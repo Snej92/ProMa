@@ -1,15 +1,13 @@
 package org.sysprotec.restapi.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name ="USER_")
+@Table(name ="users")
 @Data
 @Builder
 @NoArgsConstructor
@@ -17,8 +15,13 @@ import lombok.NoArgsConstructor;
 public class User {
 
     @Id
-    private String email;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String firstname;
     private String lastname;
-
+    private String acronym;
+    private String email;
+    private String phone;
+    private String username;
+    private String password;
 }

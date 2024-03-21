@@ -1,10 +1,8 @@
 package org.sysprotec.restapi.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,23 +10,20 @@ import org.sysprotec.restapi.model.User;
 import org.sysprotec.restapi.service.UserService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class UserController {
 
-    private final Logger logger = LoggerFactory.getLogger(UserController.class);
-
     private final UserService userService;
 
-    @GetMapping("/userInfo1")
-    public String getUserInfo1(){
-        User user = userService.getLoggedUser();
-
-        return "UserInfo1: " + user.getFirstname() + " " + user.getLastname() + ", " + user.getEmail();
+    @PreAuthorize("hasRole('backend_admin')")
+    @GetMapping("/user")
+    public User getUser(){
+        return userService.getLoggedUser();
     }
 
-    @GetMapping("/userInfo2")
+
+    @GetMapping("/userInfo")
     public String getUserInfo2(JwtAuthenticationToken auth){
         String firstname = auth.getTokenAttributes().get("given_name").toString();
         String lastname = auth.getTokenAttributes().get("family_name").toString();

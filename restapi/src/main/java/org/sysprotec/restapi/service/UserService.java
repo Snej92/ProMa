@@ -2,8 +2,9 @@ package org.sysprotec.restapi.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.sysprotec.restapi.model.User;
 import org.sysprotec.restapi.repository.UserRepository;
@@ -17,12 +18,13 @@ public class UserService {
     private final UserRepository userRepository;
 
     public User getLoggedUser() {
-        JwtAuthenticationToken token = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-
-        String email = String.valueOf(token.getTokenAttributes().get("email"));
-
-        return userRepository.findByEmail(email).
-                orElseThrow(() -> new EntityNotFoundException("Error while fetching user"));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(!(authentication instanceof AnonymousAuthenticationToken))
+        {
+            String username = authentication.getName();
+            return userRepository.findUserByUsernameIgnoreCase(username);
+        }
+        return null;
     }
 
 
