@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name ="users")
@@ -17,6 +18,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String sub;
     private String firstname;
     private String lastname;
     private String acronym;
@@ -24,6 +26,6 @@ public class User {
     private String phone;
     private String username;
     private String password;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Role roles;
 }

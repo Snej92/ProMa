@@ -16,28 +16,18 @@ public class UserConfig {
     CommandLineRunner commandLineRunnerSkills(UserRepository userRepository,
                                               RoleRepository roleRepository){
 
-        Role admin = Role.builder()
+        Role roleJAR = Role.builder()
                 .adminRole(true)
                 .projectRole(true)
                 .userRole(true)
                 .build();
 
-        Role project = Role.builder()
-                .adminRole(false)
+        Role roleBWA = Role.builder()
+                .adminRole(true)
                 .projectRole(true)
                 .userRole(true)
                 .build();
 
-        Role user = Role.builder()
-                .adminRole(false)
-                .projectRole(false)
-                .userRole(true)
-                .build();
-
-        roleRepository.saveAll(List.of(
-                admin,
-                project,
-                user));
 
         User JAR = User.builder()
                 .firstname("Jens")
@@ -47,18 +37,7 @@ public class UserConfig {
                 .phone("+49 911 ...")
                 .username("jens.arth")
                 .password("password")
-                .roles(user)
-                .build();
-
-        User AEL = User.builder()
-                .firstname("Andreas")
-                .lastname("Elsner")
-                .acronym("AEL")
-                .email("a.elsner@sysprotec.de")
-                .phone("+49 911 ...")
-                .username("andreas.elsner")
-                .password("password")
-                .roles(admin)
+                .roles(roleJAR)
                 .build();
 
         User BWA = User.builder()
@@ -69,12 +48,11 @@ public class UserConfig {
                 .phone("+49 911 ...")
                 .username("bernd.waegner")
                 .password("password")
-                .roles(project)
+                .roles(roleBWA)
                 .build();
 
         return args -> userRepository.saveAll(List.of(
                 JAR,
-                AEL,
                 BWA));
     }
 }

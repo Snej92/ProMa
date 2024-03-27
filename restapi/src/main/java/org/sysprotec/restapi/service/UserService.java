@@ -2,6 +2,7 @@ package org.sysprotec.restapi.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;
@@ -40,6 +42,7 @@ public class UserService {
             saveUser = optionalUser.get();
             saveUser.setFirstname(user.getFirstname());
             saveUser.setLastname(user.getLastname());
+            saveUser.setSub(user.getSub());
         }
 
         userRepository.save(saveUser);
