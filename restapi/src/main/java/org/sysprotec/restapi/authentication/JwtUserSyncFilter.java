@@ -37,9 +37,6 @@ public class JwtUserSyncFilter
             String lastname = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("family_name"));
             String email = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("email"));
 
-            System.out.println(jwtAuthenticationToken.getAuthorities());
-
-
             User user = User.builder()
                     .username(username)
                     .firstname(firstname)
