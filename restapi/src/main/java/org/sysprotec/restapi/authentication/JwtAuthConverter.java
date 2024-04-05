@@ -1,7 +1,6 @@
 package org.sysprotec.restapi.authentication;
 
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -25,12 +24,8 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
     private final JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter =
             new JwtGrantedAuthoritiesConverter();
 
-
-    //todo: add "jwt.auth.converter.resource-id=ProMa;jwt.auth.converter.principle-attribute=preferred_username" as environment variables
-    @Value("${jwt.auth.converter.principle-attribute}")
-    private String principleAttribute;
-    @Value("${jwt.auth.converter.resource-id}")
-    private String resourceId;
+    private String principleAttribute = "ProMa";
+    private String resourceId = "preferred_username";
     @Override
     public AbstractAuthenticationToken convert(@NonNull Jwt jwt) {
         Collection<GrantedAuthority> authorities = Stream.concat(

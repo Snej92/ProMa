@@ -7,14 +7,14 @@ import org.sysprotec.restapi.model.User;
 import org.sysprotec.restapi.service.UserService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
 //    @PreAuthorize("hasRole('backend_admin')")
-    @GetMapping("/user")
+    @GetMapping
     public User getUser(){
         return userService.getLoggedUser();
     }

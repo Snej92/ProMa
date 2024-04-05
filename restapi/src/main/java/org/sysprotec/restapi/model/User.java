@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 
 @Entity
-@Table(name ="users")
+@Table(name ="USER_")
 @Data
 @Builder
 @NoArgsConstructor

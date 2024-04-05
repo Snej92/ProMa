@@ -12,46 +12,62 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.sysprotec.restapi.model.User;
 import org.sysprotec.restapi.service.UserService;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 //todo: Maybe not needed, cause user´s will be updated through user screen
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class JwtUserSyncFilter
-        extends OncePerRequestFilter
+//        extends OncePerRequestFilter
 {
-    private final UserService userService;
-
+//    private final UserService userService;
+//
+//private static final String[] excludedEndpoints = new String[]
+//        {"/swagger-ui.html",
+//        "/swagger-ui/**",
+//        "/swagger-resources/**",
+//        "/swagger-resources",
+//        "/v3/api-docs/**",
+//        "/proxy/**"};
+//
 //    @Override
-    protected void doFilterInternal(@NonNull HttpServletRequest request,
-                                    @NonNull HttpServletResponse response,
-                                    @NonNull FilterChain filterChain
-    ) throws ServletException, IOException {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if(!(authentication instanceof AnonymousAuthenticationToken)) {
-            JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-            String username = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("preferred_username"));
-            String firstname = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("given_name"));
-            String lastname = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("family_name"));
-            String email = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("email"));
-            String sub = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("sub"));
-
-            User user = User.builder()
-                    .username(username)
-                    .firstname(firstname)
-                    .lastname(lastname)
-                    .email(email)
-                    .sub(sub)
-                    .build();
-
-            userService.SyncUser(user);
-        }
-        else log.warn("Unable to auth user");
-        filterChain.doFilter(request, response);
-    }
+//    protected boolean shouldNotFilter(@NonNull HttpServletRequest request) {
+//        return Arrays.stream(excludedEndpoints)
+//                .anyMatch(e -> new AntPathMatcher().match(e, request.getServletPath()));
+//    }
+//
+//    @Override
+//    protected void doFilterInternal(@NonNull HttpServletRequest request,
+//                                    @NonNull HttpServletResponse response,
+//                                    @NonNull FilterChain filterChain
+//    ) throws ServletException, IOException {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        if(!(authentication instanceof AnonymousAuthenticationToken)) {
+//            JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+//            String username = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("preferred_username"));
+//            String firstname = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("given_name"));
+//            String lastname = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("family_name"));
+//            String email = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("email"));
+//            String sub = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("sub"));
+//
+//            User user = User.builder()
+//                    .username(username)
+//                    .firstname(firstname)
+//                    .lastname(lastname)
+//                    .email(email)
+//                    .sub(sub)
+//                    .build();
+//
+//            userService.SyncUser(user);
+//        }
+//        else log.warn("Unable to auth user");
+//        filterChain.doFilter(request, response);
+//    }
 }
