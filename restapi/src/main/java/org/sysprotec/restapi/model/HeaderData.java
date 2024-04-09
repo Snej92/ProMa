@@ -14,16 +14,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Task {
+public class HeaderData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    private String date;
-    private String addition;
-    private Boolean done;
-    private Integer itemsTotal;
-    private Integer itemsDone;
-    private Integer progress;
+    private String item;
+    private String data;
 }

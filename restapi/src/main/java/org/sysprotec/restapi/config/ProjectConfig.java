@@ -24,6 +24,7 @@ public class ProjectConfig {
                 .description("ZH onload")
                 .favorite(true)
                 .progress(50)
+                .issuer("BWA")
                 .status(StatusEPLAN.INARBEIT)
                 .build();
 
@@ -32,6 +33,7 @@ public class ProjectConfig {
                 .description("ZH process 1")
                 .favorite(true)
                 .progress(30)
+                .issuer("AEL")
                 .status(StatusEPLAN.INARBEIT)
                 .build();
 

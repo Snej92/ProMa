@@ -24,4 +24,15 @@ public class Version {
     private Boolean done;
     @OneToMany(cascade = CascadeType.ALL)
     private List<VersionStation> versionStation;
+
+    public void addVersionStation(VersionStation versionStation){
+        this.versionStation.add(versionStation);
+    }
+
+    public void removeVersionStation(Integer versionStationId) {
+        VersionStation versionStation = this.versionStation.stream().filter(t -> t.getId() == versionStationId).findFirst().orElse(null);
+        if (versionStation != null) {
+            this.versionStation.remove(versionStation);
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package org.sysprotec.restapi.model;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,16 +15,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Task {
+public class History {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
     private String date;
-    private String addition;
-    private Boolean done;
-    private Integer itemsTotal;
-    private Integer itemsDone;
-    private Integer progress;
+    private String item;
+    private String userAcronym;
+    private String filename;
 }

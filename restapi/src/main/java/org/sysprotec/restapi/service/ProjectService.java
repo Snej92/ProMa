@@ -20,8 +20,21 @@ public class ProjectService {
         return projectRepository.findAll();
     }
 
+    public Project getProject(Integer projectId) {
+        Optional<Project> optionalProject = projectRepository.findProjectById(projectId);
+        if(optionalProject.isPresent()){
+            return optionalProject.get();
+        }else log.error("Project with ID" + projectId +" does not exist in database");
+        return null;
+    }
+
     public void addProject(Project project) {
-        projectRepository.save(project);
+        Project saveProject = Project.builder()
+                .name(project.getName())
+                .description(project.getDescription())
+                .favorite(project.getFavorite())
+                .build();
+        projectRepository.save(saveProject);
     }
 
     public void updateProject(Project project) {

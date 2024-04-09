@@ -8,16 +8,21 @@ import org.sysprotec.restapi.service.ProjectService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/Project")
+@RequestMapping("/api/project")
 @RequiredArgsConstructor
 public class ProjectController {
 
     private final ProjectService projectService;
 
-    //todo: add ResponseEntity as return value for void methods
+    //todo: add ResponseEntity
     @GetMapping("/all")
     public List<Project> getAllProjects(){
         return projectService.getAllProjects();
+    }
+
+    @GetMapping
+    public Project getProject(@RequestParam Integer projectId){
+        return projectService.getProject(projectId);
     }
 
     @PostMapping

@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface ProjectRepository extends JpaRepository<Project, Integer> {
 
     Optional<Project> findProjectById(Integer id);
+    Optional<Project> findProjectByVersionsId(Integer id);
+    Optional<Project> findProjectByLopId(Integer id);
 }
