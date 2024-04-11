@@ -1,16 +1,12 @@
-import { Component } from '@angular/core';
-import {role, user} from "../../models/user-Administration.model";
-
-const roles: role[] = [
-  {id: 1, user: true, project: true, admin: true},
-  {id: 2, user: true, project: true, admin: false},
-  {id: 3, user: true, project: false, admin: false},
-]
-
-const users: user[] = [
-  {id: 1, sub: 'testSub', firstname: 'Andreas', lastname: 'Elsner', acronym:'AEL', email:'a.elsner@sysprotec.de', phone:'+49 911 6005797 13', username: 'a.elsner', password:'IchChefDuNix', role: roles[1]},
-  {id: 2, sub: 'testSub2', firstname: 'Bernd', lastname: 'Waegner', acronym:'BWA', email:'b.waegner@sysprotec.de', phone:'+49 911 6005797 17', username: 'b.wagner', password:'42gLeberkas', role: roles[2]}
-]
+import {Component, OnInit} from '@angular/core';
+import {UserAdministrationService} from "../../services/user-administration.service";
+import {user} from "../../models/user-Administration.model";
+import {USERS} from "../../../../dummy/mock-user";
+import {MatDialog} from "@angular/material/dialog";
+import {UserFormComponent} from "../user-form/user-form.component";
+import {MatTableDataSource} from "@angular/material/table";
+import {of} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 
 @Component({
@@ -18,7 +14,30 @@ const users: user[] = [
   templateUrl: './user-administration.component.html',
   styleUrl: './user-administration.component.scss'
 })
-export class UserAdministrationComponent {
+export class UserAdministrationComponent implements OnInit {
+
+  users: user[] = [];
+  dataSource = new MatTableDataSource<user>()
+
+
+  constructor(
+    private _userAdministrationService: UserAdministrationService,
+    private _dialog: MatDialog,
+    ){
+  }
+
+  openUserForm(){
+    this._dialog.open(UserFormComponent);
+  }
+
+  getUsers(): void{
+    this.dataSource.data = this._userAdministrationService.getUsers();
+  }
+
+  ngOnInit(): void{
+    this.getUsers();
+  }
+
   displayedColumns: string[] = ['firstname', 'lastname', 'acronym', 'email', 'phone' , 'username', 'password']
-  dataSource = users;
 }
+

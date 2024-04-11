@@ -22,6 +22,11 @@ import {
   MatTable
 } from "@angular/material/table";
 import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
+import {FormsModule} from "@angular/forms";
+import {MatDivider} from "@angular/material/divider";
+import { UserFormComponent } from './modules/userAdministration/components/user-form/user-form.component';
+import {HttpClientModule} from "@angular/common/http";
+import { DashboardComponent } from './modules/dashboard/components/dashboard.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -40,11 +45,18 @@ function initializeKeycloak(keycloak: KeycloakService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, SysToolbarComponent, UserAdministrationComponent],
+  declarations: [
+    AppComponent,
+    SysToolbarComponent,
+    UserAdministrationComponent,
+    UserFormComponent,
+    DashboardComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
     KeycloakAngularModule,
+    HttpClientModule,
+
     MatToolbar,
     NgOptimizedImage,
     MatButton,
@@ -64,7 +76,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatHeaderRowDef,
     MatCard,
     MatCardHeader,
-    MatCardContent
+    MatCardContent,
+    FormsModule,
+    MatDivider
   ],
   providers: [
     {

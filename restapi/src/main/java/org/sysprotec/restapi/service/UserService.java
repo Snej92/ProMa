@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.sysprotec.restapi.model.User;
 import org.sysprotec.restapi.repository.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -46,5 +47,9 @@ public class UserService {
         }
 
         userRepository.save(saveUser);
+    }
+
+    public List<User> getAllUser() {
+        return userRepository.findAll();
     }
 }
