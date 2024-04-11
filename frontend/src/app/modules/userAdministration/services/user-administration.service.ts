@@ -1,22 +1,23 @@
 import {Injectable} from '@angular/core';
 import {user} from "../models/user-Administration.model";
 import {USERS} from "../../../dummy/mock-user";
-import {environment} from "../../../../environments/environment";
-import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {Store} from "@ngrx/store";
+import {UserAdministrationState} from "../store/user-administration.state";
+import {GetUsersActions} from "../store/user-administration.actions";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAdministrationService {
-  private API_URL = environment.API_URL;
-  constructor(private http: HttpClient) { }
-
+  constructor() { }
+  // private store : Store<UserAdministrationState>
   getUsers(): user[]{
     return USERS;
   }
 
-  // getUsersAPI(): Observable<user[]>{
-  //   return this.http.get<user[]>(this.API_URL + "/user/all")
+  // loadUsers() {
+  //   this.store.dispatch(GetUsersActions.do());
   // }
+
 }
