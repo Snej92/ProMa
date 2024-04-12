@@ -5,7 +5,7 @@ import {USERS} from "../../../../dummy/mock-user";
 import {MatDialog} from "@angular/material/dialog";
 import {UserFormComponent} from "../user-form/user-form.component";
 import {MatTableDataSource} from "@angular/material/table";
-import {of} from "rxjs";
+import {Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
 
@@ -16,7 +16,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class UserAdministrationComponent implements OnInit {
 
-  users: user[] = [];
+  // users: user[] = [];
   dataSource = new MatTableDataSource<user>()
 
 
@@ -36,6 +36,11 @@ export class UserAdministrationComponent implements OnInit {
 
   ngOnInit(): void{
     this.getUsers();
+    this._userAdministrationService.loadUsers();
+  }
+
+  get user$() : Observable<user[]>{
+    return this._userAdministrationService.$users;
   }
 
   displayedColumns: string[] = ['firstname', 'lastname', 'acronym', 'email', 'phone' , 'username', 'password']

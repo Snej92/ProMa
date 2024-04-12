@@ -1,6 +1,6 @@
 import {UserAdministrationState} from "./user-administration.state";
 import {LoadState} from "../../../core/models/core.models";
-import {createReducer, on} from "@ngrx/store";
+import {Action, createReducer, on} from "@ngrx/store";
 import * as UserAdministrationActions from "./user-administration.actions"
 
 
@@ -44,3 +44,10 @@ export const _userAdministrationReducer = createReducer(
     })
   ),
 )
+
+export function userAdministrationReducer(state: UserAdministrationState, action: Action){
+  return _userAdministrationReducer(state, action);
+}
+
+
+export const USER_ADMINISTRATION_STORE_KEY = 'user-administration-store';

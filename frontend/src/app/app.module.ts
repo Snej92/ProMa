@@ -27,6 +27,18 @@ import {MatDivider} from "@angular/material/divider";
 import { UserFormComponent } from './modules/userAdministration/components/user-form/user-form.component';
 import {HttpClientModule} from "@angular/common/http";
 import { DashboardComponent } from './modules/dashboard/components/dashboard.component';
+import {Action, ActionReducerMap, StoreModule} from "@ngrx/store";
+import {USER_ADMINISTRATION_STORE_KEY} from "./modules/userAdministration/store/user-administration.reducers";
+import * as fromUserAdministration from "./modules/userAdministration/store/user-administration.reducers";
+import {UserAdministrationEffects} from "./modules/userAdministration/store/user-administration.effects";
+import {EffectsModule} from "@ngrx/effects";
+
+const reducers: ActionReducerMap<unknown, Action>= {
+  [USER_ADMINISTRATION_STORE_KEY]: fromUserAdministration.userAdministrationReducer,
+};
+const effects = [
+  UserAdministrationEffects
+];
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -50,12 +62,16 @@ function initializeKeycloak(keycloak: KeycloakService) {
     SysToolbarComponent,
     UserAdministrationComponent,
     UserFormComponent,
-    DashboardComponent],
+    DashboardComponent,
+  ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     KeycloakAngularModule,
     HttpClientModule,
+    StoreModule.forRoot(reducers),
+    // EffectsModule.forRoot(effects),
+
 
     MatToolbar,
     NgOptimizedImage,

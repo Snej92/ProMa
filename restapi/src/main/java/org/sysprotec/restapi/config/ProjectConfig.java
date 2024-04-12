@@ -17,7 +17,7 @@ import java.util.List;
 public class ProjectConfig {
 
     @Bean
-    CommandLineRunner commandLineRunnerSkills(ProjectRepository projectRepository) {
+    CommandLineRunner commandLineRunnerProject(ProjectRepository projectRepository) {
 
         Station station1 = Station.builder()
                 .name("ST8010")

@@ -6,7 +6,7 @@ import {DashboardComponent} from "./modules/dashboard/components/dashboard.compo
 
 const routes: Routes = [
   {path: 'userAdministration', component: UserAdministrationComponent, canActivate: [AuthGuard]},
-  {path: 'home', component: DashboardComponent}
+  {path: 'home', component: DashboardComponent},
 ];
 
 @NgModule({

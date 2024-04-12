@@ -1,5 +1,4 @@
 
-
 export type role = {
   id : number,
   admin : boolean,
