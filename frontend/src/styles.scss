@@ -87,6 +87,23 @@ $frontend-theme: mat.define-light-theme((
   )
 ));
 
+$dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $frontend-primary,
+    accent: $frontend-accent,
+    warn: $frontend-warn,
+  )
+));
+
+
+.dark-theme {
+  @include mat.core-theme($dark-theme);
+  @include mat.button-theme($dark-theme);
+  @include mat.all-component-colors($dark-theme);
+  background-color: #202124;
+  color: #ffffff;
+}
+
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.

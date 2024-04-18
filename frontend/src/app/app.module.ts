@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { AppRoutingModule } from './app-routing.module';
@@ -32,6 +32,18 @@ import {USER_ADMINISTRATION_STORE_KEY} from "./modules/userAdministration/store/
 import * as fromUserAdministration from "./modules/userAdministration/store/user-administration.reducers";
 import {UserAdministrationEffects} from "./modules/userAdministration/store/user-administration.effects";
 import {EffectsModule} from "@ngrx/effects";
+import { ThemeToggleComponent } from './page-template/theme-toggle/theme-toggle.component';
+import { CounterComponent } from './modules/counter/counter.component';
+import {counterReducer} from "./modules/counter/store/counter.reducer";
+import { CounterDisplayComponent } from './modules/counter/counter-display/counter-display.component';
+import {MatFormField, MatLabel} from "@angular/material/form-field";
+import { CustomCounterComponent } from './modules/counter/custom-counter/custom-counter.component';
+import {MatInput} from "@angular/material/input";
+import {MatOption, MatSelect} from "@angular/material/select";
+import { SysSidenavComponent } from './page-template/sys-sidenav/sys-sidenav.component';
+import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
+import { CustomSidenavComponent } from './page-template/sys-sidenav/custom-sidenav/custom-sidenav.component';
+import {MatListItem, MatListItemIcon, MatListItemTitle, MatNavList} from "@angular/material/list";
 
 const reducers: ActionReducerMap<unknown, Action>= {
   [USER_ADMINISTRATION_STORE_KEY]: fromUserAdministration.userAdministrationReducer,
@@ -63,13 +75,19 @@ function initializeKeycloak(keycloak: KeycloakService) {
     UserAdministrationComponent,
     UserFormComponent,
     DashboardComponent,
+    ThemeToggleComponent,
+    CounterComponent,
+    CounterDisplayComponent,
+    CustomCounterComponent,
+    SysSidenavComponent,
+    CustomSidenavComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     KeycloakAngularModule,
     HttpClientModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot({counter: counterReducer}),
     // EffectsModule.forRoot(effects),
 
 
@@ -94,7 +112,19 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatCardHeader,
     MatCardContent,
     FormsModule,
-    MatDivider
+    MatDivider,
+    MatFormField,
+    MatInput,
+    MatSelect,
+    MatOption,
+    MatLabel,
+    MatSidenavContainer,
+    MatSidenav,
+    MatSidenavContent,
+    MatNavList,
+    MatListItem,
+    MatListItemTitle,
+    MatListItemIcon
   ],
   providers: [
     {

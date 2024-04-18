@@ -1,11 +1,21 @@
-<mat-toolbar color="primary" class="justify-content-between">
-  <button mat-button routerLink="/home">SYS|PRO|TEC</button>
-  <span>
+<mat-toolbar color="primary" class="mat-elevation-z4 justify-content-between">
+<!--  left side-->
+  <span class="sys-toolbar-left">
+    <button mat-icon-button (click)="collapsed.set(!collapsed())"> <mat-icon>menu</mat-icon> </button>
+  </span>
+  <span class="align-content-start">
+<!--        <button mat-button routerLink="/home">SYS|PRO|TEC</button>-->
+    <button mat-button routerLink="/test">TESTING</button>
+  </span>
+
+  <!--  right side-->
+  <span class="justify-content-between">
     <button mat-icon-button matTooltip="Projektverwaltung">
-    <mat-icon>folder</mat-icon>
-  </button>
-  <button mat-icon-button routerLink="/userAdministration" matTooltip="Benutzerverwaltung">
-    <mat-icon>account_box</mat-icon>
-  </button>
+      <mat-icon>folder</mat-icon>
+    </button>
+    <button mat-icon-button routerLink="/userAdministration" matTooltip="Benutzerverwaltung">
+      <mat-icon>account_box</mat-icon>
+    </button>
+    <app-theme-toggle></app-theme-toggle>
   </span>
 </mat-toolbar>

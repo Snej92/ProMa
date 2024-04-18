@@ -5,33 +5,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e30e82b7-6a25-4c22-87e0-077dfae59824" name="Changes" comment="some frontend implementations">
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/Test/components/counter-buttons/counter-buttons.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/Test/components/counter-buttons/counter-buttons.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/Test/components/counter-buttons/counter-buttons.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/Test/components/counter-buttons/counter-buttons.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/Test/components/counter-output/counter-output.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/Test/components/counter-output/counter-output.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/Test/components/counter-output/counter-output.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/Test/components/counter-output/counter-output.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/Test/components/counter/counter.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/Test/components/counter/counter.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/Test/components/counter/counter.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/Test/components/counter/counter.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/Test/components/state/counter.actions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/Test/components/state/counter.reducer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/Test/components/state/counter.state.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/counter/counter-display/counter-display.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/counter/counter-display/counter-display.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/counter/counter-display/counter-display.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/counter/counter-display/counter-display.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/counter/counter.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/counter/counter.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/counter/counter.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/counter/counter.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/counter/custom-counter/custom-counter.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/counter/custom-counter/custom-counter.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/counter/custom-counter/custom-counter.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/counter/custom-counter/custom-counter.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/counter/store/counter.actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/counter/store/counter.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/counter/store/counter.reducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/counter/store/counter.state.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/custom-sidenav/custom-sidenav.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/custom-sidenav/custom-sidenav.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/custom-sidenav/custom-sidenav.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/custom-sidenav/custom-sidenav.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/theme-toggle/service/theme.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/theme-toggle/service/theme.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/theme-toggle/theme-toggle.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/theme-toggle/theme-toggle.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/theme-toggle/theme-toggle.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/theme-toggle/theme-toggle.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/angular.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/components/user-administration/user-administration.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/components/user-administration/user-administration.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/components/user-administration/user-administration.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/components/user-administration/user-administration.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/services/user-administration-connector.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/services/user-administration-connector.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/services/user-administration.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/services/user-administration.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/store/user-administration.effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/store/user-administration.effects.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/store/user-administration.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/store/user-administration.reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/store/user-administration.selectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/store/user-administration.selectors.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-toolbar/sys-toolbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-toolbar/sys-toolbar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/UserConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/UserConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-toolbar/sys-toolbar.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-toolbar/sys-toolbar.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-toolbar/sys-toolbar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-toolbar/sys-toolbar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +72,9 @@
     &quot;accountId&quot;: &quot;9f77aa54-3db8-4415-b771-0ddec89dadf3&quot;
   }
 }</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -81,27 +96,38 @@
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;Spring Boot.RestapiApplication.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Coding/KeX&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/jensarth/IdeaProjects/ProMa/frontend/src/assets&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.ng.executor&quot;: &quot;Run&quot;,
     &quot;npm.start.executor&quot;: &quot;Run&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\Coding\\ProMa\\frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/jensarth/IdeaProjects/ProMa/frontend/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/src/assets" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\Test\components\counter" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\Test\components" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\userAdministration\services" />
+      <recent name="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav" />
+      <recent name="$PROJECT_DIR$/frontend/src/app/page-template" />
+      <recent name="$PROJECT_DIR$/frontend/src/app/modules/counter" />
+      <recent name="$PROJECT_DIR$/frontend/src/app/modules" />
+      <recent name="$PROJECT_DIR$/frontend/src/app/page-template/theme-toggle/service" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.RestapiApplication">
@@ -111,6 +137,26 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/frontend/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="ng" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/frontend/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="ng" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
     </configuration>
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/frontend/package.json" />
@@ -125,14 +171,15 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.start" />
+        <item itemvalue="npm.ng" />
+        <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-322ed176" />
       </set>
     </attachedChunks>
   </component>
@@ -145,6 +192,13 @@
       <option name="presentableId" value="Default" />
       <updated>1712813997757</updated>
       <workItem from="1712813998801" duration="1824000" />
+      <workItem from="1713161961238" duration="161000" />
+      <workItem from="1713185110136" duration="1344000" />
+      <workItem from="1713186515213" duration="3221000" />
+      <workItem from="1713247389348" duration="11424000" />
+      <workItem from="1713286190220" duration="122000" />
+      <workItem from="1713334797380" duration="9786000" />
+      <workItem from="1713365950869" duration="5648000" />
     </task>
     <servers />
   </component>

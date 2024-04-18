@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, signal} from '@angular/core';
 
 @Component({
   selector: 'app-sys-toolbar',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './sys-toolbar.component.scss'
 })
 export class SysToolbarComponent {
+
+  collapsed = signal(false);
 
 }
