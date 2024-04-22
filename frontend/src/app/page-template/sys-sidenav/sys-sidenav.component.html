@@ -1,8 +1,29 @@
-<mat-sidenav-container>
-  <mat-sidenav opened mode="side" style="width: 250px">
-    <app-custom-sidenav></app-custom-sidenav>
-  </mat-sidenav>
-  <mat-sidenav-content>
+<mat-toolbar color="primary" class="mat-elevation-z4 justify-content-between">
+  <!--  left side-->
+  <span class="sys-toolbar-left">
+    <button mat-icon-button (click)="collapsed.set(!collapsed())"> <mat-icon>menu</mat-icon> </button>
+  </span>
+  <span class="align-content-start">
+    <button mat-button routerLink="/test">TESTING</button>
+  </span>
 
+  <!--  right side-->
+  <span class="justify-content-between">
+    <button mat-icon-button matTooltip="Projektverwaltung">
+      <mat-icon>folder</mat-icon>
+    </button>
+    <button mat-icon-button routerLink="/userAdministration" matTooltip="Benutzerverwaltung">
+      <mat-icon>account_box</mat-icon>
+    </button>
+    <app-theme-toggle></app-theme-toggle>
+  </span>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav opened mode="side" [style.width]="sideNavWidth()">
+    <app-custom-sidenav [collapsed]="collapsed()"></app-custom-sidenav>
+  </mat-sidenav>
+  <mat-sidenav-content [style.margin-left]="sideNavWidth()">
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

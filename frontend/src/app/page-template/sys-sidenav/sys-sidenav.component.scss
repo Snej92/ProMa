@@ -2,3 +2,11 @@ mat-sidenav-container{
   height: calc(100vh - 64px);
 }
 
+mat-toolbar{
+  position: relative;
+  z-index: 5;
+}
+
+mat-sidenav, mat-sidenav-content, mat-sidenav-container{
+  transition: all 500ms ease-in-out;
+}

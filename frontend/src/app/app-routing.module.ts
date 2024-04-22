@@ -6,8 +6,10 @@ import {DashboardComponent} from "./modules/dashboard/components/dashboard.compo
 import {CounterComponent} from "./modules/counter/counter.component";
 
 const routes: Routes = [
+
+  {path: '', pathMatch:'full', redirectTo: "dashboard"},
+  {path: 'dashboard', component: DashboardComponent},
   {path: 'userAdministration', component: UserAdministrationComponent, canActivate: [AuthGuard]},
-  {path: 'home', component: DashboardComponent},
   {path: 'test', component: CounterComponent},
 
 ];

@@ -10,5 +10,8 @@ export class SysSidenavComponent {
 
   protected readonly open = open;
 
+  collapsed = signal(true);
+
+  sideNavWidth = computed(()=> this.collapsed() ? '63px' : '200px');
 
 }

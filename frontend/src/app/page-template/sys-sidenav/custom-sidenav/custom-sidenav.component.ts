@@ -1,9 +1,9 @@
-import {Component, signal} from '@angular/core';
+import {Component, Input, signal} from '@angular/core';
 
 export type MenuItem = {
-  icon: String,
-  label: String,
-  route: String
+  icon: string,
+  label: string,
+  route: string
 }
 
 @Component({
@@ -13,26 +13,36 @@ export type MenuItem = {
 })
 export class CustomSidenavComponent {
 
+  sideNavCollapsed = signal(false);
+  @Input() set collapsed(val: boolean){
+    this.sideNavCollapsed.set(val);
+  }
+
   menuItems = signal<MenuItem[]>([
     {
       icon: "dashboard",
       label: "Dashboard",
-      route: "home"
+      route: "dashboard"
     },
     {
-      icon: "video_library",
-      label: "Content",
-      route: "content"
+      icon: "fact_check",
+      label: "Übersicht",
+      route: "overview"
     },
     {
-      icon: "analytics",
-      label: "Analytics",
-      route: "analytics"
+      icon: "update",
+      label: "Version",
+      route: "version"
     },
     {
-      icon: "comment",
-      label: "Comments",
-      route: "comments"
+      icon: "dashboard_customize",
+      label: "Stationen",
+      route: "stations"
+    },
+    {
+      icon: "settings",
+      label: "Einstellungen",
+      route: "settings"
     }
   ])
 }
