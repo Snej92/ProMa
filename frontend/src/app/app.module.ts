@@ -1,4 +1,4 @@
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule, isDevMode} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { AppRoutingModule } from './app-routing.module';
@@ -44,6 +44,11 @@ import { SysSidenavComponent } from './page-template/sys-sidenav/sys-sidenav.com
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
 import { CustomSidenavComponent } from './page-template/sys-sidenav/custom-sidenav/custom-sidenav.component';
 import {MatListItem, MatListItemIcon, MatListItemTitle, MatNavList} from "@angular/material/list";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { OverviewComponent } from './modules/overview/components/overview.component';
+import { VersionComponent } from './modules/version/components/version.component';
+import { StationComponent } from './modules/station/components/station.component';
+import { SettingsComponent } from './modules/settings/components/settings.component';
 
 const reducers: ActionReducerMap<unknown, Action>= {
   [USER_ADMINISTRATION_STORE_KEY]: fromUserAdministration.userAdministrationReducer,
@@ -80,7 +85,11 @@ function initializeKeycloak(keycloak: KeycloakService) {
     CounterDisplayComponent,
     CustomCounterComponent,
     SysSidenavComponent,
-    CustomSidenavComponent
+    CustomSidenavComponent,
+    OverviewComponent,
+    VersionComponent,
+    StationComponent,
+    SettingsComponent
   ],
   imports: [
     AppRoutingModule,
@@ -124,7 +133,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatNavList,
     MatListItem,
     MatListItemTitle,
-    MatListItemIcon
+    MatListItemIcon,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
   providers: [
     {

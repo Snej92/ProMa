@@ -37,7 +37,7 @@ export class CustomSidenavComponent {
     {
       icon: "dashboard_customize",
       label: "Stationen",
-      route: "stations"
+      route: "station"
     },
     {
       icon: "settings",
