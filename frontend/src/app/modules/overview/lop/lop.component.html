@@ -1,0 +1,32 @@
+<div class="div-table">
+  <table mat-table [dataSource]="lopList" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="Aufnahme">
+      <th mat-header-cell *matHeaderCellDef> Aufnahme </th>
+      <td mat-cell *matCellDef="let lop">{{lop.startDate}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="LOP">
+      <th mat-header-cell *matHeaderCellDef> LOP </th>
+      <td mat-cell *matCellDef="let lop">{{lop.item}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let lop">{{lop.status}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Erledigt">
+      <th mat-header-cell *matHeaderCellDef> Erledigt </th>
+      <td mat-cell *matCellDef="let lop">{{lop.endDate}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Benutzer">
+      <th mat-header-cell *matHeaderCellDef> Benutzer </th>
+      <td mat-cell *matCellDef="let lop">{{lop.userAcronym}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

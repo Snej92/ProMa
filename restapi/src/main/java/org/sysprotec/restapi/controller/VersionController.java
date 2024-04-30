@@ -7,6 +7,7 @@ import org.sysprotec.restapi.service.VersionService;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/api/version")
 @RequiredArgsConstructor
@@ -15,9 +16,8 @@ public class VersionController {
     private final VersionService versionService;
 
     @GetMapping
-    public List<Version> getVersions(
-            @RequestParam Integer projectId){
-        return versionService.getVersions(projectId);
+    public List<Version> getVersions(){
+        return versionService.getVersions();
     }
 
     @PostMapping

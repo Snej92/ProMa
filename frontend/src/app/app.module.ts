@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatToolbar } from "@angular/material/toolbar";
 import {NgOptimizedImage} from "@angular/common";
-import {MatButton, MatIconButton} from "@angular/material/button";
+import {MatButton, MatIconButton, MatMiniFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import { SysToolbarComponent } from './page-template/sys-toolbar/sys-toolbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -21,8 +21,8 @@ import {
   MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
   MatTable
 } from "@angular/material/table";
-import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
-import {FormsModule} from "@angular/forms";
+import {MatCard, MatCardActions, MatCardContent, MatCardHeader} from "@angular/material/card";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatDivider} from "@angular/material/divider";
 import { UserFormComponent } from './modules/userAdministration/components/user-form/user-form.component';
 import {HttpClientModule} from "@angular/common/http";
@@ -49,6 +49,11 @@ import { OverviewComponent } from './modules/overview/components/overview.compon
 import { VersionComponent } from './modules/version/components/version.component';
 import { StationComponent } from './modules/station/components/station.component';
 import { SettingsComponent } from './modules/settings/components/settings.component';
+import {versionReducer} from "./modules/version/store/version.reducers";
+import {AppState} from "./core/store/app.state";
+import { AddVersionComponent } from './modules/version/components/add-version/add-version.component';
+import { SysButtonComponent } from './page-template/sys-button/sys-button.component';
+import { LopComponent } from './modules/overview/lop/lop.component';
 
 const reducers: ActionReducerMap<unknown, Action>= {
   [USER_ADMINISTRATION_STORE_KEY]: fromUserAdministration.userAdministrationReducer,
@@ -89,16 +94,18 @@ function initializeKeycloak(keycloak: KeycloakService) {
     OverviewComponent,
     VersionComponent,
     StationComponent,
-    SettingsComponent
+    SettingsComponent,
+    AddVersionComponent,
+    SysButtonComponent,
+    LopComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     KeycloakAngularModule,
     HttpClientModule,
-    StoreModule.forRoot({counter: counterReducer}),
+    StoreModule.forRoot(AppState),
     // EffectsModule.forRoot(effects),
-
 
     MatToolbar,
     NgOptimizedImage,
@@ -134,7 +141,10 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatListItem,
     MatListItemTitle,
     MatListItemIcon,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
+    MatCardActions,
+    ReactiveFormsModule,
+    MatMiniFabButton
   ],
   providers: [
     {

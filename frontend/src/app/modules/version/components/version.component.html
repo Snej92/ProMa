@@ -1,1 +1,37 @@
-<p>version works!</p>
+<h1 class="d-flex justify-content-center">Version Test</h1>
+
+<mat-card *ngFor="let item of versionList">
+  <mat-card-header>
+    <h1>{{item.version}}</h1>
+    <div style="text-align: right; width: 100%;">
+      <app-sys-button icon="edit" color="accent" tooltip="Bearbeiten" (click)="editVersion(item.id)"></app-sys-button>
+      <app-sys-button icon="delete" tooltip="löschen" (click)="deleteVersion(item.id)"></app-sys-button>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{item.todo}}</p>
+  </mat-card-content>
+</mat-card>
+
+<div class="d-flex justify-content-center mt-2">
+  <button mat-raised-button color="accent" (click)="addVersion()"> Hinzufügen </button>
+</div>
+
+
+
+<table mat-table [dataSource]="versionList" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="Version">
+    <th mat-header-cell *matHeaderCellDef>Version</th>
+    <td mat-cell *matCellDef="let version">{{version.version}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="Aufgabe">
+    <th mat-header-cell *matHeaderCellDef>Version</th>
+    <td mat-cell *matCellDef="let version">{{version.todo}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>

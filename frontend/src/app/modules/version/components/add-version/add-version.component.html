@@ -1,0 +1,23 @@
+<form [formGroup]="versionForm" (ngSubmit)="saveVersion()">
+  <mat-card>
+    <mat-card-header>
+      <h1>{{versionTitle}}</h1>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Version</mat-label>
+        <input matInput formControlName="version">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Aufgabe</mat-label>
+        <textarea matInput formControlName="todo"></textarea>
+      </mat-form-field>
+    </mat-card-content>
+
+      <mat-card-actions>
+        <button type="submit" mat-raised-button color="accent"> Hinzufügen </button>
+        <button type="reset" mat-raised-button color="primary" (click)="closePopup()"> Abbrechen </button>
+      </mat-card-actions>
+  </mat-card>
+</form>

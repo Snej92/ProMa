@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Store} from "@ngrx/store";
 import {decrement, increment, rename, reset} from "./store/counter.actions";
-import {counterState} from "./store/counter.model";
+import {AppStateModel} from "../../core/store/appState.model";
 
 @Component({
   selector: 'app-counter',
@@ -9,7 +9,7 @@ import {counterState} from "./store/counter.model";
   styleUrl: './counter.component.scss'
 })
 export class CounterComponent {
-  constructor(private store: Store<{ counter : counterState}>) {
+  constructor(private store: Store<AppStateModel>) {
   }
 
   increment() {

@@ -8,9 +8,10 @@ import org.sysprotec.restapi.model.*;
 import org.sysprotec.restapi.repository.LopRepository;
 import org.sysprotec.restapi.repository.ProjectRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.sysprotec.restapi.service.ProjectService.PROJECT_ID;
 
 @Service
 @RequiredArgsConstructor
@@ -20,11 +21,11 @@ public class LopService {
     private final LopRepository lopRepository;
     private final ProjectRepository projectRepository;
 
-    public List<Lop> getLop(Integer projectId) {
-        Optional<Project> optionalProject = projectRepository.findProjectById(projectId);
+    public List<Lop> getLop() {
+        Optional<Project> optionalProject = projectRepository.findProjectById(PROJECT_ID);
         if(optionalProject.isPresent()){
             return optionalProject.get().getLop();
-        }else log.error("Project with ID" + projectId +" does not exist in database");
+        }else log.error("Project with ID" + PROJECT_ID +" does not exist in database");
         return null;
     }
 

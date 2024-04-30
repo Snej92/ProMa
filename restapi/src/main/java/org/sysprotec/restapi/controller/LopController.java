@@ -14,9 +14,14 @@ public class LopController {
 
     private final LopService lopService;
 
+//    @GetMapping
+//    public List<Lop> getLop(@RequestParam Integer projectId){
+//        return lopService.getLop(projectId);
+//    }
+
     @GetMapping
-    public List<Lop> getLop(@RequestParam Integer projectId){
-        return lopService.getLop(projectId);
+    public List<Lop> getLop(){
+        return lopService.getLop();
     }
 
     @PostMapping

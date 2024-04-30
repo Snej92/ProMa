@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {customIncrement} from "../store/counter.actions";
-import {counterState} from "../store/counter.model";
-import {MatLabel} from "@angular/material/form-field";
 import {Subscription} from "rxjs";
 import {getcountername} from "../store/counter.selector";
+import {AppStateModel} from "../../../core/store/appState.model";
 
 @Component({
   selector: 'app-custom-counter',
@@ -13,7 +12,7 @@ import {getcountername} from "../store/counter.selector";
 })
 export class CustomCounterComponent implements OnInit {
 
-  constructor(private store: Store<{ counter: counterState }>) {
+  constructor(private store: Store<AppStateModel>) {
   }
 
   counterName = "";

@@ -14,6 +14,7 @@ import java.util.Optional;
 @Slf4j
 public class ProjectService {
 
+    public static Integer PROJECT_ID = 1;
     private final ProjectRepository projectRepository;
 
     public List<Project> getAllProjects() {
@@ -23,6 +24,7 @@ public class ProjectService {
     public Project getProject(Integer projectId) {
         Optional<Project> optionalProject = projectRepository.findProjectById(projectId);
         if(optionalProject.isPresent()){
+//            PROJECT_ID = optionalProject.get().getId();
             return optionalProject.get();
         }else log.error("Project with ID" + projectId +" does not exist in database");
         return null;
