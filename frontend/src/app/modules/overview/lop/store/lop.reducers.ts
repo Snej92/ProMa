@@ -1,14 +1,21 @@
 import {createReducer, on} from "@ngrx/store";
 import {lopState} from "./lop.state";
-import {getLop} from "./lop.actions";
+import {loadLop, loadLopSuccess} from "./lop.actions";
 
 
 const _lopReducer = createReducer(
   lopState,
 
-  on(getLop, (state) => {
+  on(loadLop, (state) => {
     return{
       ...state
+    };
+  }),
+
+  on(loadLopSuccess, (state,action) => {
+    return{
+      ...state,
+      lopList:[...action.lopList]
     };
   }),
 );

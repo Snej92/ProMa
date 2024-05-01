@@ -8,7 +8,6 @@ import { MatToolbar } from "@angular/material/toolbar";
 import {NgOptimizedImage} from "@angular/common";
 import {MatButton, MatIconButton, MatMiniFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
-import { SysToolbarComponent } from './page-template/sys-toolbar/sys-toolbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatTooltip} from "@angular/material/tooltip";
 import { UserAdministrationComponent } from './modules/userAdministration/components/user-administration/user-administration.component';
@@ -33,11 +32,7 @@ import * as fromUserAdministration from "./modules/userAdministration/store/user
 import {UserAdministrationEffects} from "./modules/userAdministration/store/user-administration.effects";
 import {EffectsModule} from "@ngrx/effects";
 import { ThemeToggleComponent } from './page-template/theme-toggle/theme-toggle.component';
-import { CounterComponent } from './modules/counter/counter.component';
-import {counterReducer} from "./modules/counter/store/counter.reducer";
-import { CounterDisplayComponent } from './modules/counter/counter-display/counter-display.component';
 import {MatFormField, MatLabel} from "@angular/material/form-field";
-import { CustomCounterComponent } from './modules/counter/custom-counter/custom-counter.component';
 import {MatInput} from "@angular/material/input";
 import {MatOption, MatSelect} from "@angular/material/select";
 import { SysSidenavComponent } from './page-template/sys-sidenav/sys-sidenav.component';
@@ -49,18 +44,14 @@ import { OverviewComponent } from './modules/overview/components/overview.compon
 import { VersionComponent } from './modules/version/components/version.component';
 import { StationComponent } from './modules/station/components/station.component';
 import { SettingsComponent } from './modules/settings/components/settings.component';
-import {versionReducer} from "./modules/version/store/version.reducers";
 import {AppState} from "./core/store/app.state";
 import { AddVersionComponent } from './modules/version/components/add-version/add-version.component';
 import { SysButtonComponent } from './page-template/sys-button/sys-button.component';
 import { LopComponent } from './modules/overview/lop/lop.component';
-
-const reducers: ActionReducerMap<unknown, Action>= {
-  [USER_ADMINISTRATION_STORE_KEY]: fromUserAdministration.userAdministrationReducer,
-};
-const effects = [
-  UserAdministrationEffects
-];
+import {LopEffects} from "./modules/overview/lop/store/lop.effects";
+import { LopSettingsComponent } from './modules/settings/lop-settings/lop-settings.component';
+import {MatGridList, MatGridTile} from "@angular/material/grid-list";
+import { SysNavButtonComponent } from './page-template/sys-nav-button/sys-nav-button.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -81,14 +72,10 @@ function initializeKeycloak(keycloak: KeycloakService) {
 @NgModule({
   declarations: [
     AppComponent,
-    SysToolbarComponent,
     UserAdministrationComponent,
     UserFormComponent,
     DashboardComponent,
     ThemeToggleComponent,
-    CounterComponent,
-    CounterDisplayComponent,
-    CustomCounterComponent,
     SysSidenavComponent,
     CustomSidenavComponent,
     OverviewComponent,
@@ -97,7 +84,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     SettingsComponent,
     AddVersionComponent,
     SysButtonComponent,
-    LopComponent
+    LopComponent,
+    LopSettingsComponent,
+    SysNavButtonComponent
   ],
   imports: [
     AppRoutingModule,
@@ -105,7 +94,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     KeycloakAngularModule,
     HttpClientModule,
     StoreModule.forRoot(AppState),
-    // EffectsModule.forRoot(effects),
+    EffectsModule.forRoot([LopEffects]),
 
     MatToolbar,
     NgOptimizedImage,
@@ -144,7 +133,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
     MatCardActions,
     ReactiveFormsModule,
-    MatMiniFabButton
+    MatMiniFabButton,
+    MatGridList,
+    MatGridTile
   ],
   providers: [
     {

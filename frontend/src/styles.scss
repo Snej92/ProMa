@@ -118,6 +118,8 @@ body { margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   --frontend-primary: #e63212;
   --frontend-accent: #4a4a4a;
+  --frontend-alternate: rgba(0,0,0,0.06);
+  --frontend-nav-button: rgba(0,0,0,0.08);
 }
 
 /* Importing Bootstrap SCSS file. */

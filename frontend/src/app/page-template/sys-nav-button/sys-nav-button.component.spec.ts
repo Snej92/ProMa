@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CounterDisplayComponent } from './counter-display.component';
+import { SysNavButtonComponent } from './sys-nav-button.component';
 
-describe('CounterDisplayComponent', () => {
-  let component: CounterDisplayComponent;
-  let fixture: ComponentFixture<CounterDisplayComponent>;
+describe('SysNavButtonComponent', () => {
+  let component: SysNavButtonComponent;
+  let fixture: ComponentFixture<SysNavButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CounterDisplayComponent]
+      declarations: [SysNavButtonComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(CounterDisplayComponent);
+    fixture = TestBed.createComponent(SysNavButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

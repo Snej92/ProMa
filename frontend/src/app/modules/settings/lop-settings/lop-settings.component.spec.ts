@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CustomCounterComponent } from './custom-counter.component';
+import { LopSettingsComponent } from './lop-settings.component';
 
-describe('CustomCounterComponent', () => {
-  let component: CustomCounterComponent;
-  let fixture: ComponentFixture<CustomCounterComponent>;
+describe('LopSettingsComponent', () => {
+  let component: LopSettingsComponent;
+  let fixture: ComponentFixture<LopSettingsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CustomCounterComponent]
+      declarations: [LopSettingsComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(CustomCounterComponent);
+    fixture = TestBed.createComponent(LopSettingsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,32 @@
+.sys-nav-button-container{
+  display: flex;
+  width: 190px;
+  align-items: stretch;
+}
+
+.sys-text-container{
+  display: flex;
+  flex: 1;
+}
+
+.mat-mdc-unelevated-button:not(:disabled){
+  background-color: var(--frontend-nav-button);
+  border-radius: 4px 0 0 4px;
+  justify-content: start;
+}
+
+.sys-nav-button{
+  width: 100%!important;
+  min-width: unset!important;
+}
+
+.sys-nav-button-content-right{
+  border-radius: 0 4px 4px 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background: var(--frontend-primary);
+  mat-icon {
+    color : white;
+  }
+}

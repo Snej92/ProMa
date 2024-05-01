@@ -3,6 +3,7 @@ import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../core/store/appState.model";
 import {lopModel} from "./store/lop.model";
 import {getLop} from "./store/lop.selectors";
+import {loadLop} from "./store/lop.actions";
 
 @Component({
   selector: 'app-lop',
@@ -18,10 +19,10 @@ export class LopComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.store.dispatch(loadLop())
     this.store.select(getLop).subscribe(data=>{
       this.lopList=data;
       console.log(this.lopList)
     })
   }
-
 }
