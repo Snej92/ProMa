@@ -14,5 +14,6 @@ export interface lopModel{
 }
 
 export interface lop{
-  lopList:lopModel[]
+  lopList:lopModel[],
+  errorMessage:string
 }

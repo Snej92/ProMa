@@ -1,30 +1,41 @@
 <div class="div-table">
-  <table mat-table [dataSource]="lopListSettings" class="mat-elevation-z8">
+  <div *ngIf="!lopSettings.errorMessage">
+    <table mat-table [dataSource]="lopSettings.lopList" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="Aktion">
-      <th mat-header-cell *matHeaderCellDef> Aktion </th>
-      <td mat-cell *matCellDef="let lop">
-        <app-sys-button icon="edit" color="accent" tooltip="Bearbeiten"></app-sys-button>
-        <app-sys-button icon="delete" tooltip="löschen"></app-sys-button>
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="Aktion">
+        <th mat-header-cell *matHeaderCellDef> Aktion </th>
+        <td mat-cell *matCellDef="let lop">
+          <app-sys-button icon="edit" color="accent" tooltip="Bearbeiten" (click)="editLop(lop.id)"></app-sys-button>
+          <app-sys-button icon="delete" tooltip="löschen" (click)="deleteLop(lop.id)"></app-sys-button>
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="Aufnahme">
-      <th mat-header-cell *matHeaderCellDef> Aufnahme </th>
-      <td mat-cell *matCellDef="let lop">{{lop.startDate}}</td>
-    </ng-container>
+      <ng-container matColumnDef="Aufnahme">
+        <th mat-header-cell *matHeaderCellDef> Aufnahme </th>
+        <td mat-cell *matCellDef="let lop">{{lop.startDate}}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="LOP">
-      <th mat-header-cell *matHeaderCellDef> LOP </th>
-      <td mat-cell *matCellDef="let lop">{{lop.item}}</td>
-    </ng-container>
+      <ng-container matColumnDef="LOP">
+        <th mat-header-cell *matHeaderCellDef> LOP </th>
+        <td mat-cell *matCellDef="let lop">{{lop.item}}</td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
 
-  <mat-divider class="mt-4"></mat-divider>
-  <div class="d-flex flex-row-reverse">
-    <button class="mt-2" mat-raised-button color="accent">Hinzufügen</button>
+    <mat-divider class="mt-4"></mat-divider>
+    <div class="d-flex flex-row-reverse">
+      <button class="mt-2" mat-raised-button color="accent" (click)="addLop()">Hinzufügen</button>
+    </div>
   </div>
+
+  <mat-card *ngIf="lopSettings.errorMessage">
+    <mat-card-header>
+      <h1>Fehler aufgetreten</h1>
+    </mat-card-header>
+    <mat-card-content>
+      <p style="color: red">{{lopSettings.errorMessage}}</p>
+    </mat-card-content>
+  </mat-card>
 </div>

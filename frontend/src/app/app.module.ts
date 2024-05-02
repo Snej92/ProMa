@@ -52,6 +52,7 @@ import {LopEffects} from "./modules/overview/lop/store/lop.effects";
 import { LopSettingsComponent } from './modules/settings/lop-settings/lop-settings.component';
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
 import { SysNavButtonComponent } from './page-template/sys-nav-button/sys-nav-button.component';
+import { AddLopComponent } from './modules/settings/lop-settings/add-lop/add-lop.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -86,7 +87,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     SysButtonComponent,
     LopComponent,
     LopSettingsComponent,
-    SysNavButtonComponent
+    SysNavButtonComponent,
+    AddLopComponent
   ],
   imports: [
     AppRoutingModule,

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../core/store/appState.model";
-import {lopModel} from "./store/lop.model";
-import {getLop} from "./store/lop.selectors";
+import {lop} from "./store/lop.model";
+import {getLopInfo} from "./store/lop.selectors";
 import {loadLop} from "./store/lop.actions";
 
 @Component({
@@ -12,7 +12,7 @@ import {loadLop} from "./store/lop.actions";
 })
 export class LopComponent implements OnInit{
 
-  lopList !: lopModel[];
+  lop !: lop;
   displayedColumns: string[] = ['Aufnahme', 'LOP', 'Status', 'Erledigt', 'Benutzer']
 
   constructor(private store:Store<AppStateModel>) {
@@ -20,9 +20,8 @@ export class LopComponent implements OnInit{
 
   ngOnInit(): void {
     this.store.dispatch(loadLop())
-    this.store.select(getLop).subscribe(data=>{
-      this.lopList=data;
-      console.log(this.lopList)
+    this.store.select(getLopInfo).subscribe(data=>{
+      this.lop=data;
     })
   }
 }
