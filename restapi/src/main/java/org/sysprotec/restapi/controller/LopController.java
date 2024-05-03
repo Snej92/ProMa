@@ -19,14 +19,14 @@ public class LopController {
         return lopService.getLop();
     }
 
-    @GetMapping("/latest")
-    public List<Lop> getLatestLop(){
-        return lopService.getLatestLop();
-    }
+//    @GetMapping("/latest")
+//    public List<Lop> getLatestLop(){
+//        return lopService.getLatestLop();
+//    }
 
     @PostMapping
-    public void addLop(@RequestBody Lop lop){
-        lopService.addLop(lop);
+    public Lop addLop(@RequestBody Lop lop){
+        return lopService.addLop(lop);
     }
 
     @PutMapping
@@ -34,8 +34,8 @@ public class LopController {
         lopService.updateLop(lop);
     }
 
-    @DeleteMapping
-    public void deleteLop(@RequestParam Integer lopId){
+    @DeleteMapping("{lopId}")
+    public void deleteLop(@PathVariable Integer lopId){
         lopService.delete(lopId);
     }
 }

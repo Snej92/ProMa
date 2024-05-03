@@ -111,7 +111,6 @@ $dark-theme: mat.define-dark-theme((
 
 
 /* You can add global styles to this file, and also import other style files */
-//@import 'bootstrap/scss/bootstrap';
 
 html, body { height: 100%; }
 body { margin: 0;
@@ -120,6 +119,22 @@ body { margin: 0;
   --frontend-accent: #4a4a4a;
   --frontend-alternate: rgba(0,0,0,0.06);
   --frontend-nav-button: rgba(0,0,0,0.08);
+}
+
+.pass-snackbar {
+
+}
+
+.pass-snackbar button {
+
+}
+
+.fail-snackbar {
+
+}
+
+.fail-snackbar button {
+
 }
 
 /* Importing Bootstrap SCSS file. */

@@ -1,5 +1,5 @@
 <div class="div-table">
-  <div *ngIf="!lopSettings.errorMessage">
+  <div>
     <table mat-table [dataSource]="lopSettings.lopList" class="mat-elevation-z8">
 
       <ng-container matColumnDef="Aktion">
@@ -29,13 +29,4 @@
       <button class="mt-2" mat-raised-button color="accent" (click)="addLop()">Hinzufügen</button>
     </div>
   </div>
-
-  <mat-card *ngIf="lopSettings.errorMessage">
-    <mat-card-header>
-      <h1>Fehler aufgetreten</h1>
-    </mat-card-header>
-    <mat-card-content>
-      <p style="color: red">{{lopSettings.errorMessage}}</p>
-    </mat-card-content>
-  </mat-card>
 </div>

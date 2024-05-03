@@ -1,6 +1,16 @@
 import {createReducer, on} from "@ngrx/store";
 import {lopState} from "./lop.state";
-import {addLop, addLopSuccess, loadLop, loadLopFail, loadLopSuccess, updateLop} from "./lop.actions";
+import {
+  addLop,
+  addLopSuccess,
+  deleteLop,
+  loadLop,
+  loadLopFail,
+  loadLopSuccess, loadSpinner,
+  updateLop,
+  updateLopSuccess
+} from "./lop.actions";
+import {lopModel} from "./lop.model";
 
 
 const _lopReducer = createReducer(
@@ -8,7 +18,8 @@ const _lopReducer = createReducer(
 
   on(loadLop, (state) => {
     return{
-      ...state
+      ...state,
+      isLoading:false
     };
   }),
 
@@ -16,7 +27,8 @@ const _lopReducer = createReducer(
     return{
       ...state,
       lopList:[...action.lopList],
-      errorMessage:''
+      errorMessage:'',
+      isLoading:false
     };
   }),
 
@@ -25,18 +37,31 @@ const _lopReducer = createReducer(
     return{
       ...state,
       lopList:[],
-      errorMessage:action.errorText.message
+      errorMessage:action.errorText.message,
+      isLoading:false
     };
   }),
 
-  on(updateLop, (state,action) => {
+  on(updateLopSuccess, (state,action) => {
     const _lop={...action.lopInput};
     const updatedLop=state.lopList.map(lop=>{
       return _lop.id===lop.id?_lop:lop;
-    })
+    });
     return{
       ...state,
-      lopList:updatedLop
+      lopList:updatedLop,
+      isLoading:false
+    };
+  }),
+
+  on(deleteLop, (state,action) => {
+    const updatedLop=state.lopList.filter((data:lopModel)=>{
+      return data.id!==action.id
+    });
+    return{
+      ...state,
+      lopList:updatedLop,
+      isLoading:false
     };
   }),
 
@@ -45,6 +70,14 @@ const _lopReducer = createReducer(
     return{
       ...state,
       lopList:[...state.lopList,lop],
+      isLoading:false
+    };
+  }),
+
+  on(loadSpinner, (state,action) => {
+    return{
+      ...state,
+      isLoading:action.isLoading,
     };
   }),
 );

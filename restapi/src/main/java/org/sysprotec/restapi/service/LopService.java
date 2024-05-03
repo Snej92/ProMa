@@ -30,7 +30,7 @@ public class LopService {
         return null;
     }
 
-    public void addLop(Lop lop) {
+    public Lop addLop(Lop lop) {
         Optional<Project> optionalProject = projectRepository.findProjectById(PROJECT_ID);
         if(optionalProject.isEmpty()){
             log.error("Project with id "+ PROJECT_ID + " does not exist in database");
@@ -39,7 +39,9 @@ public class LopService {
             saveProject.addLop(lop);
             projectRepository.save(saveProject);
             log.info("LOP Punkt: '" + lop.getItem() + "' zu '" + saveProject.getName() + "' Projekt hinzugefügt");
+            return lopRepository.findTopByOrderByIdDesc();
         }
+        return null;
     }
 
     @Transactional
@@ -67,14 +69,5 @@ public class LopService {
             saveProject.removeLop(lopId);
             lopRepository.deleteById(lopId);
         }
-    }
-
-    public List<Lop> getLatestLop() {
-        Optional<Project> optionalProject = projectRepository.findProjectById(PROJECT_ID);
-        if(optionalProject.isPresent()){
-            log.info("Fetch latest LOP");
-            return lopRepository.findTopByOrderByIdDesc();
-        }
-        return null;
     }
 }

@@ -26,10 +26,7 @@ import {MatDivider} from "@angular/material/divider";
 import { UserFormComponent } from './modules/userAdministration/components/user-form/user-form.component';
 import {HttpClientModule} from "@angular/common/http";
 import { DashboardComponent } from './modules/dashboard/components/dashboard.component';
-import {Action, ActionReducerMap, StoreModule} from "@ngrx/store";
-import {USER_ADMINISTRATION_STORE_KEY} from "./modules/userAdministration/store/user-administration.reducers";
-import * as fromUserAdministration from "./modules/userAdministration/store/user-administration.reducers";
-import {UserAdministrationEffects} from "./modules/userAdministration/store/user-administration.effects";
+import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 import { ThemeToggleComponent } from './page-template/theme-toggle/theme-toggle.component';
 import {MatFormField, MatLabel} from "@angular/material/form-field";
@@ -53,6 +50,9 @@ import { LopSettingsComponent } from './modules/settings/lop-settings/lop-settin
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
 import { SysNavButtonComponent } from './page-template/sys-nav-button/sys-nav-button.component';
 import { AddLopComponent } from './modules/settings/lop-settings/add-lop/add-lop.component';
+import {AppEffect} from "./core/store/app.effect";
+import { SysLoadingspinnerComponent } from './page-template/sys-loadingspinner/sys-loadingspinner.component';
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -88,7 +88,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     LopComponent,
     LopSettingsComponent,
     SysNavButtonComponent,
-    AddLopComponent
+    AddLopComponent,
+    SysLoadingspinnerComponent
   ],
   imports: [
     AppRoutingModule,
@@ -96,7 +97,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     KeycloakAngularModule,
     HttpClientModule,
     StoreModule.forRoot(AppState),
-    EffectsModule.forRoot([LopEffects]),
+    EffectsModule.forRoot([LopEffects, AppEffect]),
 
     MatToolbar,
     NgOptimizedImage,
@@ -137,7 +138,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ReactiveFormsModule,
     MatMiniFabButton,
     MatGridList,
-    MatGridTile
+    MatGridTile,
+    MatProgressSpinner
   ],
   providers: [
     {

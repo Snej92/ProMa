@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface LopRepository extends JpaRepository<Lop, Integer> {
 
     Optional<Lop> findLopById(Integer Id);
-    List<Lop> findTopByOrderByIdDesc();
+    Lop findTopByOrderByIdDesc();
 }

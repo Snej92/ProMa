@@ -4,7 +4,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {lopModel} from "../../../overview/lop/store/lop.model";
 import {AppStateModel} from "../../../../core/store/appState.model";
 import {Store} from "@ngrx/store";
-import {addLop, updateLop} from "../../../overview/lop/store/lop.actions";
+import {addLop, loadSpinner, updateLop} from "../../../overview/lop/store/lop.actions";
 import {getLopById} from "../../../overview/lop/store/lop.selectors";
 import {LopService} from "../../../overview/lop/service/lop.service";
 
@@ -19,8 +19,7 @@ export class AddLopComponent implements OnInit{
   constructor(private dialogRef:MatDialogRef<AddLopComponent>,
               private builder:FormBuilder,
               private store:Store<AppStateModel>,
-              @Inject(MAT_DIALOG_DATA) public data:any,
-              private service:LopService) {
+              @Inject(MAT_DIALOG_DATA) public data:any) {
   }
 
   closePopup(){
@@ -30,7 +29,7 @@ export class AddLopComponent implements OnInit{
   lopForm=this.builder.group({
     id:this.builder.control(0),
     startDate:this.builder.control('', Validators.required),
-    endDate:this.builder.control('test'),
+    endDate:this.builder.control(''),
     item:this.builder.control('', Validators.required),
     status:this.builder.control('OFFEN'),
     userAcronym:this.builder.control('JAR')
@@ -46,6 +45,7 @@ export class AddLopComponent implements OnInit{
         status:this.lopForm.value.status as string,
         userAcronym:this.lopForm.value.userAcronym as string,
       }
+      this.store.dispatch(loadSpinner({isLoading:true}));
       if(this.data.isEdit){
         lopInput.id=this.lopForm.value.id as number
         this.store.dispatch(updateLop({lopInput:lopInput}))

@@ -11,8 +11,7 @@ import {getLop} from "../store/lop.selectors";
 })
 export class LopService {
 
-  constructor(private http:HttpClient,
-              private store:Store<AppStateModel>) { }
+  constructor(private http:HttpClient) { }
 
 
   getAllLops():Observable<lopModel[]>{
@@ -21,11 +20,14 @@ export class LopService {
   }
 
   addLop(lopInput:lopModel){
-    return this.http.post("http://localhost:8080/api/lop", lopInput)
-      .pipe(
-      tap(()=>{
-        this.http.get<lopModel>("http://localhost:8080/api/lop/latest");
-      })
-    )
+    return this.http.post("http://localhost:8080/api/lop", lopInput);
+  }
+
+  updateLop(lopInput:lopModel){
+    return this.http.put("http://localhost:8080/api/lop", lopInput);
+  }
+
+  deleteLop(lopId:number){
+    return this.http.delete("http://localhost:8080/api/lop/"+lopId);
   }
 }

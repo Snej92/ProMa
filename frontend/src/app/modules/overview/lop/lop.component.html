@@ -1,5 +1,5 @@
 <div class="div-table">
-  <div *ngIf="!lop.errorMessage">
+  <div>
     <table mat-table [dataSource]="lop.lopList" class="mat-elevation-z8">
 
       <ng-container matColumnDef="Aufnahme">
@@ -31,13 +31,4 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
-
-  <mat-card *ngIf="lop.errorMessage">
-    <mat-card-header>
-      <h1>Fehler aufgetreten</h1>
-    </mat-card-header>
-    <mat-card-content>
-      <p style="color: red">{{lop.errorMessage}}</p>
-    </mat-card-content>
-  </mat-card>
 </div>

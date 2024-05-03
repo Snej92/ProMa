@@ -1,13 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {lop, lopModel} from "../../overview/lop/store/lop.model";
+import {lop} from "../../overview/lop/store/lop.model";
 import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../core/store/appState.model";
-import {loadLop} from "../../overview/lop/store/lop.actions";
-import {getLop, getLopInfo} from "../../overview/lop/store/lop.selectors";
+import {deleteLop, loadLop, loadSpinner} from "../../overview/lop/store/lop.actions";
+import {getLopInfo} from "../../overview/lop/store/lop.selectors";
 import {MatDialog} from "@angular/material/dialog";
 import {AddLopComponent} from "./add-lop/add-lop.component";
-import {Observable} from "rxjs";
-import {LopService} from "../../overview/lop/service/lop.service";
 
 @Component({
   selector: 'app-lop-settings',
@@ -16,20 +14,23 @@ import {LopService} from "../../overview/lop/service/lop.service";
 })
 export class LopSettingsComponent implements OnInit{
 
-  lopListSettings !: lopModel[];
   lopSettings !: lop;
   displayedColumns: string[] = ['Aktion','Aufnahme', 'LOP']
+  isLoading = false;
 
   constructor(private store:Store<AppStateModel>,
-              private dialog:MatDialog,
-              private service: LopService) {
+              private dialog:MatDialog) {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(loadLop())
-    this.store.select(getLopInfo).subscribe(data=>{
-      this.lopSettings=data;
-    })
+    this.store.dispatch(loadSpinner({isLoading:true}));
+    setTimeout(()=>{
+      this.store.dispatch(loadLop())
+      this.store.select(getLopInfo).subscribe(data=>{
+        this.lopSettings=data;
+      });
+    }, 5000);
+
   }
 
   addLop(){
@@ -43,6 +44,10 @@ export class LopSettingsComponent implements OnInit{
 
   deleteLop(id:any){
     console.log(id)
+    if(confirm("Wirklich löschen? Vorgang kann nicht Rückgängig gemacht werden")){
+      this.store.dispatch(loadSpinner({isLoading:true}));
+      this.store.dispatch(deleteLop({id:id}))
+    }
   }
 
   openPopup(id:any, title:any, isEdit=false){

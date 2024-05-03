@@ -4,5 +4,6 @@ import {lop} from "../../modules/overview/lop/store/lop.model";
 
 export interface AppStateModel{
   version:versions,
-  lop:lop
+  lop:lop,
+  // isLoading:boolean
 }
