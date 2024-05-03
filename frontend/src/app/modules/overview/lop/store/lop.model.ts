@@ -1,4 +1,4 @@
-export enum lopStatus{
+export enum LopStatus{
   INARBEIT = 'INARBEIT',
   ERLEDIGT = 'ERLEDIGT',
   OFFEN = 'OFFEN'

@@ -1,5 +1,3 @@
-
-
 export enum LoadState {
   NONE = 'NONE',
   LOADING = 'LOADING',

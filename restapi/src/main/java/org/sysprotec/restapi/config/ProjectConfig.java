@@ -105,7 +105,7 @@ public class ProjectConfig {
 
         Lop lop3 = Lop.builder()
                 .startDate("03.04.2024")
-                .endDate("9.04.2024")
+                .endDate("09.04.2024")
                 .item("LOP Punkt 3")
                 .status(StatusLOP.INARBEIT)
                 .userAcronym("DBI")
