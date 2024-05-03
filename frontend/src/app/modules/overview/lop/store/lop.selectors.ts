@@ -15,7 +15,3 @@ export const getLopInfo=createSelector(getLopState,(state)=>{
 export const getLopById=(lopId:number)=>createSelector(getLopState,(state)=>{
   return state.lopList.find((lop:lopModel)=>lop.id===lopId) as lopModel;
 });
-
-export const getSpinnerState=createSelector(getLopState,(state)=>{
-  return state.isLoading;
-});

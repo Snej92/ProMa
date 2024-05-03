@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {getSpinnerState} from "../../modules/overview/lop/store/lop.selectors";
 import {AppStateModel} from "../../core/store/appState.model";
+import {getSpinnerState} from "../../core/store/app.selector";
 
 @Component({
   selector: 'app-sys-loadingspinner',
@@ -14,8 +14,9 @@ export class SysLoadingspinnerComponent implements OnInit{
   constructor(private store:Store<AppStateModel>) {
   }
 
+
+
   ngOnInit(): void {
-    console.log(this.isLoading)
     this.store.select(getSpinnerState).subscribe(data=>{
       this.isLoading = data;
     });

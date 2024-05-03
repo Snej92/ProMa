@@ -15,6 +15,5 @@ export interface lopModel{
 
 export interface lop{
   lopList:lopModel[],
-  errorMessage:string,
-  isLoading:boolean
+  errorMessage:string
 }

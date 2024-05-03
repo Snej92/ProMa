@@ -1,13 +1,11 @@
 import {createReducer, on} from "@ngrx/store";
 import {lopState} from "./lop.state";
 import {
-  addLop,
   addLopSuccess,
   deleteLop,
   loadLop,
   loadLopFail,
-  loadLopSuccess, loadSpinner,
-  updateLop,
+  loadLopSuccess,
   updateLopSuccess
 } from "./lop.actions";
 import {lopModel} from "./lop.model";
@@ -18,8 +16,7 @@ const _lopReducer = createReducer(
 
   on(loadLop, (state) => {
     return{
-      ...state,
-      isLoading:false
+      ...state
     };
   }),
 
@@ -27,8 +24,7 @@ const _lopReducer = createReducer(
     return{
       ...state,
       lopList:[...action.lopList],
-      errorMessage:'',
-      isLoading:false
+      errorMessage:''
     };
   }),
 
@@ -37,8 +33,7 @@ const _lopReducer = createReducer(
     return{
       ...state,
       lopList:[],
-      errorMessage:action.errorText.message,
-      isLoading:false
+      errorMessage:action.errorText.message
     };
   }),
 
@@ -49,8 +44,7 @@ const _lopReducer = createReducer(
     });
     return{
       ...state,
-      lopList:updatedLop,
-      isLoading:false
+      lopList:updatedLop
     };
   }),
 
@@ -60,8 +54,7 @@ const _lopReducer = createReducer(
     });
     return{
       ...state,
-      lopList:updatedLop,
-      isLoading:false
+      lopList:updatedLop
     };
   }),
 
@@ -69,17 +62,10 @@ const _lopReducer = createReducer(
     const lop={...action.lopInput};
     return{
       ...state,
-      lopList:[...state.lopList,lop],
-      isLoading:false
+      lopList:[...state.lopList,lop]
     };
   }),
 
-  on(loadSpinner, (state,action) => {
-    return{
-      ...state,
-      isLoading:action.isLoading,
-    };
-  }),
 );
 
 export function lopReducer(state: any , action: any) {

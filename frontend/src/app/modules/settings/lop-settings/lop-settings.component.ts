@@ -2,10 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {lop} from "../../overview/lop/store/lop.model";
 import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../core/store/appState.model";
-import {deleteLop, loadLop, loadSpinner} from "../../overview/lop/store/lop.actions";
+import {deleteLop, loadLop} from "../../overview/lop/store/lop.actions";
 import {getLopInfo} from "../../overview/lop/store/lop.selectors";
 import {MatDialog} from "@angular/material/dialog";
 import {AddLopComponent} from "./add-lop/add-lop.component";
+import {loadSpinner} from "../../../core/store/app.action";
+import {getSpinnerState} from "../../../core/store/app.selector";
 
 @Component({
   selector: 'app-lop-settings',
@@ -16,7 +18,6 @@ export class LopSettingsComponent implements OnInit{
 
   lopSettings !: lop;
   displayedColumns: string[] = ['Aktion','Aufnahme', 'LOP']
-  isLoading = false;
 
   constructor(private store:Store<AppStateModel>,
               private dialog:MatDialog) {
@@ -24,13 +25,10 @@ export class LopSettingsComponent implements OnInit{
 
   ngOnInit(): void {
     this.store.dispatch(loadSpinner({isLoading:true}));
-    setTimeout(()=>{
       this.store.dispatch(loadLop())
       this.store.select(getLopInfo).subscribe(data=>{
         this.lopSettings=data;
       });
-    }, 5000);
-
   }
 
   addLop(){

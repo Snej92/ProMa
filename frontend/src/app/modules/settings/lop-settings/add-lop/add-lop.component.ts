@@ -4,9 +4,9 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {lopModel} from "../../../overview/lop/store/lop.model";
 import {AppStateModel} from "../../../../core/store/appState.model";
 import {Store} from "@ngrx/store";
-import {addLop, loadSpinner, updateLop} from "../../../overview/lop/store/lop.actions";
+import {addLop, updateLop} from "../../../overview/lop/store/lop.actions";
 import {getLopById} from "../../../overview/lop/store/lop.selectors";
-import {LopService} from "../../../overview/lop/service/lop.service";
+import {loadSpinner} from "../../../../core/store/app.action";
 
 @Component({
   selector: 'app-add-lop',

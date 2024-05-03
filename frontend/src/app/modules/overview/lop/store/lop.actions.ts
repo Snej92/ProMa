@@ -10,7 +10,6 @@ export const UPDATE_LOP='[lop page] update lop'
 export const UPDATE_LOP_SUCCESS='[lop page] update lop success'
 export const DELETE_LOP='[lop page] delete lop'
 export const DELETE_LOP_SUCCESS='[lop page] delete lop success'
-export const LOAD_SPINNER='[lop page] load spinner'
 
 
 export const loadLop=createAction(LOAD_LOP);
@@ -25,5 +24,3 @@ export const updateLopSuccess=createAction(UPDATE_LOP_SUCCESS, props<{lopInput:l
 
 export const deleteLop=createAction(DELETE_LOP, props<{id:number}>())
 export const deleteLopSuccess=createAction(DELETE_LOP_SUCCESS, props<{id:number}>())
-
-export const loadSpinner=createAction(LOAD_SPINNER, props<{isLoading:boolean}>())
