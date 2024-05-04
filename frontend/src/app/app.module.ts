@@ -53,6 +53,9 @@ import { AddLopComponent } from './modules/settings/lop-settings/add-lop/add-lop
 import {AppEffect} from "./core/store/app.effect";
 import { SysLoadingspinnerComponent } from './page-template/sys-loadingspinner/sys-loadingspinner.component';
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
+import { ProjectAdministrationComponent } from './modules/project-administration/components/project-administration.component';
+import { ProjectCardComponent } from './modules/project-administration/components/project-card/project-card.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -89,7 +92,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     LopSettingsComponent,
     SysNavButtonComponent,
     AddLopComponent,
-    SysLoadingspinnerComponent
+    SysLoadingspinnerComponent,
+    ProjectAdministrationComponent,
+    ProjectCardComponent
   ],
   imports: [
     AppRoutingModule,
@@ -139,7 +144,10 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatMiniFabButton,
     MatGridList,
     MatGridTile,
-    MatProgressSpinner
+    MatProgressSpinner,
+    MatMenu,
+    MatMenuTrigger,
+    MatMenuItem
   ],
   providers: [
     {

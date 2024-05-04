@@ -3,6 +3,7 @@ package org.sysprotec.restapi.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.sysprotec.restapi.model.Project;
+import org.sysprotec.restapi.model.projections.ProjectView;
 import org.sysprotec.restapi.service.ProjectService;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class ProjectController {
 
     //todo: add ResponseEntity
     @GetMapping("/all")
-    public List<Project> getAllProjects(){
+    public List<ProjectView> getAllProjects(){
         return projectService.getAllProjects();
     }
 

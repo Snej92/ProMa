@@ -117,8 +117,12 @@ body { margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   --frontend-primary: #e63212;
   --frontend-accent: #4a4a4a;
+  --frontend-error: #ff5252;
+  --frontend-success: #4caf50;
+  --frontend-warning: #fbc800;
   --frontend-alternate: rgba(0,0,0,0.06);
   --frontend-nav-button: rgba(0,0,0,0.08);
+  --frontend-nav-button-border: rgba(255,255,255,0.1);
 }
 
 .pass-snackbar {

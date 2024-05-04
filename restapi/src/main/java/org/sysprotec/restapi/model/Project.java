@@ -21,6 +21,10 @@ public class Project {
     private String name;
     private String description;
     private Boolean favorite;
+    private Integer amountStations;
+    private Integer inProgressStations;
+    private Integer storedStations;
+    private Integer notStoredStations;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Version> versions;
     @OneToMany(cascade = CascadeType.ALL)

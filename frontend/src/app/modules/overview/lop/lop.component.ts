@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../core/store/appState.model";
-import {lop} from "./store/lop.model";
-import {getLopInfo} from "./store/lop.selectors";
-import {loadLop} from "./store/lop.actions";
+import {lop, lopModel} from "./store/lop.model";
+import {getLopById, getLopInfo} from "./store/lop.selectors";
+import {loadLop, updateLop} from "./store/lop.actions";
 import {loadSpinner} from "../../../core/store/app.action";
 import {Subscription} from "rxjs";
 
@@ -16,8 +16,9 @@ export class LopComponent implements OnInit, OnDestroy{
 
   private subscriptions: Subscription[] = [];
   lop !: lop;
+  editData!:lopModel;
   displayedColumns: string[] = ['Aufnahme', 'LOP', 'Status', 'Erledigt', 'Benutzer'];
-  lopStatus: string[] = ['ERLEDIGT', 'OFFEN', 'INARBEIT'];
+  lopStatus: string[] = ['OFFEN', 'INARBEIT', 'ERLEDIGT'];
 
   constructor(private store:Store<AppStateModel>) {
   }
@@ -33,7 +34,36 @@ export class LopComponent implements OnInit, OnDestroy{
     )
   }
 
+  changeLOPStatus(status:string, id:any){
+    this.store.select(getLopById(id)).subscribe(data=>{
+      this.editData=data;
+    })
+    if(this.editData.status!=status){
+      const lopInput:lopModel={
+        id:this.editData.id,
+        startDate:this.editData.startDate,
+        endDate:this.editData.endDate,
+        item: this.editData.item,
+        status:status,
+        userAcronym:this.editData.userAcronym,
+      }
+      console.log(lopInput)
+      this.store.dispatch(loadSpinner({isLoading:true}));
+      this.store.dispatch(updateLop({lopInput:lopInput}))
+    }
+  }
 
+  changeToOFFEN(id:any){
+    this.changeLOPStatus(this.lopStatus[0],id)
+  }
+
+  changeToINARBEIT(id:any){
+    this.changeLOPStatus(this.lopStatus[1],id)
+  }
+
+  changeToERLEDIGT(id:any){
+    this.changeLOPStatus(this.lopStatus[2],id)
+  }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());

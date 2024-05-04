@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.sysprotec.restapi.model.Project;
+import org.sysprotec.restapi.model.projections.ProjectView;
 import org.sysprotec.restapi.repository.ProjectRepository;
 
 import java.util.List;
@@ -17,8 +18,8 @@ public class ProjectService {
     public static Integer PROJECT_ID = 1;
     private final ProjectRepository projectRepository;
 
-    public List<Project> getAllProjects() {
-        return projectRepository.findAll();
+    public List<ProjectView> getAllProjects() {
+        return projectRepository.findBy();
     }
 
     public Project getProject(Integer projectId) {
