@@ -1,13 +1,13 @@
-
-export type role = {
+export interface userRole {
   id : number,
   admin : boolean,
   project : boolean,
   user : boolean
 }
 
-export type user = {
+export interface userModel{
   id : number,
+  activeProject: number,
   sub : string,
   firstname : string,
   lastname : string,
@@ -16,5 +16,10 @@ export type user = {
   phone : string,
   username : string,
   password : string,
-  role : role
+  role : userRole
+}
+
+export interface user{
+  userList:userModel[],
+  errorMessage:string
 }

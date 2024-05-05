@@ -1,10 +1,19 @@
-.user-administration-container {
-    margin-left: 20%;
-    margin-right: 20%;
+.div-table{
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 4px;
 }
 
-.user-administration-header-container{
-  margin-top: 3%;
-  margin-left: 20%;
-  margin-right: 20%;
+.mat-mdc-header-row{
+  color: white;
+  background-color: var(--frontend-primary);
+  height: 50px;
+}
+
+.mat-mdc-row:nth-child(even){
+  background-color: var(--frontend-alternate);
+}
+
+.button{
+  background-color: var(--frontend-accent)!important;
 }

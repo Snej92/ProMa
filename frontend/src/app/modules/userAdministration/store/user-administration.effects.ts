@@ -1,24 +1,31 @@
 import {Injectable} from "@angular/core";
-import * as UserAdministrationActions from "./user-administration.actions"
 import {Actions, createEffect, ofType} from "@ngrx/effects";
-import {UserAdministrationConnectorService} from "../services/user-administration-connector.service";
-import {catchError, map, of, switchMap, tap} from "rxjs";
+import {catchError, of, switchMap} from "rxjs";
+import {LOAD_USER, loadUserFail, loadUserSuccess} from "./user-administration.actions";
+import {UserService} from "../services/user.service";
+import {loadSpinner} from "../../../core/store/app.action";
+
 
 @Injectable()
 export class UserAdministrationEffects{
+  constructor(private action$:Actions,
+              private service:UserService) {
 
-  getUsers = createEffect(() => this.actions$.pipe(
-    ofType(UserAdministrationActions.GetUsersActions.do),
-    switchMap(action =>
-      this.connector.getUsers().pipe(
-        map((data) => UserAdministrationActions.GetUsersActions.success({users: data})),
-        catchError(() => of(UserAdministrationActions.GetUsersActions.fail()).pipe(tap(error => console.log(error))))
-      ))
-  ));
-
-  constructor(
-    private actions$: Actions,
-    private connector: UserAdministrationConnectorService
-  ) {
   }
+
+  _getUser=createEffect(()=>
+    this.action$.pipe(
+      ofType(LOAD_USER),
+      switchMap(action=>
+        this.service.getAllUsers().pipe(
+          switchMap(data=> of(
+            loadUserSuccess({userList:data}),
+            loadSpinner({isLoading:false})
+          )),
+          catchError((error)=> of(loadUserFail({errorText:error}), loadSpinner({isLoading:false})))
+        )
+      )
+    )
+  );
 }
+

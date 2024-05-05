@@ -1,48 +1,21 @@
 import {Component, OnInit} from '@angular/core';
-import {UserAdministrationService} from "../../services/user-administration.service";
-import {user} from "../../models/user-Administration.model";
-import {USERS} from "../../../../dummy/mock-user";
-import {MatDialog} from "@angular/material/dialog";
-import {UserFormComponent} from "../user-form/user-form.component";
-import {MatTableDataSource} from "@angular/material/table";
-import {Observable, of} from "rxjs";
-import {HttpClient} from "@angular/common/http";
-
+import {user} from "../../store/user-Administration.model";
 
 @Component({
   selector: 'app-user-administration',
   templateUrl: './user-administration.component.html',
   styleUrl: './user-administration.component.scss'
 })
-export class UserAdministrationComponent implements OnInit {
+export class UserAdministrationComponent implements OnInit{
 
-  // users: user[] = [];
-  dataSource = new MatTableDataSource<user>()
-
-
-  constructor(
-    private _userAdministrationService: UserAdministrationService,
-    private _dialog: MatDialog,
-    ){
-  }
+  user!:user;
+  displayedColumns: string[] = ['Vorname','Nachname', 'Kürzel', 'E-Mail', 'Telefon', 'Benutzername', 'Passwort']
 
   openUserForm(){
-    this._dialog.open(UserFormComponent);
+
   }
 
-  getUsers(): void{
-    this.dataSource.data = this._userAdministrationService.getUsers();
+  ngOnInit(): void {
+    console.log(this.user)
   }
-
-  ngOnInit(): void{
-    this.getUsers();
-    this._userAdministrationService.loadUsers();
-  }
-
-  get user$() : Observable<user[]>{
-    return this._userAdministrationService.$users;
-  }
-
-  displayedColumns: string[] = ['firstname', 'lastname', 'acronym', 'email', 'phone' , 'username', 'password']
 }
-

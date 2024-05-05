@@ -1,11 +1,6 @@
-import {user} from "../models/user-Administration.model";
-import {LoadState} from "../../../core/models/core.models";
+import {user} from "./user-Administration.model";
 
-
-export interface UserAdministrationState {
-  users : user[],
-  usersLoadState : LoadState,
-  addUserLoadState : LoadState,
-  deleteUserLoadState : LoadState,
-  editUserLoadState : LoadState,
+export const userState:user={
+  userList:[],
+  errorMessage:''
 }

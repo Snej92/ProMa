@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatToolbar } from "@angular/material/toolbar";
 import {NgOptimizedImage} from "@angular/common";
-import {MatButton, MatIconButton, MatMiniFabButton} from "@angular/material/button";
+import {MatButton, MatIconButton, MatMiniFabButton, MatButtonModule} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatTooltip} from "@angular/material/tooltip";
@@ -59,6 +59,7 @@ import { ProjectCardComponent } from './modules/project-administration/component
 import {
   ProjectAdministrationEffects
 } from "./modules/project-administration/components/store/project-administration.effects";
+import {UserAdministrationEffects} from "./modules/userAdministration/store/user-administration.effects";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -105,7 +106,11 @@ function initializeKeycloak(keycloak: KeycloakService) {
     KeycloakAngularModule,
     HttpClientModule,
     StoreModule.forRoot(AppState),
-    EffectsModule.forRoot([LopEffects, AppEffect, ProjectAdministrationEffects]),
+    EffectsModule.forRoot([
+      LopEffects,
+      AppEffect,
+      ProjectAdministrationEffects,
+      UserAdministrationEffects]),
 
 
     MatToolbar,

@@ -4,6 +4,7 @@ import {appReducer} from "./app.reducer";
 import {
   projectViewReducer
 } from "../../modules/project-administration/components/store/project-administration.reducers";
+import {userReducer} from "../../modules/userAdministration/store/user-administration.reducers";
 
 
 export const AppState={
@@ -11,4 +12,5 @@ export const AppState={
   lop:lopReducer,
   app:appReducer,
   projectView:projectViewReducer,
+  user:userReducer,
 }
