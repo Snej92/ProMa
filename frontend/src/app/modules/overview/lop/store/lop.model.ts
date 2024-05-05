@@ -1,7 +1,7 @@
 export enum LopStatus{
-  INARBEIT = 'INARBEIT',
-  ERLEDIGT = 'ERLEDIGT',
-  OFFEN = 'OFFEN'
+  INARBEIT = 'OFFEN',
+  ERLEDIGT = 'INARBEIT',
+  OFFEN = 'ERLEDIGT'
 }
 
 export interface lopModel{

@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {lopModel} from "../store/lop.model";
-import {Observable, tap} from "rxjs";
-import {AppStateModel} from "../../../../core/store/appState.model";
-import {Store} from "@ngrx/store";
-import {getLop} from "../store/lop.selectors";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'

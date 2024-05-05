@@ -56,6 +56,9 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import { ProjectAdministrationComponent } from './modules/project-administration/components/project-administration.component';
 import { ProjectCardComponent } from './modules/project-administration/components/project-card/project-card.component';
+import {
+  ProjectAdministrationEffects
+} from "./modules/project-administration/components/store/project-administration.effects";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -102,7 +105,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     KeycloakAngularModule,
     HttpClientModule,
     StoreModule.forRoot(AppState),
-    EffectsModule.forRoot([LopEffects, AppEffect]),
+    EffectsModule.forRoot([LopEffects, AppEffect, ProjectAdministrationEffects]),
+
 
     MatToolbar,
     NgOptimizedImage,

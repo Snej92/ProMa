@@ -36,6 +36,10 @@ public class ProjectService {
                 .name(project.getName())
                 .description(project.getDescription())
                 .favorite(project.getFavorite())
+                .amountStations(project.getAmountStations())
+                .inProgressStations(project.getInProgressStations())
+                .storedStations(project.getStoredStations())
+                .notStoredStations(project.getNotStoredStations())
                 .build();
         projectRepository.save(saveProject);
     }
@@ -47,6 +51,10 @@ public class ProjectService {
             saveProject.setName(project.getName());
             saveProject.setDescription(project.getDescription());
             saveProject.setFavorite(project.getFavorite());
+            saveProject.setAmountStations(project.getAmountStations());
+            saveProject.setInProgressStations(project.getInProgressStations());
+            saveProject.setStoredStations(project.getStoredStations());
+            saveProject.setNotStoredStations(project.getNotStoredStations());
 
             projectRepository.save(saveProject);
         }else log.error("Project " + project.getName() +" does not exist");
