@@ -21,9 +21,9 @@ public class ProjectController {
         return projectService.getAllProjects();
     }
 
-    @GetMapping
-    public Project getProject(@RequestParam Integer projectId){
-        return projectService.getProject(projectId);
+    @GetMapping("/{projectId}")
+    public ProjectView getProjectById(@PathVariable Integer projectId){
+        return projectService.getProjectById(projectId);
     }
 
     @PostMapping

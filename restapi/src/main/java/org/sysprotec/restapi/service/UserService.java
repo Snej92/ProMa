@@ -1,11 +1,11 @@
 package org.sysprotec.restapi.service;
 
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.sysprotec.restapi.model.User;
 import org.sysprotec.restapi.repository.UserRepository;
@@ -31,22 +31,38 @@ public class UserService {
     }
 
 
-    public void SyncUser(User user) {
-        if (user == null){
-            throw new EntityNotFoundException("Error while user sync");
+    public void SyncUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(!(authentication instanceof AnonymousAuthenticationToken)){
+            JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+            String sub = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("sub"));
+            String username = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("preferred_username"));
+            String firstname = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("given_name"));
+            String lastname = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("family_name"));
+            String email = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("email"));
+
+            User user = User.builder()
+                    .sub(sub)
+                    .username(username)
+                    .firstname(firstname)
+                    .lastname(lastname)
+                    .email(email)
+                    .build();
+
+            User saveUser = user;
+            Optional<User> optionalUser = userRepository.getUserBySub(user.getSub());
+
+            if (optionalUser.isPresent()) {
+                saveUser = optionalUser.get();
+                saveUser.setUsername(user.getUsername());
+                saveUser.setLastname(user.getLastname());
+                saveUser.setFirstname(user.getFirstname());
+                saveUser.setEmail(user.getEmail());
+            }
+
+            userRepository.save(saveUser);
+            log.info("user " + saveUser.getUsername() +" synchronized with database");
         }
-
-        User saveUser = user;
-        Optional<User> optionalUser = userRepository.findByEmail(user.getEmail());
-
-        if(optionalUser.isPresent()){
-            saveUser = optionalUser.get();
-            saveUser.setFirstname(user.getFirstname());
-            saveUser.setLastname(user.getLastname());
-            saveUser.setSub(user.getSub());
-        }
-
-        userRepository.save(saveUser);
     }
 
     public List<User> getAllUser() {

@@ -20,6 +20,7 @@ public class LopService {
 
     private final LopRepository lopRepository;
     private final ProjectRepository projectRepository;
+    public static Integer PROJECT_ID = 1;
 
     public List<Lop> getLop() {
         log.info("Fetch all LOPs");

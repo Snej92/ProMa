@@ -2,10 +2,16 @@ package org.sysprotec.restapi.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.sysprotec.restapi.model.Project;
+import org.sysprotec.restapi.model.User;
 import org.sysprotec.restapi.model.projections.ProjectView;
 import org.sysprotec.restapi.repository.ProjectRepository;
+import org.sysprotec.restapi.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,16 +23,27 @@ public class ProjectService {
 
     public static Integer PROJECT_ID = 1;
     private final ProjectRepository projectRepository;
+    private final UserRepository userRepository;
 
     public List<ProjectView> getAllProjects() {
         return projectRepository.findBy();
     }
 
-    public Project getProject(Integer projectId) {
-        Optional<Project> optionalProject = projectRepository.findProjectById(projectId);
-        if(optionalProject.isPresent()){
-//            PROJECT_ID = optionalProject.get().getId();
-            return optionalProject.get();
+    public ProjectView getProjectById(Integer projectId) {
+        ProjectView projectView = projectRepository.findProjectedById(projectId);
+        if(projectView!=null){
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if(!(authentication instanceof AnonymousAuthenticationToken)){
+                //Todo: change back to use authentication "authentication.getName()"
+                JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+                String username = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("preferred_username"));
+                User user = userRepository.findUserByUsernameIgnoreCase(username);
+                user.setActiveProject(projectId);
+                userRepository.save(user);
+                return projectView;
+            } else{
+                log.error("no user logged in");
+            }
         }else log.error("Project with ID" + projectId +" does not exist in database");
         return null;
     }

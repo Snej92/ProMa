@@ -19,11 +19,6 @@ public class LopController {
         return lopService.getLop();
     }
 
-//    @GetMapping("/latest")
-//    public List<Lop> getLatestLop(){
-//        return lopService.getLatestLop();
-//    }
-
     @PostMapping
     public Lop addLop(@RequestBody Lop lop){
         return lopService.addLop(lop);
