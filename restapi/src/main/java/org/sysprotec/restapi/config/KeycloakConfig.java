@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class KeycloakConfig {
 
     private String authServerUrl = "http://localhost:8081";
-    private String adminClientSecret = "oLluQ2Qqi555OIm4tEjW5hOwXNAmPCdb";
+    private String adminClientSecret = "dZwaCJrCVnaEpV3LmIAQD0ts3DoSItu5";
     private String realm = "ProMa";
     private String clientId = "admin-cli";
     @Bean
@@ -27,7 +27,7 @@ public class KeycloakConfig {
                 .build();
 
         if (keycloak == null){
-            log.warn("Keycloak is null");
+            log.error("Keycloak is null");
         }else log.info("Keycloak created");
 
         return keycloak;

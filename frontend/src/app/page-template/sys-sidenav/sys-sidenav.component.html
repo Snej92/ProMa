@@ -1,17 +1,40 @@
 <mat-toolbar color="primary" class="mat-elevation-z4 justify-content-between">
   <!--  left side-->
-  <span class="sys-toolbar-left">
+  <span>
     <button mat-icon-button (click)="collapsed.set(!collapsed())"> <mat-icon>menu</mat-icon> </button>
   </span>
-
+  <ng-container *ngIf="loggedUser as user">
+<!--    todo: Projektname anzeigen! Eigentlich wichtiger als Benutzer-->
+<!--    <ng-container *ngIf="activeProjectView as project">-->
+<!--      <ng-container *ngIf="user.user.activeProject != 0">-->
+<!--      <span>-->
+<!--        {{project.projectView.name}}-->
+<!--      </span>-->
+<!--      </ng-container>-->
+<!--      <ng-container *ngIf="user.user.activeProject == 0">-->
+<!--      <span>-->
+<!--        {{selectProject}}-->
+<!--      </span>-->
+<!--      </ng-container>-->
+<!--    </ng-container>-->
+    <ng-container *ngIf="user.user.firstname != 'Not in Database'">
+      <span>
+        Hallo {{user.user.firstname}}
+      </span>
+    </ng-container>
+  </ng-container>
   <!--  right side-->
   <span class="justify-content-between">
     <button mat-icon-button routerLink="/projectAdministration" matTooltip="Projektverwaltung">
       <mat-icon>folder</mat-icon>
     </button>
-    <button mat-icon-button routerLink="/userAdministration" matTooltip="Benutzerverwaltung">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>account_box</mat-icon>
     </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/userAdministration"><span>Benutzerverwaltung</span></button>
+      <button mat-menu-item (click)="onLogout()"><span>Ausloggen</span></button>
+    </mat-menu>
     <app-theme-toggle></app-theme-toggle>
   </span>
 </mat-toolbar>

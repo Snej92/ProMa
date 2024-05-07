@@ -1,10 +1,8 @@
 package org.sysprotec.restapi.controller;
 
-import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.sysprotec.restapi.model.User;
 import org.sysprotec.restapi.service.KeycloakService;
@@ -23,24 +21,24 @@ public class KeycloakController {
         return keycloakService.getUserByUsername(principal.getName());
     }
 
-    @PreAuthorize("hasRole('backend_admin')")
+//    @PreAuthorize("hasRole('client_admin')")
     @PostMapping("/keycloak")
-    public ResponseEntity<String> createUser(@RequestBody User user){
+    public ResponseEntity<User> createUser(@RequestBody User user){
         return keycloakService.createUser(user);
     }
 
     //todo: add ResponseEntity
-    @PreAuthorize("hasRole('backend_admin')")
-    @DeleteMapping("/keycloak")
-    public void deleteUser(@RequestParam String sub){
+//    @PreAuthorize("hasRole('client_admin')")
+    @DeleteMapping("/keycloak/{sub}")
+    public void deleteUser(@PathVariable String sub){
         keycloakService.deleteUser(sub);
     }
 
     //todo: add ResponseEntity
-    @PreAuthorize("hasRole('backend_admin')")
+//    @PreAuthorize("hasRole('backend_admin')")
     @PutMapping("/keycloak")
-    public void updateUser(@RequestBody User user){
+    public ResponseEntity<User> updateUser(@RequestBody User user){
         keycloakService.deleteUser(user.getSub());
-        keycloakService.createUser(user);
+        return keycloakService.createUser(user);
     }
 }

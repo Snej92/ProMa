@@ -1,6 +1,11 @@
 import {createReducer, on} from "@ngrx/store";
 import {projectViewState} from "./project-administration.state";
-import {loadProjectView, loadProjectViewFail, loadProjectViewSuccess} from "./project-administration.actions";
+import {
+  loadProjectView,
+  loadProjectViewFail,
+  loadProjectViewSuccess
+} from "./project-administration.actions";
+import {lopModel} from "../../../overview/lop/store/lop.model";
 
 
 const _projectReducer = createReducer(

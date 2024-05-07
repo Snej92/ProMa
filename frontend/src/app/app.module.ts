@@ -23,7 +23,6 @@ import {
 import {MatCard, MatCardActions, MatCardContent, MatCardHeader} from "@angular/material/card";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatDivider} from "@angular/material/divider";
-import { UserFormComponent } from './modules/userAdministration/components/user-form/user-form.component';
 import {HttpClientModule} from "@angular/common/http";
 import { DashboardComponent } from './modules/dashboard/components/dashboard.component';
 import {StoreModule} from "@ngrx/store";
@@ -60,6 +59,11 @@ import {
   ProjectAdministrationEffects
 } from "./modules/project-administration/components/store/project-administration.effects";
 import {UserAdministrationEffects} from "./modules/userAdministration/store/user-administration.effects";
+import { AddUserComponent } from './modules/userAdministration/components/add-user/add-user.component';
+import {MatCheckbox} from "@angular/material/checkbox";
+import { ProjectElevationDirective } from './page-template/directives/project-elevation/project-elevation.directive';
+import {LoggedUserEffects} from "./core/logged-user/logged-user.effects";
+import {ActiveProjectEffects} from "./core/active-project/active-project.effects";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -81,7 +85,6 @@ function initializeKeycloak(keycloak: KeycloakService) {
   declarations: [
     AppComponent,
     UserAdministrationComponent,
-    UserFormComponent,
     DashboardComponent,
     ThemeToggleComponent,
     SysSidenavComponent,
@@ -98,7 +101,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     AddLopComponent,
     SysLoadingspinnerComponent,
     ProjectAdministrationComponent,
-    ProjectCardComponent
+    ProjectCardComponent,
+    AddUserComponent,
+    ProjectElevationDirective
   ],
   imports: [
     AppRoutingModule,
@@ -110,7 +115,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
       LopEffects,
       AppEffect,
       ProjectAdministrationEffects,
-      UserAdministrationEffects]),
+      UserAdministrationEffects,
+      LoggedUserEffects,
+      ActiveProjectEffects,]),
 
 
     MatToolbar,
@@ -156,7 +163,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatProgressSpinner,
     MatMenu,
     MatMenuTrigger,
-    MatMenuItem
+    MatMenuItem,
+    MatCheckbox
   ],
   providers: [
     {

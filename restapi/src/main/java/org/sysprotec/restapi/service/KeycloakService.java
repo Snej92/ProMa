@@ -25,9 +25,9 @@ public class KeycloakService {
 
     private final String REALM_NAME = "ProMa";
 
-    private RoleRepository roleRepository;
-    private UserRepository userRepository;
-    private Keycloak keycloak;
+    private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
+    private final Keycloak keycloak;
 
     public KeycloakService(RoleRepository roleRepository, UserRepository userRepository, Keycloak keycloak) {
         this.roleRepository = roleRepository;
@@ -36,7 +36,7 @@ public class KeycloakService {
     }
 
 
-    public ResponseEntity<String> createUser(User user){
+    public ResponseEntity<User> createUser(User user){
 
         List<String> groups = new ArrayList<>();
         if(user.getRoles().getAdminRole()){
@@ -83,6 +83,7 @@ public class KeycloakService {
             roleRepository.save(role);
             User newUser = User.builder()
                     .sub(keycloakUser.getId())
+                    .activeProject(0)
                     .firstname(user.getFirstname())
                     .lastname(user.getLastname())
                     .acronym(user.getAcronym())
@@ -95,13 +96,13 @@ public class KeycloakService {
             userRepository.save(newUser);
             log.info("Status: " + String.valueOf(response.getStatus()) +" - User " + user.getUsername() + " created");
             return new ResponseEntity<>(
-                    "User " + user.getUsername() + " created" ,
+                    userRepository.findTopByOrderByIdDesc() ,
                     HttpStatus.CREATED);
         }
         else{
-            log.warn("Status: " + String.valueOf(response.getStatus()) +" - User "+ user.getUsername() + "already exists");
+            log.warn("Status: " + String.valueOf(response.getStatus()) +" - User "+ user.getUsername() + " already exists");
             return new ResponseEntity<>(
-                    "User " + user.getUsername() + " already exists",
+                    null,
                     HttpStatus.CONFLICT);
         }
     }

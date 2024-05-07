@@ -1,8 +1,8 @@
 export interface userRole {
   id : number,
-  admin : boolean,
-  project : boolean,
-  user : boolean
+  adminRole : boolean,
+  projectRole : boolean,
+  userRole : boolean
 }
 
 export interface userModel{
@@ -16,7 +16,7 @@ export interface userModel{
   phone : string,
   username : string,
   password : string,
-  role : userRole
+  roles : userRole
 }
 
 export interface user{

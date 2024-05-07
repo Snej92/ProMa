@@ -24,8 +24,10 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
     private final JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter =
             new JwtGrantedAuthoritiesConverter();
 
-    private String principleAttribute = "ProMa";
-    private String resourceId = "preferred_username";
+//    private String principleAttribute = "ProMa";
+//    private String resourceId = "preferred_username";
+    private String principleAttribute = "preferred_username";
+    private String resourceId = "backend";
     @Override
     public AbstractAuthenticationToken convert(@NonNull Jwt jwt) {
         Collection<GrantedAuthority> authorities = Stream.concat(

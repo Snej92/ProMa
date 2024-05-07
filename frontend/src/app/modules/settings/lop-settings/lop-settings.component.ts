@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {lop} from "../../overview/lop/store/lop.model";
 import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../core/store/appState.model";
@@ -7,16 +7,18 @@ import {getLopInfo} from "../../overview/lop/store/lop.selectors";
 import {MatDialog} from "@angular/material/dialog";
 import {AddLopComponent} from "./add-lop/add-lop.component";
 import {loadSpinner} from "../../../core/store/app.action";
-import {getSpinnerState} from "../../../core/store/app.selector";
+import {Subscription} from "rxjs";
+
 
 @Component({
   selector: 'app-lop-settings',
   templateUrl: './lop-settings.component.html',
   styleUrl: './lop-settings.component.scss'
 })
-export class LopSettingsComponent implements OnInit{
+export class LopSettingsComponent implements OnInit, OnDestroy{
 
   lopSettings !: lop;
+  private subscriptions: Subscription[] = [];
   displayedColumns: string[] = ['Aktion','Aufnahme', 'LOP']
 
   constructor(private store:Store<AppStateModel>,
@@ -26,9 +28,12 @@ export class LopSettingsComponent implements OnInit{
   ngOnInit(): void {
     this.store.dispatch(loadSpinner({isLoading:true}));
       this.store.dispatch(loadLop())
-      this.store.select(getLopInfo).subscribe(data=>{
+    this.subscriptions.push(
+      this.store.select(getLopInfo).pipe()
+        .subscribe(data=>{
         this.lopSettings=data;
-      });
+      })
+    )
   }
 
   addLop(){
@@ -53,9 +58,13 @@ export class LopSettingsComponent implements OnInit{
       width:'40%',
       data:{
         id:id,
-        title: title,
+        title:title,
         isEdit:isEdit
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

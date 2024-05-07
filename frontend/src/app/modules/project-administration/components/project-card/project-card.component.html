@@ -1,4 +1,4 @@
-<mat-card class="card-container mt-4 ms-5">
+<mat-card class="card-container">
   <div class="d-flex justify-content-between ms-2 mt-2 me-2">
     <div class="card-header-left">
       <button mat-raised-button matTooltip="Favorit" color="accent" class="button small-button">
@@ -29,23 +29,26 @@
     </div>
   </div>
 
-  <div class="card-media">
+  <div (click)="selectProject(projectView?.id)">
+    <div class="card-media">
 
+    </div>
+
+    <div class="card-info1 d-flex justify-content-center">
+      <h5>Anzahl Stationen: {{projectView?.amountStations}}</h5>
+    </div>
+
+    <div class="card-info2 d-flex justify-content-center">
+      <h5 class="card-info-text">In Arbeit</h5>
+      <h5 class="card-info-text">Eingelagert</h5>
+      <h5 class="card-info-text">Ausgelagert</h5>
+    </div>
+
+    <div class="card-info3 d-flex justify-content-center">
+      <h5 class="card-info-text">{{projectView?.inProgressStations}}</h5>
+      <h5 class="card-info-text">{{projectView?.storedStations}}</h5>
+      <h5 class="card-info-text">{{projectView?.notStoredStations}}</h5>
+    </div>
   </div>
 
-  <div class="card-info1 d-flex justify-content-center">
-    <h5>Anzahl Stationen: {{projectView?.amountStations}}</h5>
-  </div>
-
-  <div class="card-info2 d-flex justify-content-center">
-    <h5 class="card-info-text">In Arbeit</h5>
-    <h5 class="card-info-text">Eingelagert</h5>
-    <h5 class="card-info-text">Ausgelagert</h5>
-  </div>
-
-  <div class="card-info3 d-flex justify-content-center">
-    <h5 class="card-info-text">{{projectView?.inProgressStations}}</h5>
-    <h5 class="card-info-text">{{projectView?.storedStations}}</h5>
-    <h5 class="card-info-text">{{projectView?.notStoredStations}}</h5>
-  </div>
 </mat-card>

@@ -15,4 +15,9 @@ export class ProjectAdministrationService {
     console.log('Fetch Projects')
     return this.http.get<projectViewModel[]>("http://localhost:8080/api/project/all")
   }
+
+  getProject():Observable<projectViewModel>{
+    console.log("Fetch active Project")
+    return this.http.get<projectViewModel>("http://localhost:8080/api/project")
+  }
 }

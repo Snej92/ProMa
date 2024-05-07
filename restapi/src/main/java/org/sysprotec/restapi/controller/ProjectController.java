@@ -26,6 +26,11 @@ public class ProjectController {
         return projectService.getProjectById(projectId);
     }
 
+    @GetMapping
+    public ProjectView getProject(){
+        return projectService.getProject();
+    }
+
     @PostMapping
     public void addProject(@RequestBody Project project){
         projectService.addProject(project);

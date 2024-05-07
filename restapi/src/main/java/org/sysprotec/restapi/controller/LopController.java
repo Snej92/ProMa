@@ -1,6 +1,7 @@
 package org.sysprotec.restapi.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.sysprotec.restapi.model.Lop;
 import org.sysprotec.restapi.service.LopService;
@@ -13,6 +14,8 @@ import java.util.List;
 public class LopController {
 
     private final LopService lopService;
+
+
 
     @GetMapping
     public List<Lop> getLop(){

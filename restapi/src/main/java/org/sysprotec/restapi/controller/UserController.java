@@ -25,6 +25,11 @@ public class UserController {
         return userService.getLoggedUser();
     }
 
+    @PutMapping
+    public User updateUser(@RequestBody User user){
+        return userService.updateUser(user);
+    }
+
     @GetMapping("/all")
     public List<User> getAllUser(){
         return userService.getAllUser();

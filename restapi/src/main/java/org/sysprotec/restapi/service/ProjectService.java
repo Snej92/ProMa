@@ -30,7 +30,7 @@ public class ProjectService {
     }
 
     public ProjectView getProjectById(Integer projectId) {
-        ProjectView projectView = projectRepository.findProjectedById(projectId);
+        ProjectView projectView = projectRepository.getProjectedById(projectId);
         if(projectView!=null){
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             if(!(authentication instanceof AnonymousAuthenticationToken)){
@@ -45,6 +45,22 @@ public class ProjectService {
                 log.error("no user logged in");
             }
         }else log.error("Project with ID" + projectId +" does not exist in database");
+        return null;
+    }
+
+    public ProjectView getProject() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            //Todo: change back to use authentication "authentication.getName()"
+            JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+            String username = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("preferred_username"));
+            User user = userRepository.findUserByUsernameIgnoreCase(username);
+            if(user!=null){
+                if(user.getActiveProject()!=null){
+                    return projectRepository.getProjectedById(user.getActiveProject());
+                }
+            }
+        }
         return null;
     }
 

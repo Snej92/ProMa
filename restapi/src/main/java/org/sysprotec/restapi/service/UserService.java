@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.sysprotec.restapi.model.User;
 import org.sysprotec.restapi.repository.UserRepository;
 
@@ -25,7 +26,15 @@ public class UserService {
         if(!(authentication instanceof AnonymousAuthenticationToken))
         {
             String username = authentication.getName();
-            return userRepository.findUserByUsernameIgnoreCase(username);
+            if(userRepository.findUserByUsernameIgnoreCase(username) != null){
+                return userRepository.findUserByUsernameIgnoreCase(username);
+            } else{
+                //Todo: user löschen und ohne probieren
+                User user = User.builder()
+                        .firstname("Not in Database")
+                        .build();
+                return user;
+            }
         }
         return null;
     }
@@ -67,5 +76,22 @@ public class UserService {
 
     public List<User> getAllUser() {
         return userRepository.findAll();
+    }
+
+    //Updates only the active Project!! - add more if needed
+    @Transactional
+    public User updateUser(User user) {
+        if(user != null){
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (!(authentication instanceof AnonymousAuthenticationToken)) {
+                String username = authentication.getName();
+                User loggedUser = userRepository.findUserByUsernameIgnoreCase(username);
+                if (loggedUser != null) {
+                    loggedUser.setActiveProject(user.getActiveProject());
+                    return loggedUser;
+                }
+            }
+        }
+        return null;
     }
 }

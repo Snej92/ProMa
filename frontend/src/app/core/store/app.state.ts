@@ -5,6 +5,8 @@ import {
   projectViewReducer
 } from "../../modules/project-administration/components/store/project-administration.reducers";
 import {userReducer} from "../../modules/userAdministration/store/user-administration.reducers";
+import {loggedUserReducer} from "../logged-user/logged-user.reducers";
+import {activeProjectViewReducer} from "../active-project/active-project.reducer";
 
 
 export const AppState={
@@ -13,4 +15,6 @@ export const AppState={
   app:appReducer,
   projectView:projectViewReducer,
   user:userReducer,
+  loggedUser:loggedUserReducer,
+  activeProjectView:activeProjectViewReducer,
 }

@@ -3,6 +3,15 @@
     <table mat-table [dataSource]="user.userList" class="mat-elevation-z8">
 
       <!-- Firstname Column -->
+      <ng-container matColumnDef="Aktion">
+        <th mat-header-cell *matHeaderCellDef> Aktion </th>
+        <td mat-cell *matCellDef="let user">
+          <app-sys-button icon="edit" color="accent" tooltip="Bearbeiten" (click)="editUser(user.id)"></app-sys-button>
+          <app-sys-button icon="delete" tooltip="löschen" (click)="deleteUser(user.sub)"></app-sys-button>
+        </td>
+      </ng-container>
+
+      <!-- Firstname Column -->
       <ng-container matColumnDef="Vorname">
         <th mat-header-cell *matHeaderCellDef> Vorname </th>
         <td mat-cell *matCellDef="let user"> {{user.firstname}} </td>
@@ -50,7 +59,7 @@
 
     <mat-divider class="mt-4" ></mat-divider>
     <div class="d-flex flex-row-reverse">
-      <button class="mt-2" mat-raised-button color="accent" (click)="openUserForm()">Hinzufügen</button>
+      <button class="mt-2" mat-raised-button color="accent" (click)="addUser()">Hinzufügen</button>
     </div>
   </div>
 </div>
