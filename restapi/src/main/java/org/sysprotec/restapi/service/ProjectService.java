@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.stereotype.Service;
 import org.sysprotec.restapi.model.Project;
 import org.sysprotec.restapi.model.User;
+import org.sysprotec.restapi.model.projections.ProjectDto;
 import org.sysprotec.restapi.model.projections.ProjectView;
 import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.UserRepository;
@@ -29,9 +30,9 @@ public class ProjectService {
         return projectRepository.findBy();
     }
 
-    public ProjectView getProjectById(Integer projectId) {
-        ProjectView projectView = projectRepository.getProjectedById(projectId);
-        if(projectView!=null){
+    public ProjectDto getProjectById(Integer projectId) {
+        ProjectDto projectDto = projectRepository.getProjectedById(projectId);
+        if(projectDto!=null){
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             if(!(authentication instanceof AnonymousAuthenticationToken)){
                 //Todo: change back to use authentication "authentication.getName()"
@@ -40,7 +41,7 @@ public class ProjectService {
                 User user = userRepository.findUserByUsernameIgnoreCase(username);
                 user.setActiveProject(projectId);
                 userRepository.save(user);
-                return projectView;
+                return projectDto;
             } else{
                 log.error("no user logged in");
             }
@@ -48,18 +49,28 @@ public class ProjectService {
         return null;
     }
 
-    public ProjectView getProject() {
+    public ProjectDto getActiveProject() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
-            //Todo: change back to use authentication "authentication.getName()"
-            JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-            String username = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("preferred_username"));
+            String username = authentication.getName();
             User user = userRepository.findUserByUsernameIgnoreCase(username);
             if(user!=null){
+                Integer activeProject = user.getActiveProject();
                 if(user.getActiveProject()!=null){
-                    return projectRepository.getProjectedById(user.getActiveProject());
+                    if(user.getActiveProject()!=0){
+                        log.info("send active project to frontend");
+                        return projectRepository.getProjectedById(user.getActiveProject());
+                    }
                 }
+                log.info("send dummy project to frontend");
+                return ProjectDto.builder()
+                        .name("Kein Projekt ausgewählt")
+                        .build();
             }
+            log.info("send dummy project to frontend");
+            return ProjectDto.builder()
+                    .name("Kein Projekt ausgewählt")
+                    .build();
         }
         return null;
     }

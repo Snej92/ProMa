@@ -31,7 +31,7 @@ public class UserService {
             } else{
                 //Todo: user löschen und ohne probieren
                 User user = User.builder()
-                        .firstname("Not in Database")
+                        .firstname("bitte einloggen")
                         .build();
                 return user;
             }

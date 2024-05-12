@@ -39,6 +39,7 @@ public class KeycloakService {
     public ResponseEntity<User> createUser(User user){
 
         List<String> groups = new ArrayList<>();
+        //WICHTIG: Those roles have to exist in Keycloak Realm! Otherwise you get an error!
         if(user.getRoles().getAdminRole()){
             groups.add("Admin");
         }

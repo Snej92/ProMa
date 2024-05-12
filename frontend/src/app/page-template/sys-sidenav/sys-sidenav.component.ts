@@ -19,8 +19,7 @@ export class SysSidenavComponent implements OnInit{
 
   activeProjectView!:activeProjectView;
   loggedUser!:loggedUser;
-  projectActive = false;
-  selectProject = 'Kein Projekt ausgewählt'
+
 
   constructor(private keycloakService:KeycloakService,
               private store:Store<AppStateModel>) {
@@ -39,12 +38,12 @@ export class SysSidenavComponent implements OnInit{
   ngOnInit(): void {
     console.log('Nav Init')
     this.store.dispatch(loadSpinner({isLoading:true}))
-    this.store.dispatch(loadActiveProjectView())
+    this.store.dispatch(loadActiveProjectView());
     this.store.select(getActiveProjectViewInfo).subscribe(data =>{
           this.activeProjectView=data;
     });
     this.store.dispatch(loadSpinner({isLoading:true}))
-    this.store.dispatch(loadLoggedUser())
+    this.store.dispatch(loadLoggedUser());
     this.store.select(getLoggedUserInfo).subscribe(data =>{
       this.loggedUser=data;
     });

@@ -3,6 +3,7 @@ package org.sysprotec.restapi.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.sysprotec.restapi.model.Project;
+import org.sysprotec.restapi.model.projections.ProjectDto;
 import org.sysprotec.restapi.model.projections.ProjectView;
 import org.sysprotec.restapi.service.ProjectService;
 
@@ -22,13 +23,13 @@ public class ProjectController {
     }
 
     @GetMapping("/{projectId}")
-    public ProjectView getProjectById(@PathVariable Integer projectId){
+    public ProjectDto getProjectById(@PathVariable Integer projectId){
         return projectService.getProjectById(projectId);
     }
 
     @GetMapping
-    public ProjectView getProject(){
-        return projectService.getProject();
+    public ProjectDto getActiveProject(){
+        return projectService.getActiveProject();
     }
 
     @PostMapping

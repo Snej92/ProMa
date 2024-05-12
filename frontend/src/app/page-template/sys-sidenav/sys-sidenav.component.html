@@ -3,26 +3,12 @@
   <span>
     <button mat-icon-button (click)="collapsed.set(!collapsed())"> <mat-icon>menu</mat-icon> </button>
   </span>
-  <ng-container *ngIf="loggedUser as user">
-<!--    todo: Projektname anzeigen! Eigentlich wichtiger als Benutzer-->
-<!--    <ng-container *ngIf="activeProjectView as project">-->
-<!--      <ng-container *ngIf="user.user.activeProject != 0">-->
-<!--      <span>-->
-<!--        {{project.projectView.name}}-->
-<!--      </span>-->
-<!--      </ng-container>-->
-<!--      <ng-container *ngIf="user.user.activeProject == 0">-->
-<!--      <span>-->
-<!--        {{selectProject}}-->
-<!--      </span>-->
-<!--      </ng-container>-->
-<!--    </ng-container>-->
-    <ng-container *ngIf="user.user.firstname != 'Not in Database'">
-      <span>
-        Hallo {{user.user.firstname}}
-      </span>
-    </ng-container>
-  </ng-container>
+  <span>
+    {{activeProjectView.projectView.name}}
+  </span>
+  <span>
+    Hallo, {{loggedUser.user.firstname}}
+  </span>
   <!--  right side-->
   <span class="justify-content-between">
     <button mat-icon-button routerLink="/projectAdministration" matTooltip="Projektverwaltung">

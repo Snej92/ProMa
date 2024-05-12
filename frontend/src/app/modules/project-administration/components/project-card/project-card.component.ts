@@ -6,6 +6,7 @@ import {updateLoggedUser} from "../../../../core/logged-user/logged-user.actions
 import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../../core/store/appState.model";
 import {loggedUser} from "../../../../core/logged-user/logged-user.model";
+import {loadActiveProjectView} from "../../../../core/active-project/active-project.actions";
 
 @Component({
   selector: 'app-project-card',
@@ -41,9 +42,9 @@ export class ProjectCardComponent {
         password : this.loggedUser.user.password,
         roles : roles
       }
-      console.log(updatedUser);
-      this.store.dispatch(loadSpinner({isLoading:true}))
-      this.store.dispatch(updateLoggedUser({loggedUser:updatedUser}))
+      this.store.dispatch(loadSpinner({isLoading:true}));
+      this.store.dispatch(updateLoggedUser({loggedUser:updatedUser}));
+      console.log(updatedUser.activeProject + " selected");
     } else {
       console.log(projectId + ' already selected')
     }

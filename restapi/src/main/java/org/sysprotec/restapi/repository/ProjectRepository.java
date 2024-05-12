@@ -3,6 +3,7 @@ package org.sysprotec.restapi.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.sysprotec.restapi.model.Project;
+import org.sysprotec.restapi.model.projections.ProjectDto;
 import org.sysprotec.restapi.model.projections.ProjectView;
 
 import java.util.List;
@@ -15,5 +16,5 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
     Optional<Project> findProjectByVersionsId(Integer id);
     Optional<Project> findProjectByLopId(Integer id);
     List<ProjectView> findBy();
-    ProjectView getProjectedById(Integer id);
+    ProjectDto getProjectedById(Integer id);
 }
