@@ -7,6 +7,8 @@ import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../../core/store/appState.model";
 import {loggedUser} from "../../../../core/logged-user/logged-user.model";
 import {loadActiveProjectView} from "../../../../core/active-project/active-project.actions";
+import {MatDialog} from "@angular/material/dialog";
+import {AddProjectComponent} from "../add-project/add-project.component";
 
 @Component({
   selector: 'app-project-card',
@@ -17,7 +19,31 @@ export class ProjectCardComponent {
   @Input() projectView: projectViewModel | undefined;
   @Input() loggedUser!: loggedUser;
 
-  constructor(private store:Store<AppStateModel>) {
+  constructor(private store:Store<AppStateModel>,
+              private dialog:MatDialog) {
+  }
+
+  editProject(id:any){
+    console.log(id)
+    this.openPopup(id, 'Projekt Bearbeiten', true, 'Aktualisieren')
+  }
+
+  deleteProject(id:any){
+    if(confirm("Projekt wirklich löschen? Vorgang kann nicht Rückgängig gemacht werden")){
+      console.log(id)
+    }
+  }
+
+  openPopup(id:any, title:any, isEdit=false, button:any){
+    this.dialog.open(AddProjectComponent,{
+      width:'30%',
+      data:{
+        id:id,
+        title: title,
+        isEdit:isEdit,
+        button:button
+      }
+    })
   }
 
   selectProject(projectId:any) {
@@ -45,7 +71,6 @@ export class ProjectCardComponent {
       this.store.dispatch(loadSpinner({isLoading:true}));
       this.store.dispatch(updateLoggedUser({loggedUser:updatedUser}));
       console.log(updatedUser.activeProject + " selected");
-      // this.store.dispatch(loadActiveProjectView());
     } else {
       console.log(projectId + ' already selected')
     }

@@ -64,6 +64,7 @@ import {MatCheckbox} from "@angular/material/checkbox";
 import { ProjectElevationDirective } from './page-template/directives/project-elevation/project-elevation.directive';
 import {LoggedUserEffects} from "./core/logged-user/logged-user.effects";
 import {ActiveProjectEffects} from "./core/active-project/active-project.effects";
+import { AddProjectComponent } from './modules/project-administration/components/add-project/add-project.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -103,7 +104,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ProjectAdministrationComponent,
     ProjectCardComponent,
     AddUserComponent,
-    ProjectElevationDirective
+    ProjectElevationDirective,
+    AddProjectComponent
   ],
   imports: [
     AppRoutingModule,

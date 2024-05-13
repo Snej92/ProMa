@@ -8,6 +8,8 @@ import {loadProjectView} from "./store/project-administration.actions";
 import {getProjectViewInfo} from "./store/project-administration.selectors";
 import {loggedUser} from "../../../core/logged-user/logged-user.model";
 import {getLoggedUserInfo} from "../../../core/logged-user/logged-user.selectors";
+import {MatDialog} from "@angular/material/dialog";
+import {AddProjectComponent} from "./add-project/add-project.component";
 
 @Component({
   selector: 'app-project-administration',
@@ -20,7 +22,29 @@ export class ProjectAdministrationComponent implements OnInit, OnDestroy{
   projectView!:projectView;
   loggedUser!:loggedUser;
 
-  constructor(private store:Store<AppStateModel>) {
+  constructor(private store:Store<AppStateModel>,
+              private dialog:MatDialog) {
+  }
+
+  addProject(){
+    this.openPopup(0, 'Projekt Hinzufügen', false, 'Hinzufügen')
+  }
+
+  editProject(id:any){
+    console.log(id)
+    this.openPopup(id, 'Projekt Bearbeiten', false, 'Aktualisieren')
+  }
+
+  openPopup(id:any, title:any, isEdit=false, button:any){
+    this.dialog.open(AddProjectComponent,{
+      width:'30%',
+      data:{
+        id:id,
+        title: title,
+        isEdit:isEdit,
+        button:button
+      }
+    })
   }
 
   ngOnInit(): void {

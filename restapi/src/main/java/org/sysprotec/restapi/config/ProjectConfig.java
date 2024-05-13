@@ -118,7 +118,7 @@ public class ProjectConfig {
 
 
         //add new stuff above
-        Project testProject = Project.builder()
+        Project testProject1 = Project.builder()
                 .name("Test")
                 .description("Project for testing http requests")
                 .amountStations(1)
@@ -130,8 +130,19 @@ public class ProjectConfig {
                 .lop(lopList)
                 .favorite(false)
                 .build();
+
+        Project testProject2 = Project.builder()
+                .name("Testing 2")
+                .description("Project for testing frontend spacing")
+                .amountStations(0)
+                .inProgressStations(0)
+                .storedStations(0)
+                .notStoredStations(0)
+                .favorite(false)
+                .build();
         return args -> {
-            projectRepository.save(testProject);
+            projectRepository.save(testProject1);
+            projectRepository.save(testProject2);
         };
     }
 }
