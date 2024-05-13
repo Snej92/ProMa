@@ -30,7 +30,7 @@ export class AppEffect{
 
   showSnackBarAlert(message:string, actionResult:string='fail'){
     let _class=actionResult=='pass'?'pass-snackbar':'fail-snackbar'
-    let _duration=actionResult=='pass'?3000:8000
+    let _duration=actionResult=='pass'?3000:12000
     return this.snackBar.open(message,'OK',{
       duration:_duration,
       verticalPosition:'bottom',

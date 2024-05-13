@@ -8,8 +8,6 @@ import {loadProjectView} from "./store/project-administration.actions";
 import {getProjectViewInfo} from "./store/project-administration.selectors";
 import {loggedUser} from "../../../core/logged-user/logged-user.model";
 import {getLoggedUserInfo} from "../../../core/logged-user/logged-user.selectors";
-import {userModel, userRole} from "../../userAdministration/store/user-Administration.model";
-import {updateLoggedUser} from "../../../core/logged-user/logged-user.actions";
 
 @Component({
   selector: 'app-project-administration',

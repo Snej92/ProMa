@@ -10,6 +10,7 @@ import {
   loadActiveProjectViewFail,
   loadActiveProjectViewSuccess
 } from "./active-project.actions";
+import {updateLoggedUserSuccess} from "../logged-user/logged-user.actions";
 
 @Injectable()
 export class ActiveProjectEffects {
@@ -24,6 +25,23 @@ export class ActiveProjectEffects {
       switchMap(action=>
         this.service.getProject().pipe(
           switchMap(data=> of(
+            loadSpinner({isLoading:true}),
+            loadActiveProjectViewSuccess({projectView:data}),
+            loadSpinner({isLoading:false})
+          )),
+          catchError((error)=> of(loadActiveProjectViewFail({errorText:error}), loadSpinner({isLoading:false})))
+        )
+      )
+    )
+  );
+
+  _getActiveProjectViewAuto=createEffect(()=>
+    this.action$.pipe(
+      ofType(updateLoggedUserSuccess),
+      switchMap(action=>
+        this.service.getProject().pipe(
+          switchMap(data=> of(
+            loadSpinner({isLoading:true}),
             loadActiveProjectViewSuccess({projectView:data}),
             loadSpinner({isLoading:false})
           )),

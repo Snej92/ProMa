@@ -10,11 +10,15 @@ import {
   updateLoggedUser,
   updateLoggedUserSuccess
 } from "./logged-user.actions";
+import {
+  ProjectAdministrationService
+} from "../../modules/project-administration/components/service/project-administration.service";
 
 @Injectable()
 export class LoggedUserEffects {
   constructor(private action$: Actions,
-              private service: UserService) {
+              private service: UserService,
+              private projectService: ProjectAdministrationService) {
 
   }
 
@@ -24,6 +28,7 @@ export class LoggedUserEffects {
       switchMap(action =>
         this.service.getLoggedUser().pipe(
           switchMap(data => of(
+            loadSpinner({isLoading:true}),
             loadLoggedUserSuccess({loggedUser:data}),
             loadSpinner({isLoading: false}),
           )),
@@ -39,8 +44,8 @@ export class LoggedUserEffects {
       switchMap(action =>
         this.service.updateLoggedUser(action.loggedUser).pipe(
           switchMap(data=> of(
+            loadSpinner({isLoading:true}),
             updateLoggedUserSuccess({loggedUser:data}),
-            loadSpinner({isLoading:false}),
             showAlert({message: 'Projekt ausgewählt', actionResult:'pass'})
           )),
           catchError((error)=> of(showAlert({message: 'Projekt auswählen fehlgeschlagen weil '+error.message, actionResult:'fail'}),loadSpinner({isLoading:false})))

@@ -45,6 +45,7 @@ export class ProjectCardComponent {
       this.store.dispatch(loadSpinner({isLoading:true}));
       this.store.dispatch(updateLoggedUser({loggedUser:updatedUser}));
       console.log(updatedUser.activeProject + " selected");
+      // this.store.dispatch(loadActiveProjectView());
     } else {
       console.log(projectId + ' already selected')
     }
