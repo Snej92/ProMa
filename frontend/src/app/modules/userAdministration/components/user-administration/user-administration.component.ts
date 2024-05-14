@@ -26,13 +26,27 @@ export class UserAdministrationComponent implements OnInit, OnDestroy{
               private confirm:MatDialog) {
   }
 
-  deleteUser(sub:any){
-    console.log(sub)
-    if(confirm("Benutzer wirklich löschen? Vorgang kann nicht Rückgängig gemacht werden")){
-      this.store.dispatch(loadSpinner({isLoading:true}));
-      this.store.dispatch(deleteUser({sub:sub}))
-    }
-    this.openConfirm();
+  deleteUser(sub:any, deleteName:any){
+    this.openConfirm('Benutzer', deleteName, 'Löschen', sub);
+  }
+
+  openConfirm(title:any, confirmName:any, button:any, sub:any){
+    const confirmRef = this.confirm.open(SysConfirmationComponent, {
+      width: '30%',
+      data:{
+        title: title,
+        confirmName: confirmName,
+        button:button
+      }
+    });
+
+    confirmRef.afterClosed().subscribe((confirmed:boolean)=> {
+      if(confirmed){
+        console.log(sub)
+        this.store.dispatch(loadSpinner({isLoading:true}));
+        this.store.dispatch(deleteUser({sub:sub}))
+      }
+    })
   }
 
   editUser(id:any){
@@ -64,12 +78,6 @@ export class UserAdministrationComponent implements OnInit, OnDestroy{
         isEdit:isEdit,
         button:button
       }
-    })
-  }
-
-  openConfirm(){
-    this.confirm.open(SysConfirmationComponent, {
-      width: '30'
     })
   }
 

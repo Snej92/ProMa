@@ -4,15 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="672b6c24-1ba4-45dc-9cab-421c2d00eb01" name="Changes" comment="User Administration NGRX">
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/core/sys-confirmation/sys-confirmation.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/core/sys-confirmation/sys-confirmation.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/core/sys-confirmation/sys-confirmation.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/core/sys-confirmation/sys-confirmation.component.ts" afterDir="false" />
+    <list default="true" id="672b6c24-1ba4-45dc-9cab-421c2d00eb01" name="Changes" comment="improvements to sidenav logged user and active project">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/sys-confirmation/sys-confirmation.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/sys-confirmation/sys-confirmation.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/sys-confirmation/sys-confirmation.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/sys-confirmation/sys-confirmation.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/sys-confirmation/sys-confirmation.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/sys-confirmation/sys-confirmation.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/components/user-administration/user-administration.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/components/user-administration/user-administration.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/components/user-administration/user-administration.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/components/user-administration/user-administration.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/KeycloakConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/KeycloakConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,18 +30,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Snej92"
-  }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Snej92/ProMa",
-    "accountId": "9f77aa54-3db8-4415-b771-0ddec89dadf3"
-  }
-}]]></component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
@@ -61,36 +48,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.RestapiApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Coding/KeX&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\Coding\\ProMa\\frontend\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.RestapiApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Coding/ProMa",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "D:\\Coding\\ProMa\\frontend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Coding\ProMa\frontend\src\app\core" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\project-administration\components" />
       <recent name="D:\Coding\ProMa\frontend\src\app\modules\userAdministration\services" />
       <recent name="D:\Coding\ProMa\frontend\src\app\modules\overview\components" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\project-administration\components" />
       <recent name="D:\Coding\ProMa\frontend\src\app\modules\userAdministration\components" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\userAdministration\store" />
     </key>
   </component>
   <component name="RunManager">
@@ -105,8 +92,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+        <option value="jdk-21.0.1-openjdk-21.0.1-f644763e9732-f98dd351" />
       </set>
     </attachedChunks>
   </component>
@@ -131,7 +117,9 @@
       <workItem from="1715327649556" duration="2599000" />
       <workItem from="1715336684839" duration="1113000" />
       <workItem from="1715436680617" duration="23000" />
-      <workItem from="1715693449772" duration="885000" />
+      <workItem from="1715523243129" duration="60000" />
+      <workItem from="1715617167613" duration="2381000" />
+      <workItem from="1715621474318" duration="2221000" />
     </task>
     <task id="LOCAL-00001" summary="loading spinner">
       <option name="closed" value="true" />
@@ -165,7 +153,23 @@
       <option name="project" value="LOCAL" />
       <updated>1714922471618</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="User Administration NGRX">
+      <option name="closed" value="true" />
+      <created>1715523277101</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1715523277101</updated>
+    </task>
+    <task id="LOCAL-00006" summary="improvements to sidenav logged user and active project">
+      <option name="closed" value="true" />
+      <created>1715619537493</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1715619537493</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,6 +191,7 @@
     <MESSAGE value="loading spinner" />
     <MESSAGE value="Project administration get API" />
     <MESSAGE value="User Administration NGRX" />
-    <option name="LAST_COMMIT_MESSAGE" value="User Administration NGRX" />
+    <MESSAGE value="improvements to sidenav logged user and active project" />
+    <option name="LAST_COMMIT_MESSAGE" value="improvements to sidenav logged user and active project" />
   </component>
 </project>

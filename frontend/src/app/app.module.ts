@@ -20,7 +20,7 @@ import {
   MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
   MatTable
 } from "@angular/material/table";
-import {MatCard, MatCardActions, MatCardContent, MatCardHeader} from "@angular/material/card";
+import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardSubtitle} from "@angular/material/card";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatDivider} from "@angular/material/divider";
 import {HttpClientModule} from "@angular/common/http";
@@ -66,6 +66,7 @@ import {LoggedUserEffects} from "./core/logged-user/logged-user.effects";
 import {ActiveProjectEffects} from "./core/active-project/active-project.effects";
 import { AddProjectComponent } from './modules/project-administration/components/add-project/add-project.component';
 import { SysConfirmationComponent } from './core/sys-confirmation/sys-confirmation.component';
+import {MatDialogClose} from "@angular/material/dialog";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -168,7 +169,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatMenu,
     MatMenuTrigger,
     MatMenuItem,
-    MatCheckbox
+    MatCheckbox,
+    MatCardSubtitle,
+    MatDialogClose
   ],
   providers: [
     {
