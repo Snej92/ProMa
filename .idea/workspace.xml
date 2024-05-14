@@ -4,20 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="672b6c24-1ba4-45dc-9cab-421c2d00eb01" name="Changes" comment="improvements to sidenav logged user and active project">
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.ts" afterDir="false" />
+    <list default="true" id="672b6c24-1ba4-45dc-9cab-421c2d00eb01" name="Changes" comment="User Administration NGRX">
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/core/sys-confirmation/sys-confirmation.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/core/sys-confirmation/sys-confirmation.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/core/sys-confirmation/sys-confirmation.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/core/sys-confirmation/sys-confirmation.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-administration.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-administration.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-administration.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-administration.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-administration.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-administration.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/ProjectConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/ProjectConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/components/user-administration/user-administration.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/components/user-administration/user-administration.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/KeycloakConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/KeycloakConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +31,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Snej92"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Snej92/ProMa",
+    "accountId": "9f77aa54-3db8-4415-b771-0ddec89dadf3"
+  }
+}]]></component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
@@ -78,11 +86,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\project-administration\components" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\core" />
       <recent name="D:\Coding\ProMa\frontend\src\app\modules\userAdministration\services" />
       <recent name="D:\Coding\ProMa\frontend\src\app\modules\overview\components" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\project-administration\components" />
       <recent name="D:\Coding\ProMa\frontend\src\app\modules\userAdministration\components" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\userAdministration\store" />
     </key>
   </component>
   <component name="RunManager">
@@ -97,7 +105,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.1-openjdk-21.0.1-f644763e9732-f98dd351" />
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
       </set>
     </attachedChunks>
   </component>
@@ -122,9 +131,7 @@
       <workItem from="1715327649556" duration="2599000" />
       <workItem from="1715336684839" duration="1113000" />
       <workItem from="1715436680617" duration="23000" />
-      <workItem from="1715523243129" duration="60000" />
-      <workItem from="1715617167613" duration="2381000" />
-      <workItem from="1715621474318" duration="2221000" />
+      <workItem from="1715693449772" duration="885000" />
     </task>
     <task id="LOCAL-00001" summary="loading spinner">
       <option name="closed" value="true" />
@@ -158,23 +165,7 @@
       <option name="project" value="LOCAL" />
       <updated>1714922471618</updated>
     </task>
-    <task id="LOCAL-00005" summary="User Administration NGRX">
-      <option name="closed" value="true" />
-      <created>1715523277101</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1715523277101</updated>
-    </task>
-    <task id="LOCAL-00006" summary="improvements to sidenav logged user and active project">
-      <option name="closed" value="true" />
-      <created>1715619537493</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1715619537493</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,7 +187,6 @@
     <MESSAGE value="loading spinner" />
     <MESSAGE value="Project administration get API" />
     <MESSAGE value="User Administration NGRX" />
-    <MESSAGE value="improvements to sidenav logged user and active project" />
-    <option name="LAST_COMMIT_MESSAGE" value="improvements to sidenav logged user and active project" />
+    <option name="LAST_COMMIT_MESSAGE" value="User Administration NGRX" />
   </component>
 </project>

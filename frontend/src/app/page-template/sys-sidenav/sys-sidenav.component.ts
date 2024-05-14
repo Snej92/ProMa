@@ -1,4 +1,10 @@
-import {Component, computed, OnInit, signal} from '@angular/core';
+import {
+  Component,
+  computed,
+  OnDestroy,
+  OnInit,
+  signal
+} from '@angular/core';
 import {KeycloakService} from "keycloak-angular";
 import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../core/store/appState.model";
@@ -9,14 +15,16 @@ import {loggedUser} from "../../core/logged-user/logged-user.model";
 import {activeProjectView} from "../../core/active-project/active-project.model";
 import {loadActiveProjectView} from "../../core/active-project/active-project.actions";
 import {getActiveProjectViewInfo} from "../../core/active-project/active-project.selector";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-sys-sidenav',
   templateUrl: './sys-sidenav.component.html',
   styleUrl: './sys-sidenav.component.scss'
 })
-export class SysSidenavComponent implements OnInit{
+export class SysSidenavComponent implements OnInit, OnDestroy{
 
+  private subscriptions: Subscription[] = [];
   activeProjectView!:activeProjectView;
   loggedUser!:loggedUser;
 
@@ -24,8 +32,6 @@ export class SysSidenavComponent implements OnInit{
   constructor(private keycloakService:KeycloakService,
               private store:Store<AppStateModel>) {
   }
-
-  protected readonly open = open;
 
   collapsed = signal(true);
 
@@ -39,13 +45,22 @@ export class SysSidenavComponent implements OnInit{
     console.log('Nav Init')
     this.store.dispatch(loadSpinner({isLoading:true}))
     this.store.dispatch(loadActiveProjectView());
-    this.store.select(getActiveProjectViewInfo).subscribe(data =>{
-          this.activeProjectView=data;
-    });
+    this.subscriptions.push(
+      this.store.select(getActiveProjectViewInfo).subscribe(data =>{
+        this.activeProjectView=data;
+      })
+    );
+
     this.store.dispatch(loadSpinner({isLoading:true}))
     this.store.dispatch(loadLoggedUser());
+    this.subscriptions.push(
     this.store.select(getLoggedUserInfo).subscribe(data =>{
       this.loggedUser=data;
-    });
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

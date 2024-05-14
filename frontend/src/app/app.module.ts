@@ -65,6 +65,7 @@ import { ProjectElevationDirective } from './page-template/directives/project-el
 import {LoggedUserEffects} from "./core/logged-user/logged-user.effects";
 import {ActiveProjectEffects} from "./core/active-project/active-project.effects";
 import { AddProjectComponent } from './modules/project-administration/components/add-project/add-project.component';
+import { SysConfirmationComponent } from './core/sys-confirmation/sys-confirmation.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -105,7 +106,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ProjectCardComponent,
     AddUserComponent,
     ProjectElevationDirective,
-    AddProjectComponent
+    AddProjectComponent,
+    SysConfirmationComponent
   ],
   imports: [
     AppRoutingModule,

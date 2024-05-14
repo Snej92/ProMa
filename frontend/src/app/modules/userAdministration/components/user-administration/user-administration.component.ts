@@ -8,6 +8,7 @@ import {getUserInfo} from "../../store/user-administration.selectors";
 import {loadSpinner} from "../../../../core/store/app.action";
 import {MatDialog} from "@angular/material/dialog";
 import {AddUserComponent} from "../add-user/add-user.component";
+import {SysConfirmationComponent} from "../../../../core/sys-confirmation/sys-confirmation.component";
 
 @Component({
   selector: 'app-user-administration',
@@ -21,7 +22,8 @@ export class UserAdministrationComponent implements OnInit, OnDestroy{
   displayedColumns: string[] = ['Aktion','Vorname','Nachname', 'Kürzel', 'E-Mail', 'Telefon', 'Benutzername', 'Passwort']
 
   constructor(private store:Store<AppStateModel>,
-              private dialog:MatDialog) {
+              private dialog:MatDialog,
+              private confirm:MatDialog) {
   }
 
   deleteUser(sub:any){
@@ -30,6 +32,7 @@ export class UserAdministrationComponent implements OnInit, OnDestroy{
       this.store.dispatch(loadSpinner({isLoading:true}));
       this.store.dispatch(deleteUser({sub:sub}))
     }
+    this.openConfirm();
   }
 
   editUser(id:any){
@@ -61,6 +64,12 @@ export class UserAdministrationComponent implements OnInit, OnDestroy{
         isEdit:isEdit,
         button:button
       }
+    })
+  }
+
+  openConfirm(){
+    this.confirm.open(SysConfirmationComponent, {
+      width: '30'
     })
   }
 
