@@ -1,11 +1,11 @@
 import {createReducer, on} from "@ngrx/store";
 import {projectViewState} from "./project-administration.state";
 import {
+  addProjectViewSuccess,
   loadProjectView,
   loadProjectViewFail,
   loadProjectViewSuccess
 } from "./project-administration.actions";
-import {lopModel} from "../../../overview/lop/store/lop.model";
 
 
 const _projectReducer = createReducer(
@@ -31,6 +31,14 @@ const _projectReducer = createReducer(
       ...state,
       projectViewList:[],
       errorMessage:action.errorText.message
+    };
+  }),
+
+  on(addProjectViewSuccess, (state,action) => {
+    const project={...action.projectViewInput};
+    return{
+      ...state,
+      projectViewList:[...state.projectViewList,project]
     };
   }),
 );

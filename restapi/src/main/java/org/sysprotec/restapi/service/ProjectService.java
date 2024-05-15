@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.sysprotec.restapi.model.Project;
 import org.sysprotec.restapi.model.User;
@@ -22,31 +21,11 @@ import java.util.Optional;
 @Slf4j
 public class ProjectService {
 
-    public static Integer PROJECT_ID = 1;
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
 
     public List<ProjectView> getAllProjects() {
         return projectRepository.findBy();
-    }
-
-    public ProjectDto getProjectById(Integer projectId) {
-        ProjectDto projectDto = projectRepository.getProjectedById(projectId);
-        if(projectDto!=null){
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            if(!(authentication instanceof AnonymousAuthenticationToken)){
-                //Todo: change back to use authentication "authentication.getName()"
-                JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-                String username = String.valueOf(jwtAuthenticationToken.getTokenAttributes().get("preferred_username"));
-                User user = userRepository.findUserByUsernameIgnoreCase(username);
-                user.setActiveProject(projectId);
-                userRepository.save(user);
-                return projectDto;
-            } else{
-                log.error("no user logged in");
-            }
-        }else log.error("Project with ID" + projectId +" does not exist in database");
-        return null;
     }
 
     public ProjectDto getActiveProject() {
@@ -55,7 +34,6 @@ public class ProjectService {
             String username = authentication.getName();
             User user = userRepository.findUserByUsernameIgnoreCase(username);
             if(user!=null){
-                Integer activeProject = user.getActiveProject();
                 if(user.getActiveProject()!=null){
                     if(user.getActiveProject()!=0){
                         log.info("send active project to frontend");
@@ -75,39 +53,41 @@ public class ProjectService {
         return null;
     }
 
-    public void addProject(Project project) {
+    public ProjectDto addProject(ProjectDto projectDto) {
         Project saveProject = Project.builder()
-                .name(project.getName())
-                .description(project.getDescription())
-                .favorite(project.getFavorite())
-                .amountStations(project.getAmountStations())
-                .inProgressStations(project.getInProgressStations())
-                .storedStations(project.getStoredStations())
-                .notStoredStations(project.getNotStoredStations())
+                .name(projectDto.getName())
+                .description(projectDto.getDescription())
+                .favorite(projectDto.getFavorite())
+                .amountStations(projectDto.getAmountStations())
+                .inProgressStations(projectDto.getInProgressStations())
+                .storedStations(projectDto.getStoredStations())
+                .notStoredStations(projectDto.getNotStoredStations())
                 .build();
         projectRepository.save(saveProject);
+        log.info("Project " + projectDto.getName() + " created");
+        return projectRepository.findTopByOrderByIdDesc();
     }
 
-    public void updateProject(Project project) {
-        Optional<Project> optionalProject = projectRepository.findProjectById(project.getId());
+    public void updateProject(ProjectDto projectDto) {
+        Optional<Project> optionalProject = projectRepository.findProjectById(projectDto.getId());
         if(optionalProject.isPresent()){
             Project saveProject = optionalProject.get();
-            saveProject.setName(project.getName());
-            saveProject.setDescription(project.getDescription());
-            saveProject.setFavorite(project.getFavorite());
-            saveProject.setAmountStations(project.getAmountStations());
-            saveProject.setInProgressStations(project.getInProgressStations());
-            saveProject.setStoredStations(project.getStoredStations());
-            saveProject.setNotStoredStations(project.getNotStoredStations());
+            saveProject.setName(projectDto.getName());
+            saveProject.setDescription(projectDto.getDescription());
+            saveProject.setFavorite(projectDto.getFavorite());
+            saveProject.setAmountStations(projectDto.getAmountStations());
+            saveProject.setInProgressStations(projectDto.getInProgressStations());
+            saveProject.setStoredStations(projectDto.getStoredStations());
+            saveProject.setNotStoredStations(projectDto.getNotStoredStations());
 
             projectRepository.save(saveProject);
-        }else log.error("Project " + project.getName() +" does not exist");
+        }else log.error("Project with ID" + projectDto.getId() +" does not exist");
     }
 
-    public void deleteProject(Project project) {
-        Optional<Project> optionalProject = projectRepository.findProjectById(project.getId());
+    public void deleteProject(Integer projectId) {
+        Optional<Project> optionalProject = projectRepository.findProjectById(projectId);
         if(optionalProject.isPresent()){
-            projectRepository.delete(project);
-        }else log.error("Project " + project.getName() +" does not exist");
+            projectRepository.delete(optionalProject.get());
+        }else log.error("Project with ID " + projectId +" does not exist");
     }
 }

@@ -17,4 +17,5 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
     Optional<Project> findProjectByLopId(Integer id);
     List<ProjectView> findBy();
     ProjectDto getProjectedById(Integer id);
+    ProjectDto findTopByOrderByIdDesc();
 }

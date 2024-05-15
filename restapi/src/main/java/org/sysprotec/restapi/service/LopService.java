@@ -11,7 +11,6 @@ import org.sysprotec.restapi.repository.ProjectRepository;
 import java.util.List;
 import java.util.Optional;
 
-import static org.sysprotec.restapi.service.ProjectService.PROJECT_ID;
 
 @Service
 @RequiredArgsConstructor

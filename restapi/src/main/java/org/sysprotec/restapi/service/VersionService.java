@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.sysprotec.restapi.service.ProjectService.PROJECT_ID;
-
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -25,17 +23,10 @@ public class VersionService {
     private final VersionRepository versionRepository;
     private final ProjectRepository projectRepository;
 
-//    public List<Version> getVersions(Integer projectId) {
-//        Optional<Project> optionalProject = projectRepository.findProjectById(projectId);
-//        if(optionalProject.isEmpty()){
-//            log.error("Project with id "+ projectId + " does not exist in database");
-//        } else {
-//            return optionalProject.get().getVersions();
-//        }
-//        return null;
-//    }
+    public static Integer PROJECT_ID = 1;
 
     public List<Version> getVersions() {
+
         Optional<Project> optionalProject = projectRepository.findProjectById(PROJECT_ID);
         if(optionalProject.isEmpty()){
             log.error("Project with id "+ PROJECT_ID + " does not exist in database");
