@@ -4,10 +4,10 @@ import {ProjectAdministrationService} from "../service/project-administration.se
 import {catchError, of, switchMap} from "rxjs";
 import {loadSpinner, showAlert} from "../../../../core/store/app.action";
 import {
-  addProjectView, addProjectViewSuccess,
+  addProjectView, addProjectViewSuccess, deleteProject, deleteProjectSuccess,
   LOAD_PROJECT_VIEW,
   loadProjectViewFail,
-  loadProjectViewSuccess
+  loadProjectViewSuccess, updateProject, updateProjectSuccess
 } from "./project-administration.actions";
 import {projectViewModel} from "./project-administration.model";
 
@@ -45,6 +45,38 @@ export class ProjectAdministrationEffects {
             showAlert({message: 'Projekt Erfolgreich hinzugefügt', actionResult:'pass'})
           )),
           catchError((error)=> of(showAlert({message: 'Projekt Hinzufügen fehlgeschlagen wegen '+error.message, actionResult:'fail'}),loadSpinner({isLoading:false})))
+        )
+      )
+    )
+  );
+
+  _updateProject=createEffect(()=>
+    this.action$.pipe(
+      ofType(updateProject),
+      switchMap(action =>
+        this.service.updateProject(action.projectViewInput).pipe(
+          switchMap(data=> of(
+            updateProjectSuccess({projectViewNew:data as projectViewModel, projectViewOld:action.projectViewInput}),
+            loadSpinner({isLoading:false}),
+            showAlert({message: 'Projekt erfolgreich aktualisiert', actionResult:'pass'})
+          )),
+          catchError((error)=> of(showAlert({message: 'Projekt Aktualisierung fehlgeschlagen wegen '+error.message, actionResult:'fail'}),loadSpinner({isLoading:false})))
+        )
+      )
+    )
+  );
+
+  _deleteProject=createEffect(()=>
+    this.action$.pipe(
+      ofType(deleteProject),
+      switchMap(action=>
+        this.service.deleteProject(action.id).pipe(
+          switchMap(res=>of(
+            deleteProjectSuccess({id:action.id}),
+            loadSpinner({isLoading:false}),
+            showAlert({message: 'Projekt erfolgreich gelöscht', actionResult:'pass'})
+          )),
+          catchError((error)=> of(showAlert({message: 'Projekt löschen fehlgeschlagen wegen '+error.message, actionResult:'fail'}),loadSpinner({isLoading:false})))
         )
       )
     )

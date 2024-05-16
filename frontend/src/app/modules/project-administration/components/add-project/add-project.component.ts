@@ -5,9 +5,9 @@ import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../../core/store/appState.model";
 import {Subscription} from "rxjs";
 import {projectViewModel} from "../store/project-administration.model";
-import {userModel} from "../../../userAdministration/store/user-Administration.model";
 import {loadSpinner} from "../../../../core/store/app.action";
-import {addProjectView} from "../store/project-administration.actions";
+import {addProjectView, updateProject} from "../store/project-administration.actions";
+import {getProjectById} from "../store/project-administration.selectors";
 
 @Component({
   selector: 'app-add-project',
@@ -35,9 +35,6 @@ export class AddProjectComponent implements OnInit{
     notStoredStations:this.builder.control(0)
   })
 
-  ngOnInit(): void {
-  }
-
   saveProject(){
     const projectInput: projectViewModel = {
       id:0,
@@ -53,6 +50,7 @@ export class AddProjectComponent implements OnInit{
     if(this.data.isEdit){
       projectInput.id=this.projectForm.value.id as number
       console.log(projectInput)
+      this.store.dispatch(updateProject({projectViewInput:projectInput}))
     }else {
       console.log(projectInput)
       this.store.dispatch(addProjectView({projectViewInput:projectInput}));
@@ -62,5 +60,24 @@ export class AddProjectComponent implements OnInit{
 
   closePopup(){
     this.dialogRef.close();
+  }
+
+  ngOnInit(): void {
+    if(this.data.isEdit){
+      this.onInitSub = this.store.select(getProjectById(this.data.id)).subscribe(data=>{
+        this.editData=data;
+        this.projectForm.setValue({
+          id:this.editData.id,
+          name: this.editData.name,
+          description: this.editData.description,
+          favorite: this.editData.favorite,
+          amountStations: this.editData.amountStations,
+          inProgressStations: this.editData.inProgressStations,
+          storedStations: this.editData.storedStations,
+          notStoredStations:this.editData.notStoredStations,
+        })
+      })
+      this.onInitSub.unsubscribe();
+    }
   }
 }

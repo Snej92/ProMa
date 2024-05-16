@@ -68,7 +68,7 @@ public class ProjectService {
         return projectRepository.findTopByOrderByIdDesc();
     }
 
-    public void updateProject(ProjectDto projectDto) {
+    public ProjectDto updateProject(ProjectDto projectDto) {
         Optional<Project> optionalProject = projectRepository.findProjectById(projectDto.getId());
         if(optionalProject.isPresent()){
             Project saveProject = optionalProject.get();
@@ -81,7 +81,11 @@ public class ProjectService {
             saveProject.setNotStoredStations(projectDto.getNotStoredStations());
 
             projectRepository.save(saveProject);
-        }else log.error("Project with ID" + projectDto.getId() +" does not exist");
+            return projectRepository.getProjectedById(projectDto.getId());
+        }else {
+            log.error("Project with ID{} does not exist", projectDto.getId());
+            return null;
+        }
     }
 
     public void deleteProject(Integer projectId) {

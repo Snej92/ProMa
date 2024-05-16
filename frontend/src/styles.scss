@@ -123,13 +123,14 @@ body { margin: 0;
   --frontend-alternate: rgba(0,0,0,0.06);
   --frontend-nav-button: rgba(0,0,0,0.08);
   --frontend-nav-button-border: rgba(255,255,255,0.1);
+  --mat-snack-bar-button-color: #c6c6c6;
 }
 
 .pass-snackbar {
 
 }
 
-.pass-snackbar button {
+.pass-snackbar .mat-mdc-button {
 
 }
 
@@ -137,7 +138,7 @@ body { margin: 0;
 
 }
 
-.fail-snackbar button {
+.fail-snackbar .mat-mdc-button {
 
 }
 

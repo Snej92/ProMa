@@ -33,8 +33,8 @@ public class ProjectController {
     }
 
     @PutMapping
-    public void updateProject(@RequestBody ProjectDto projectDto){
-        projectService.updateProject(projectDto);
+    public ProjectDto updateProject(@RequestBody ProjectDto projectDto){
+        return projectService.updateProject(projectDto);
     }
 
     @DeleteMapping("{projectId}")

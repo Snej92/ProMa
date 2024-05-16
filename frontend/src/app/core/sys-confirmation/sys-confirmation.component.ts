@@ -15,5 +15,4 @@ export class SysConfirmationComponent {
   confirm(){
     this.dialogRef.close(true);
   }
-
 }

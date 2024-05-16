@@ -6,9 +6,10 @@ import {updateLoggedUser} from "../../../../core/logged-user/logged-user.actions
 import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../../core/store/appState.model";
 import {loggedUser} from "../../../../core/logged-user/logged-user.model";
-import {loadActiveProjectView} from "../../../../core/active-project/active-project.actions";
 import {MatDialog} from "@angular/material/dialog";
 import {AddProjectComponent} from "../add-project/add-project.component";
+import {SysConfirmationComponent} from "../../../../core/sys-confirmation/sys-confirmation.component";
+import {deleteProject} from "../store/project-administration.actions";
 
 @Component({
   selector: 'app-project-card',
@@ -20,7 +21,8 @@ export class ProjectCardComponent {
   @Input() loggedUser!: loggedUser;
 
   constructor(private store:Store<AppStateModel>,
-              private dialog:MatDialog) {
+              private dialog:MatDialog,
+              private confirm:MatDialog) {
   }
 
   editProject(id:any){
@@ -28,10 +30,27 @@ export class ProjectCardComponent {
     this.openPopup(id, 'Projekt Bearbeiten', true, 'Aktualisieren')
   }
 
-  deleteProject(id:any){
-    if(confirm("Projekt wirklich löschen? Vorgang kann nicht Rückgängig gemacht werden")){
-      console.log(id)
-    }
+  deleteProject(id:any, deleteName:any){
+    this.openConfirm('Projekt', deleteName, 'Löschen', id);
+  }
+
+  openConfirm(title:any, confirmName:any, button:any, id:any){
+    const confirmRef = this.confirm.open(SysConfirmationComponent, {
+      width: '30%',
+      data:{
+        title: title,
+        confirmName: confirmName,
+        button:button
+      }
+    });
+
+    confirmRef.afterClosed().subscribe((confirmed:boolean)=> {
+      if(confirmed){
+        console.log(id)
+        this.store.dispatch(loadSpinner({isLoading:true}));
+        this.store.dispatch(deleteProject({id:id}))
+      }
+    })
   }
 
   openPopup(id:any, title:any, isEdit=false, button:any){

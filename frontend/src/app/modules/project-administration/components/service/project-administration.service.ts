@@ -25,4 +25,12 @@ export class ProjectAdministrationService {
   addProject(projectViewInput:projectViewModel){
     return this.http.post("http://localhost:8080/api/project", projectViewInput);
   }
+
+  updateProject(projectViewInput:projectViewModel){
+    return this.http.put("http://localhost:8080/api/project", projectViewInput);
+  }
+
+  deleteProject(id:number){
+    return this.http.delete("http://localhost:8080/api/project/"+id);
+  }
 }

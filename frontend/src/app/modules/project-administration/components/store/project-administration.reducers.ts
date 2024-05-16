@@ -1,11 +1,12 @@
 import {createReducer, on} from "@ngrx/store";
 import {projectViewState} from "./project-administration.state";
 import {
-  addProjectViewSuccess,
+  addProjectViewSuccess, deleteProject,
   loadProjectView,
   loadProjectViewFail,
-  loadProjectViewSuccess
+  loadProjectViewSuccess, updateProjectSuccess
 } from "./project-administration.actions";
+import {projectViewModel} from "./project-administration.model";
 
 
 const _projectReducer = createReducer(
@@ -39,6 +40,29 @@ const _projectReducer = createReducer(
     return{
       ...state,
       projectViewList:[...state.projectViewList,project]
+    };
+  }),
+
+  on(updateProjectSuccess, (state,action) => {
+    const projectViewOld={...action.projectViewOld};
+    const projectViewNew={...action.projectViewNew};
+    const updatedProject=state.projectViewList.map(projectView=>{
+      return projectViewOld.id===projectView.id?projectViewNew:projectView;
+    });
+    return{
+      ...state,
+      projectViewList:updatedProject
+    };
+  }),
+
+
+  on(deleteProject, (state,action) => {
+    const updatedProject=state.projectViewList.filter((data:projectViewModel)=>{
+      return data.id!==action.id
+    });
+    return{
+      ...state,
+      projectViewList:updatedProject
     };
   }),
 );

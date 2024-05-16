@@ -12,7 +12,7 @@ export const ADD_USER='[user page] add user'
 export const UPDATE_USER='[user page] update user'
 export const UPDATE_USER_SUCCESS='[user page] update user success'
 
-export const DELETE_USER='[user page] delete lop'
+export const DELETE_USER='[user page] delete user'
 export const DELETE_USER_SUCCESS='[user page] delete user success'
 
 
