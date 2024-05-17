@@ -3,10 +3,11 @@ import {lopReducer} from "../../modules/overview/lop/store/lop.reducers";
 import {appReducer} from "./app.reducer";
 import {
   projectViewReducer
-} from "../../modules/project-administration/components/store/project-administration.reducers";
+} from "../../modules/project-administration/store/project-administration.reducers";
 import {userReducer} from "../../modules/userAdministration/store/user-administration.reducers";
 import {loggedUserReducer} from "../logged-user/logged-user.reducers";
 import {activeProjectViewReducer} from "../active-project/active-project.reducer";
+import {stationViewReducer} from "../../modules/station/store/station.reducers";
 
 
 export const AppState={
@@ -17,4 +18,5 @@ export const AppState={
   user:userReducer,
   loggedUser:loggedUserReducer,
   activeProjectView:activeProjectViewReducer,
+  stationView:stationViewReducer,
 }

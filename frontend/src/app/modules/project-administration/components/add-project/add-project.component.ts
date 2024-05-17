@@ -4,10 +4,10 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../../core/store/appState.model";
 import {Subscription} from "rxjs";
-import {projectViewModel} from "../store/project-administration.model";
+import {projectViewModel} from "../../store/project-administration.model";
 import {loadSpinner} from "../../../../core/store/app.action";
-import {addProjectView, updateProject} from "../store/project-administration.actions";
-import {getProjectById} from "../store/project-administration.selectors";
+import {addProjectView, updateProject} from "../../store/project-administration.actions";
+import {getProjectById} from "../../store/project-administration.selectors";
 
 @Component({
   selector: 'app-add-project',

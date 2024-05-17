@@ -57,7 +57,7 @@ import { ProjectAdministrationComponent } from './modules/project-administration
 import { ProjectCardComponent } from './modules/project-administration/components/project-card/project-card.component';
 import {
   ProjectAdministrationEffects
-} from "./modules/project-administration/components/store/project-administration.effects";
+} from "./modules/project-administration/store/project-administration.effects";
 import {UserAdministrationEffects} from "./modules/userAdministration/store/user-administration.effects";
 import { AddUserComponent } from './modules/userAdministration/components/add-user/add-user.component';
 import {MatCheckbox} from "@angular/material/checkbox";
@@ -67,6 +67,8 @@ import {ActiveProjectEffects} from "./core/active-project/active-project.effects
 import { AddProjectComponent } from './modules/project-administration/components/add-project/add-project.component';
 import { SysConfirmationComponent } from './core/sys-confirmation/sys-confirmation.component';
 import {MatDialogClose} from "@angular/material/dialog";
+import { StationCardComponent } from './modules/station/components/station-card/station-card.component';
+import {StationEffects} from "./modules/station/store/station.effects";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -108,7 +110,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     AddUserComponent,
     ProjectElevationDirective,
     AddProjectComponent,
-    SysConfirmationComponent
+    SysConfirmationComponent,
+    StationCardComponent
   ],
   imports: [
     AppRoutingModule,
@@ -122,7 +125,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
       ProjectAdministrationEffects,
       UserAdministrationEffects,
       LoggedUserEffects,
-      ActiveProjectEffects,]),
+      ActiveProjectEffects,
+      StationEffects,]),
 
 
     MatToolbar,

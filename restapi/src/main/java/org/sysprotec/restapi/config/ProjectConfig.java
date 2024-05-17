@@ -21,23 +21,39 @@ public class ProjectConfig {
                 .name("ST8010")
                 .description("ZH onload")
                 .favorite(true)
-                .progress(50)
+                .totalProgress(50)
                 .issuer("BWA")
-                .status(StatusEPLAN.INARBEIT)
+                .lopTotal(10)
+                .lopDone(0)
+                .status(StatusEPLAN.AUSGELAGERT)
                 .build();
 
         Station station2 = Station.builder()
                 .name("ST8020")
                 .description("ZH process 1")
-                .favorite(true)
-                .progress(30)
+                .favorite(false)
+                .totalProgress(30)
                 .issuer("AEL")
+                .lopTotal(10)
+                .lopDone(5)
+                .status(StatusEPLAN.EINGELAGERT)
+                .build();
+
+        Station station3 = Station.builder()
+                .name("ST8040")
+                .description("Macht halt was")
+                .favorite(false)
+                .totalProgress(100)
+                .issuer("AEL")
+                .lopTotal(10)
+                .lopDone(10)
                 .status(StatusEPLAN.INARBEIT)
                 .build();
 
         List<Station> stationList = new ArrayList<>();
         stationList.add(station1);
         stationList.add(station2);
+        stationList.add(station3);
 
         VersionStation versionStation1 = VersionStation.builder()
                 .done(false)

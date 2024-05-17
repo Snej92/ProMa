@@ -12,7 +12,7 @@ import {
 } from "./logged-user.actions";
 import {
   ProjectAdministrationService
-} from "../../modules/project-administration/components/service/project-administration.service";
+} from "../../modules/project-administration/service/project-administration.service";
 
 @Injectable()
 export class LoggedUserEffects {

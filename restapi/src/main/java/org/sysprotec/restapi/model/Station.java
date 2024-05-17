@@ -22,10 +22,27 @@ public class Station {
     private String name;
     private String description;
     private Boolean favorite;
-    private Integer progress;
     private String issuer;
     @Enumerated(EnumType.STRING)
     private StatusEPLAN status;
+    private Integer totalProgress;
+    //Progress
+    //LOP
+    private Integer lopTotal;
+    private Integer lopDone;
+    private Integer lopProgress;
+    //Documentation
+    private Integer documentationTotal;
+    private Integer documentationDone;
+    private Integer documentationProgress;
+    //Specification
+    private Integer specificationTotal;
+    private Integer specificationDone;
+    private Integer specificationProgress;
+    //Control
+    private Integer controlTotal;
+    private Integer controlDone;
+    private Integer controlProgress;
     //Tables
     @OneToMany(cascade = CascadeType.ALL)
     private List<History> history;

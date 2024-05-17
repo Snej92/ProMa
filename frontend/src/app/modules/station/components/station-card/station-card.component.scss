@@ -1,0 +1,101 @@
+.station-card-container{
+  width: 350px;
+  border-radius: 12px;
+  background-color: var(--frontend-nav-button);
+  border-color: var(--frontend-nav-button-border);
+  border-width: 2px;
+}
+
+.card-header{
+  display: flex;
+}
+
+.card-header-left{
+  display: flex;
+}
+
+.card-header-right{
+  display:flex;
+}
+
+.card-header-text{
+  display: flex;
+  flex-direction: column;
+  margin-left: 4px
+}
+
+.card-header-icon{
+
+}
+
+.project-name{
+  height: 24px;
+}
+
+.project-description{
+  height: 20px;
+}
+
+.star-icon{
+  color: var(--frontend-warning);
+}
+
+.small-button{
+  width: 36px;
+  height: 36px;
+  min-width: 38px !important;
+  padding: 0 !important;
+  margin-right: 4px;
+  margin-top: 4px;
+  //border-radius: 20px;
+}
+
+.card-margin{
+  margin-left: 50px;
+}
+
+.station-info-text{
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 1.25px;
+}
+
+.station-info{
+  height: 40px;
+}
+
+.station-status{
+  color: white;
+  background-color: var(--frontend-error);
+  align-content: center;
+  padding: 9px;
+  border-radius: 4px;
+}
+
+.station-version{
+  color: white;
+  background-color: var(--frontend-accent);
+  align-content: center;
+  padding: 9px;
+  border-radius: 4px;
+}
+
+.station-issuer{
+  color: white;
+  background-color: var(--frontend-accent);
+  align-content: center;
+  padding: 9px;
+  border-radius: 4px;
+}
+
+.station-lop{
+  color: white;
+  background-color: var(--frontend-error);
+  align-content: center;
+  padding: 9px;
+  border-radius: 4px;
+}
+
+.station-progress{
+  font-size: 11px;
+}

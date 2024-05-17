@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {
   ProjectAdministrationService
-} from "../../modules/project-administration/components/service/project-administration.service";
+} from "../../modules/project-administration/service/project-administration.service";
 import {catchError, of, switchMap} from "rxjs";
 import {loadSpinner} from "../store/app.action";
 import {

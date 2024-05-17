@@ -23,7 +23,4 @@ public class Task {
     private String date;
     private String addition;
     private Boolean done;
-    private Integer itemsTotal;
-    private Integer itemsDone;
-    private Integer progress;
 }

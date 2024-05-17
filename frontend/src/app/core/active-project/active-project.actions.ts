@@ -1,7 +1,7 @@
 import {createAction, props} from "@ngrx/store";
 import {
   projectViewModel
-} from "../../modules/project-administration/components/store/project-administration.model";
+} from "../../modules/project-administration/store/project-administration.model";
 
 export const LOAD_ACTIVE_PROJECT_VIEW_SUCCESS='[project page] load active project view success'
 export const LOAD_ACTIVE_PROJECT_VIEW_FAIL='[project page] load active project view fail'

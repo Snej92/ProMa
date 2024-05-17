@@ -1,0 +1,46 @@
+<mat-card class="station-card-container">
+  <div class="d-flex justify-content-between ms-2 mt-2 me-2">
+    <div class="card-header-left">
+      <button mat-raised-button matTooltip="Favorit" color="accent" class="button small-button">
+        <i class="material-icons star-icon">star</i>
+      </button>
+      <div class="card-header-text">
+        <div class="project-name">
+          <h3>Station Name</h3>
+        </div>
+        <div class="project-description">
+          <h5>Station Beschreibung</h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-header-right">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          Bearbeiten
+        </button>
+        <button mat-menu-item>
+          Löschen
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+
+  <div>
+    <div class="station-info d-flex justify-content-between ms-2 mt-3 me-3">
+      <h5 class="station-status station-info-text">{{stationView?.status}}</h5>
+      <h5 class="station-version station-info-text">V1.0</h5>
+      <h5 class="station-issuer station-info-text">AEL</h5>
+      <h5 class="station-lop station-info-text">LOP: 10</h5>
+      <div class="station-progress station-info-text">
+        <mat-progress-spinner style="position:relative; top:-1.75px" value="100" mode="determinate" [diameter]="33" color="accent"></mat-progress-spinner>
+        <div style="position:relative; top:-27px">50</div>
+      </div>
+    </div>
+  </div>
+
+</mat-card>
+

@@ -2,7 +2,7 @@ import {
   Component,
   computed,
   OnDestroy,
-  OnInit,
+  OnInit, Output,
   signal
 } from '@angular/core';
 import {KeycloakService} from "keycloak-angular";

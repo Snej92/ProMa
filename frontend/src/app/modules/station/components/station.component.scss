@@ -1,0 +1,21 @@
+.station-cards-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.station-card{
+  border-radius: 12px
+}
+
+.card-container{
+  width: 350px;
+  height: 117px;
+  border-radius: 12px;
+  background-color: var(--frontend-nav-button);
+  border-color: var(--frontend-nav-button-border);
+  border-width: 2px;
+}
+
+.card-button{
+  width: 120px;
+}

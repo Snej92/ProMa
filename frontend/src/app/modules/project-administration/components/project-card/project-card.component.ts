@@ -1,5 +1,5 @@
 import {Component, Input, Output} from '@angular/core';
-import {projectViewModel} from "../store/project-administration.model";
+import {projectViewModel} from "../../store/project-administration.model";
 import {userModel, userRole} from "../../../userAdministration/store/user-Administration.model";
 import {loadSpinner} from "../../../../core/store/app.action";
 import {updateLoggedUser} from "../../../../core/logged-user/logged-user.actions";
@@ -9,7 +9,7 @@ import {loggedUser} from "../../../../core/logged-user/logged-user.model";
 import {MatDialog} from "@angular/material/dialog";
 import {AddProjectComponent} from "../add-project/add-project.component";
 import {SysConfirmationComponent} from "../../../../core/sys-confirmation/sys-confirmation.component";
-import {deleteProject} from "../store/project-administration.actions";
+import {deleteProject} from "../../store/project-administration.actions";
 
 @Component({
   selector: 'app-project-card',
