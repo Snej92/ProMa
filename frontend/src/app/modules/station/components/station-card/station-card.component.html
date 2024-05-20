@@ -6,10 +6,10 @@
       </button>
       <div class="card-header-text">
         <div class="project-name">
-          <h3>Station Name</h3>
+          <h3>{{stationView?.name}}</h3>
         </div>
         <div class="project-description">
-          <h5>Station Beschreibung</h5>
+          <h5>{{stationView?.description}}</h5>
         </div>
       </div>
     </div>
@@ -33,8 +33,8 @@
     <div class="station-info d-flex justify-content-between ms-2 mt-3 me-3">
       <h5 class="station-status station-info-text">{{stationView?.status}}</h5>
       <h5 class="station-version station-info-text">V1.0</h5>
-      <h5 class="station-issuer station-info-text">AEL</h5>
-      <h5 class="station-lop station-info-text">LOP: 10</h5>
+      <h5 class="station-issuer station-info-text">{{stationView?.issuer}}</h5>
+      <h5 class="station-lop station-info-text">LOP: {{stationView?.lopToDo}}</h5>
       <div class="station-progress station-info-text">
         <mat-progress-spinner style="position:relative; top:-1.75px" value="100" mode="determinate" [diameter]="33" color="accent"></mat-progress-spinner>
         <div style="position:relative; top:-27px">50</div>

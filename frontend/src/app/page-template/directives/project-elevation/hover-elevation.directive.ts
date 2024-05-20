@@ -3,7 +3,7 @@ import {Directive, ElementRef, HostListener, Input, OnChanges, Renderer2, Simple
 @Directive({
   selector: '[appProjectElevation]'
 })
-export class ProjectElevationDirective implements OnChanges{
+export class HoverElevationDirective implements OnChanges{
 
   @Input()defaultElevation = 2;
   @Input()raisedElevation = 8;

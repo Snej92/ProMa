@@ -9,18 +9,22 @@ export interface stationViewModel{
   //LOP
   lopTotal:number,
   lopDone:number,
+  lopToDo:number,
   lopProgress:number,
   //Documentation
   documentationTotal:number,
   documentationDone:number,
+  documentationToDo:number,
   documentationProgress:number,
   //Specification
   specificationTotal:number,
   specificationDone:number,
+  specificationToDo:number,
   specificationProgress:number,
   //Control
   controlTotal:number,
   controlDone:number,
+  controlToDo:number,
   controlProgress:number
 }
 

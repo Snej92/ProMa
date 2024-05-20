@@ -1,9 +1,9 @@
-import { ProjectElevationDirective } from './project-elevation.directive';
+import { HoverElevationDirective } from './hover-elevation.directive';
 
 describe('ProjectElevationDirective', () => {
   it('should create an instance', () => {
     // @ts-ignore
-    const directive = new ProjectElevationDirective();
+    const directive = new HoverElevationDirective();
     expect(directive).toBeTruthy();
   });
 });

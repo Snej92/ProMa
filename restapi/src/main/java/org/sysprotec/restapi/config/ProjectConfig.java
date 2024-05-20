@@ -25,6 +25,7 @@ public class ProjectConfig {
                 .issuer("BWA")
                 .lopTotal(10)
                 .lopDone(0)
+                .lopToDo(10)
                 .status(StatusEPLAN.AUSGELAGERT)
                 .build();
 
@@ -36,6 +37,7 @@ public class ProjectConfig {
                 .issuer("AEL")
                 .lopTotal(10)
                 .lopDone(5)
+                .lopToDo(5)
                 .status(StatusEPLAN.EINGELAGERT)
                 .build();
 
@@ -47,6 +49,7 @@ public class ProjectConfig {
                 .issuer("AEL")
                 .lopTotal(10)
                 .lopDone(10)
+                .lopToDo(0)
                 .status(StatusEPLAN.INARBEIT)
                 .build();
 

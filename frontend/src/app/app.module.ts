@@ -61,7 +61,7 @@ import {
 import {UserAdministrationEffects} from "./modules/userAdministration/store/user-administration.effects";
 import { AddUserComponent } from './modules/userAdministration/components/add-user/add-user.component';
 import {MatCheckbox} from "@angular/material/checkbox";
-import { ProjectElevationDirective } from './page-template/directives/project-elevation/project-elevation.directive';
+import { HoverElevationDirective } from './page-template/directives/project-elevation/hover-elevation.directive';
 import {LoggedUserEffects} from "./core/logged-user/logged-user.effects";
 import {ActiveProjectEffects} from "./core/active-project/active-project.effects";
 import { AddProjectComponent } from './modules/project-administration/components/add-project/add-project.component';
@@ -108,7 +108,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ProjectAdministrationComponent,
     ProjectCardComponent,
     AddUserComponent,
-    ProjectElevationDirective,
+    HoverElevationDirective,
     AddProjectComponent,
     SysConfirmationComponent,
     StationCardComponent

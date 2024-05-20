@@ -30,18 +30,22 @@ public class Station {
     //LOP
     private Integer lopTotal;
     private Integer lopDone;
+    private Integer lopToDo;
     private Integer lopProgress;
     //Documentation
     private Integer documentationTotal;
     private Integer documentationDone;
+    private Integer documentationToDo;
     private Integer documentationProgress;
     //Specification
     private Integer specificationTotal;
     private Integer specificationDone;
+    private Integer specificationToDo;
     private Integer specificationProgress;
     //Control
     private Integer controlTotal;
     private Integer controlDone;
+    private Integer controlToDo;
     private Integer controlProgress;
     //Tables
     @OneToMany(cascade = CascadeType.ALL)

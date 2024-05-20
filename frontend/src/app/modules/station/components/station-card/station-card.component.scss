@@ -62,13 +62,14 @@
 
 .station-info{
   height: 40px;
+  align-items: center;
 }
 
 .station-status{
   color: white;
   background-color: var(--frontend-error);
   align-content: center;
-  padding: 9px;
+  padding: 7px;
   border-radius: 4px;
 }
 
@@ -76,7 +77,7 @@
   color: white;
   background-color: var(--frontend-accent);
   align-content: center;
-  padding: 9px;
+  padding: 7px;
   border-radius: 4px;
 }
 
@@ -84,7 +85,7 @@
   color: white;
   background-color: var(--frontend-accent);
   align-content: center;
-  padding: 9px;
+  padding: 7px;
   border-radius: 4px;
 }
 
@@ -92,7 +93,7 @@
   color: white;
   background-color: var(--frontend-error);
   align-content: center;
-  padding: 9px;
+  padding: 7px;
   border-radius: 4px;
 }
 

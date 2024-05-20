@@ -7,8 +7,6 @@ import {AppStateModel} from "../../../core/store/appState.model";
 import {MatDialog} from "@angular/material/dialog";
 import {getLoggedUserInfo} from "../../../core/logged-user/logged-user.selectors";
 import {loadSpinner} from "../../../core/store/app.action";
-import {loadProjectView} from "../../project-administration/store/project-administration.actions";
-import {getProjectViewInfo} from "../../project-administration/store/project-administration.selectors";
 import {loadStationView} from "../store/station.actions";
 import {getStationViewInfo} from "../store/station.selectors";
 import {activeProjectView} from "../../../core/active-project/active-project.model";
@@ -36,12 +34,6 @@ export class StationComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.store.dispatch(loadSpinner({isLoading:true}))
-    this.store.dispatch(loadActiveProjectView());
-    this.subscriptions.push(
-      this.store.select(getActiveProjectViewInfo).subscribe(data =>{
-        this.activeProjectView=data;
-      })
-    );
     this.subscriptions.push(
       this.store.select(getLoggedUserInfo).pipe()
         .subscribe(data =>{
