@@ -1,5 +1,5 @@
 import {createFeatureSelector, createSelector} from "@ngrx/store";
-import {stationView, stationViewModel} from "./station.model";
+import {stationView, stationViewModel} from "./stationView.model";
 
 const getStationViewState=createFeatureSelector<stationView>('stationView')
 

@@ -12,32 +12,26 @@ import java.util.List;
 
 @Configuration
 public class UserConfig {
-//    @Bean
-//    CommandLineRunner commandLineRunnerSkills(UserRepository userRepository){
+    @Bean
+    CommandLineRunner commandLineRunnerSkills(UserRepository userRepository){
 
-//        Role roleJAR = Role.builder()
-//                .adminRole(true)
-//                .projectRole(true)
-//                .userRole(true)
-//                .build();
-//
-//        Role roleBWA = Role.builder()
-//                .adminRole(true)
-//                .projectRole(true)
-//                .userRole(true)
-//                .build();
-//
-//
-//        User JAR = User.builder()
-//                .firstname("Jens")
-//                .lastname("Arth")
-//                .acronym("JAR")
-//                .email("j.arth@sysprotec.de")
-//                .phone("+49 911 ...")
-//                .username("jens.arth")
-//                .password("password")
-//                .roles(roleJAR)
-//                .build();
+        Role roleAll = Role.builder()
+                .adminRole(true)
+                .projectRole(true)
+                .userRole(true)
+                .build();
+
+        User Admin = User.builder()
+                .firstname("Test")
+                .lastname("Admin")
+                .acronym("TAD")
+                .email("admin@admin.com")
+                .phone("geheim")
+                .username("admin@admin.com")
+                .password("test")
+                .roles(roleAll)
+                .activeProject(1)
+                .build();
 //
 //        User BWA = User.builder()
 //                .firstname("Bernd")
@@ -50,8 +44,7 @@ public class UserConfig {
 //                .roles(roleBWA)
 //                .build();
 //
-//        return args -> userRepository.saveAll(List.of(
-//                JAR,
-//                BWA));
-//    }
+        return args -> userRepository.saveAll(List.of(
+                Admin));
+    }
 }

@@ -2,14 +2,13 @@ package org.sysprotec.restapi.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.sysprotec.restapi.model.Lop;
 import org.sysprotec.restapi.model.LopSetting;
 
 import java.util.Optional;
 
 @Repository
-public interface LopRepository extends JpaRepository<Lop, Integer> {
+public interface LopSettingRepository extends JpaRepository<LopSetting, Integer> {
 
-    Optional<Lop> findLopById(Integer Id);
-    Lop findTopByOrderByIdDesc();
+    Optional<LopSetting> findLopById(Integer Id);
+    LopSetting findTopByOrderByIdDesc();
 }

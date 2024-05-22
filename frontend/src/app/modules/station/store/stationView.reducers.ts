@@ -1,13 +1,13 @@
 import {createReducer, on} from "@ngrx/store";
-import {stationViewState} from "./station.state";
+import {stationViewState} from "./stationView.state";
 import {
   addStationViewSuccess,
   deleteStation,
   loadStationView,
   loadStationViewFail,
   loadStationViewSuccess, updateStationSuccess
-} from "./station.actions";
-import {stationViewModel} from "./station.model";
+} from "./stationView.actions";
+import {stationViewModel} from "./stationView.model";
 
 const _stationReducer = createReducer(
   stationViewState,

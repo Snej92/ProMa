@@ -1,12 +1,12 @@
 <div class="div-table">
   <div>
-    <table mat-table [dataSource]="lopSettings.lopList" class="mat-elevation-z8">
+    <table mat-table [dataSource]="lopSettings.lopSettingList" class="mat-elevation-z8">
 
       <ng-container matColumnDef="Aktion">
         <th mat-header-cell *matHeaderCellDef> Aktion </th>
         <td mat-cell *matCellDef="let lop">
           <app-sys-button icon="edit" color="accent" tooltip="Bearbeiten" (click)="editLop(lop.id)"></app-sys-button>
-          <app-sys-button icon="delete" tooltip="löschen" (click)="deleteLop(lop.id)"></app-sys-button>
+          <app-sys-button icon="delete" tooltip="löschen" (click)="deleteLop(lop.id, lop.item)"></app-sys-button>
         </td>
       </ng-container>
 

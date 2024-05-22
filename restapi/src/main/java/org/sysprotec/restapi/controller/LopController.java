@@ -1,39 +1,27 @@
 package org.sysprotec.restapi.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.sysprotec.restapi.model.Lop;
+import org.sysprotec.restapi.model.LopSetting;
 import org.sysprotec.restapi.service.LopService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/lop")
+@RequestMapping("/api/lop/station")
 @RequiredArgsConstructor
 public class LopController {
 
     private final LopService lopService;
 
-
-
-    @GetMapping
-    public List<Lop> getLop(){
-        return lopService.getLop();
-    }
-
-    @PostMapping
-    public Lop addLop(@RequestBody Lop lop){
-        return lopService.addLop(lop);
+    @GetMapping("{stationId}")
+    public List<Lop> getStationLop(@PathVariable Integer stationId){
+        return lopService.getStationLop(stationId);
     }
 
     @PutMapping
     public void updateLop(@RequestBody Lop lop){
         lopService.updateLop(lop);
-    }
-
-    @DeleteMapping("{lopId}")
-    public void deleteLop(@PathVariable Integer lopId){
-        lopService.delete(lopId);
     }
 }

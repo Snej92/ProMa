@@ -1,4 +1,4 @@
-import {stationView} from "./station.model";
+import {stationView} from "./stationView.model";
 
 export const stationViewState:stationView={
   stationViewList:[],

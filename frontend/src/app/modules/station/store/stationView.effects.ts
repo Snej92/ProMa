@@ -9,11 +9,11 @@ import {
   LOAD_STATION_VIEW,
   loadStationViewFail,
   loadStationViewSuccess, updateStation, updateStationSuccess
-} from "./station.actions";
-import {stationViewModel} from "./station.model";
+} from "./stationView.actions";
+import {stationViewModel} from "./stationView.model";
 
 @Injectable()
-export class StationEffects {
+export class StationViewEffects {
   constructor(private action$: Actions,
               private service: StationService) {
   }

@@ -1,9 +1,9 @@
 package org.sysprotec.restapi.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.sysprotec.restapi.model.Station;
+import org.sysprotec.restapi.model.projections.StationDto;
 import org.sysprotec.restapi.model.projections.StationView;
 import org.sysprotec.restapi.service.StationService;
 
@@ -20,5 +20,25 @@ public class StationController {
     @GetMapping("/all")
     public List<StationView> getAllStations(){
         return stationService.getAllStations();
+    }
+
+    @GetMapping("{stationId}")
+    public Station getStation(@PathVariable Integer stationId){
+        return stationService.getStation(stationId);
+    }
+
+    @PostMapping
+    public StationDto addStation(@RequestBody StationDto stationDto){
+        return stationService.addStation(stationDto);
+    }
+
+    @PutMapping
+    public StationDto updateStation(@RequestBody StationDto stationDto){
+        return stationService.updateStation(stationDto);
+    }
+
+    @DeleteMapping("{stationId}")
+    public void deleteStation(@PathVariable Integer stationId){
+        stationService.deleteStation(stationId);
     }
 }

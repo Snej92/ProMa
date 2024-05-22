@@ -7,12 +7,14 @@ import {
 import {userReducer} from "../../modules/userAdministration/store/user-administration.reducers";
 import {loggedUserReducer} from "../logged-user/logged-user.reducers";
 import {activeProjectViewReducer} from "../active-project/active-project.reducer";
-import {stationViewReducer} from "../../modules/station/store/station.reducers";
+import {stationViewReducer} from "../../modules/station/store/stationView.reducers";
+import {lopSettingReducer} from "../../modules/settings/lop-settings/store/lopSetting.reducers";
 
 
 export const AppState={
   version:versionReducer,
   lop:lopReducer,
+  lopSetting:lopSettingReducer,
   app:appReducer,
   projectView:projectViewReducer,
   user:userReducer,

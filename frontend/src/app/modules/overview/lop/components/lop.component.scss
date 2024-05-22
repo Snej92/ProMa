@@ -1,0 +1,50 @@
+.div-table{
+  //margin-top: 10px;
+}
+
+.mat-column-Aufnahme{
+  width: 10%;
+}
+
+.mat-column-LOP{
+  width: 50%;
+}
+
+.mat-column-Status{
+  width: 10%;
+}
+
+.mat-column-Erledigt{
+  width: 10%;
+}
+
+.mat-column-Benutzer{
+  width: 10%;
+}
+
+.th-center{
+  text-align: center;
+}
+
+
+.mat-mdc-header-row{
+  color: white;
+  background-color: var(--frontend-primary);
+  height: 50px;
+}
+
+.mat-mdc-row:nth-child(even){
+  background-color: var(--frontend-alternate);
+}
+
+.status-erledigt{
+  background: var(--frontend-success);
+}
+
+.status-offen{
+  background: var(--frontend-error);
+}
+
+.status-in-arbeit{
+  background: var(--frontend-warning);
+}

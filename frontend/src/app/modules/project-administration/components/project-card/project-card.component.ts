@@ -43,7 +43,6 @@ export class ProjectCardComponent {
         button:button
       }
     });
-
     confirmRef.afterClosed().subscribe((confirmed:boolean)=> {
       if(confirmed){
         console.log(id)

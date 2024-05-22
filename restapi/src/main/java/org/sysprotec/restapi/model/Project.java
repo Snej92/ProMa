@@ -31,7 +31,7 @@ public class Project {
     private List<Station> stations;
     //Settings
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Lop> lop;
+    private List<LopSetting> lopSetting;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Task> documentation;
     @OneToMany(cascade = CascadeType.ALL)
@@ -72,14 +72,14 @@ public class Project {
     }
 
     //Lop
-    public void addLop(Lop lop){
-        this.lop.add(lop);
+    public void addLop(LopSetting lopSetting){
+        this.lopSetting.add(lopSetting);
     }
 
     public void removeLop(Integer lopId) {
-        Lop lop = this.lop.stream().filter(t -> t.getId() == lopId).findFirst().orElse(null);
-        if (lop != null) {
-            this.lop.remove(lop);
+        LopSetting lopSetting = this.lopSetting.stream().filter(t -> t.getId() == lopId).findFirst().orElse(null);
+        if (lopSetting != null) {
+            this.lopSetting.remove(lopSetting);
         }
     }
 

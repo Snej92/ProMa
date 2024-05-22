@@ -5,6 +5,7 @@ export interface stationViewModel{
   favorite:boolean,
   issuer:string,
   status:string,
+  version:string,
   totalProgress:number,
   //LOP
   lopTotal:number,

@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.sysprotec.restapi.model.*;
 import org.sysprotec.restapi.model.types.StatusEPLAN;
-import org.sysprotec.restapi.model.types.StatusLOP;
 import org.sysprotec.restapi.repository.ProjectRepository;
 
 import java.util.ArrayList;
@@ -27,6 +26,7 @@ public class ProjectConfig {
                 .lopDone(0)
                 .lopToDo(10)
                 .status(StatusEPLAN.AUSGELAGERT)
+                .version("V1.0")
                 .build();
 
         Station station2 = Station.builder()
@@ -39,6 +39,7 @@ public class ProjectConfig {
                 .lopDone(5)
                 .lopToDo(5)
                 .status(StatusEPLAN.EINGELAGERT)
+                .version("V1.1")
                 .build();
 
         Station station3 = Station.builder()
@@ -51,6 +52,7 @@ public class ProjectConfig {
                 .lopDone(10)
                 .lopToDo(0)
                 .status(StatusEPLAN.INARBEIT)
+                .version("V1.2")
                 .build();
 
         List<Station> stationList = new ArrayList<>();
@@ -106,31 +108,22 @@ public class ProjectConfig {
         versionList.add(version1);
         versionList.add(version2);
 
-        Lop lop1 = Lop.builder()
+        LopSetting lop1 = LopSetting.builder()
                 .startDate("01.04.2024")
-                .endDate("27.04.2024")
                 .item("LOP Punkt 1")
-                .status(StatusLOP.ERLEDIGT)
-                .userAcronym("AEL")
                 .build();
 
-        Lop lop2 = Lop.builder()
+        LopSetting lop2 = LopSetting.builder()
                 .startDate("02.04.2024")
-                .endDate("28.04.2024")
                 .item("LOP Punkt 2")
-                .status(StatusLOP.OFFEN)
-                .userAcronym("BWA")
                 .build();
 
-        Lop lop3 = Lop.builder()
+        LopSetting lop3 = LopSetting.builder()
                 .startDate("03.04.2024")
-                .endDate("09.04.2024")
                 .item("LOP Punkt 3")
-                .status(StatusLOP.INARBEIT)
-                .userAcronym("DBI")
                 .build();
 
-        List<Lop> lopList = new ArrayList<>();
+        List<LopSetting> lopList = new ArrayList<>();
             lopList.add(lop1);
             lopList.add(lop2);
             lopList.add(lop3);
@@ -146,7 +139,7 @@ public class ProjectConfig {
                 .notStoredStations(0)
                 .versions(versionList)
                 .stations(stationList)
-                .lop(lopList)
+                .lopSetting(lopList)
                 .favorite(false)
                 .build();
 

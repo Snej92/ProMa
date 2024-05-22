@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {stationView} from "../store/station.model";
+import {stationView} from "../store/stationView.model";
 import {loggedUser} from "../../../core/logged-user/logged-user.model";
 import {Subscription} from "rxjs";
 import {Store} from "@ngrx/store";
@@ -7,11 +7,10 @@ import {AppStateModel} from "../../../core/store/appState.model";
 import {MatDialog} from "@angular/material/dialog";
 import {getLoggedUserInfo} from "../../../core/logged-user/logged-user.selectors";
 import {loadSpinner} from "../../../core/store/app.action";
-import {loadStationView} from "../store/station.actions";
-import {getStationViewInfo} from "../store/station.selectors";
+import {loadStationView} from "../store/stationView.actions";
+import {getStationViewInfo} from "../store/stationView.selectors";
 import {activeProjectView} from "../../../core/active-project/active-project.model";
-import {loadActiveProjectView} from "../../../core/active-project/active-project.actions";
-import {getActiveProjectViewInfo} from "../../../core/active-project/active-project.selector";
+import {AddStationComponent} from "./add-station/add-station.component";
 
 @Component({
   selector: 'app-station',
@@ -29,7 +28,19 @@ export class StationComponent implements OnInit, OnDestroy{
   }
 
   addStation(){
+    this.openPopup(0, "Station Hinzufügen", false, "Hinzufügen")
+  }
 
+  openPopup(id:any, title:any, isEdit=false, button:any){
+    this.dialog.open(AddStationComponent,{
+      width:'30%',
+      data:{
+        id:id,
+        title: title,
+        isEdit:isEdit,
+        button:button
+      }
+    })
   }
 
   ngOnInit(): void {

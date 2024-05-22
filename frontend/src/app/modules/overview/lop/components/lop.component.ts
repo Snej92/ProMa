@@ -1,10 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {AppStateModel} from "../../../core/store/appState.model";
-import {lop, lopModel} from "./store/lop.model";
-import {getLopById, getLopInfo} from "./store/lop.selectors";
-import {loadLop, updateLop} from "./store/lop.actions";
-import {loadSpinner} from "../../../core/store/app.action";
+import {AppStateModel} from "../../../../core/store/appState.model";
+import {lop, lopModel} from "../store/lop.model";
+import {getLopById, getLopInfo} from "../store/lop.selectors";
+import {loadStationLop, updateStationLop} from "../store/lop.actions";
+import {loadSpinner} from "../../../../core/store/app.action";
 import {Subscription} from "rxjs";
 
 @Component({
@@ -19,13 +19,17 @@ export class LopComponent implements OnInit, OnDestroy{
   editData!:lopModel;
   displayedColumns: string[] = ['Aufnahme', 'LOP', 'Status', 'Erledigt', 'Benutzer'];
   lopStatus: string[] = ['OFFEN', 'INARBEIT', 'ERLEDIGT'];
+  @Input() stationId!:number;
 
   constructor(private store:Store<AppStateModel>) {
   }
 
+  //todo add lazy load
+
   ngOnInit(): void {
+    console.log(this.stationId)
     this.store.dispatch(loadSpinner({isLoading:true}))
-    this.store.dispatch(loadLop())
+    this.store.dispatch(loadStationLop({stationId:this.stationId}))
     this.subscriptions.push(
       this.store.select(getLopInfo).pipe()
         .subscribe(data =>{
@@ -49,7 +53,7 @@ export class LopComponent implements OnInit, OnDestroy{
       }
       console.log(lopInput)
       this.store.dispatch(loadSpinner({isLoading:true}));
-      this.store.dispatch(updateLop({lopInput:lopInput}))
+      this.store.dispatch(updateStationLop({lopInput:lopInput}))
     }
   }
 

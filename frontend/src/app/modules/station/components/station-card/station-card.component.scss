@@ -73,6 +73,27 @@
   border-radius: 4px;
 }
 
+.station-lop{
+  color: white;
+  background-color: var(--frontend-error);
+  align-content: center;
+  padding: 7px;
+  border-radius: 4px;
+}
+
+.station-status-ausgelagert{
+  background-color: var(--frontend-error);
+}
+
+.station-status-inarbeit{
+  background-color: var(--frontend-warning);
+}
+
+.station-status-eingelagert{
+  background-color: var(--frontend-success)
+}
+
+
 .station-version{
   color: white;
   background-color: var(--frontend-accent);
@@ -84,14 +105,6 @@
 .station-issuer{
   color: white;
   background-color: var(--frontend-accent);
-  align-content: center;
-  padding: 7px;
-  border-radius: 4px;
-}
-
-.station-lop{
-  color: white;
-  background-color: var(--frontend-error);
   align-content: center;
   padding: 7px;
   border-radius: 4px;

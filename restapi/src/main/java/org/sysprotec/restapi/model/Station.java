@@ -26,6 +26,7 @@ public class Station {
     @Enumerated(EnumType.STRING)
     private StatusEPLAN status;
     private Integer totalProgress;
+    private String version;
     //Progress
     //LOP
     private Integer lopTotal;

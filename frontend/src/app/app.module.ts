@@ -43,12 +43,12 @@ import { SettingsComponent } from './modules/settings/components/settings.compon
 import {AppState} from "./core/store/app.state";
 import { AddVersionComponent } from './modules/version/components/add-version/add-version.component';
 import { SysButtonComponent } from './page-template/sys-button/sys-button.component';
-import { LopComponent } from './modules/overview/lop/lop.component';
+import { LopComponent } from './modules/overview/lop/components/lop.component';
 import {LopEffects} from "./modules/overview/lop/store/lop.effects";
-import { LopSettingsComponent } from './modules/settings/lop-settings/lop-settings.component';
+import { LopSettingsComponent } from './modules/settings/lop-settings/components/lop-settings.component';
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
 import { SysNavButtonComponent } from './page-template/sys-nav-button/sys-nav-button.component';
-import { AddLopComponent } from './modules/settings/lop-settings/add-lop/add-lop.component';
+import { AddLopComponent } from './modules/settings/lop-settings/components/add-lop/add-lop.component';
 import {AppEffect} from "./core/store/app.effect";
 import { SysLoadingspinnerComponent } from './page-template/sys-loadingspinner/sys-loadingspinner.component';
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
@@ -68,7 +68,10 @@ import { AddProjectComponent } from './modules/project-administration/components
 import { SysConfirmationComponent } from './core/sys-confirmation/sys-confirmation.component';
 import {MatDialogClose} from "@angular/material/dialog";
 import { StationCardComponent } from './modules/station/components/station-card/station-card.component';
-import {StationEffects} from "./modules/station/store/station.effects";
+import {StationViewEffects} from "./modules/station/store/stationView.effects";
+import { AddStationComponent } from './modules/station/components/add-station/add-station.component';
+import {MatTab, MatTabContent, MatTabGroup, MatTabLink, MatTabNav, MatTabNavPanel} from "@angular/material/tabs";
+import {LopSettingEffects} from "./modules/settings/lop-settings/store/lopSetting.effects";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -111,7 +114,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     HoverElevationDirective,
     AddProjectComponent,
     SysConfirmationComponent,
-    StationCardComponent
+    StationCardComponent,
+    AddStationComponent
   ],
   imports: [
     AppRoutingModule,
@@ -121,12 +125,13 @@ function initializeKeycloak(keycloak: KeycloakService) {
     StoreModule.forRoot(AppState),
     EffectsModule.forRoot([
       LopEffects,
+      LopSettingEffects,
       AppEffect,
       ProjectAdministrationEffects,
       UserAdministrationEffects,
       LoggedUserEffects,
       ActiveProjectEffects,
-      StationEffects,]),
+      StationViewEffects,]),
 
 
     MatToolbar,
@@ -175,7 +180,13 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatMenuItem,
     MatCheckbox,
     MatCardSubtitle,
-    MatDialogClose
+    MatDialogClose,
+    MatTabNav,
+    MatTabLink,
+    MatTabGroup,
+    MatTab,
+    MatTabNavPanel,
+    MatTabContent
   ],
   providers: [
     {

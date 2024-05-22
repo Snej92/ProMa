@@ -1,5 +1,5 @@
 import {createAction, props} from "@ngrx/store";
-import {stationViewModel} from "./station.model";
+import {stationViewModel} from "./stationView.model";
 
 export const LOAD_STATION_VIEW_SUCCESS='[station page] load station view success'
 export const LOAD_STATION_VIEW_FAIL='[station page] load station view fail'

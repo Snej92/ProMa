@@ -7,6 +7,7 @@ public interface StationView {
     Boolean getFavorite();
     String getIssuer();
     String getStatus();
+    String getVersion();
     Integer getTotalProgress();
     //Progress
     //LOP

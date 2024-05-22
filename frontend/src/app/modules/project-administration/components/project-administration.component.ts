@@ -30,11 +30,6 @@ export class ProjectAdministrationComponent implements OnInit, OnDestroy{
     this.openPopup(0, 'Projekt Hinzufügen', false, 'Hinzufügen')
   }
 
-  editProject(id:any){
-    console.log(id)
-    this.openPopup(id, 'Projekt Bearbeiten', false, 'Aktualisieren')
-  }
-
   openPopup(id:any, title:any, isEdit=false, button:any){
     this.dialog.open(AddProjectComponent,{
       width:'30%',

@@ -5,9 +5,9 @@ import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../../core/store/appState.model";
 import {Subscription} from "rxjs";
 import {projectViewModel} from "../../store/project-administration.model";
-import {loadSpinner} from "../../../../core/store/app.action";
 import {addProjectView, updateProject} from "../../store/project-administration.actions";
 import {getProjectById} from "../../store/project-administration.selectors";
+import {loadSpinner} from "../../../../core/store/app.action";
 
 @Component({
   selector: 'app-add-project',
@@ -46,7 +46,7 @@ export class AddProjectComponent implements OnInit{
       storedStations:this.projectForm.value.storedStations as number,
       notStoredStations:this.projectForm.value.notStoredStations as number,
     }
-    // this.store.dispatch(loadSpinner({isLoading:true}));
+    this.store.dispatch(loadSpinner({isLoading:true}));
     if(this.data.isEdit){
       projectInput.id=this.projectForm.value.id as number
       console.log(projectInput)

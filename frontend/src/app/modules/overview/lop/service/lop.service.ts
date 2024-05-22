@@ -10,21 +10,12 @@ export class LopService {
 
   constructor(private http:HttpClient) { }
 
-
-  getAllLops():Observable<lopModel[]>{
-    console.log("fetch lops")
-    return this.http.get<lopModel[]>("http://localhost:8080/api/lop")
+  getStationLops(stationId:number):Observable<lopModel[]>{
+    console.log("fetch station lops")
+    return this.http.get<lopModel[]>("http://localhost:8080/api/lop/station/"+stationId)
   }
 
-  addLop(lopInput:lopModel){
-    return this.http.post("http://localhost:8080/api/lop", lopInput);
-  }
-
-  updateLop(lopInput:lopModel){
-    return this.http.put("http://localhost:8080/api/lop", lopInput);
-  }
-
-  deleteLop(lopId:number){
-    return this.http.delete("http://localhost:8080/api/lop/"+lopId);
+  updateStationLop(lopInput:lopModel){
+    return this.http.put("http://localhost:8080/api/lop/station", lopInput);
   }
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.sysprotec.restapi.model.Project;
 import org.sysprotec.restapi.model.Station;
 import org.sysprotec.restapi.model.User;
+import org.sysprotec.restapi.model.projections.StationDto;
 import org.sysprotec.restapi.model.projections.StationView;
 import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.StationRepository;
@@ -45,5 +46,106 @@ public class StationService {
             }
         }
         return stationViews;
+    }
+
+    public StationDto addStation(StationDto stationDto) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String username = authentication.getName();
+            User user = userRepository.findUserByUsernameIgnoreCase(username);
+            if (user != null) {
+                Optional<Project> optionalProject = projectRepository.findProjectById(user.getActiveProject());
+                if (optionalProject.isPresent()) {
+                    Project savedProject = optionalProject.get();
+                    Station newStation = Station.builder()
+                            .name(stationDto.getName())
+                            .description(stationDto.getDescription())
+                            .favorite(stationDto.getFavorite())
+                            .issuer(stationDto.getIssuer())
+                            .status(stationDto.getStatus())
+                            .totalProgress(stationDto.getTotalProgress())
+                            .version(stationDto.getVersion())
+                            .lopTotal(stationDto.getLopTotal())
+                            .lopDone(stationDto.getLopDone())
+                            .lopToDo(stationDto.getLopToDo())
+                            .lopProgress(stationDto.getLopProgress())
+                            .documentationTotal(stationDto.getDocumentationTotal())
+                            .documentationDone(stationDto.getDocumentationDone())
+                            .documentationToDo(stationDto.getDocumentationToDo())
+                            .documentationProgress(stationDto.getDocumentationProgress())
+                            .specificationTotal(stationDto.getSpecificationTotal())
+                            .specificationDone(stationDto.getSpecificationDone())
+                            .specificationToDo(stationDto.getSpecificationToDo())
+                            .specificationProgress(stationDto.getSpecificationProgress())
+                            .controlTotal(stationDto.getControlTotal())
+                            .controlDone(stationDto.getControlDone())
+                            .controlToDo(stationDto.getControlToDo())
+                            .controlProgress(stationDto.getControlProgress())
+                            .build();
+                    savedProject.addStation(newStation);
+                    projectRepository.save(savedProject);
+                    return stationRepository.findTopByOrderByIdDesc();
+                }
+
+            }
+        }
+        return null;
+    }
+
+    public void deleteStation(Integer stationId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String username = authentication.getName();
+            User user = userRepository.findUserByUsernameIgnoreCase(username);
+            if (user != null) {
+                Optional<Project> optionalProject = projectRepository.findProjectById(user.getActiveProject());
+                if (optionalProject.isPresent()) {
+                    Project savedProject = optionalProject.get();
+                    savedProject.removeStation(stationId);
+                    stationRepository.deleteById(stationId);
+                }
+            }
+        }
+    }
+
+    public StationDto updateStation(StationDto stationDto) {
+        Optional<Station> optionalStation = stationRepository.findById(stationDto.getId());
+        if (optionalStation.isPresent()) {
+            Station saveStation = optionalStation.get();
+            saveStation.setName(stationDto.getName());
+            saveStation.setDescription(stationDto.getDescription());
+            saveStation.setFavorite(stationDto.getFavorite());
+            saveStation.setIssuer(stationDto.getIssuer());
+            saveStation.setStatus(stationDto.getStatus());
+            saveStation.setTotalProgress(stationDto.getTotalProgress());
+            saveStation.setVersion(stationDto.getVersion());
+            saveStation.setLopTotal(stationDto.getLopTotal());
+            saveStation.setLopDone(stationDto.getLopDone());
+            saveStation.setLopToDo(stationDto.getLopToDo());
+            saveStation.setLopProgress(stationDto.getLopProgress());
+            saveStation.setDocumentationTotal(stationDto.getDocumentationTotal());
+            saveStation.setDocumentationDone(stationDto.getDocumentationDone());
+            saveStation.setDocumentationToDo(stationDto.getDocumentationToDo());
+            saveStation.setDocumentationProgress(stationDto.getDocumentationProgress());
+            saveStation.setSpecificationTotal(stationDto.getSpecificationTotal());
+            saveStation.setSpecificationDone(stationDto.getSpecificationDone());
+            saveStation.setSpecificationToDo(stationDto.getSpecificationToDo());
+            saveStation.setSpecificationProgress(stationDto.getSpecificationProgress());
+            saveStation.setControlTotal(stationDto.getControlTotal());
+            saveStation.setControlDone(stationDto.getControlDone());
+            saveStation.setControlToDo(stationDto.getControlToDo());
+            saveStation.setControlProgress(stationDto.getControlProgress());
+
+            stationRepository.save(saveStation);
+            return stationRepository.findProjectedById(stationDto.getId());
+        } else {
+            log.error("Station with ID{} does not exist", stationDto.getId());
+            return null;
+        }
+    }
+
+    public Station getStation(Integer stationId) {
+        Optional<Station> optionalStation = stationRepository.findById(stationId);
+        return optionalStation.orElse(null);
     }
 }

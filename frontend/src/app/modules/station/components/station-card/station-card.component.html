@@ -19,10 +19,10 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+        <button mat-menu-item (click)="editStation(stationView?.id)">
           Bearbeiten
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item (click)="deleteStation(stationView?.id, stationView?.name)">
           Löschen
         </button>
       </mat-menu>
@@ -31,13 +31,22 @@
 
   <div>
     <div class="station-info d-flex justify-content-between ms-2 mt-3 me-3">
-      <h5 class="station-status station-info-text">{{stationView?.status}}</h5>
-      <h5 class="station-version station-info-text">V1.0</h5>
+      <h5 class="station-status station-info-text"
+      [ngClass]="{
+          'station-status-ausgelagert': stationView?.status=='AUSGELAGERT',
+          'station-status-inarbeit': stationView?.status=='INARBEIT',
+          'station-status-eingelagert': stationView?.status=='EINGELAGERT'
+          }">
+        {{stationView?.status}}
+      </h5>
+      <h5 class="station-version station-info-text">{{stationView?.version}}</h5>
       <h5 class="station-issuer station-info-text">{{stationView?.issuer}}</h5>
-      <h5 class="station-lop station-info-text">LOP: {{stationView?.lopToDo}}</h5>
+      <h5 class="station-lop station-info-text" [ngClass]="{'station-status-eingelagert': stationView?.lopToDo==0}">
+        LOP: {{stationView?.lopToDo}}
+      </h5>
       <div class="station-progress station-info-text">
-        <mat-progress-spinner style="position:relative; top:-1.75px" value="100" mode="determinate" [diameter]="33" color="accent"></mat-progress-spinner>
-        <div style="position:relative; top:-27px">50</div>
+        <mat-progress-spinner style="position:relative; top:2px" value="{{stationView?.totalProgress}}" mode="determinate" [diameter]="33" color="accent"></mat-progress-spinner>
+        <div style="position:relative; top:-23px">{{stationView?.totalProgress}}</div>
       </div>
     </div>
   </div>

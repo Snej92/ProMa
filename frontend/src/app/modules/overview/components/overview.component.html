@@ -1,1 +1,29 @@
-<app-lop></app-lop>
+<div class="overview-container">
+  <div class="overview-nav">
+    <app-sys-nav-button class="nav-button" text="Stationen"></app-sys-nav-button>
+    <app-sys-nav-button class="nav-button" text="Kopfdaten"></app-sys-nav-button>
+    <app-sys-nav-button class="nav-button" text="Vorgaben"></app-sys-nav-button>
+    <app-sys-nav-button class="nav-button" text="Projektierung"></app-sys-nav-button>
+    <app-sys-nav-button class="nav-button" text="Technische Daten"></app-sys-nav-button>
+    <app-sys-nav-button class="nav-button" text="Kontrolle"></app-sys-nav-button>
+    <app-sys-nav-button class="nav-button" text="Doku"></app-sys-nav-button>
+    <app-sys-nav-button class="nav-button" text="Historie"></app-sys-nav-button>
+    <app-sys-nav-button class="nav-button" text="LOP"></app-sys-nav-button>
+  </div>
+  <div class="overview-divider">
+    <mat-divider vertical="true"></mat-divider>
+  </div>
+  <div class="overview-content">
+    <mat-tab-group mat-stretch-tabs="false" color="accent" animationDuration="0ms">
+      <ng-container *ngFor="let stationView of stationView.stationViewList">
+        <mat-tab [label]="stationView.name">
+          <ng-template matTabContent>
+            <div class="card-content">
+              <app-lop [stationId]="stationView.id"></app-lop>
+            </div>
+          </ng-template>
+        </mat-tab>
+      </ng-container>
+    </mat-tab-group>
+  </div>
+</div>

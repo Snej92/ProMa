@@ -4,7 +4,7 @@ export enum LopStatus{
   OFFEN = 'ERLEDIGT'
 }
 
-export interface lopModel{
+export interface lopModel {
   id : number,
   startDate : string,
   endDate : string,
