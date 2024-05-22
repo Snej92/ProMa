@@ -60,53 +60,54 @@ public class ProjectConfig {
         stationList.add(station2);
         stationList.add(station3);
 
-        VersionStation versionStation1 = VersionStation.builder()
-                .done(false)
-                .stationName("ST8010")
-                .build();
-
-        VersionStation versionStation2 = VersionStation.builder()
-                .done(false)
-                .stationName("ST8020")
-                .build();
-
-        List<VersionStation> versionStationList1 = new ArrayList<>();
-        versionStationList1.add(versionStation1);
-        versionStationList1.add(versionStation2);
-
-        Version version1 = Version.builder()
-                .date("04.04.2024")
-                .done(false)
-                .toDo("http requests test")
-                .version("V1.0")
-                .versionStation(versionStationList1)
-                .build();
-
-        VersionStation versionStation21 = VersionStation.builder()
-                .done(false)
-                .stationName("ST8010")
-                .build();
-
-        VersionStation versionStation22 = VersionStation.builder()
-                .done(false)
-                .stationName("ST8020")
-                .build();
-
-        List<VersionStation> versionStationList2 = new ArrayList<>();
-        versionStationList2.add(versionStation21);
-        versionStationList2.add(versionStation22);
-
-        Version version2 = Version.builder()
-                .date("30.04.2024")
-                .done(false)
-                .toDo("NGRX lerning")
-                .version("V1.1")
-                .versionStation(versionStationList2)
-                .build();
-
-        List<Version> versionList = new ArrayList<>();
-        versionList.add(version1);
-        versionList.add(version2);
+        //Version
+//        VersionStation versionStation1 = VersionStation.builder()
+//                .done(false)
+//                .stationName("ST8010")
+//                .build();
+//
+//        VersionStation versionStation2 = VersionStation.builder()
+//                .done(false)
+//                .stationName("ST8020")
+//                .build();
+//
+//        List<VersionStation> versionStationList1 = new ArrayList<>();
+//        versionStationList1.add(versionStation1);
+//        versionStationList1.add(versionStation2);
+//
+//        Version version1 = Version.builder()
+//                .date("04.04.2024")
+//                .done(false)
+//                .toDo("http requests test")
+//                .version("V1.0")
+//                .versionStation(versionStationList1)
+//                .build();
+//
+//        VersionStation versionStation21 = VersionStation.builder()
+//                .done(false)
+//                .stationName("ST8010")
+//                .build();
+//
+//        VersionStation versionStation22 = VersionStation.builder()
+//                .done(false)
+//                .stationName("ST8020")
+//                .build();
+//
+//        List<VersionStation> versionStationList2 = new ArrayList<>();
+//        versionStationList2.add(versionStation21);
+//        versionStationList2.add(versionStation22);
+//
+//        Version version2 = Version.builder()
+//                .date("30.04.2024")
+//                .done(false)
+//                .toDo("NGRX lerning")
+//                .version("V1.1")
+//                .versionStation(versionStationList2)
+//                .build();
+//
+//        List<Version> versionList = new ArrayList<>();
+//        versionList.add(version1);
+//        versionList.add(version2);
 
         LopSetting lop1 = LopSetting.builder()
                 .startDate("01.04.2024")
@@ -137,7 +138,7 @@ public class ProjectConfig {
                 .inProgressStations(1)
                 .storedStations(0)
                 .notStoredStations(0)
-                .versions(versionList)
+//                .versions(versionList)
                 .stations(stationList)
                 .lopSetting(lopList)
                 .favorite(false)

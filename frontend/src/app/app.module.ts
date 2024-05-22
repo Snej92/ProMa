@@ -72,6 +72,7 @@ import {StationViewEffects} from "./modules/station/store/stationView.effects";
 import { AddStationComponent } from './modules/station/components/add-station/add-station.component';
 import {MatTab, MatTabContent, MatTabGroup, MatTabLink, MatTabNav, MatTabNavPanel} from "@angular/material/tabs";
 import {LopSettingEffects} from "./modules/settings/lop-settings/store/lopSetting.effects";
+import {VersionEffects} from "./modules/version/store/version.effects";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -131,7 +132,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
       UserAdministrationEffects,
       LoggedUserEffects,
       ActiveProjectEffects,
-      StationViewEffects,]),
+      StationViewEffects,
+      VersionEffects]),
 
 
     MatToolbar,

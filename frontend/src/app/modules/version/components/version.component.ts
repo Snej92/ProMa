@@ -1,39 +1,47 @@
-import {Component, OnInit} from '@angular/core';
-import {versionModel} from "../store/version.model";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {versions} from "../store/version.model";
 import {Store} from "@ngrx/store";
-import {getVersion} from "../store/version.selectors";
+import {getVersionInfo} from "../store/version.selectors";
 import {AppStateModel} from "../../../core/store/appState.model";
 import {MatDialog} from "@angular/material/dialog";
 import {AddVersionComponent} from "./add-version/add-version.component";
-import {deleteVersion} from "../store/version.actions";
+import {deleteVersion, loadVersion} from "../store/version.actions";
+import {Subscription} from "rxjs";
+import {loadSpinner} from "../../../core/store/app.action";
+
 
 @Component({
   selector: 'app-version',
   templateUrl: './version.component.html',
   styleUrl: './version.component.scss'
 })
-export class VersionComponent implements OnInit{
+export class VersionComponent implements OnInit,OnDestroy{
 
   constructor(private store:Store<AppStateModel>, private dialog:MatDialog) {
   }
 
-  versionList !:versionModel[];
-  displayedColumns: String[] = ['Version', 'Aufgabe']
+  version!:versions;
+  private subscriptions: Subscription[] = [];
+  displayedColumns: String[] = ['Aktion', 'Datum', 'Version', 'Aufgabe', 'Status']
+  columnsToDisplay: String[] = this.displayedColumns.slice();
 
   ngOnInit(): void {
-    this.store.select(getVersion).subscribe(data=>{
-      this.versionList=data;
-      console.log(this.versionList)
-    })
+    this.store.dispatch(loadSpinner({isLoading:true}))
+    this.store.dispatch(loadVersion())
+    this.subscriptions.push(
+      this.store.select(getVersionInfo).pipe()
+        .subscribe(data =>{
+          this.version=data;
+        })
+    )
   }
 
   addVersion(){
-    console.log('Neue Version hinzufügen')
     this.OpenPopup(0,'Version hinzufügen', false)
   }
 
   deleteVersion(id:any){
-    console.log('Version löschen')
+    console.log(id)
     if(confirm("Wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden")){
       this.store.dispatch(deleteVersion({id:id}));
     }
@@ -53,5 +61,9 @@ export class VersionComponent implements OnInit{
         isedit:isedit
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

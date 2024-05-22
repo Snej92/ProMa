@@ -21,10 +21,8 @@ public class VersionController {
     }
 
     @PostMapping
-    public void addVersion(
-            @RequestBody Version version,
-            @RequestParam Integer projectId){
-        versionService.addVersion(version, projectId);
+    public void addVersion(@RequestBody Version version){
+        versionService.addVersion(version);
     }
 
     @PutMapping
@@ -32,8 +30,8 @@ public class VersionController {
         versionService.updateVersion(version);
     }
 
-    @DeleteMapping
-    public void deleteVersion(@RequestBody Version version){
-        versionService.deleteVersion(version);
+    @DeleteMapping("{versionId}")
+    public void deleteVersion(@PathVariable Integer versionId){
+        versionService.deleteVersion(versionId);
     }
 }

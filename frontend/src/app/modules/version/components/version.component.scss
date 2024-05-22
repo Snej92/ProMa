@@ -1,9 +1,15 @@
-.mat-mdc-card{
-  width: 50%;
-  margin-left: 25%;
-  margin-top: 2%;
+.div-table{
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 12px;
 }
 
-.mdc-button{
-  margin: 2px;
+.mat-mdc-header-row{
+  color: white;
+  background-color: var(--frontend-primary);
+  height: 50px;
+}
+
+.mat-mdc-row:nth-child(even){
+  background-color: var(--frontend-alternate);
 }

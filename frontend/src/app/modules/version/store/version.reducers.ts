@@ -1,31 +1,57 @@
 import {createReducer, on} from "@ngrx/store";
 import {versionState} from "./version.state";
-import {addVersion, deleteVersion, getVersion, updateVersion} from "./version.actions";
+import {
+  addVersionSuccess,
+  deleteVersion,
+  loadVersion,
+  loadVersionFail,
+  loadVersionSuccess,
+  updateVersionSuccess
+} from "./version.actions";
 import {versionModel} from "./version.model";
+
+
 
 
 const _versionReducer = createReducer(
   versionState,
 
-  on(getVersion, (state) => {
+  on(loadVersion, (state) => {
     return{
       ...state
     };
   }),
 
-  on(addVersion, (state, action) => {
-    const _version={...action.versionInput}
-    _version.id=state.versionList.length+1;
+  on(loadVersionSuccess, (state,action) => {
     return{
       ...state,
-      versionList:[...state.versionList, _version],
+      versionList:[...action.versionList],
+      errorMessage:''
     };
   }),
 
-  on(updateVersion, (state, action) => {
-    const _version={...action.versionInput}
+  on(loadVersionFail, (state,action) => {
+    console.log(action.errorText)
+    return{
+      ...state,
+      versionList:[],
+      errorMessage:action.errorText.message
+    };
+  }),
+
+  on(addVersionSuccess, (state,action) => {
+    const version={...action.versionInput};
+    return{
+      ...state,
+      versionList:[...state.versionList,version]
+    };
+  }),
+
+  on(updateVersionSuccess, (state,action) => {
+    const versionOld={...action.versionOld};
+    const versionNew={...action.versionNew};
     const updatedVersion=state.versionList.map(version=>{
-      return _version.id===version.id?_version:version;
+      return versionOld.id===version.id?versionNew:version;
     });
     return{
       ...state,
@@ -33,10 +59,11 @@ const _versionReducer = createReducer(
     };
   }),
 
-  on(deleteVersion, (state, action) => {
+
+  on(deleteVersion, (state,action) => {
     const updatedVersion=state.versionList.filter((data:versionModel)=>{
-      return data.id !== action.id
-    })
+      return data.id!==action.id
+    });
     return{
       ...state,
       versionList:updatedVersion

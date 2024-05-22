@@ -2,13 +2,14 @@ package org.sysprotec.restapi.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.sysprotec.restapi.model.Project;
-import org.sysprotec.restapi.model.Station;
-import org.sysprotec.restapi.model.Version;
-import org.sysprotec.restapi.model.VersionStation;
+import org.sysprotec.restapi.model.*;
 import org.sysprotec.restapi.repository.ProjectRepository;
+import org.sysprotec.restapi.repository.UserRepository;
 import org.sysprotec.restapi.repository.VersionRepository;
 
 import java.util.ArrayList;
@@ -22,50 +23,63 @@ public class VersionService {
 
     private final VersionRepository versionRepository;
     private final ProjectRepository projectRepository;
+    private final UserRepository userRepository;
 
-    public static Integer PROJECT_ID = 1;
 
     public List<Version> getVersions() {
-
-        Optional<Project> optionalProject = projectRepository.findProjectById(PROJECT_ID);
-        if(optionalProject.isEmpty()){
-            log.error("Project with id "+ PROJECT_ID + " does not exist in database");
-        } else {
-            return optionalProject.get().getVersions();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String username = authentication.getName();
+            User user = userRepository.findUserByUsernameIgnoreCase(username);
+            if (user != null) {
+                Optional<Project> optionalProject = projectRepository.findProjectById(user.getActiveProject());
+                if (optionalProject.isPresent()) {
+                    return optionalProject.get().getVersions();
+                } else log.error("Project with ID" + user.getActiveProject() + " does not exist in database");
+            }
         }
         return null;
     }
 
-    public void addVersion(Version version, Integer projectId) {
-        Optional<Project> optionalProject = projectRepository.findProjectById(projectId);
-        if(optionalProject.isEmpty()){
-            log.error("Project with id "+ projectId + " does not exist in database");
-        } else {
-            List<VersionStation> saveVersionStation = new ArrayList<>();
+    public void addVersion(Version version) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String username = authentication.getName();
+            User user = userRepository.findUserByUsernameIgnoreCase(username);
+            if (user != null) {
+                Optional<Project> optionalProject = projectRepository.findProjectById(user.getActiveProject());
+                if (optionalProject.isEmpty()) {
+                    log.error("Project with ID" + user.getActiveProject() + " does not exist in database");
+                } else {
+                    List<VersionStation> saveVersionStation = new ArrayList<>();
 
-            if(!optionalProject.get().getStations().isEmpty()){
-                for(Station station : optionalProject.get().getStations()){
-                    VersionStation newVersionStation = VersionStation.builder()
-                            .done(false)
-                            .stationName(station.getName())
+                    if (!optionalProject.get().getStations().isEmpty()) {
+                        for (Station station : optionalProject.get().getStations()) {
+                            VersionStation newVersionStation = VersionStation.builder()
+                                    .done(false)
+                                    .stationName(station.getName())
+                                    .build();
+                            saveVersionStation.add(newVersionStation);
+                            log.info("Version '" + version.getVersion() + "' added to Station '" + station.getName() + "'");
+                        }
+                    }
+
+                    Version saveVersion = Version.builder()
+                            .version(version.getVersion())
+                            .toDo(version.getToDo())
+                            .done(version.getDone())
+                            .date(version.getDate())
+                            .versionStation(saveVersionStation)
                             .build();
-                    saveVersionStation.add(newVersionStation);
+
+                    Project saveProject = optionalProject.get();
+                    List<Version> projectVersion = optionalProject.get().getVersions();
+                    projectVersion.add(saveVersion);
+                    saveProject.setVersions(projectVersion);
+                    projectRepository.save(saveProject);
+                    log.info("Version '" + version.getVersion() + "' added to Project '" + saveProject.getName() + "'");
                 }
             }
-
-            Version saveVersion = Version.builder()
-                    .version(version.getVersion())
-                    .toDo(version.getToDo())
-                    .done(version.getDone())
-                    .date(version.getDate())
-                    .versionStation(saveVersionStation)
-                    .build();
-
-            Project saveProject = optionalProject.get();
-            List<Version> projectVersion = optionalProject.get().getVersions();
-            projectVersion.add(saveVersion);
-            saveProject.setVersions(projectVersion);
-            projectRepository.save(saveProject);
         }
     }
 
@@ -80,18 +94,20 @@ public class VersionService {
             saveVersion.setToDo(version.getToDo());
             saveVersion.setDate(version.getDate());
             saveVersion.setDone(version.getDone());
+            log.info("Version '"+ version.getVersion() + "' updated");
         }
     }
 
-    public void deleteVersion(Version version) {
-        Optional<Project> optionalProject = projectRepository.findProjectByVersionsId(version.getId());
-        Optional<Version> optionalVersion = versionRepository.findVersionById(version.getId());
+    public void deleteVersion(Integer versionId) {
+        Optional<Project> optionalProject = projectRepository.findProjectByVersionsId(versionId);
+        Optional<Version> optionalVersion = versionRepository.findVersionById(versionId);
         if(optionalVersion.isEmpty() || optionalProject.isEmpty()){
-            log.error("Version "+ version.getVersion() + " does not exist in database");
+            log.error("Version with ID '"+ versionId + "' does not exist in database");
         } else {
             Project saveProject = optionalProject.get();
-            saveProject.removeVersion(version.getId());
-            versionRepository.deleteById(version.getId());
+            saveProject.removeVersion(versionId);
+            versionRepository.deleteById(versionId);
+            log.info("Version '" + optionalVersion.get().getVersion() + "' deleted");
         }
     }
 }

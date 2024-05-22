@@ -11,7 +11,7 @@ export class LopService {
   constructor(private http:HttpClient) { }
 
   getStationLops(stationId:number):Observable<lopModel[]>{
-    console.log("fetch station lops")
+    console.log("Fetch station lops")
     return this.http.get<lopModel[]>("http://localhost:8080/api/lop/station/"+stationId)
   }
 
