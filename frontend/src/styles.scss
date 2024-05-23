@@ -76,6 +76,7 @@ $frontend-accent: mat.define-palette($sys-grey-palette, 800);
 
 // The warn palette is optional (defaults to red).
 $frontend-warn: mat.define-palette(mat.$red-palette);
+$frontend-success: #4caf50;
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
@@ -118,7 +119,7 @@ body { margin: 0;
   --frontend-primary: #e63212;
   --frontend-accent: #4a4a4a;
   --frontend-error: #ff5252;
-  --frontend-success: #4caf50;
+  --frontend-success: $frontend-success;
   //--frontend-warning: #fbc800;
   --frontend-warning: #fb8C00;
   --frontend-alternate: rgba(0,0,0,0.06);

@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit, signal} from '@angular/core';
-import {versionModel, versions, versionStationModel} from "../store/version.model";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {versions} from "../store/version.model";
 import {Store} from "@ngrx/store";
 import {getVersionInfo} from "../store/version.selectors";
 import {AppStateModel} from "../../../core/store/appState.model";
@@ -24,7 +24,6 @@ export class VersionComponent implements OnInit,OnDestroy{
   private subscriptions: Subscription[] = [];
   displayedColumns: String[] = ['Aktion', 'Datum', 'Version', 'Aufgabe', 'Status'];
   extraColumns: String[] = [];
-  extraColumns2: String[] = ['Aktion', 'Datum', 'Version', 'Aufgabe', 'Status'];
 
 
   ngOnInit(): void {
@@ -36,14 +35,12 @@ export class VersionComponent implements OnInit,OnDestroy{
           this.version=data;
           for(let val of this.version.versionList){
             this.extraColumns = [];
-            this.extraColumns2 = ['Aktion', 'Datum', 'Version', 'Aufgabe', 'Status'];
+            this.displayedColumns = ['Aktion', 'Datum', 'Version', 'Aufgabe', 'Status'];
             for(let test of val.versionStation){
               this.extraColumns.push(test.stationName);
-              this.extraColumns2.push(test.stationName);
+              this.displayedColumns.push(test.stationName);
             }
           }
-          console.log(this.extraColumns);
-          console.log(this.extraColumns2)
         })
     )
   }
@@ -62,6 +59,10 @@ export class VersionComponent implements OnInit,OnDestroy{
   editVersion(id:any){
     console.log('version bearbeiten')
     this.OpenPopup(id, 'Version bearbeiten', true)
+  }
+
+  updateVersionStation(id:any){
+    console.log(id);
   }
 
   OpenPopup(id:any,version:any,isedit=false){

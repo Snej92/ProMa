@@ -4,22 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="672b6c24-1ba4-45dc-9cab-421c2d00eb01" name="Changes" comment="LOP changed to have LOP and LOP settings">
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/VersionStationRepository.java" afterDir="false" />
+    <list default="true" id="672b6c24-1ba4-45dc-9cab-421c2d00eb01" name="Changes" comment="basic version backend and ngrx state management frontend">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/lop/components/lop.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/lop/components/lop.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/version/components/version.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/version/components/version.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/version/components/version.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/version/components/version.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/version/components/version.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/version/components/version.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/version/store/version.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/version/store/version.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/version/store/version.effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/version/store/version.effects.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/version/store/version.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/version/store/version.reducers.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/Version.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/Version.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/VersionStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/VersionStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/VersionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/VersionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/VersionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/VersionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +22,6 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript File" />
-        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -38,26 +29,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;Snej92&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Snej92/ProMa&quot;,
-    &quot;accountId&quot;: &quot;9f77aa54-3db8-4415-b771-0ddec89dadf3&quot;
-  }
-}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -71,47 +47,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.RestapiApplication.executor": "Run",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Coding/KeX",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "D:\\Coding\\ProMa\\frontend\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.RestapiApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Coding/ProMa&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Coding\\ProMa\\frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\settings\lop-settings\store" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\version\store" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\version\store\version" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\overview\lop\store" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\settings\lop-settings\service" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\settings\lop-settings\components" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="org.sysprotec.restapi.repository" />
-      <recent name="org.sysprotec.restapi.service" />
-      <recent name="org.sysprotec.restapi.controller" />
-      <recent name="org.sysprotec.restapi.model" />
-      <recent name="org.sysprotec.restapi.model.projections" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\version\service" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\project-administration\components" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\userAdministration\services" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\overview\components" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\userAdministration\components" />
     </key>
   </component>
   <component name="RunManager">
@@ -126,8 +92,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+        <option value="jdk-21.0.1-openjdk-21.0.1-f644763e9732-f98dd351" />
       </set>
     </attachedChunks>
   </component>
@@ -152,12 +117,21 @@
       <workItem from="1715327649556" duration="2599000" />
       <workItem from="1715336684839" duration="1113000" />
       <workItem from="1715436680617" duration="23000" />
-      <workItem from="1715693449772" duration="1040000" />
-      <workItem from="1715862417166" duration="4753000" />
-      <workItem from="1715926935498" duration="16728000" />
-      <workItem from="1716276265219" duration="20181000" />
-      <workItem from="1716355957967" duration="22865000" />
-      <workItem from="1716441488813" duration="27557000" />
+      <workItem from="1715523243129" duration="60000" />
+      <workItem from="1715617167613" duration="2381000" />
+      <workItem from="1715621474318" duration="2221000" />
+      <workItem from="1715789972280" duration="5898000" />
+      <workItem from="1715800172441" duration="58000" />
+      <workItem from="1715958523459" duration="7022000" />
+      <workItem from="1715966902752" duration="398000" />
+      <workItem from="1715967423971" duration="32000" />
+      <workItem from="1716220684841" duration="102000" />
+      <workItem from="1716313028842" duration="358000" />
+      <workItem from="1716396665536" duration="6856000" />
+      <workItem from="1716403895308" duration="95000" />
+      <workItem from="1716474405837" duration="134000" />
+      <workItem from="1716474622149" duration="2970000" />
+      <workItem from="1716487044594" duration="5049000" />
     </task>
     <task id="LOCAL-00001" summary="loading spinner">
       <option name="closed" value="true" />
@@ -191,39 +165,55 @@
       <option name="project" value="LOCAL" />
       <updated>1714922471618</updated>
     </task>
-    <task id="LOCAL-00005" summary="added sys confirmation component">
+    <task id="LOCAL-00005" summary="User Administration NGRX">
       <option name="closed" value="true" />
-      <created>1715694479976</created>
+      <created>1715523277101</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1715694479976</updated>
+      <updated>1715523277101</updated>
     </task>
-    <task id="LOCAL-00006" summary="Project update and Project delete">
+    <task id="LOCAL-00006" summary="improvements to sidenav logged user and active project">
       <option name="closed" value="true" />
-      <created>1715867170191</created>
+      <created>1715619537493</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1715867170191</updated>
+      <updated>1715619537493</updated>
     </task>
-    <task id="LOCAL-00007" summary="parts of &quot;station&quot; implemented">
+    <task id="LOCAL-00007" summary="updated sys-confirm and implemented it for user administration">
       <option name="closed" value="true" />
-      <created>1715943893103</created>
+      <created>1715702931219</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1715943893103</updated>
+      <updated>1715702931219</updated>
     </task>
-    <task id="LOCAL-00008" summary="LOP changed to have LOP and LOP settings">
+    <task id="LOCAL-00008" summary="adding projects">
       <option name="closed" value="true" />
-      <created>1716385894877</created>
+      <created>1715800216860</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1716385894877</updated>
+      <updated>1715800216860</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary=".">
+      <option name="closed" value="true" />
+      <created>1716220766060</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1716220766060</updated>
+    </task>
+    <task id="LOCAL-00010" summary="basic version backend and ngrx state management frontend">
+      <option name="closed" value="true" />
+      <created>1716403960480</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1716403960480</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,10 +235,11 @@
     <MESSAGE value="loading spinner" />
     <MESSAGE value="Project administration get API" />
     <MESSAGE value="User Administration NGRX" />
-    <MESSAGE value="added sys confirmation component" />
-    <MESSAGE value="Project update and Project delete" />
-    <MESSAGE value="parts of &quot;station&quot; implemented" />
-    <MESSAGE value="LOP changed to have LOP and LOP settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="LOP changed to have LOP and LOP settings" />
+    <MESSAGE value="improvements to sidenav logged user and active project" />
+    <MESSAGE value="updated sys-confirm and implemented it for user administration" />
+    <MESSAGE value="adding projects" />
+    <MESSAGE value="." />
+    <MESSAGE value="basic version backend and ngrx state management frontend" />
+    <option name="LAST_COMMIT_MESSAGE" value="basic version backend and ngrx state management frontend" />
   </component>
 </project>

@@ -1,32 +1,48 @@
-.th-center{
-  text-align: center;
-}
-
-.div-table{
+.table-container {
+  overflow-x: auto;
+  max-width: 100%;
   margin-left: 5%;
   margin-right: 5%;
-  margin-top: 12px;
+}
+
+.button-container{
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.mat-table {
+  //min-width: 1600px; /*currently not needed*/
+}
+
+.mat-mdc-header-cell, .mat-mdc-cell {
+  text-align: center;
+  white-space: nowrap;
 }
 
 .mat-column-Aktion{
-  width: 116px;
+
 }
 
 .mat-column-Datum{
-  width: 116px;
+
 }
 
 .mat-column-Version{
-  width: 90px;
+
 }
 
 .mat-column-status{
-  width: 300px;
+
 }
 
 .mat-column-Aufgabe{
-  width: 600px;
+  text-align: start;
 }
+
+.mat-column-Station{
+
+}
+
 
 .mat-mdc-header-row{
   color: white;
