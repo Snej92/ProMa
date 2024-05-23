@@ -8,7 +8,7 @@ import {
   addVersionSuccess, deleteVersion, deleteVersionSuccess,
   LOAD_VERSION,
   loadVersionFail,
-  loadVersionSuccess,
+  loadVersionSuccess, loadVersionSuccess2,
   updateVersion, updateVersionSuccess
 } from "./version.actions";
 import {versionModel} from "./version.model";

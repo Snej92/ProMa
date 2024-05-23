@@ -1,5 +1,6 @@
 package org.sysprotec.restapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@JsonIgnoreProperties({"project"})
 @Entity
 @Data
 @Builder
@@ -22,8 +24,11 @@ public class Version {
     private String version;
     private String toDo;
     private Boolean done;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "version")
     private List<VersionStation> versionStation;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
 
     public void addVersionStation(VersionStation versionStation){
         this.versionStation.add(versionStation);

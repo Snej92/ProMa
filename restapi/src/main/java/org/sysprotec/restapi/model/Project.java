@@ -25,7 +25,7 @@ public class Project {
     private Integer inProgressStations;
     private Integer storedStations;
     private Integer notStoredStations;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private List<Version> versions;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Station> stations;

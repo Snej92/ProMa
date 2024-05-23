@@ -1,7 +1,31 @@
+.th-center{
+  text-align: center;
+}
+
 .div-table{
   margin-left: 5%;
   margin-right: 5%;
   margin-top: 12px;
+}
+
+.mat-column-Aktion{
+  width: 116px;
+}
+
+.mat-column-Datum{
+  width: 116px;
+}
+
+.mat-column-Version{
+  width: 90px;
+}
+
+.mat-column-status{
+  width: 300px;
+}
+
+.mat-column-Aufgabe{
+  width: 600px;
 }
 
 .mat-mdc-header-row{

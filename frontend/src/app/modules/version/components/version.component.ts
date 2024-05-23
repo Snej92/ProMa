@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {versions} from "../store/version.model";
+import {Component, OnDestroy, OnInit, signal} from '@angular/core';
+import {versionModel, versions, versionStationModel} from "../store/version.model";
 import {Store} from "@ngrx/store";
 import {getVersionInfo} from "../store/version.selectors";
 import {AppStateModel} from "../../../core/store/appState.model";
@@ -22,8 +22,10 @@ export class VersionComponent implements OnInit,OnDestroy{
 
   version!:versions;
   private subscriptions: Subscription[] = [];
-  displayedColumns: String[] = ['Aktion', 'Datum', 'Version', 'Aufgabe', 'Status']
-  columnsToDisplay: String[] = this.displayedColumns.slice();
+  displayedColumns: String[] = ['Aktion', 'Datum', 'Version', 'Aufgabe', 'Status'];
+  extraColumns: String[] = [];
+  extraColumns2: String[] = ['Aktion', 'Datum', 'Version', 'Aufgabe', 'Status'];
+
 
   ngOnInit(): void {
     this.store.dispatch(loadSpinner({isLoading:true}))
@@ -32,6 +34,16 @@ export class VersionComponent implements OnInit,OnDestroy{
       this.store.select(getVersionInfo).pipe()
         .subscribe(data =>{
           this.version=data;
+          for(let val of this.version.versionList){
+            this.extraColumns = [];
+            this.extraColumns2 = ['Aktion', 'Datum', 'Version', 'Aufgabe', 'Status'];
+            for(let test of val.versionStation){
+              this.extraColumns.push(test.stationName);
+              this.extraColumns2.push(test.stationName);
+            }
+          }
+          console.log(this.extraColumns);
+          console.log(this.extraColumns2)
         })
     )
   }

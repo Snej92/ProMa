@@ -11,6 +11,7 @@ import org.sysprotec.restapi.model.*;
 import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.UserRepository;
 import org.sysprotec.restapi.repository.VersionRepository;
+import org.sysprotec.restapi.repository.VersionStationRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class VersionService {
     private final VersionRepository versionRepository;
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
+    private final VersionStationRepository versionStationRepository;
 
 
     public List<Version> getVersions() {
@@ -32,10 +34,14 @@ public class VersionService {
             String username = authentication.getName();
             User user = userRepository.findUserByUsernameIgnoreCase(username);
             if (user != null) {
-                Optional<Project> optionalProject = projectRepository.findProjectById(user.getActiveProject());
-                if (optionalProject.isPresent()) {
-                    return optionalProject.get().getVersions();
-                } else log.error("Project with ID" + user.getActiveProject() + " does not exist in database");
+                if(user.getActiveProject() != null && user.getActiveProject()>0){
+                    List<Version> versions = versionRepository.findVersionsByProjectIdOrderByVersionAsc(user.getActiveProject());
+                    for(Version version : versions){
+                        List<VersionStation> versionStation = versionStationRepository.findVersionStationsByVersionIdOrderByIdAsc(version.getId());
+                        version.setVersionStation(versionStation);
+                    }
+                    return versions;
+                }
             }
         }
         return null;
@@ -51,32 +57,36 @@ public class VersionService {
                 if (optionalProject.isEmpty()) {
                     log.error("Project with ID" + user.getActiveProject() + " does not exist in database");
                 } else {
-                    List<VersionStation> saveVersionStation = new ArrayList<>();
+                    Version saveVersion = Version.builder()
+                            .version(version.getVersion())
+                            .toDo(version.getToDo())
+                            .done(version.getDone())
+                            .date(version.getDate())
+                            .project(optionalProject.get())
+                            .build();
+
+                    Version newVersion = versionRepository.save(saveVersion);
+//                    List<VersionStation> saveVersionStation = new ArrayList<>();
 
                     if (!optionalProject.get().getStations().isEmpty()) {
                         for (Station station : optionalProject.get().getStations()) {
                             VersionStation newVersionStation = VersionStation.builder()
                                     .done(false)
                                     .stationName(station.getName())
+                                    .version(newVersion)
                                     .build();
-                            saveVersionStation.add(newVersionStation);
+//                            saveVersionStation.add(newVersionStation);
+                            versionStationRepository.save(newVersionStation);
                             log.info("Version '" + version.getVersion() + "' added to Station '" + station.getName() + "'");
                         }
                     }
-
-                    Version saveVersion = Version.builder()
-                            .version(version.getVersion())
-                            .toDo(version.getToDo())
-                            .done(version.getDone())
-                            .date(version.getDate())
-                            .versionStation(saveVersionStation)
-                            .build();
 
                     Project saveProject = optionalProject.get();
                     List<Version> projectVersion = optionalProject.get().getVersions();
                     projectVersion.add(saveVersion);
                     saveProject.setVersions(projectVersion);
                     projectRepository.save(saveProject);
+
                     log.info("Version '" + version.getVersion() + "' added to Project '" + saveProject.getName() + "'");
                 }
             }
@@ -94,6 +104,13 @@ public class VersionService {
             saveVersion.setToDo(version.getToDo());
             saveVersion.setDate(version.getDate());
             saveVersion.setDone(version.getDone());
+            if(version.getVersionStation() != null){
+                List<VersionStation> versionStationList = version.getVersionStation();
+                for(VersionStation versionStation : versionStationList){
+                    Optional<VersionStation> optionalVersionStation = versionStationRepository.findById(versionStation.getId());
+                    optionalVersionStation.get().setDone(versionStation.getDone());
+                }
+            }
             log.info("Version '"+ version.getVersion() + "' updated");
         }
     }

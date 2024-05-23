@@ -1,8 +1,8 @@
 import {createAction, props} from "@ngrx/store";
-import {versionModel} from "./version.model";
+import {versionModel, versionStationModel} from "./version.model";
 
-export const LOAD_VERSION_SUCCESS='[version page] load version view success'
-export const LOAD_VERSION_FAIL='[version page] load version view fail'
+export const LOAD_VERSION_SUCCESS='[version page] load version success'
+export const LOAD_VERSION_FAIL='[version page] load version fail'
 export const LOAD_VERSION='[version page] get version view'
 
 export const ADD_VERSION_SUCCESS='[version page] add version success'
@@ -26,3 +26,7 @@ export const updateVersionSuccess=createAction(UPDATE_VERSION_SUCCESS, props<{ve
 
 export const deleteVersion=createAction(DELETE_VERSION, props<{id:number}>())
 export const deleteVersionSuccess=createAction(DELETE_VERSION_SUCCESS, props<{id:number}>())
+
+
+
+export const loadVersionSuccess2=createAction(LOAD_VERSION_SUCCESS, props<{versionStation:versionStationModel[]}>());

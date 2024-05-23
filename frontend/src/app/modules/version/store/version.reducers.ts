@@ -5,7 +5,7 @@ import {
   deleteVersion,
   loadVersion,
   loadVersionFail,
-  loadVersionSuccess,
+  loadVersionSuccess, loadVersionSuccess2,
   updateVersionSuccess
 } from "./version.actions";
 import {versionModel} from "./version.model";
