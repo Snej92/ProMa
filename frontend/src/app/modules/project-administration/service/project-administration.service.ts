@@ -2,35 +2,35 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {projectViewModel} from "../store/project-administration.model";
-import {userModel} from "../../userAdministration/store/user-Administration.model";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectAdministrationService {
-
+  private API_URL= environment.API_URL;
   constructor(private http:HttpClient) { }
 
 
   getAllProjects():Observable<projectViewModel[]>{
     console.log('Fetch Projects')
-    return this.http.get<projectViewModel[]>("http://localhost:8080/api/project/all")
+    return this.http.get<projectViewModel[]>(this.API_URL + "/project/all")
   }
 
   getProject():Observable<projectViewModel>{
     console.log("Fetch active Project")
-    return this.http.get<projectViewModel>("http://localhost:8080/api/project")
+    return this.http.get<projectViewModel>(this.API_URL + "/project")
   }
 
   addProject(projectViewInput:projectViewModel){
-    return this.http.post("http://localhost:8080/api/project", projectViewInput);
+    return this.http.post(this.API_URL + "/project", projectViewInput);
   }
 
   updateProject(projectViewInput:projectViewModel){
-    return this.http.put("http://localhost:8080/api/project", projectViewInput);
+    return this.http.put(this.API_URL + "/project", projectViewInput);
   }
 
   deleteProject(id:number){
-    return this.http.delete("http://localhost:8080/api/project/"+id);
+    return this.http.delete(this.API_URL + "/project/"+id);
   }
 }

@@ -21,13 +21,13 @@ public class VersionController {
     }
 
     @PostMapping
-    public void addVersion(@RequestBody Version version){
-        versionService.addVersion(version);
+    public Version addVersion(@RequestBody Version version){
+        return versionService.addVersion(version);
     }
 
     @PutMapping
-    public void updateVersion(@RequestBody Version version){
-        versionService.updateVersion(version);
+    public Version updateVersion(@RequestBody Version version){
+        return versionService.updateVersion(version);
     }
 
     @DeleteMapping("{versionId}")

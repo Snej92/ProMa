@@ -11,12 +11,17 @@
 
       <mat-form-field>
         <mat-label>Aufgabe</mat-label>
-        <textarea matInput formControlName="todo"></textarea>
+        <textarea matInput formControlName="toDo"></textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Datum</mat-label>
+        <input matInput formControlName="date">
       </mat-form-field>
     </mat-card-content>
 
       <mat-card-actions>
-        <button type="submit" mat-raised-button color="accent"> Hinzufügen </button>
+        <button type="submit" mat-raised-button color="accent"> {{data.button}} </button>
         <button type="reset" mat-raised-button color="primary" (click)="closePopup()"> Abbrechen </button>
       </mat-card-actions>
   </mat-card>

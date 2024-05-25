@@ -2,33 +2,34 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {stationViewModel} from "../store/stationView.model";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class StationService {
-
+  private API_URL= environment.API_URL;
   constructor(private http:HttpClient) {}
 
   getAllStations():Observable<stationViewModel[]>{
     console.log('Fetch Stations')
-    return this.http.get<stationViewModel[]>("http://localhost:8080/api/station/all")
+    return this.http.get<stationViewModel[]>(this.API_URL + "/station/all")
   }
 
   getStation():Observable<stationViewModel>{
     console.log("Fetch selected Station")
-    return this.http.get<stationViewModel>("http://localhost:8080/api/station")
+    return this.http.get<stationViewModel>(this.API_URL + "/station")
   }
 
   addStation(stationViewInput:stationViewModel){
-    return this.http.post("http://localhost:8080/api/station", stationViewInput);
+    return this.http.post(this.API_URL + "/station", stationViewInput);
   }
 
   updateStation(stationViewInput:stationViewModel){
-    return this.http.put("http://localhost:8080/api/station", stationViewInput);
+    return this.http.put(this.API_URL + "/station", stationViewInput);
   }
 
   deleteStation(id:number){
-    return this.http.delete("http://localhost:8080/api/station/"+id);
+    return this.http.delete(this.API_URL + "/station/"+id);
   }
 }

@@ -47,7 +47,7 @@ public class VersionService {
         return null;
     }
 
-    public void addVersion(Version version) {
+    public Version addVersion(Version version) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String username = authentication.getName();
@@ -65,9 +65,11 @@ public class VersionService {
                             .project(optionalProject.get())
                             .build();
 
+                    //save Version so versionStations can be added to it
                     Version newVersion = versionRepository.save(saveVersion);
-//                    List<VersionStation> saveVersionStation = new ArrayList<>();
+                    List<VersionStation> saveVersionStation = new ArrayList<>();
 
+                    //create and add versionStations to Version
                     if (!optionalProject.get().getStations().isEmpty()) {
                         for (Station station : optionalProject.get().getStations()) {
                             VersionStation newVersionStation = VersionStation.builder()
@@ -75,12 +77,16 @@ public class VersionService {
                                     .stationName(station.getName())
                                     .version(newVersion)
                                     .build();
-//                            saveVersionStation.add(newVersionStation);
+                            saveVersionStation.add(newVersionStation);
                             versionStationRepository.save(newVersionStation);
                             log.info("Version '" + version.getVersion() + "' added to Station '" + station.getName() + "'");
                         }
                     }
 
+                    //set the versionStations to Version, so we can return it - otherwise versionStation is null
+                    saveVersion.setVersionStation(saveVersionStation);
+
+                    //add Version to the project
                     Project saveProject = optionalProject.get();
                     List<Version> projectVersion = optionalProject.get().getVersions();
                     projectVersion.add(saveVersion);
@@ -88,13 +94,14 @@ public class VersionService {
                     projectRepository.save(saveProject);
 
                     log.info("Version '" + version.getVersion() + "' added to Project '" + saveProject.getName() + "'");
+                    return versionRepository.findTopByOrderByIdDesc();
                 }
             }
         }
+        return null;
     }
 
-    @Transactional
-    public void updateVersion(Version version) {
+    public Version updateVersion(Version version) {
         Optional<Version> optionalVersion = versionRepository.findVersionById(version.getId());
         if(optionalVersion.isEmpty()){
             log.error("Version "+ version.getVersion() + " does not exist in database");
@@ -103,16 +110,34 @@ public class VersionService {
             saveVersion.setVersion(version.getVersion());
             saveVersion.setToDo(version.getToDo());
             saveVersion.setDate(version.getDate());
-            saveVersion.setDone(version.getDone());
+
+            //check if all stations are done
+            saveVersion.setDone(true);
+
+
             if(version.getVersionStation() != null){
-                List<VersionStation> versionStationList = version.getVersionStation();
-                for(VersionStation versionStation : versionStationList){
-                    Optional<VersionStation> optionalVersionStation = versionStationRepository.findById(versionStation.getId());
-                    optionalVersionStation.get().setDone(versionStation.getDone());
+                if(!version.getVersionStation().isEmpty()){
+                    List<VersionStation> versionStationList = version.getVersionStation();
+                    for(VersionStation versionStation : versionStationList){
+                        Optional<VersionStation> optionalVersionStation = versionStationRepository.findById(versionStation.getId());
+                        if(optionalVersionStation.isPresent()){
+                            optionalVersionStation.get().setDone(versionStation.getDone());
+                            if(!optionalVersionStation.get().getDone()){
+                                saveVersion.setDone(false);
+                            }
+                        }
+                    }
                 }
             }
+            versionRepository.save(saveVersion);
             log.info("Version '"+ version.getVersion() + "' updated");
+            if(versionRepository.findVersionById(version.getId()).isPresent()){
+                Version returnVersion = versionRepository.findVersionById(version.getId()).get();
+                returnVersion.setVersionStation(versionStationRepository.findVersionStationsByVersionIdOrderByIdAsc(returnVersion.getId()));
+                return returnVersion;
+            }
         }
+        return null;
     }
 
     public void deleteVersion(Integer versionId) {

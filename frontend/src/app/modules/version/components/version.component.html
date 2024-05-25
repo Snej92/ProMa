@@ -26,7 +26,11 @@
 
       <ng-container matColumnDef="Status">
         <th mat-header-cell *matHeaderCellDef> Status </th>
-        <td mat-cell *matCellDef="let version">{{version.done}}</td>
+        <td mat-cell *matCellDef="let version">
+          <div class="d-flex justify-content-center">
+            <app-sys-status-led [status]=version.done></app-sys-status-led>
+          </div>
+        </td>
       </ng-container>
 
       <!--      Station columns-->
@@ -35,7 +39,7 @@
           <th mat-header-cell *matHeaderCellDef> {{displayedColumns}} </th>
           <td mat-cell *matCellDef="let version">
             <mat-checkbox checked="{{version.versionStation[colIndex].done}}"
-                          (change)="updateVersionStation(version.versionStation[colIndex].id)"
+                          (click)="updateVersionStation(version.versionStation[colIndex].id, version.id)"
                           color="primary">
             </mat-checkbox>
           </td>

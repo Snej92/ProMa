@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {versions} from "../store/version.model";
+import {versionModel, versions} from "../store/version.model";
 import {Store} from "@ngrx/store";
-import {getVersionInfo} from "../store/version.selectors";
+import {getVersionById, getVersionInfo} from "../store/version.selectors";
 import {AppStateModel} from "../../../core/store/appState.model";
 import {MatDialog} from "@angular/material/dialog";
 import {AddVersionComponent} from "./add-version/add-version.component";
-import {deleteVersion, loadVersion} from "../store/version.actions";
+import {deleteVersion, loadVersion, updateVersion} from "../store/version.actions";
 import {Subscription} from "rxjs";
 import {loadSpinner} from "../../../core/store/app.action";
 
@@ -24,6 +24,7 @@ export class VersionComponent implements OnInit,OnDestroy{
   private subscriptions: Subscription[] = [];
   displayedColumns: String[] = ['Aktion', 'Datum', 'Version', 'Aufgabe', 'Status'];
   extraColumns: String[] = [];
+  updateVersion!:versionModel;
 
 
   ngOnInit(): void {
@@ -46,7 +47,7 @@ export class VersionComponent implements OnInit,OnDestroy{
   }
 
   addVersion(){
-    this.OpenPopup(0,'Version hinzufügen', false)
+    this.OpenPopup(0,'Version hinzufügen', false, 'Hinzufügen')
   }
 
   deleteVersion(id:any){
@@ -58,20 +59,34 @@ export class VersionComponent implements OnInit,OnDestroy{
 
   editVersion(id:any){
     console.log('version bearbeiten')
-    this.OpenPopup(id, 'Version bearbeiten', true)
+    this.OpenPopup(id, 'Version bearbeiten', true, 'Aktualisieren')
   }
 
-  updateVersionStation(id:any){
-    console.log(id);
+  updateVersionStation(versionStationId:number, versionId:number){
+    const subscription = this.store.select(getVersionById(versionId)).subscribe(data=>{
+      if (data) {
+        this.updateVersion = {
+          ...data,
+          versionStation: data.versionStation.map((station, index) =>
+            data.versionStation[index].id === versionStationId ? {...station, done: !station.done} : station
+          )
+        };
+      }
+      console.log(this.updateVersion);
+      this.store.dispatch(updateVersion({versionInput:this.updateVersion}));
+
+    });
+    subscription.unsubscribe();
   }
 
-  OpenPopup(id:any,version:any,isedit=false){
+  OpenPopup(id:any,version:any,isEdit=false, button:any){
     this.dialog.open(AddVersionComponent,{
       width: '40%',
       data:{
         id:id,
         version:version,
-        isedit:isedit
+        isEdit:isEdit,
+        button:button
       }
     })
   }

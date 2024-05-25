@@ -1,5 +1,6 @@
 import {createAction, props} from "@ngrx/store";
 import {versionModel, versionStationModel} from "./version.model";
+import {stationViewModel} from "../../station/store/stationView.model";
 
 export const LOAD_VERSION_SUCCESS='[version page] load version success'
 export const LOAD_VERSION_FAIL='[version page] load version fail'

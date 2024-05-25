@@ -44,7 +44,85 @@ public class ProjectConfig {
 
         Station station3 = Station.builder()
                 .name("ST8040")
-                .description("Macht halt was")
+                .description("Presst")
+                .favorite(false)
+                .totalProgress(100)
+                .issuer("AEL")
+                .lopTotal(10)
+                .lopDone(10)
+                .lopToDo(0)
+                .status(StatusEPLAN.INARBEIT)
+                .version("V1.2")
+                .build();
+
+        Station station4 = Station.builder()
+                .name("ST8050")
+                .description("Presst und misst")
+                .favorite(false)
+                .totalProgress(800)
+                .issuer("AEL")
+                .lopTotal(10)
+                .lopDone(10)
+                .lopToDo(0)
+                .status(StatusEPLAN.INARBEIT)
+                .version("V1.2")
+                .build();
+
+        Station station5 = Station.builder()
+                .name("ST8060")
+                .description("Schraubt mit Hand was")
+                .favorite(false)
+                .totalProgress(100)
+                .issuer("AEL")
+                .lopTotal(10)
+                .lopDone(10)
+                .lopToDo(0)
+                .status(StatusEPLAN.INARBEIT)
+                .version("V1.2")
+                .build();
+
+        Station station6 = Station.builder()
+                .name("ST8070")
+                .description("Schraubt automatisch was")
+                .favorite(false)
+                .totalProgress(100)
+                .issuer("AEL")
+                .lopTotal(10)
+                .lopDone(10)
+                .lopToDo(0)
+                .status(StatusEPLAN.INARBEIT)
+                .version("V1.2")
+                .build();
+
+        Station station7 = Station.builder()
+                .name("ST8080")
+                .description("3 Handarbeitsplätze nebeneinander")
+                .favorite(false)
+                .totalProgress(100)
+                .issuer("AEL")
+                .lopTotal(10)
+                .lopDone(10)
+                .lopToDo(0)
+                .status(StatusEPLAN.INARBEIT)
+                .version("V1.2")
+                .build();
+
+        Station station8 = Station.builder()
+                .name("ST8090")
+                .description("Schraubt den camshaft fest")
+                .favorite(false)
+                .totalProgress(100)
+                .issuer("AEL")
+                .lopTotal(10)
+                .lopDone(10)
+                .lopToDo(0)
+                .status(StatusEPLAN.INARBEIT)
+                .version("V1.2")
+                .build();
+
+        Station station9 = Station.builder()
+                .name("ST8100")
+                .description("hab ich legit vergessen")
                 .favorite(false)
                 .totalProgress(100)
                 .issuer("AEL")
@@ -59,6 +137,12 @@ public class ProjectConfig {
         stationList.add(station1);
         stationList.add(station2);
         stationList.add(station3);
+        stationList.add(station4);
+        stationList.add(station5);
+        stationList.add(station6);
+        stationList.add(station7);
+        stationList.add(station8);
+        stationList.add(station9);
 
         //Version
 //        VersionStation versionStation1 = VersionStation.builder()

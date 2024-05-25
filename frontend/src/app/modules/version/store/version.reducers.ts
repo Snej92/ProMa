@@ -59,7 +59,6 @@ const _versionReducer = createReducer(
     };
   }),
 
-
   on(deleteVersion, (state,action) => {
     const updatedVersion=state.versionList.filter((data:versionModel)=>{
       return data.id!==action.id

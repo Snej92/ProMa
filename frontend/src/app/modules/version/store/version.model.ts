@@ -8,7 +8,7 @@ export interface versionModel{
   id : number,
   date : string,
   version : string,
-  todo : string,
+  toDo : string,
   done : boolean,
   versionStation : versionStationModel[]
 }
