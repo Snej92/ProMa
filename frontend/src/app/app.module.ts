@@ -1,4 +1,4 @@
-import {APP_INITIALIZER, NgModule, isDevMode} from '@angular/core';
+import {APP_INITIALIZER, NgModule, isDevMode, importProvidersFrom} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { AppRoutingModule } from './app-routing.module';
@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatToolbar } from "@angular/material/toolbar";
 import {NgOptimizedImage} from "@angular/common";
-import {MatButton, MatIconButton, MatMiniFabButton, MatButtonModule} from "@angular/material/button";
+import {MatButton, MatIconButton, MatMiniFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatTooltip} from "@angular/material/tooltip";
@@ -75,7 +75,14 @@ import {LopSettingEffects} from "./modules/settings/lop-settings/store/lopSettin
 import {VersionEffects} from "./modules/version/store/version.effects";
 import {CdkScrollable} from "@angular/cdk/overlay";
 import { SysStatusLedComponent } from './page-template/sys-status-led/sys-status-led.component';
-import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
+import {
+  MatDatepicker,
+  MatDatepickerInput,
+  MatDatepickerModule,
+  MatDatepickerToggle
+} from "@angular/material/datepicker";
+import {MatNativeDateModule, provideNativeDateAdapter} from "@angular/material/core";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -197,7 +204,10 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatDatepickerToggle,
     MatDatepicker,
     MatDatepickerInput,
-    MatHint
+    MatHint,
+    MatNativeDateModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
   ],
   providers: [
     {
@@ -206,7 +216,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
       multi: true,
       deps: [KeycloakService]
     },
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideNativeDateAdapter(),
   ],
   bootstrap: [AppComponent]
 })

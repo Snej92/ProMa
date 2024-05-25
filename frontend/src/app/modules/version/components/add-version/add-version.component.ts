@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {FormArray, FormBuilder, Validators} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {versionModel, versionStationModel} from "../../store/version.model";
 import {AppStateModel} from "../../../../core/store/appState.model";
 import {Store} from "@ngrx/store";
@@ -31,7 +31,7 @@ export class AddVersionComponent implements OnInit{
 
   versionForm=this.builder.group({
     id:this.builder.control(0),
-    date:this.builder.control(''),
+    // date:this.builder.control(''),
     version:this.builder.control('', Validators.required),
     toDo:this.builder.control('', Validators.required),
     done:this.builder.control(false),
@@ -43,7 +43,8 @@ export class AddVersionComponent implements OnInit{
     if(this.versionForm.valid){
       const versionInput:versionModel={
         id:0,
-        date:this.versionForm.value.date as string,
+        // date:this.versionForm.value.date as string,
+        date:'',
         version:this.versionForm.value.version as string,
         toDo:this.versionForm.value.toDo as string,
         done:this.versionForm.value.done as boolean,
@@ -79,7 +80,7 @@ export class AddVersionComponent implements OnInit{
 
         this.versionForm.setValue({
           id:this.editData.id,
-          date:this.editData.date,
+          // date:this.editData.date,
           version:this.editData.version,
           toDo:this.editData.toDo,
           done:this.editData.done,
