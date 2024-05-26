@@ -8,6 +8,9 @@ import {AddVersionComponent} from "./add-version/add-version.component";
 import {deleteVersion, loadVersion, updateVersion} from "../store/version.actions";
 import {Subscription} from "rxjs";
 import {loadSpinner} from "../../../core/store/app.action";
+import {matDatepickerAnimations} from "@angular/material/datepicker";
+import {SysConfirmationComponent} from "../../../core/sys-confirmation/sys-confirmation.component";
+import {deleteSettingLop} from "../../settings/lop-settings/store/lopSetting.actions";
 
 
 @Component({
@@ -17,7 +20,9 @@ import {loadSpinner} from "../../../core/store/app.action";
 })
 export class VersionComponent implements OnInit,OnDestroy{
 
-  constructor(private store:Store<AppStateModel>, private dialog:MatDialog) {
+  constructor(private store:Store<AppStateModel>,
+              private dialog:MatDialog,
+              private confirm:MatDialog) {
   }
 
   version!:versions;
@@ -50,11 +55,9 @@ export class VersionComponent implements OnInit,OnDestroy{
     this.OpenPopup(0,'Version hinzufügen', false, 'Hinzufügen')
   }
 
-  deleteVersion(id:any){
+  deleteVersion(id:any, deleteName:any){
     console.log(id)
-    if(confirm("Wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden")){
-      this.store.dispatch(deleteVersion({id:id}));
-    }
+    this.openConfirm('Version', deleteName, 'Löschen', id);
   }
 
   editVersion(id:any){
@@ -81,12 +84,30 @@ export class VersionComponent implements OnInit,OnDestroy{
 
   OpenPopup(id:any,version:any,isEdit=false, button:any){
     this.dialog.open(AddVersionComponent,{
-      width: '40%',
+      width: '25%',
       data:{
         id:id,
         version:version,
         isEdit:isEdit,
         button:button
+      }
+    })
+  }
+
+  openConfirm(title:any, confirmName:any, button:any, id:any){
+    const confirmRef = this.confirm.open(SysConfirmationComponent, {
+      width: '30%',
+      data:{
+        title: title,
+        confirmName: confirmName,
+        button:button
+      }
+    });
+    confirmRef.afterClosed().subscribe((confirmed:boolean)=> {
+      if(confirmed){
+        console.log(id)
+        this.store.dispatch(loadSpinner({isLoading:true}));
+        this.store.dispatch(deleteVersion({id:id}))
       }
     })
   }

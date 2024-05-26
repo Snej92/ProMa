@@ -18,11 +18,17 @@ import {Subscription} from "rxjs";
 export class AddUserComponent implements OnInit{
   private onInitSub!:Subscription;
   editData!:userModel;
+  hide = true;
 
   constructor(private dialogRef:MatDialogRef<AddUserComponent>,
               private builder:FormBuilder,
               private store:Store<AppStateModel>,
               @Inject(MAT_DIALOG_DATA) public data:any) {
+  }
+
+  clickEvent(event: MouseEvent) {
+    this.hide = !this.hide;
+    event.stopPropagation();
   }
 
   userForm=this.builder.group({

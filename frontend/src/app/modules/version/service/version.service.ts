@@ -17,7 +17,6 @@ export class VersionService {
   }
 
   addVersion(versionInput:versionModel){
-    console.log(versionInput)
     return this.http.post(this.API_URL + "/version", versionInput);
   }
 
