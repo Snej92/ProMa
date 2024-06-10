@@ -2,8 +2,7 @@ package org.sysprotec.restapi.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.sysprotec.restapi.model.Lop;
-import org.sysprotec.restapi.model.LopSetting;
+import org.sysprotec.restapi.model.overview.Lop;
 
 import java.util.Optional;
 

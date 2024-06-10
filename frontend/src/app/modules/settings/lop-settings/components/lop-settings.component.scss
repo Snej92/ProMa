@@ -1,7 +1,25 @@
 .div-table{
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 3%;
+  margin-right: 3%;
   margin-top: 4px;
+}
+
+.mat-mdc-header-cell, .mat-mdc-cell {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.mat-column-Aufnahme{
+  width: 8%;
+}
+
+.mat-column-LOP{
+  //width: 80%;
+  text-align: left;
+}
+
+.mat-column-Aktion{
+  width: 150px;
 }
 
 .mat-mdc-header-row{

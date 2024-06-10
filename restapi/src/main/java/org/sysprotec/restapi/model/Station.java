@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.sysprotec.restapi.model.overview.Lop;
 import org.sysprotec.restapi.model.types.StatusEPLAN;
 
 import java.util.List;
@@ -17,7 +18,8 @@ import java.util.List;
 public class Station {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "STATION_ID_GEN")
+    @SequenceGenerator(name = "STATION_ID_GEN", sequenceName = "STATION_ID_SEQ", initialValue = 1, allocationSize = 1)
     private Integer id;
     private String name;
     private String description;

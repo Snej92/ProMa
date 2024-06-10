@@ -1,4 +1,4 @@
-package org.sysprotec.restapi.model;
+package org.sysprotec.restapi.model.settings;
 
 
 import jakarta.persistence.*;
@@ -15,7 +15,8 @@ import lombok.NoArgsConstructor;
 public class LopSetting {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LOP_SETTINGS_ID_GEN")
+    @SequenceGenerator(name = "LOP_SETTINGS_ID_GEN", sequenceName = "LOP_SETTINGS_ID_SEQ", initialValue = 1, allocationSize = 1)
     private Integer id;
     private String startDate;
     private String item;

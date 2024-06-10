@@ -1,10 +1,11 @@
-package org.sysprotec.restapi.service;
+package org.sysprotec.restapi.service.overview;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.sysprotec.restapi.model.*;
+import org.sysprotec.restapi.model.overview.Lop;
 import org.sysprotec.restapi.repository.LopRepository;
 import org.sysprotec.restapi.repository.StationRepository;
 

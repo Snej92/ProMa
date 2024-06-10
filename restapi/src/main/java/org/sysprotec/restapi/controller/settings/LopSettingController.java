@@ -1,10 +1,9 @@
-package org.sysprotec.restapi.controller;
+package org.sysprotec.restapi.controller.settings;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.sysprotec.restapi.model.Lop;
-import org.sysprotec.restapi.model.LopSetting;
-import org.sysprotec.restapi.service.LopSettingService;
+import org.sysprotec.restapi.model.settings.LopSetting;
+import org.sysprotec.restapi.service.settings.LopSettingService;
 
 import java.util.List;
 

@@ -114,7 +114,6 @@ public class VersionService {
             //check if all stations are done
             saveVersion.setDone(true);
 
-
             if(version.getVersionStation() != null){
                 if(!version.getVersionStation().isEmpty()){
                     List<VersionStation> versionStationList = version.getVersionStation();
@@ -122,6 +121,7 @@ public class VersionService {
                         Optional<VersionStation> optionalVersionStation = versionStationRepository.findById(versionStation.getId());
                         if(optionalVersionStation.isPresent()){
                             optionalVersionStation.get().setDone(versionStation.getDone());
+                            //check if all stations are done
                             if(!optionalVersionStation.get().getDone()){
                                 saveVersion.setDone(false);
                             }

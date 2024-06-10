@@ -6,14 +6,13 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.sysprotec.restapi.model.Project;
-import org.sysprotec.restapi.model.Station;
-import org.sysprotec.restapi.model.User;
+import org.sysprotec.restapi.model.*;
 import org.sysprotec.restapi.model.projections.StationDto;
 import org.sysprotec.restapi.model.projections.StationView;
 import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.StationRepository;
 import org.sysprotec.restapi.repository.UserRepository;
+import org.sysprotec.restapi.repository.VersionRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +25,8 @@ public class StationService {
     private final StationRepository stationRepository;
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
+    private final VersionRepository versionRepository;
+
 
     public List<StationView> getAllStations() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -83,7 +84,22 @@ public class StationService {
                             .controlProgress(stationDto.getControlProgress())
                             .build();
                     savedProject.addStation(newStation);
+
+                    //Add new Station to Version
+                    List<Version> versionList = versionRepository.findVersionsByProjectIdOrderByVersionAsc(savedProject.getId());
+                    for(Version version: versionList){
+                        VersionStation newVersionStation = VersionStation.builder()
+                                .done(false)
+                                .stationName(stationDto.getName())
+                                .version(version)
+                                .build();
+                        version.addVersionStation(newVersionStation);
+                        versionRepository.save(version);
+                        log.info("Version '" + version.getVersion() + "' added to Station '" + stationDto.getName() + "'");
+                    }
+
                     projectRepository.save(savedProject);
+                    log.info("Station '" + stationDto.getName() + "' added to Project '" + savedProject.getName() + "'");
                     return stationRepository.findTopByOrderByIdDesc();
                 }
 

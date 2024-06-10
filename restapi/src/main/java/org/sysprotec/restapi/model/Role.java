@@ -14,7 +14,8 @@ import lombok.NoArgsConstructor;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ROLE_ID_GEN")
+    @SequenceGenerator(name = "ROLE_ID_GEN", sequenceName = "ROLE_ID_SEQ", initialValue = 1, allocationSize = 1)
     private Integer id;
     private Boolean adminRole;
     private Boolean projectRole;

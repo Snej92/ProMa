@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.sysprotec.restapi.model.settings.LopSetting;
 
 import java.util.List;
 
@@ -16,7 +17,8 @@ import java.util.List;
 public class Project {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PROJECT_ID_GEN")
+    @SequenceGenerator(name = "PROJECT_ID_GEN", sequenceName = "PROJECT_ID_SEQ", initialValue = 1, allocationSize = 1)
     private Integer id;
     private String name;
     private String description;

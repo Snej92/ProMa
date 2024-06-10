@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.sysprotec.restapi.model.*;
+import org.sysprotec.restapi.model.settings.LopSetting;
 import org.sysprotec.restapi.model.types.StatusEPLAN;
 import org.sysprotec.restapi.repository.ProjectRepository;
 

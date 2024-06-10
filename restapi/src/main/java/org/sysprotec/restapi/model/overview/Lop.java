@@ -1,4 +1,4 @@
-package org.sysprotec.restapi.model;
+package org.sysprotec.restapi.model.overview;
 
 
 import jakarta.persistence.*;
@@ -16,7 +16,8 @@ import org.sysprotec.restapi.model.types.StatusLOP;
 public class Lop {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LOP_ID_GEN")
+    @SequenceGenerator(name = "LOP_ID_GEN", sequenceName = "LOP_ID_SEQ", initialValue = 1, allocationSize = 1)
     private Integer id;
     private String startDate;
     private String endDate;
