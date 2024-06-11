@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.sysprotec.restapi.model.overview.HeaderData;
 import org.sysprotec.restapi.model.overview.Lop;
+import org.sysprotec.restapi.model.overview.Task;
+import org.sysprotec.restapi.model.overview.TechnicalData;
 import org.sysprotec.restapi.model.types.StatusEPLAN;
 
 import java.util.List;
@@ -51,22 +54,25 @@ public class Station {
     private Integer controlToDo;
     private Integer controlProgress;
     //Tables
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "station")
     private List<History> history;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "station")
     private List<Lop> lop;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "station")
     private List<Task> documentation;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "station")
     private List<Task> control;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "station")
     private List<HeaderData> headerData;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "station")
     private List<Task> specification;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "station")
     private List<Task> projection;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "station")
     private List<TechnicalData> technicalData;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
 
 
     //History

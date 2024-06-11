@@ -6,6 +6,7 @@ import {getLopById, getLopInfo} from "../store/lop.selectors";
 import {loadStationLop, updateStationLop} from "../store/lop.actions";
 import {loadSpinner} from "../../../../core/store/app.action";
 import {Subscription} from "rxjs";
+import {lopSettingModel} from "../../../settings/lop-settings/store/lopSetting.model";
 
 @Component({
   selector: 'app-lop',
@@ -43,11 +44,15 @@ export class LopComponent implements OnInit, OnDestroy{
       this.editData=data;
     })
     if(this.editData.status!=status){
+      const lopSetting:lopSettingModel={
+        id:this.editData.lopSetting.id,
+        item:this.editData.lopSetting.item,
+        startDate:this.editData.lopSetting.startDate
+      }
       const lopInput:lopModel={
         id:this.editData.id,
-        startDate:this.editData.startDate,
+        lopSetting:lopSetting,
         endDate:this.editData.endDate,
-        item: this.editData.item,
         status:status,
         userAcronym:this.editData.userAcronym,
       }

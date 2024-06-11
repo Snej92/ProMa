@@ -1,19 +1,29 @@
 <div class="settings-container">
   <div class="settings-nav">
-    <app-sys-nav-button class="nav-button" text="Stationen"></app-sys-nav-button>
-    <app-sys-nav-button class="nav-button" text="Kopfdaten"></app-sys-nav-button>
-    <app-sys-nav-button class="nav-button" text="Vorgaben"></app-sys-nav-button>
-    <app-sys-nav-button class="nav-button" text="Projektierung"></app-sys-nav-button>
-    <app-sys-nav-button class="nav-button" text="Technische Daten"></app-sys-nav-button>
-    <app-sys-nav-button class="nav-button" text="Kontrolle"></app-sys-nav-button>
-    <app-sys-nav-button class="nav-button" text="Doku"></app-sys-nav-button>
-    <app-sys-nav-button class="nav-button" text="Historie"></app-sys-nav-button>
-    <app-sys-nav-button class="nav-button" text="LOP"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(1)" class="nav-button" text="Stationen"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(2)" class="nav-button" text="Kopfdaten"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(3)" class="nav-button" text="Vorgaben"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(4)" class="nav-button" text="Projektierung"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(5)" class="nav-button" text="Technische Daten"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(6)" class="nav-button" text="Kontrolle"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(7)" class="nav-button" text="Doku"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(8)" class="nav-button" text="Historie"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(9)" class="nav-button" text="LOP"></app-sys-nav-button>
   </div>
   <div class="settings-divider">
     <mat-divider vertical="true"></mat-divider>
   </div>
   <div class="settings-content">
-    <app-lop-settings></app-lop-settings>
+    <ng-container [ngSwitch]="selectedSetting">
+      <div *ngSwitchCase="1"> Stationen </div>
+      <div *ngSwitchCase="2"> Kopfdaten </div>
+      <div *ngSwitchCase="3"> Vorgaben </div>
+      <div *ngSwitchCase="4"> Projektierung </div>
+      <div *ngSwitchCase="5"> Technische Daten </div>
+      <div *ngSwitchCase="6"> Kontrolle </div>
+      <div *ngSwitchCase="7"> Doku </div>
+      <div *ngSwitchCase="8"> Historie </div>
+      <app-lop-settings *ngSwitchCase="9"></app-lop-settings>
+    </ng-container>
   </div>
 </div>

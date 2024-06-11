@@ -34,13 +34,14 @@ const _lopReducer = createReducer(
   }),
 
   on(updateStationLopSuccess, (state,action) => {
-    const _lop={...action.lopInput};
-    const updatedLop=state.lopList.map(lop=>{
-      return _lop.id===lop.id?_lop:lop;
+    const lopOld = {...action.lopOld};
+    const lopNew = {...action.lopNew};
+    const updatedLop = state.lopList.map(lop => {
+      return lopOld.id === lop.id?lopNew:lop;
     });
-    return{
+    return {
       ...state,
-      lopList:updatedLop
+      lopList: updatedLop
     };
   }),
 );

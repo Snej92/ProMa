@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 import org.sysprotec.restapi.model.*;
 import org.sysprotec.restapi.model.projections.StationDto;
 import org.sysprotec.restapi.model.projections.StationView;
+import org.sysprotec.restapi.model.settings.LopSetting;
 import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.StationRepository;
 import org.sysprotec.restapi.repository.UserRepository;
 import org.sysprotec.restapi.repository.VersionRepository;
+import org.sysprotec.restapi.service.overview.LopService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,27 +28,21 @@ public class StationService {
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
     private final VersionRepository versionRepository;
+    private final LopService lopService;
 
 
     public List<StationView> getAllStations() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        List<StationView> stationViews = new ArrayList<>();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String username = authentication.getName();
             User user = userRepository.findUserByUsernameIgnoreCase(username);
             if (user != null) {
-                if(projectRepository.findProjectById(user.getActiveProject()).isPresent()){
-                    List<Station> station = projectRepository.findProjectById(user.getActiveProject()).get().getStations();
-                    if(station != null){
-                        for(Station s : station){
-                            stationViews.add(stationRepository.getProjectedById(s.getId()));
-                        }
-                        return stationViews;
-                    }
+                if(stationRepository.getProjectedByProjectId(user.getActiveProject()).isPresent()){
+                    return stationRepository.getProjectedByProjectId(user.getActiveProject()).get();
                 }
             }
         }
-        return stationViews;
+        return null;
     }
 
     public StationDto addStation(StationDto stationDto) {
@@ -82,6 +78,7 @@ public class StationService {
                             .controlDone(stationDto.getControlDone())
                             .controlToDo(stationDto.getControlToDo())
                             .controlProgress(stationDto.getControlProgress())
+                            .project(savedProject)
                             .build();
                     savedProject.addStation(newStation);
 
@@ -96,6 +93,14 @@ public class StationService {
                         version.addVersionStation(newVersionStation);
                         versionRepository.save(version);
                         log.info("Version '" + version.getVersion() + "' added to Station '" + stationDto.getName() + "'");
+                    }
+
+                    //Add Lops to Station
+                    List<LopSetting> lopSettingList = savedProject.getLopSetting();
+                    if (lopSettingList != null) {
+                        for(LopSetting lopSetting: lopSettingList){
+                            lopService.createLopForStations(lopSetting);
+                        }
                     }
 
                     projectRepository.save(savedProject);

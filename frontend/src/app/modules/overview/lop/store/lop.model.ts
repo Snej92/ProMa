@@ -1,3 +1,5 @@
+import {lopSettingModel} from "../../../settings/lop-settings/store/lopSetting.model";
+
 export enum LopStatus{
   INARBEIT = 'OFFEN',
   ERLEDIGT = 'INARBEIT',
@@ -6,9 +8,8 @@ export enum LopStatus{
 
 export interface lopModel {
   id : number,
-  startDate : string,
+  lopSetting: lopSettingModel,
   endDate : string,
-  item : string,
   status : string,
   userAcronym : string
 }

@@ -8,10 +8,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.sysprotec.restapi.model.*;
-import org.sysprotec.restapi.model.overview.Lop;
 import org.sysprotec.restapi.model.settings.LopSetting;
-import org.sysprotec.restapi.model.types.StatusLOP;
 import org.sysprotec.restapi.repository.*;
+import org.sysprotec.restapi.repository.settings.LopSettingRepository;
+import org.sysprotec.restapi.service.overview.LopService;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +25,7 @@ public class LopSettingService {
     private final LopSettingRepository lopSettingRepository;
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
-    private final StationRepository stationRepository;
+    private final LopService lopService;
 
     public List<LopSetting> getSettingLop() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -53,27 +53,13 @@ public class LopSettingService {
                     log.error("Project with id " + user.getActiveProject() + " does not exist in database");
                 } else {
                     Project saveProject = optionalProject.get();
-                    //add LOP to Project
+                    //add LOPSetting to Project
+                    lopSetting.setProject(saveProject);
                     saveProject.addLop(lopSetting);
                     projectRepository.save(saveProject);
-                    log.info("LOP Punkt: '" + lopSetting.getItem() + "' zu '" + saveProject.getName() + "' hinzugefügt");
-                    //add LOP to all Stations
-                    List<Station> stationList = saveProject.getStations();
-                    if (stationList != null) {
-                        Lop lop = Lop.builder()
-                                .startDate(lopSetting.getStartDate())
-                                .id(0)
-                                .endDate("")
-                                .item(lopSetting.getItem())
-                                .status(StatusLOP.OFFEN)
-                                .userAcronym("")
-                                .build();
-                        for (Station station : stationList) {
-                            station.addLop(lop);
-                            stationRepository.save(station);
-                            log.info("LOP Punkt: '" + lop.getItem() + "' zu '" + station.getName() + "' hinzugefügt");
-                        }
-                    }
+                    log.info("LOPSetting Punkt: '" + lopSetting.getItem() + "' zu '" + saveProject.getName() + "' hinzugefügt");
+                    LopSetting newLopSetting = lopSettingRepository.findTopByOrderByIdDesc();
+                    lopService.createLopForStations(newLopSetting);
                     return lopSettingRepository.findTopByOrderByIdDesc();
                 }
             }

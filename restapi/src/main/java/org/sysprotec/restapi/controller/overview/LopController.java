@@ -20,7 +20,8 @@ public class LopController {
     }
 
     @PutMapping
-    public void updateLop(@RequestBody Lop lop){
-        lopService.updateLop(lop);
+    public Lop updateLop(@RequestBody Lop lop){
+        System.out.println(lop.toString());
+        return lopService.updateLop(lop);
     }
 }

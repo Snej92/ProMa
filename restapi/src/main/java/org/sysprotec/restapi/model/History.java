@@ -1,6 +1,7 @@
 package org.sysprotec.restapi.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"station"})
 public class History {
 
     @Id
@@ -22,4 +24,7 @@ public class History {
     private String item;
     private String userAcronym;
     private String filename;
+    @ManyToOne
+    @JoinColumn(name = "station_id")
+    private Station station;
 }

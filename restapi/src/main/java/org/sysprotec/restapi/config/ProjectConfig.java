@@ -17,6 +17,16 @@ public class ProjectConfig {
     @Bean
     CommandLineRunner commandLineRunnerProject(ProjectRepository projectRepository) {
 
+        Project testProject1 = Project.builder()
+                .name("Test")
+                .description("Project for testing http requests")
+                .amountStations(1)
+                .inProgressStations(1)
+                .storedStations(0)
+                .notStoredStations(0)
+                .favorite(false)
+                .build();
+
         Station station1 = Station.builder()
                 .name("ST8010")
                 .description("ZH onload")
@@ -28,6 +38,7 @@ public class ProjectConfig {
                 .lopToDo(10)
                 .status(StatusEPLAN.AUSGELAGERT)
                 .version("V1.0")
+                .project(testProject1)
                 .build();
 
         Station station2 = Station.builder()
@@ -41,6 +52,7 @@ public class ProjectConfig {
                 .lopToDo(5)
                 .status(StatusEPLAN.EINGELAGERT)
                 .version("V1.1")
+                .project(testProject1)
                 .build();
 
         Station station3 = Station.builder()
@@ -54,6 +66,7 @@ public class ProjectConfig {
                 .lopToDo(0)
                 .status(StatusEPLAN.INARBEIT)
                 .version("V1.2")
+                .project(testProject1)
                 .build();
 
         Station station4 = Station.builder()
@@ -67,6 +80,7 @@ public class ProjectConfig {
                 .lopToDo(0)
                 .status(StatusEPLAN.INARBEIT)
                 .version("V1.2")
+                .project(testProject1)
                 .build();
 
         Station station5 = Station.builder()
@@ -80,6 +94,7 @@ public class ProjectConfig {
                 .lopToDo(0)
                 .status(StatusEPLAN.INARBEIT)
                 .version("V1.2")
+                .project(testProject1)
                 .build();
 
         Station station6 = Station.builder()
@@ -93,6 +108,7 @@ public class ProjectConfig {
                 .lopToDo(0)
                 .status(StatusEPLAN.INARBEIT)
                 .version("V1.2")
+                .project(testProject1)
                 .build();
 
         Station station7 = Station.builder()
@@ -106,6 +122,7 @@ public class ProjectConfig {
                 .lopToDo(0)
                 .status(StatusEPLAN.INARBEIT)
                 .version("V1.2")
+                .project(testProject1)
                 .build();
 
         Station station8 = Station.builder()
@@ -119,6 +136,7 @@ public class ProjectConfig {
                 .lopToDo(0)
                 .status(StatusEPLAN.INARBEIT)
                 .version("V1.2")
+                .project(testProject1)
                 .build();
 
         Station station9 = Station.builder()
@@ -132,6 +150,7 @@ public class ProjectConfig {
                 .lopToDo(0)
                 .status(StatusEPLAN.INARBEIT)
                 .version("V1.2")
+                .project(testProject1)
                 .build();
 
         List<Station> stationList = new ArrayList<>();
@@ -144,6 +163,8 @@ public class ProjectConfig {
         stationList.add(station7);
         stationList.add(station8);
         stationList.add(station9);
+
+        testProject1.setStations(stationList);
 
         //Version
 //        VersionStation versionStation1 = VersionStation.builder()
@@ -197,16 +218,19 @@ public class ProjectConfig {
         LopSetting lop1 = LopSetting.builder()
                 .startDate("01.04.2024")
                 .item("LOP Punkt 1")
+                .project(testProject1)
                 .build();
 
         LopSetting lop2 = LopSetting.builder()
                 .startDate("02.04.2024")
                 .item("LOP Punkt 2")
+                .project(testProject1)
                 .build();
 
         LopSetting lop3 = LopSetting.builder()
                 .startDate("03.04.2024")
                 .item("LOP Punkt 3")
+                .project(testProject1)
                 .build();
 
         List<LopSetting> lopList = new ArrayList<>();
@@ -214,20 +238,9 @@ public class ProjectConfig {
             lopList.add(lop2);
             lopList.add(lop3);
 
-
+        testProject1.setLopSetting(lopList);
         //add new stuff above
-        Project testProject1 = Project.builder()
-                .name("Test")
-                .description("Project for testing http requests")
-                .amountStations(1)
-                .inProgressStations(1)
-                .storedStations(0)
-                .notStoredStations(0)
-//                .versions(versionList)
-                .stations(stationList)
-                .lopSetting(lopList)
-                .favorite(false)
-                .build();
+
 
         Project testProject2 = Project.builder()
                 .name("Testing 2")

@@ -9,6 +9,7 @@ import {
 } from "./lop.actions";
 import {catchError, of, switchMap} from "rxjs";
 import {loadSpinner, showAlert} from "../../../../core/store/app.action";
+import {lopModel} from "./lop.model";
 
 
 @Injectable()
@@ -38,8 +39,8 @@ export class LopEffects {
       ofType(updateStationLop),
       switchMap(action =>
         this.service.updateStationLop(action.lopInput).pipe(
-          switchMap(res=> of(
-            updateStationLopSuccess({lopInput:action.lopInput}),
+          switchMap(data=> of(
+            updateStationLopSuccess({lopNew:data as lopModel, lopOld:action.lopInput}),
             loadSpinner({isLoading:false}),
             showAlert({message: 'Erfolgreich aktualisiert', actionResult:'pass'})
           )),

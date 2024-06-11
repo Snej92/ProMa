@@ -12,4 +12,4 @@ export const loadStationLopSuccess=createAction(LOAD_STATION_LOP_SUCCESS, props<
 export const loadStationLopFail=createAction(LOAD_STATION_LOP_FAIL, props<{errorText:any}>())
 
 export const updateStationLop=createAction(UPDATE_STATION_LOP, props<{lopInput:lopModel}>())
-export const updateStationLopSuccess=createAction(UPDATE_STATION_LOP_SUCCESS, props<{lopInput:lopModel}>())
+export const updateStationLopSuccess=createAction(UPDATE_STATION_LOP_SUCCESS, props<{lopNew:lopModel, lopOld:lopModel}>())
