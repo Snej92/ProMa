@@ -9,6 +9,10 @@
   flex: 1;
 }
 
+.sys-nav-button-selected{
+  background-color: var(--frontend-nav-button-selected);
+}
+
 .mat-mdc-unelevated-button:not(:disabled){
   background-color: var(--frontend-nav-button);
   border-radius: 4px 0 0 4px;

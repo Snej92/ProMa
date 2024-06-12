@@ -9,6 +9,7 @@ import {loggedUserReducer} from "../logged-user/logged-user.reducers";
 import {activeProjectViewReducer} from "../active-project/active-project.reducer";
 import {stationViewReducer} from "../../modules/station/store/stationView.reducers";
 import {lopSettingReducer} from "../../modules/settings/lop-settings/store/lopSetting.reducers";
+import {historyReducer} from "../../modules/overview/history/store/history.reducers";
 
 
 export const AppState={
@@ -21,4 +22,5 @@ export const AppState={
   loggedUser:loggedUserReducer,
   activeProjectView:activeProjectViewReducer,
   stationView:stationViewReducer,
+  history:historyReducer,
 }

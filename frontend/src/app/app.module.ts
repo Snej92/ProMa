@@ -83,6 +83,9 @@ import {
 } from "@angular/material/datepicker";
 import {MatNativeDateModule, provideNativeDateAdapter} from "@angular/material/core";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { HistoryComponent } from './modules/overview/history/components/history.component';
+import {HistoryEffects} from "./modules/overview/history/store/history.effects";
+import { AddHistoryComponent } from './modules/overview/history/components/add-history/add-history.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -127,7 +130,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     SysConfirmationComponent,
     StationCardComponent,
     AddStationComponent,
-    SysStatusLedComponent
+    SysStatusLedComponent,
+    HistoryComponent,
+    AddHistoryComponent
   ],
     imports: [
         AppRoutingModule,
@@ -144,7 +149,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
             LoggedUserEffects,
             ActiveProjectEffects,
             StationViewEffects,
-            VersionEffects]),
+            VersionEffects,
+            HistoryEffects]),
 
 
         MatToolbar,

@@ -101,6 +101,8 @@ $dark-theme: mat.define-dark-theme((
   @include mat.core-theme($dark-theme);
   @include mat.button-theme($dark-theme);
   @include mat.all-component-colors($dark-theme);
+  --frontend-nav-button: rgba(255,255,255,.08);
+  --frontend-nav-button-selected: rgba(255,255,255,0.2);
   background-color: #202124;
   color: #ffffff;
 }
@@ -124,6 +126,7 @@ body { margin: 0;
   --frontend-warning: #fb8C00;
   --frontend-alternate: rgba(0,0,0,0.06);
   --frontend-nav-button: rgba(0,0,0,0.08);
+  --frontend-nav-button-selected: rgba(0,0,0,0.16);
   --frontend-nav-button-border: rgba(255,255,255,0.1);
   --mat-snack-bar-button-color: #c6c6c6;
 }

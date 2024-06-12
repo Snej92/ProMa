@@ -1,14 +1,14 @@
 <div class="overview-container">
   <div class="overview-nav">
-    <app-sys-nav-button (click)="selectOverview(1)" class="nav-button" text="Stationen"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(2)" class="nav-button" text="Kopfdaten"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(3)" class="nav-button" text="Vorgaben"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(4)" class="nav-button" text="Projektierung"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(5)" class="nav-button" text="Technische Daten"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(6)" class="nav-button" text="Kontrolle"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(7)" class="nav-button" text="Doku"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(8)" class="nav-button" text="Historie"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(9)" class="nav-button" text="LOP"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectOverview(1)"  text="Stationen" [selected]="selectedOverview==1"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectOverview(2)"  text="Kopfdaten" [selected]="selectedOverview==2"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectOverview(3)"  text="Vorgaben" [selected]="selectedOverview==3"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectOverview(4)"  text="Projektierung" [selected]="selectedOverview==4"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectOverview(5)"  text="Technische Daten" [selected]="selectedOverview==5"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectOverview(6)"  text="Kontrolle" [selected]="selectedOverview==6"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectOverview(7)"  text="Doku" [selected]="selectedOverview==7"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectOverview(8)"  text="LOP" [selected]="selectedOverview==8"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectOverview(9)"  text="Historie" [selected]="selectedOverview==9"></app-sys-nav-button>
   </div>
   <div class="overview-divider">
     <mat-divider vertical="true"></mat-divider>
@@ -26,8 +26,8 @@
                 <div *ngSwitchCase="5"> Technische Daten </div>
                 <div *ngSwitchCase="6"> Kontrolle </div>
                 <div *ngSwitchCase="7"> Doku </div>
-                <div *ngSwitchCase="8"> Historie </div>
-                <app-lop *ngSwitchCase="9" [stationId]="stationView.id"></app-lop>
+                <app-lop *ngSwitchCase="8" [stationId]="stationView.id"></app-lop>
+                <app-history *ngSwitchCase="9" [stationId]="stationView.id"></app-history>
               </div>
             </ng-template>
           </mat-tab>

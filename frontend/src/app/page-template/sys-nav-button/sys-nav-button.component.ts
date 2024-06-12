@@ -9,4 +9,5 @@ export class SysNavButtonComponent {
 
   @Input() tooltip = '';
   @Input() text = '';
+  @Input() selected : boolean = false;
 }

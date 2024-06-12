@@ -1,14 +1,14 @@
 <div class="settings-container">
   <div class="settings-nav">
-    <app-sys-nav-button (click)="selectSetting(1)" class="nav-button" text="Stationen"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectSetting(2)" class="nav-button" text="Kopfdaten"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectSetting(3)" class="nav-button" text="Vorgaben"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectSetting(4)" class="nav-button" text="Projektierung"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectSetting(5)" class="nav-button" text="Technische Daten"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectSetting(6)" class="nav-button" text="Kontrolle"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectSetting(7)" class="nav-button" text="Doku"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectSetting(8)" class="nav-button" text="Historie"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectSetting(9)" class="nav-button" text="LOP"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(1)" [selected]="selectedSetting==1" text="Stationen"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(2)" [selected]="selectedSetting==2" text="Kopfdaten"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(3)" [selected]="selectedSetting==3" text="Vorgaben"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(4)" [selected]="selectedSetting==4" text="Projektierung"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(5)" [selected]="selectedSetting==5" text="Technische Daten"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(6)" [selected]="selectedSetting==6" text="Kontrolle"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(7)" [selected]="selectedSetting==7" text="Doku"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(8)" [selected]="selectedSetting==8" text="LOP"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(9)" [selected]="selectedSetting==9" text="Historie"></app-sys-nav-button>
   </div>
   <div class="settings-divider">
     <mat-divider vertical="true"></mat-divider>
@@ -22,8 +22,8 @@
       <div *ngSwitchCase="5"> Technische Daten </div>
       <div *ngSwitchCase="6"> Kontrolle </div>
       <div *ngSwitchCase="7"> Doku </div>
-      <div *ngSwitchCase="8"> Historie </div>
-      <app-lop-settings *ngSwitchCase="9"></app-lop-settings>
+      <app-lop-settings *ngSwitchCase="8"></app-lop-settings>
+      <div *ngSwitchCase="9"> Historie </div>
     </ng-container>
   </div>
 </div>

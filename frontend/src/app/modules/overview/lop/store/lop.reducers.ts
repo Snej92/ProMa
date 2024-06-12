@@ -4,7 +4,6 @@ import {
   loadStationLop, loadStationLopFail, loadStationLopSuccess,
   updateStationLopSuccess
 } from "./lop.actions";
-import {lopModel} from "./lop.model";
 
 
 const _lopReducer = createReducer(

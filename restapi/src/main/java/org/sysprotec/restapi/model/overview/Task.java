@@ -28,6 +28,7 @@ public class Task {
     private String date;
     private String addition;
     private Boolean done;
+    private Boolean commit;
     @ManyToOne
     @JoinColumn(name = "station_id")
     private Station station;

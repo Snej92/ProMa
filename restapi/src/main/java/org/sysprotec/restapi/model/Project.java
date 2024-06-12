@@ -39,17 +39,17 @@ public class Project {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private List<LopSetting> lopSetting;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    private List<TaskSetting> documentation;
+    private List<TaskSetting> documentationSetting;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    private List<TaskSetting> control;
+    private List<TaskSetting> controlSetting;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    private List<HeaderDataSetting> headerData;
+    private List<HeaderDataSetting> headerDataSetting;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    private List<TaskSetting> specification;
+    private List<TaskSetting> specificationSetting;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    private List<TaskSetting> projection;
+    private List<TaskSetting> projectionSetting;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    private List<TechnicalDataSetting> technicalData;
+    private List<TechnicalDataSetting> technicalDataSetting;
 
 
 
@@ -91,73 +91,73 @@ public class Project {
 
     //Documentation
     public void addDocumentation(TaskSetting documentation){
-        this.documentation.add(documentation);
+        this.documentationSetting.add(documentation);
     }
 
     public void removeDocumentation(Integer documentationId) {
-        TaskSetting documentation = this.documentation.stream().filter(t -> t.getId() == documentationId).findFirst().orElse(null);
+        TaskSetting documentation = this.documentationSetting.stream().filter(t -> t.getId() == documentationId).findFirst().orElse(null);
         if (documentation != null) {
-            this.documentation.remove(documentation);
+            this.documentationSetting.remove(documentation);
         }
     }
 
     //Control
     public void addControl(TaskSetting control){
-        this.control.add(control);
+        this.controlSetting.add(control);
     }
 
     public void removeControl(Integer controlId) {
-        TaskSetting control = this.control.stream().filter(t -> t.getId() == controlId).findFirst().orElse(null);
+        TaskSetting control = this.controlSetting.stream().filter(t -> t.getId() == controlId).findFirst().orElse(null);
         if (control != null) {
-            this.control.remove(control);
+            this.controlSetting.remove(control);
         }
     }
 
     //HeaderData
     public void addHeaderData(HeaderDataSetting headerData){
-        this.headerData.add(headerData);
+        this.headerDataSetting.add(headerData);
     }
 
     public void removeHeaderData(Integer headerDataId) {
-        HeaderDataSetting headerData = this.headerData.stream().filter(t -> t.getId() == headerDataId).findFirst().orElse(null);
+        HeaderDataSetting headerData = this.headerDataSetting.stream().filter(t -> t.getId() == headerDataId).findFirst().orElse(null);
         if (headerData != null) {
-            this.headerData.remove(headerData);
+            this.headerDataSetting.remove(headerData);
         }
     }
 
     //Specification
     public void addSpecification(TaskSetting specification){
-        this.specification.add(specification);
+        this.specificationSetting.add(specification);
     }
 
     public void removeSpecification(Integer specificationId) {
-        TaskSetting specification = this.specification.stream().filter(t -> t.getId() == specificationId).findFirst().orElse(null);
+        TaskSetting specification = this.specificationSetting.stream().filter(t -> t.getId() == specificationId).findFirst().orElse(null);
         if (specification != null) {
-            this.specification.remove(specification);
+            this.specificationSetting.remove(specification);
         }
     }
 
     //Projection
     public void addProjection(TaskSetting projection){
-        this.projection.add(projection);
+        this.projectionSetting.add(projection);
     }
 
     public void removeProjection(Integer projectionId) {
-        TaskSetting projection = this.projection.stream().filter(t -> t.getId() == projectionId).findFirst().orElse(null);
+        TaskSetting projection = this.projectionSetting.stream().filter(t -> t.getId() == projectionId).findFirst().orElse(null);
         if (projection != null) {
-            this.projection.remove(projection);
+            this.projectionSetting.remove(projection);
         }
     }
 
     //TechnicalData
     public void addTechnicalData(TechnicalDataSetting technicalData){
-        this.technicalData.add(technicalData);
+        this.technicalDataSetting.add(technicalData);
     }
 
     public void removeTechnicalData(Integer technicalDataId) {
-        TechnicalDataSetting technicalData = this.technicalData.stream().filter(t -> t.getId() == technicalDataId).findFirst().orElse(null);
+        TechnicalDataSetting technicalData = this.technicalDataSetting.stream().filter(t -> t.getId() == technicalDataId).findFirst().orElse(null);
         if (technicalData != null) {
-            this.technicalData.remove(technicalData);
+            this.technicalDataSetting.remove(technicalData);
         }
     }
 }

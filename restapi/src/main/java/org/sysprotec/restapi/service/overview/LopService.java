@@ -11,6 +11,7 @@ import org.sysprotec.restapi.model.types.StatusLOP;
 import org.sysprotec.restapi.repository.overview.LopRepository;
 import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.StationRepository;
+import org.sysprotec.restapi.service.HistoryService;
 import org.sysprotec.restapi.service.UserService;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class LopService {
     private final LopRepository lopRepository;
     private final UserService userService;
     private final ProjectRepository projectRepository;
+    private final HistoryService historyService;
 
     public List<Lop> getStationLop(Integer stationId) {
         Optional<Station> optionalStation = stationRepository.findById(stationId);
@@ -49,6 +51,11 @@ public class LopService {
             saveLop.setLopSetting(lopSetting);
             saveLop.setEndDate(lop.getEndDate());
             saveLop.setStatus(lop.getStatus(), userService.getLoggedUser());
+            User user = userService.getLoggedUser();
+            historyService.newEntryAuto(
+                    user,
+                    saveLop.getStation().getId(),
+                    "Status von LOP: '" + saveLop.getLopSetting().getItem() + "' von '" + saveLop.getStation().getName() + "' geändert auf: " + saveLop.getStatus());
             return saveLop;
         }
         return null;

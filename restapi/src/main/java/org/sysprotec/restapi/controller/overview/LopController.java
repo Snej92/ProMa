@@ -21,7 +21,6 @@ public class LopController {
 
     @PutMapping
     public Lop updateLop(@RequestBody Lop lop){
-        System.out.println(lop.toString());
         return lopService.updateLop(lop);
     }
 }
