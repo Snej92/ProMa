@@ -42,7 +42,7 @@ public class HistoryService {
         Optional<Station> optionalStation = stationRepository.findById(stationId);
         if (optionalStation.isPresent()) {
             if(optionalStation.get().getLop() != null) {
-                return optionalStation.get().getHistory();
+                return historyRepository.findHistoriesByStationIdOrderByIdDesc(stationId);
             }
         }
         return null;

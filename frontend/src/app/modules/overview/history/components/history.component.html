@@ -1,6 +1,6 @@
 <div class="div-table ">
-  <div>
-    <table mat-table [dataSource]="history.historyList" class="mat-elevation-z8">
+  <div class="table-container mat-elevation-z8">
+    <table mat-table [dataSource]="history.historyList">
 
       <ng-container matColumnDef="Zeitstempel">
         <th mat-header-cell *matHeaderCellDef> Zeitstempel </th>
@@ -26,9 +26,10 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
+  <mat-divider class="mt-4"></mat-divider>
+  <div class="d-flex flex-row-reverse">
+    <button class="mt-2" mat-raised-button color="accent" (click)="addHistory()">Datei übergeben</button>
+  </div>
 </div>
 
-<mat-divider class="mt-4"></mat-divider>
-<div class="d-flex flex-row-reverse">
-  <button class="mt-2" mat-raised-button color="accent" (click)="addHistory()">Datei übergeben</button>
-</div>
+

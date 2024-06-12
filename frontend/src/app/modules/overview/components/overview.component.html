@@ -18,7 +18,7 @@
         <ng-container *ngFor="let stationView of stationView.stationViewList">
           <mat-tab [label]="stationView.name">
             <ng-template matTabContent>
-              <div [ngSwitch]="selectedOverview" class="card-content">
+              <div [ngSwitch]="selectedOverview" class="mat-tab-group-content">
                 <div *ngSwitchCase="1"> Stationen </div>
                 <div *ngSwitchCase="2"> Kopfdaten </div>
                 <div *ngSwitchCase="3"> Vorgaben </div>
