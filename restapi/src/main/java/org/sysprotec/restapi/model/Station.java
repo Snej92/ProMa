@@ -11,6 +11,7 @@ import org.sysprotec.restapi.model.overview.Task;
 import org.sysprotec.restapi.model.overview.TechnicalData;
 import org.sysprotec.restapi.model.types.StatusEPLAN;
 
+import java.util.Iterator;
 import java.util.List;
 
 @Entity
@@ -23,7 +24,7 @@ public class Station {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "STATION_ID_GEN")
     @SequenceGenerator(name = "STATION_ID_GEN", sequenceName = "STATION_ID_SEQ", initialValue = 1, allocationSize = 1)
-    private Integer id;
+    private Long id;
     private String name;
     private String description;
     private Boolean favorite;
@@ -80,7 +81,7 @@ public class Station {
         this.history.add(history);
     }
 
-    public void removeHistory(Integer historyId) {
+    public void removeHistory(Long historyId) {
         History history = this.history.stream().filter(t -> t.getId() == historyId).findFirst().orElse(null);
         if (history != null) {
             this.history.remove(history);
@@ -92,10 +93,15 @@ public class Station {
         this.lop.add(lop);
     }
 
-    public void removeLop(Integer lopId) {
-        Lop lop = this.lop.stream().filter(t -> t.getId() == lopId).findFirst().orElse(null);
+    public void removeLop(Long lopSettingId) {
         if (lop != null) {
-            this.lop.remove(lop);
+            lop.removeIf(lop -> {
+                boolean match = lop.getLopSetting() != null && lop.getLopSetting().getId().equals(lopSettingId);
+                if (match) {
+                    lop.setStation(null);
+                }
+                return match;
+            });
         }
     }
 
@@ -104,10 +110,15 @@ public class Station {
         this.documentation.add(documentation);
     }
 
-    public void removeDocumentation(Integer documentationId) {
-        Task documentation = this.documentation.stream().filter(t -> t.getId() == documentationId).findFirst().orElse(null);
+    public void removeDocumentation(Long documentationSettingId) {
         if (documentation != null) {
-            this.documentation.remove(documentation);
+            documentation.removeIf(task -> {
+                boolean match = task.getTaskSetting() != null && task.getTaskSetting().getId().equals(documentationSettingId);
+                if (match) {
+                    task.setStation(null);
+                }
+                return match;
+            });
         }
     }
 
@@ -116,10 +127,15 @@ public class Station {
         this.control.add(control);
     }
 
-    public void removeControl(Integer controlId) {
-        Task control = this.control.stream().filter(t -> t.getId() == controlId).findFirst().orElse(null);
+    public void removeControl(Long controlSettingId) {
         if (control != null) {
-            this.control.remove(control);
+            control.removeIf(task -> {
+                boolean match = task.getTaskSetting() != null && task.getTaskSetting().getId().equals(controlSettingId);
+                if (match) {
+                    task.setStation(null);
+                }
+                return match;
+            });
         }
     }
 
@@ -128,10 +144,15 @@ public class Station {
         this.headerData.add(headerData);
     }
 
-    public void removeHeaderData(Integer headerDataId) {
-        HeaderData headerData = this.headerData.stream().filter(t -> t.getId() == headerDataId).findFirst().orElse(null);
+    public void removeHeaderData(Long headerDataSettingId) {
         if (headerData != null) {
-            this.headerData.remove(headerData);
+            headerData.removeIf(headerData -> {
+                boolean match = headerData.getHeaderDataSetting() != null && headerData.getHeaderDataSetting().getId().equals(headerDataSettingId);
+                if (match) {
+                    headerData.setStation(null);
+                }
+                return match;
+            });
         }
     }
 
@@ -140,10 +161,15 @@ public class Station {
         this.specification.add(specification);
     }
 
-    public void removeSpecification(Integer specificationId) {
-        Task specification = this.specification.stream().filter(t -> t.getId() == specificationId).findFirst().orElse(null);
+    public void removeSpecification(Long specificationSettingId) {
         if (specification != null) {
-            this.specification.remove(specification);
+            specification.removeIf(task -> {
+                boolean match = task.getTaskSetting() != null && task.getTaskSetting().getId().equals(specificationSettingId);
+                if (match) {
+                    task.setStation(null);
+                }
+                return match;
+            });
         }
     }
 
@@ -152,10 +178,15 @@ public class Station {
         this.projection.add(projection);
     }
 
-    public void removeProjection(Integer projectionId) {
-        Task projection = this.projection.stream().filter(t -> t.getId() == projectionId).findFirst().orElse(null);
+    public void removeProjection(Long projectionSettingId) {
         if (projection != null) {
-            this.projection.remove(projection);
+            projection.removeIf(task -> {
+                boolean match = task.getTaskSetting() != null && task.getTaskSetting().getId().equals(projectionSettingId);
+                if (match) {
+                    task.setStation(null);
+                }
+                return match;
+            });
         }
     }
 
@@ -164,10 +195,15 @@ public class Station {
         this.technicalData.add(technicalData);
     }
 
-    public void removeTechnicalData(Integer technicalDataId) {
-        TechnicalData technicalData = this.technicalData.stream().filter(t -> t.getId() == technicalDataId).findFirst().orElse(null);
+    public void removeTechnicalData(Long technicalDataSettingId) {
         if (technicalData != null) {
-            this.technicalData.remove(technicalData);
+            technicalData.removeIf(technicalData -> {
+                boolean match = technicalData.getTechnicalDataSetting() != null && technicalData.getTechnicalDataSetting().getId().equals(technicalDataSettingId);
+                if (match) {
+                    technicalData.setStation(null);
+                }
+                return match;
+            });
         }
     }
 }

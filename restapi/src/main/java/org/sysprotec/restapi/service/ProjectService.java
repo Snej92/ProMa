@@ -88,7 +88,7 @@ public class ProjectService {
         }
     }
 
-    public void deleteProject(Integer projectId) {
+    public void deleteProject(Long projectId) {
         Optional<Project> optionalProject = projectRepository.findProjectById(projectId);
         if(optionalProject.isPresent()){
             projectRepository.delete(optionalProject.get());

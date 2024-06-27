@@ -29,7 +29,7 @@ public class LopService {
     private final ProjectRepository projectRepository;
     private final HistoryService historyService;
 
-    public List<Lop> getStationLop(Integer stationId) {
+    public List<Lop> getStationLop(Long stationId) {
         Optional<Station> optionalStation = stationRepository.findById(stationId);
         if (optionalStation.isPresent()) {
             if(optionalStation.get().getLop() != null) {
@@ -47,7 +47,6 @@ public class LopService {
         } else {
             LopSetting lopSetting = optionalLop.get().getLopSetting();
             Lop saveLop = optionalLop.get();
-            saveLop.setLopSetting(lopSetting);
             saveLop.setLopSetting(lopSetting);
             saveLop.setEndDate(lop.getEndDate());
             saveLop.setStatus(lop.getStatus(), userService.getLoggedUser());

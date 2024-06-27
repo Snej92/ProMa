@@ -31,7 +31,7 @@ public class VersionController {
     }
 
     @DeleteMapping("{versionId}")
-    public void deleteVersion(@PathVariable Integer versionId){
+    public void deleteVersion(@PathVariable Long versionId){
         versionService.deleteVersion(versionId);
     }
 }

@@ -26,7 +26,7 @@ public class Lop {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LOP_ID_GEN")
     @SequenceGenerator(name = "LOP_ID_GEN", sequenceName = "LOP_ID_SEQ", initialValue = 1, allocationSize = 1)
-    private Integer id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name= "lop_setting_id")
     private LopSetting lopSetting;

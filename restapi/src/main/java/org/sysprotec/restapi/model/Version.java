@@ -20,7 +20,7 @@ public class Version {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VERSION_ID_GEN")
     @SequenceGenerator(name = "VERSION_ID_GEN", sequenceName = "VERSION_ID_SEQ", initialValue = 1, allocationSize = 1)
-    private Integer id;
+    private Long id;
     private String date;
     private String version;
     private String toDo;
@@ -35,7 +35,7 @@ public class Version {
         this.versionStation.add(versionStation);
     }
 
-    public void removeVersionStation(Integer versionStationId) {
+    public void removeVersionStation(Long versionStationId) {
         VersionStation versionStation = this.versionStation.stream().filter(t -> t.getId() == versionStationId).findFirst().orElse(null);
         if (versionStation != null) {
             this.versionStation.remove(versionStation);

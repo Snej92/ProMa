@@ -1,6 +1,5 @@
 package org.sysprotec.restapi.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +22,7 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PROJECT_ID_GEN")
     @SequenceGenerator(name = "PROJECT_ID_GEN", sequenceName = "PROJECT_ID_SEQ", initialValue = 1, allocationSize = 1)
-    private Integer id;
+    private Long id;
     private String name;
     private String description;
     private Boolean favorite;
@@ -51,14 +50,12 @@ public class Project {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private List<TechnicalDataSetting> technicalDataSetting;
 
-
-
     //Version
-    public void addVersion(Version version){
+    public void addVersion(Version version) {
         this.versions.add(version);
     }
 
-    public void removeVersion(Integer versionId) {
+    public void removeVersion(Long versionId) {
         Version version = this.versions.stream().filter(t -> t.getId() == versionId).findFirst().orElse(null);
         if (version != null) {
             this.versions.remove(version);
@@ -66,11 +63,11 @@ public class Project {
     }
 
     //Station
-    public void addStation(Station station){
+    public void addStation(Station station) {
         this.stations.add(station);
     }
 
-    public void removeStation(Integer stationId) {
+    public void removeStation(Long stationId) {
         Station station = this.stations.stream().filter(t -> t.getId() == stationId).findFirst().orElse(null);
         if (station != null) {
             this.stations.remove(station);
@@ -78,11 +75,11 @@ public class Project {
     }
 
     //Lop
-    public void addLop(LopSetting lopSetting){
+    public void addLop(LopSetting lopSetting) {
         this.lopSetting.add(lopSetting);
     }
 
-    public void removeLop(Integer lopId) {
+    public void removeLop(Long lopId) {
         LopSetting lopSetting = this.lopSetting.stream().filter(t -> t.getId() == lopId).findFirst().orElse(null);
         if (lopSetting != null) {
             this.lopSetting.remove(lopSetting);
@@ -90,11 +87,11 @@ public class Project {
     }
 
     //Documentation
-    public void addDocumentation(TaskSetting documentation){
+    public void addDocumentation(TaskSetting documentation) {
         this.documentationSetting.add(documentation);
     }
 
-    public void removeDocumentation(Integer documentationId) {
+    public void removeDocumentation(Long documentationId) {
         TaskSetting documentation = this.documentationSetting.stream().filter(t -> t.getId() == documentationId).findFirst().orElse(null);
         if (documentation != null) {
             this.documentationSetting.remove(documentation);
@@ -102,11 +99,11 @@ public class Project {
     }
 
     //Control
-    public void addControl(TaskSetting control){
+    public void addControl(TaskSetting control) {
         this.controlSetting.add(control);
     }
 
-    public void removeControl(Integer controlId) {
+    public void removeControl(Long controlId) {
         TaskSetting control = this.controlSetting.stream().filter(t -> t.getId() == controlId).findFirst().orElse(null);
         if (control != null) {
             this.controlSetting.remove(control);
@@ -114,11 +111,11 @@ public class Project {
     }
 
     //HeaderData
-    public void addHeaderData(HeaderDataSetting headerData){
+    public void addHeaderData(HeaderDataSetting headerData) {
         this.headerDataSetting.add(headerData);
     }
 
-    public void removeHeaderData(Integer headerDataId) {
+    public void removeHeaderData(Long headerDataId) {
         HeaderDataSetting headerData = this.headerDataSetting.stream().filter(t -> t.getId() == headerDataId).findFirst().orElse(null);
         if (headerData != null) {
             this.headerDataSetting.remove(headerData);
@@ -126,11 +123,11 @@ public class Project {
     }
 
     //Specification
-    public void addSpecification(TaskSetting specification){
+    public void addSpecification(TaskSetting specification) {
         this.specificationSetting.add(specification);
     }
 
-    public void removeSpecification(Integer specificationId) {
+    public void removeSpecification(Long specificationId) {
         TaskSetting specification = this.specificationSetting.stream().filter(t -> t.getId() == specificationId).findFirst().orElse(null);
         if (specification != null) {
             this.specificationSetting.remove(specification);
@@ -138,11 +135,11 @@ public class Project {
     }
 
     //Projection
-    public void addProjection(TaskSetting projection){
+    public void addProjection(TaskSetting projection) {
         this.projectionSetting.add(projection);
     }
 
-    public void removeProjection(Integer projectionId) {
+    public void removeProjection(Long projectionId) {
         TaskSetting projection = this.projectionSetting.stream().filter(t -> t.getId() == projectionId).findFirst().orElse(null);
         if (projection != null) {
             this.projectionSetting.remove(projection);
@@ -150,11 +147,11 @@ public class Project {
     }
 
     //TechnicalData
-    public void addTechnicalData(TechnicalDataSetting technicalData){
+    public void addTechnicalData(TechnicalDataSetting technicalData) {
         this.technicalDataSetting.add(technicalData);
     }
 
-    public void removeTechnicalData(Integer technicalDataId) {
+    public void removeTechnicalData(Long technicalDataId) {
         TechnicalDataSetting technicalData = this.technicalDataSetting.stream().filter(t -> t.getId() == technicalDataId).findFirst().orElse(null);
         if (technicalData != null) {
             this.technicalDataSetting.remove(technicalData);

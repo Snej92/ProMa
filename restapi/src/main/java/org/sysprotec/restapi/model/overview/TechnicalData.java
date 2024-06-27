@@ -22,7 +22,7 @@ public class TechnicalData {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TECHNICAL_DATA_ID_GEN")
     @SequenceGenerator(name = "TECHNICAL_DATA_ID_GEN", sequenceName = "TECHNICAL_DATA_ID_SEQ", initialValue = 1, allocationSize = 1)
-    private Integer id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name= "technical_data_setting_id")
     private TechnicalDataSetting technicalDataSetting;

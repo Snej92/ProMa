@@ -16,22 +16,22 @@ public class LopSettingController {
 
 
     @GetMapping()
-    public List<LopSetting> getSettingLop(){
-        return lopSettingService.getSettingLop();
+    public List<LopSetting> getLopSetting(){
+        return lopSettingService.getLopSetting();
     }
 
     @PostMapping()
-    public LopSetting addSettingLop(@RequestBody LopSetting lopSetting){
-        return lopSettingService.addSettingLop(lopSetting);
+    public LopSetting addLopSetting(@RequestBody LopSetting lopSetting){
+        return lopSettingService.addLopSetting(lopSetting);
     }
 
     @PutMapping
-    public void updateSettingLop(@RequestBody LopSetting lopSetting){
-        lopSettingService.updateSettingLop(lopSetting);
+    public void updateLopSetting(@RequestBody LopSetting lopSetting){
+        lopSettingService.updateLopSetting(lopSetting);
     }
 
     @DeleteMapping("{lopId}")
-    public void deleteSettingLop(@PathVariable Integer lopId){
-        lopSettingService.delete(lopId);
+    public void deleteLopSetting(@PathVariable Long lopId){
+        lopSettingService.deleteLopSetting(lopId);
     }
 }

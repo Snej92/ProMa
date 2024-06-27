@@ -23,7 +23,7 @@ public class StationController {
     }
 
     @GetMapping("{stationId}")
-    public Station getStation(@PathVariable Integer stationId){
+    public Station getStation(@PathVariable Long stationId){
         return stationService.getStation(stationId);
     }
 
@@ -38,7 +38,7 @@ public class StationController {
     }
 
     @DeleteMapping("{stationId}")
-    public void deleteStation(@PathVariable Integer stationId){
+    public void deleteStation(@PathVariable Long stationId){
         stationService.deleteStation(stationId);
     }
 }

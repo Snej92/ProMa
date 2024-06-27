@@ -113,7 +113,7 @@ public class StationService {
         return null;
     }
 
-    public void deleteStation(Integer stationId) {
+    public void deleteStation(Long stationId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String username = authentication.getName();
@@ -165,7 +165,7 @@ public class StationService {
         }
     }
 
-    public Station getStation(Integer stationId) {
+    public Station getStation(Long stationId) {
         Optional<Station> optionalStation = stationRepository.findById(stationId);
         return optionalStation.orElse(null);
     }

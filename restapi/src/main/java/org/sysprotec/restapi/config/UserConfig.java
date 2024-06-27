@@ -30,7 +30,7 @@ public class UserConfig {
                 .username("admin@admin.com")
                 .password("test")
                 .roles(roleAll)
-                .activeProject(1)
+                .activeProject(1L)
                 .build();
 //
 //        User BWA = User.builder()

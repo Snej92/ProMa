@@ -18,7 +18,7 @@ public class VersionStation {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VERSION_STATION_ID_GEN")
     @SequenceGenerator(name = "VERSION_STATION_ID_GEN", sequenceName = "VERSION_STATION_ID_SEQ", initialValue = 1, allocationSize = 1)
-    private Integer id;
+    private Long id;
     private String stationName;
     private Boolean done;
     @ManyToOne

@@ -16,7 +16,7 @@ public class ProjectController {
 
     private final ProjectService projectService;
 
-    //todo: add ResponseEntity
+
     @GetMapping("/all")
     public List<ProjectView> getAllProjects(){
         return projectService.getAllProjects();
@@ -38,7 +38,7 @@ public class ProjectController {
     }
 
     @DeleteMapping("{projectId}")
-    public void deleteProject(@PathVariable Integer projectId){
+    public void deleteProject(@PathVariable Long projectId){
         projectService.deleteProject(projectId);
     }
 }

@@ -84,7 +84,7 @@ public class KeycloakService {
             roleRepository.save(role);
             User newUser = User.builder()
                     .sub(keycloakUser.getId())
-                    .activeProject(0)
+                    .activeProject(0L)
                     .firstname(user.getFirstname())
                     .lastname(user.getLastname())
                     .acronym(user.getAcronym())

@@ -10,12 +10,20 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ProjectRepository extends JpaRepository<Project, Integer> {
+public interface ProjectRepository extends JpaRepository<Project, Long> {
 
-    Optional<Project> findProjectById(Integer id);
-    Optional<Project> findProjectByVersionsId(Integer id);
-    Optional<Project> findProjectByLopSettingId(Integer id);
+    Optional<Project> findProjectById(Long id);
     List<ProjectView> findBy();
-    ProjectDto getProjectedById(Integer id);
+    ProjectDto getProjectedById(Long id);
     ProjectDto findTopByOrderByIdDesc();
+
+    //find By other ID
+    Optional<Project> findProjectByVersionsId(Long id);
+    Optional<Project> findProjectByLopSettingId(Long id);
+    Optional<Project> findProjectByDocumentationSettingId(Long id);
+    Optional<Project> findProjectByControlSettingId(Long id);
+    Optional<Project> findProjectByHeaderDataSettingId(Long id);
+    Optional<Project> findProjectBySpecificationSettingId(Long id);
+    Optional<Project> findProjectByProjectionSettingId(Long id);
+    Optional<Project> findProjectByTechnicalDataSettingId(Long id);
 }

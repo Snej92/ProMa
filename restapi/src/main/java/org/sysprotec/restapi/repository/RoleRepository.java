@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import org.sysprotec.restapi.model.Role;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Integer> {
+public interface RoleRepository extends JpaRepository<Role, Long> {
 
 }

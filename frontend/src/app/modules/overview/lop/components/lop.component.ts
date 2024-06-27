@@ -25,8 +25,6 @@ export class LopComponent implements OnInit, OnDestroy{
   constructor(private store:Store<AppStateModel>) {
   }
 
-  //todo add lazy load
-
   ngOnInit(): void {
     console.log(this.stationId)
     this.store.dispatch(loadSpinner({isLoading:true}))

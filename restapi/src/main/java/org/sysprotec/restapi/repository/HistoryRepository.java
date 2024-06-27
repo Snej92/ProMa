@@ -7,7 +7,7 @@ import org.sysprotec.restapi.model.History;
 import java.util.List;
 
 @Repository
-public interface HistoryRepository extends JpaRepository<History,Integer> {
+public interface HistoryRepository extends JpaRepository<History,Long> {
     History findTopByOrderByIdDesc();
-    List<History> findHistoriesByStationIdOrderByIdDesc(Integer stationId);
+    List<History> findHistoriesByStationIdOrderByIdDesc(Long stationId);
 }

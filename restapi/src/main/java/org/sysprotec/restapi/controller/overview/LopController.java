@@ -15,7 +15,7 @@ public class LopController {
     private final LopService lopService;
 
     @GetMapping("{stationId}")
-    public List<Lop> getStationLop(@PathVariable Integer stationId){
+    public List<Lop> getStationLop(@PathVariable Long stationId){
         return lopService.getStationLop(stationId);
     }
 

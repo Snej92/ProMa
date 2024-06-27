@@ -24,7 +24,7 @@ public class HistoryService {
     private final UserService userService;
 
 
-    public void newEntryAuto(User user, Integer StationId, String item){
+    public void newEntryAuto(User user, Long StationId, String item){
         if (stationRepository.findById(StationId).isPresent()){
             Station station = stationRepository.findById(StationId).get();
             History newHistory = History.builder()
@@ -38,7 +38,7 @@ public class HistoryService {
         }
     }
 
-    public List<History> getHistoryByStationId(Integer stationId){
+    public List<History> getHistoryByStationId(Long stationId){
         Optional<Station> optionalStation = stationRepository.findById(stationId);
         if (optionalStation.isPresent()) {
             if(optionalStation.get().getLop() != null) {
@@ -48,7 +48,7 @@ public class HistoryService {
         return null;
     }
 
-    public History addHistory(History history, Integer stationId) {
+    public History addHistory(History history, Long stationId) {
         Optional<Station> optionalStation = stationRepository.findById(stationId);
         User user = userService.getLoggedUser();
         if (optionalStation.isPresent()) {

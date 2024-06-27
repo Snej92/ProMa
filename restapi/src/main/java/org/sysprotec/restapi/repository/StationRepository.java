@@ -10,12 +10,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface StationRepository extends JpaRepository<Station, Integer> {
+public interface StationRepository extends JpaRepository<Station, Long> {
 
-    StationView getProjectedById(Integer id);
-    Optional<List<StationView>> getProjectedByProjectId(Integer projectId);
+    StationView getProjectedById(Long id);
+    Optional<List<StationView>> getProjectedByProjectId(Long projectId);
     StationDto findTopByOrderByIdDesc();
-    StationDto findProjectedById(Integer id);
+    StationDto findProjectedById(Long id);
     Station getTopByOrderByIdDesc();
-    Optional<Station> findStationByNameAndLopLopSettingId(String name, Integer LopSettingId);
+    Optional<Station> findStationByNameAndLopLopSettingId(String name, Long LopSettingId);
+    Optional<Station> findStationByNameAndDocumentationTaskSettingId(String name, Long TaskSettingId);
+    Optional<Station> findStationByNameAndSpecificationTaskSettingId(String name, Long TaskSettingId);
+    Optional<Station> findStationByNameAndProjectionTaskSettingId(String name, Long TaskSettingId);
+    Optional<Station> findStationByNameAndControlTaskSettingId(String name, Long TaskSettingId);
 }

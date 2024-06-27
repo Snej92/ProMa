@@ -15,13 +15,13 @@ public class HistoryController {
     public final HistoryService historyService;
 
     @GetMapping("{stationId}")
-    public List<History> getStationHistory(@PathVariable Integer stationId){
+    public List<History> getStationHistory(@PathVariable Long stationId){
         return historyService.getHistoryByStationId(stationId);
     }
 
     @PostMapping("{stationId}")
     public History addStationHistory(@RequestBody History history,
-                                     @PathVariable Integer stationId){
+                                     @PathVariable Long stationId){
         return historyService.addHistory(history, stationId);
     }
 }

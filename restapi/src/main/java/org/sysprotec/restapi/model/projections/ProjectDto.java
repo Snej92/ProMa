@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @Builder
 public class ProjectDto {
-    private Integer id;
+    private Long id;
     private String name;
     private String description;
     private Boolean favorite;
@@ -16,7 +16,7 @@ public class ProjectDto {
     private Integer storedStations;
     private Integer notStoredStations;
 
-    public ProjectDto(Integer id,
+    public ProjectDto(Long id,
                       String name,
                       String description,
                       Boolean favorite,

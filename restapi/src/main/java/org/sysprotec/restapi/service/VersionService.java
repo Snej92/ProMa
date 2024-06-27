@@ -140,7 +140,7 @@ public class VersionService {
         return null;
     }
 
-    public void deleteVersion(Integer versionId) {
+    public void deleteVersion(Long versionId) {
         Optional<Project> optionalProject = projectRepository.findProjectByVersionsId(versionId);
         Optional<Version> optionalVersion = versionRepository.findVersionById(versionId);
         if(optionalVersion.isEmpty() || optionalProject.isEmpty()){

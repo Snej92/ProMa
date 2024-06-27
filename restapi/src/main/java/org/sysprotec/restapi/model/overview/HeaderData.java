@@ -21,7 +21,7 @@ public class HeaderData {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "HEADER_ID_GEN")
     @SequenceGenerator(name = "HEADER_ID_GEN", sequenceName = "HEADER_ID_SEQ", initialValue = 1, allocationSize = 1)
-    private Integer id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name= "header_data_setting_id")
     private HeaderDataSetting headerDataSetting;

@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.sysprotec.restapi.model.Project;
-import org.sysprotec.restapi.model.overview.Lop;
 import org.sysprotec.restapi.model.overview.Task;
 
 import java.util.List;
@@ -22,8 +21,9 @@ public class TaskSetting {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TASK_SETTING_ID_GEN")
     @SequenceGenerator(name = "TASK_SETTING_ID_GEN", sequenceName = "TASK_SETTING_ID_SEQ", initialValue = 1, allocationSize = 1)
-    private Integer id;
+    private Long id;
     private String name;
+    private String type;
 
     @ManyToOne
     @JoinColumn(name = "project_id")

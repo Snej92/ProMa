@@ -8,8 +8,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.sysprotec.restapi.model.*;
+import org.sysprotec.restapi.model.overview.Lop;
+import org.sysprotec.restapi.model.overview.Task;
 import org.sysprotec.restapi.model.settings.LopSetting;
 import org.sysprotec.restapi.repository.*;
+import org.sysprotec.restapi.repository.overview.LopRepository;
 import org.sysprotec.restapi.repository.settings.LopSettingRepository;
 import org.sysprotec.restapi.service.overview.LopService;
 
@@ -23,11 +26,12 @@ import java.util.Optional;
 public class LopSettingService {
 
     private final LopSettingRepository lopSettingRepository;
+    private final LopRepository lopRepository;
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
     private final LopService lopService;
 
-    public List<LopSetting> getSettingLop() {
+    public List<LopSetting> getLopSetting() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String username = authentication.getName();
@@ -42,7 +46,7 @@ public class LopSettingService {
         return null;
     }
 
-    public LopSetting addSettingLop(LopSetting lopSetting) {
+    public LopSetting addLopSetting(LopSetting lopSetting) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String username = authentication.getName();
@@ -68,7 +72,7 @@ public class LopSettingService {
     }
 
     @Transactional
-    public void updateSettingLop(LopSetting lopSetting) {
+    public void updateLopSetting(LopSetting lopSetting) {
         Optional<LopSetting> optionalLopSetting = lopSettingRepository.findLopById(lopSetting.getId());
         if(optionalLopSetting.isEmpty()){
             log.error("LOP with id "+ lopSetting.getId() + " does not exist in database");
@@ -76,34 +80,29 @@ public class LopSettingService {
             LopSetting saveLop = optionalLopSetting.get();
             saveLop.setItem(lopSetting.getItem());
             saveLop.setStartDate(lopSetting.getStartDate());
+            log.info("LOP with id " + lopSetting.getId() + " updated");
         }
     }
 
-    public void delete(Integer lopId) {
-        Optional<LopSetting> optionalLopSetting = lopSettingRepository.findLopById(lopId);
-        Optional<Project> optionalProject = projectRepository.findProjectByLopSettingId(lopId);
+    public void deleteLopSetting(Long lopSettingId) {
+        Optional<LopSetting> optionalLopSetting = lopSettingRepository.findLopById(lopSettingId);
+        Optional<Project> optionalProject = projectRepository.findProjectByLopSettingId(lopSettingId);
         if(optionalLopSetting.isEmpty() || optionalProject.isEmpty()){
-            log.error("LOP with id "+ lopId + " does not exist in database");
+            log.error("LOP with id "+ lopSettingId + " does not exist in database");
         } else {
             Project saveProject = optionalProject.get();
             List<Station> stationList = saveProject.getStations();
             for (Station station : stationList) {
-                station.removeLop(lopId);
+                station.removeLop(lopSettingId);
                 log.info("LOP Punkt: '" + optionalLopSetting.get().getItem() + "' von '" + station.getName() + "' entfernt");
             }
-            saveProject.removeLop(lopId);
+
+            List<Lop> lopList = lopRepository.findAllByLopSettingId(lopSettingId);
+            lopRepository.deleteAll(lopList);
+
+            saveProject.removeLop(lopSettingId);
             log.info("LOP Punkt: '" + optionalLopSetting.get().getItem() + "' von '" + saveProject.getName() + "' entfernt");
-            lopSettingRepository.deleteById(lopId);
+            lopSettingRepository.deleteById(lopSettingId);
         }
     }
-
-//    public List<Lop> getStationLop(Integer stationId) {
-//        Optional<Station> optionalStation = stationRepository.findById(stationId);
-//        if (optionalStation.isPresent()) {
-//            if(optionalStation.get().getLop() != null) {
-//                return optionalStation.get().getLop();
-//            }
-//        }
-//        return null;
-//    }
 }

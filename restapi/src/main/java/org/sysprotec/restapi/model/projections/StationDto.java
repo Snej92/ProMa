@@ -12,7 +12,7 @@ import org.sysprotec.restapi.model.types.StatusEPLAN;
 @Getter
 @Builder
 public class StationDto {
-    private Integer id;
+    private Long id;
     private String name;
     private String description;
     private Boolean favorite;
@@ -43,7 +43,7 @@ public class StationDto {
     private Integer controlToDo;
     private Integer controlProgress;
 
-    public StationDto(Integer id,
+    public StationDto(Long id,
                       String name,
                       String description,
                       Boolean favorite,

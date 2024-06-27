@@ -14,8 +14,6 @@ export class SysLoadingspinnerComponent implements OnInit{
   constructor(private store:Store<AppStateModel>) {
   }
 
-
-
   ngOnInit(): void {
     this.store.select(getSpinnerState).subscribe(data=>{
       this.isLoading = data;

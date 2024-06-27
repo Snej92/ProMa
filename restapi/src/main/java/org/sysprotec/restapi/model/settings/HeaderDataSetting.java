@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.sysprotec.restapi.model.Project;
 import org.sysprotec.restapi.model.overview.HeaderData;
-import org.sysprotec.restapi.model.overview.Lop;
 
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class HeaderDataSetting {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "HEADER_SETTING_ID_GEN")
     @SequenceGenerator(name = "HEADER_SETTING_ID_GEN", sequenceName = "HEADER_SETTING_ID_SEQ", initialValue = 1, allocationSize = 1)
-    private Integer id;
+    private Long id;
     private String item;
     @ManyToOne
     @JoinColumn(name = "project_id")
