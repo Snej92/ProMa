@@ -8,7 +8,7 @@
     <app-sys-nav-button (click)="selectSetting(6)" [selected]="selectedSetting==6" text="Kontrolle"></app-sys-nav-button>
     <app-sys-nav-button (click)="selectSetting(7)" [selected]="selectedSetting==7" text="Doku"></app-sys-nav-button>
     <app-sys-nav-button (click)="selectSetting(8)" [selected]="selectedSetting==8" text="LOP"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectSetting(9)" [selected]="selectedSetting==9" text="Historie"></app-sys-nav-button>
+<!--    <app-sys-nav-button (click)="selectSetting(9)" [selected]="selectedSetting==9" text="Historie"></app-sys-nav-button>-->
   </div>
   <div class="settings-divider">
     <mat-divider vertical="true"></mat-divider>
@@ -16,14 +16,14 @@
   <div class="settings-content">
     <ng-container [ngSwitch]="selectedSetting">
       <div *ngSwitchCase="1"> Stationen </div>
-      <div *ngSwitchCase="2"> Kopfdaten </div>
-      <div *ngSwitchCase="3"> Vorgaben </div>
-      <div *ngSwitchCase="4"> Projektierung </div>
-      <div *ngSwitchCase="5"> Technische Daten </div>
-      <div *ngSwitchCase="6"> Kontrolle </div>
-      <div *ngSwitchCase="7"> Doku </div>
+      <app-header-data-settings *ngSwitchCase="2"></app-header-data-settings>
+      <app-specification-settings *ngSwitchCase="3"></app-specification-settings>
+      <app-projection-settings *ngSwitchCase="4"></app-projection-settings>
+      <app-technical-data-settings *ngSwitchCase="5"></app-technical-data-settings>
+      <app-control-settings *ngSwitchCase="6"></app-control-settings>
+      <app-documentation-settings *ngSwitchCase="7"></app-documentation-settings>
       <app-lop-settings *ngSwitchCase="8"></app-lop-settings>
-      <div *ngSwitchCase="9"> Historie </div>
+<!--      <div *ngSwitchCase="9"> Historie </div>-->
     </ng-container>
   </div>
 </div>

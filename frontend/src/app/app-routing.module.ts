@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'version', component: VersionComponent, canActivate: [AuthGuard]},
   {path: 'station', component: StationComponent, canActivate: [AuthGuard]},
   {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
-  {path: 'userAdministration', component: UserAdministrationComponent, canActivate: [AuthGuard]},
+  {path: 'userAdministration', component: UserAdministrationComponent, canActivate: [AuthGuard], data:{roles:['admin']}},
   {path: 'projectAdministration', component: ProjectAdministrationComponent, canActivate: [AuthGuard]},
   {path: '**', component: DashboardComponent, canActivate: [AuthGuard]},
 ];

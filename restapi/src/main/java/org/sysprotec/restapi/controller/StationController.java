@@ -41,4 +41,9 @@ public class StationController {
     public void deleteStation(@PathVariable Long stationId){
         stationService.deleteStation(stationId);
     }
+
+    @PostMapping("/updateStationStatus")
+    public void updateAllStationStatus(){
+        stationService.updateAllStationStatus();
+    }
 }

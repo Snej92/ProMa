@@ -10,7 +10,6 @@ public class ProjectDto {
     private Long id;
     private String name;
     private String description;
-    private Boolean favorite;
     private Integer amountStations;
     private Integer inProgressStations;
     private Integer storedStations;
@@ -19,7 +18,6 @@ public class ProjectDto {
     public ProjectDto(Long id,
                       String name,
                       String description,
-                      Boolean favorite,
                       Integer amountStations,
                       Integer inProgressStations,
                       Integer storedStations,
@@ -27,7 +25,6 @@ public class ProjectDto {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.favorite = favorite;
         this.amountStations = amountStations;
         this.inProgressStations = inProgressStations;
         this.storedStations = storedStations;

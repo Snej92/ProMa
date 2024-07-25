@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-between ms-2 mt-2 me-2">
     <div class="card-header-left">
       <button mat-raised-button matTooltip="Favorit" color="accent" class="button small-button">
-        <i class="material-icons star-icon" [ngClass]="{'star-icon': projectView?.favorite}" >star</i>
+        <i class="material-icons star-icon" [ngClass]="{'star-icon': favorite}" >star</i>
       </button>
       <div class="card-header-text">
         <div class="project-name">
@@ -15,7 +15,7 @@
     </div>
 
     <div class="card-header-right">
-      <button mat-icon-button [matMenuTriggerFor]="menu">
+      <button class="align-menu-button" mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">

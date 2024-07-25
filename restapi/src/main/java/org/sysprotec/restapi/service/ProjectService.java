@@ -24,8 +24,8 @@ public class ProjectService {
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
 
-    public List<ProjectView> getAllProjects() {
-        return projectRepository.findBy();
+    public List<Project> getAllProjects() {
+        return projectRepository.findAll();
     }
 
     public ProjectDto getActiveProject() {
@@ -36,8 +36,14 @@ public class ProjectService {
             if(user!=null){
                 if(user.getActiveProject()!=null){
                     if(user.getActiveProject()!=0){
-                        log.info("send active project to frontend");
-                        return projectRepository.getProjectedById(user.getActiveProject());
+                        if(projectRepository.getProjectedById(user.getActiveProject()) != null){
+                            log.info("send active project to frontend");
+                            return projectRepository.getProjectedById(user.getActiveProject());
+                        } else {
+                            log.info("active project not found, active project set to 0");
+                            user.setActiveProject(0L);
+                            userRepository.save(user);
+                        }
                     }
                 }
                 log.info("send dummy project to frontend");
@@ -54,18 +60,20 @@ public class ProjectService {
     }
 
     public ProjectDto addProject(ProjectDto projectDto) {
-        Project saveProject = Project.builder()
-                .name(projectDto.getName())
-                .description(projectDto.getDescription())
-                .favorite(projectDto.getFavorite())
-                .amountStations(projectDto.getAmountStations())
-                .inProgressStations(projectDto.getInProgressStations())
-                .storedStations(projectDto.getStoredStations())
-                .notStoredStations(projectDto.getNotStoredStations())
-                .build();
-        projectRepository.save(saveProject);
-        log.info("Project " + projectDto.getName() + " created");
-        return projectRepository.findTopByOrderByIdDesc();
+        if(projectRepository.findProjectByNameIgnoreCase(projectDto.getName()) == null){
+            Project saveProject = Project.builder()
+                    .name(projectDto.getName())
+                    .description(projectDto.getDescription())
+                    .amountStations(projectDto.getAmountStations())
+                    .inProgressStations(projectDto.getInProgressStations())
+                    .storedStations(projectDto.getStoredStations())
+                    .notStoredStations(projectDto.getNotStoredStations())
+                    .build();
+            projectRepository.save(saveProject);
+            log.info("Project " + projectDto.getName() + " created");
+            return projectRepository.findTopByOrderByIdDesc();
+        }
+        return null;
     }
 
     public ProjectDto updateProject(ProjectDto projectDto) {
@@ -74,7 +82,6 @@ public class ProjectService {
             Project saveProject = optionalProject.get();
             saveProject.setName(projectDto.getName());
             saveProject.setDescription(projectDto.getDescription());
-            saveProject.setFavorite(projectDto.getFavorite());
             saveProject.setAmountStations(projectDto.getAmountStations());
             saveProject.setInProgressStations(projectDto.getInProgressStations());
             saveProject.setStoredStations(projectDto.getStoredStations());

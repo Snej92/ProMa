@@ -3,11 +3,10 @@ import {
   projectViewModel
 } from "../../modules/project-administration/store/project-administration.model";
 
-const activeProjectViewModel:projectViewModel={
+export const activeProjectViewModel:projectViewModel={
   id:0,
-  name:'',
+  name:'Kein Projekt ausgewählt',
   description:'',
-  favorite:false,
   amountStations:0,
   inProgressStations:0,
   storedStations:0,

@@ -1,0 +1,42 @@
+<div class="div-table">
+  <div class="table-container mat-elevation-z8">
+    <table mat-table [dataSource]="documentationSettings.documentationSettingList">
+
+      <ng-container matColumnDef="Aktion">
+        <th class="th-Aktion" mat-header-cell *matHeaderCellDef> Aktion </th>
+        <td mat-cell *matCellDef="let documentation">
+          <ng-container *ngIf="!editDocumentationSettings[documentation.id].isEdit">
+            <app-sys-button icon="edit" color="accent" tooltip="Bearbeiten" (click)="editDocumentationSetting(documentation.id)"></app-sys-button>
+            <app-sys-button icon="delete" tooltip="Löschen" (click)="deleteDocumentation(documentation.id,documentation.name)"></app-sys-button>
+          </ng-container>
+          <ng-container *ngIf="editDocumentationSettings[documentation.id].isEdit">
+            <app-sys-button icon="check" color="accent" tooltip="Speichern" (click)="updateDocumentationSetting(documentation.id)"></app-sys-button>
+            <app-sys-button icon="close" tooltip="Abbrechen" (click)="cancelEditDocumentationSetting(documentation.id)"></app-sys-button>
+          </ng-container>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Doku">
+        <th mat-header-cell *matHeaderCellDef> Doku </th>
+        <td mat-cell *matCellDef="let documentation">
+          <ng-container *ngIf="!editDocumentationSettings[documentation.id].isEdit">
+            {{documentation.item}}
+          </ng-container>
+          <ng-container *ngIf="editDocumentationSettings[documentation.id].isEdit">
+            <mat-form-field class="alignment edit-mat-form-field-doku">
+              <input matInput [(ngModel)]="editDocumentationSettings[documentation.id].documentationSetting.item">
+            </mat-form-field>
+          </ng-container>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+  </div>
+  <mat-divider class="mt-4"></mat-divider>
+  <div class="d-flex flex-row-reverse">
+    <button class="mt-2" mat-raised-button color="accent" (click)="addDocumentationSetting()">Hinzufügen</button>
+  </div>
+</div>

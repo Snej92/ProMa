@@ -22,19 +22,38 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
 
-  keycloak:
-    image: quay.io/keycloak/keycloak:24.0.2
-    environment:
-      KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://postgresql:5432/Keycloak
-      KC_DB_USERNAME: postgres
-      KC_DB_PASSWORD: password
-      KEYCLOAK_ADMIN: keycloak
-      KEYCLOAK_ADMIN_PASSWORD: password
-      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
-      #JDBC_PARAMS: "ssl=true"
-    ports:
-      - "8081:8081"
-    command: [ "start-dev", "--http-port=8081" ]
-    depends_on:
-      - postgresql
+# Keycloak wurde auf den server geschoben -> siehe application.properties
+#  keycloak:
+#    image: quay.io/keycloak/keycloak:24.0.2
+#    environment:
+#      KC_DB: postgres
+#      KC_DB_URL: jdbc:postgresql://postgresql:5432/Keycloak
+#      KC_DB_USERNAME: postgres
+#      KC_DB_PASSWORD: password
+#      KEYCLOAK_ADMIN: keycloak
+#      KEYCLOAK_ADMIN_PASSWORD: password
+#      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
+#      #JDBC_PARAMS: "ssl=true"
+#    ports:
+#      - "8081:8081"
+#    command: [ "start-dev", "--http-port=8081" ]
+#    depends_on:
+#      - postgresql
+#
+#  frontend:
+#    build: ./frontend
+#    container_name: proma-ui
+#    ports:
+#      - 4200:80
+
+#  springboot:
+#    container_name: springbootProMa
+#    image: springbootstuto:0.0.8
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    restart: always
+#    ports:
+#      - "7081:7081"
+#    volumes:
+#      - springboot_data:/data

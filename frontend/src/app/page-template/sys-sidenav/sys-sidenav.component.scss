@@ -15,3 +15,36 @@ mat-sidenav, mat-sidenav-content, mat-sidenav-container{
   margin-top: 24px;
   margin-left: 24px;
 }
+
+.alignment-project{
+  position: relative;
+  top: 6.5px;
+  margin-left: 19px;
+}
+
+.alignment-collapse-button{
+  position: relative;
+  right: 6.5px;
+}
+
+.alignment-user{
+  position: relative;
+  top: 8px;
+}
+
+.alignment-theme-toggle{
+  position: relative;
+  left: 7px;
+}
+
+.flex-container{
+  display: flex;
+}
+
+.divider-container{
+  height: 70%;
+  position: relative;
+  top: 7px;
+  right: 2px;
+  background-color: var(--mat-divider-white-opacity);
+}

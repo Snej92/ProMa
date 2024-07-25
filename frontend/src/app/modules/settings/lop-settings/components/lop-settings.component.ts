@@ -18,7 +18,11 @@ import {SysConfirmationComponent} from "../../../../core/sys-confirmation/sys-co
 })
 export class LopSettingsComponent implements OnInit, OnDestroy{
 
-  lopSettings !: lopSetting;
+  lopSettings:lopSetting={
+    lopSettingList:[],
+    errorMessage:''
+  }
+
   private subscriptions: Subscription[] = [];
   displayedColumns: string[] = ['Aktion','Aufnahme', 'LOP']
 
@@ -29,7 +33,7 @@ export class LopSettingsComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.store.dispatch(loadSpinner({isLoading:true}));
-      this.store.dispatch(loadSettingLop())
+    this.store.dispatch(loadSettingLop())
     this.subscriptions.push(
       this.store.select(getSettingLopInfo).pipe()
         .subscribe(data=>{

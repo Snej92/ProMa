@@ -23,10 +23,10 @@ public class TechnicalData {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TECHNICAL_DATA_ID_GEN")
     @SequenceGenerator(name = "TECHNICAL_DATA_ID_GEN", sequenceName = "TECHNICAL_DATA_ID_SEQ", initialValue = 1, allocationSize = 1)
     private Long id;
+    private String value;
     @ManyToOne
     @JoinColumn(name= "technical_data_setting_id")
     private TechnicalDataSetting technicalDataSetting;
-    private Long value;
     @ManyToOne
     @JoinColumn(name = "station_id")
     private Station station;

@@ -5,7 +5,6 @@ import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../core/store/appState.model";
 import {Subscription} from "rxjs";
 import {stationView} from "../../station/store/stationView.model";
-import {MatTabGroup} from "@angular/material/tabs";
 
 @Component({
   selector: 'app-overview',

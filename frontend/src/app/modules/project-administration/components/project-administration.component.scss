@@ -1,4 +1,8 @@
 .project-cards-container{
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 95%;
+
   display: flex;
   flex-wrap: wrap;
 }

@@ -14,7 +14,8 @@ public class CorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:4200"); // Specify the origin of your Angular frontend
+        config.addAllowedOrigin("https://proma.snejcloud.de"); // Specify the origin of your Angular frontend for production
+        config.addAllowedOrigin("http://localhost:4200"); // Specify the origin of your Angular frontend for development
         config.addAllowedHeader("*"); // Allow all headers
         config.addAllowedMethod("*"); // Allow all HTTP methods
         source.registerCorsConfiguration("/**", config);

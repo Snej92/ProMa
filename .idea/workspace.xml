@@ -4,71 +4,317 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="672b6c24-1ba4-45dc-9cab-421c2d00eb01" name="Changes" comment="history table scrollable with sticky head and return Desc sorted">
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/overview/ControlController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/overview/DocumentationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/overview/ProjectionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/overview/SpecificationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/settings/ControlSettingController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/settings/DocumentationSettingController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/settings/ProjectionSettingController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/settings/SpecificationSettingController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/overview/TaskRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/settings/TaskSettingRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/ControlService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/DocumentationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/ProjectionService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/SpecificationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/ControlSettingService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/DocumentationSettingService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/ProjectionSettingService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/SpecificationSettingService.java" afterDir="false" />
+    <list default="true" id="672b6c24-1ba4-45dc-9cab-421c2d00eb01" name="Changes" comment="started to implement all &quot;TaskSettings&quot;">
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/nginx.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/components/control.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/components/control.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/components/control.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/components/control.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/service/control.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/service/control.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/store/control.actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/store/control.effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/store/control.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/store/control.reducers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/store/control.selectors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/store/control.state.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/documentation/components/documentation.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/documentation/components/documentation.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/documentation/components/documentation.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/documentation/components/documentation.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/documentation/service/documentation.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/documentation/service/documentation.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/documentation/store/documentation.actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/documentation/store/documentation.effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/documentation/store/documentation.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/documentation/store/documentation.reducers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/documentation/store/documentation.selectors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/documentation/store/documentation.state.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/headerData/components/header-data.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/headerData/components/header-data.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/headerData/components/header-data.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/headerData/components/header-data.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/headerData/sercive/header-data.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/headerData/sercive/header-data.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/headerData/store/headerData.actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/headerData/store/headerData.effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/headerData/store/headerData.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/headerData/store/headerData.reducers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/headerData/store/headerData.selectors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/headerData/store/headerData.state.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/projection/components/projection.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/projection/components/projection.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/projection/components/projection.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/projection/components/projection.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/projection/service/projection.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/projection/service/projection.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/projection/store/projection.actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/projection/store/projection.effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/projection/store/projection.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/projection/store/projection.reducers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/projection/store/projection.selectors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/projection/store/projection.state.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/specification/components/specification.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/specification/components/specification.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/specification/components/specification.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/specification/components/specification.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/specification/service/specification.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/specification/service/specification.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/specification/store/specification.actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/specification/store/specification.effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/specification/store/specification.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/specification/store/specification.reducers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/specification/store/specification.selectors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/specification/store/specification.state.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-control/station-overview-control.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-control/station-overview-control.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-control/station-overview-control.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-control/station-overview-control.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-documentation/station-overview-documentation.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-documentation/station-overview-documentation.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-documentation/station-overview-documentation.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-documentation/station-overview-documentation.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-general/station-overview-general.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-general/station-overview-general.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-general/station-overview-general.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-general/station-overview-general.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-lop/station-overview-lop.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-lop/station-overview-lop.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-lop/station-overview-lop.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-lop/station-overview-lop.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-specification/station-overview-specification.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-specification/station-overview-specification.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-specification/station-overview-specification.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-specification/station-overview-specification.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/technicalData/components/technical-data.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/technicalData/components/technical-data.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/technicalData/components/technical-data.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/technicalData/components/technical-data.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/technicalData/service/technical-data.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/technicalData/service/technical-data.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/technicalData/store/technicalData.actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/technicalData/store/technicalData.effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/technicalData/store/technicalData.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/technicalData/store/technicalData.reducers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/technicalData/store/technicalData.selectors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/technicalData/store/technicalData.state.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/HeaderData-settings/components/add-header-data/add-header-data.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/HeaderData-settings/components/add-header-data/add-header-data.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/HeaderData-settings/components/add-header-data/add-header-data.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/HeaderData-settings/components/add-header-data/add-header-data.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/HeaderData-settings/components/header-data-settings.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/HeaderData-settings/components/header-data-settings.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/HeaderData-settings/components/header-data-settings.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/HeaderData-settings/components/header-data-settings.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/HeaderData-settings/service/header-data-settings.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/HeaderData-settings/service/header-data-settings.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/HeaderData-settings/store/headerDataSetting.actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/HeaderData-settings/store/headerDataSetting.effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/HeaderData-settings/store/headerDataSetting.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/HeaderData-settings/store/headerDataSetting.reducers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/HeaderData-settings/store/headerDataSetting.selectors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/HeaderData-settings/store/headerDataSetting.state.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/TechnicalData-settings/components/add-technical-data/add-technical-data.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/TechnicalData-settings/components/add-technical-data/add-technical-data.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/TechnicalData-settings/components/add-technical-data/add-technical-data.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/TechnicalData-settings/components/add-technical-data/add-technical-data.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/TechnicalData-settings/components/technical-data-settings.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/TechnicalData-settings/components/technical-data-settings.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/TechnicalData-settings/components/technical-data-settings.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/TechnicalData-settings/components/technical-data-settings.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/TechnicalData-settings/service/technical-data-settings.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/TechnicalData-settings/service/technical-data-settings.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/TechnicalData-settings/store/technicalDataSetting.actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/TechnicalData-settings/store/technicalDataSetting.effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/TechnicalData-settings/store/technicalDataSetting.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/TechnicalData-settings/store/technicalDataSetting.reducers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/TechnicalData-settings/store/technicalDataSetting.selectors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/TechnicalData-settings/store/technicalDataSetting.state.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/components/add-control/add-control.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/components/add-control/add-control.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/components/add-control/add-control.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/components/add-control/add-control.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/components/control-settings.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/components/control-settings.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/components/control-settings.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/components/control-settings.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/service/control-settings.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/service/control-settings.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/store/controlSetting.actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/store/controlSetting.effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/store/controlSetting.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/store/controlSetting.reducers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/store/controlSetting.selectors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/store/controlSetting.state.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/documentation-settings/components/add-documentation/add-documentation.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/documentation-settings/components/add-documentation/add-documentation.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/documentation-settings/components/add-documentation/add-documentation.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/documentation-settings/components/add-documentation/add-documentation.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/documentation-settings/components/documentation-settings.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/documentation-settings/components/documentation-settings.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/documentation-settings/components/documentation-settings.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/documentation-settings/components/documentation-settings.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/documentation-settings/service/documentation-settings.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/documentation-settings/service/documentation-settings.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/documentation-settings/store/documentationSetting.actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/documentation-settings/store/documentationSetting.effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/documentation-settings/store/documentationSetting.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/documentation-settings/store/documentationSetting.reducers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/documentation-settings/store/documentationSetting.selectors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/documentation-settings/store/documentationSetting.state.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/projection-settings/components/add-projection/add-projection.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/projection-settings/components/add-projection/add-projection.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/projection-settings/components/add-projection/add-projection.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/projection-settings/components/add-projection/add-projection.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/projection-settings/components/projection-settings.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/projection-settings/components/projection-settings.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/projection-settings/components/projection-settings.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/projection-settings/components/projection-settings.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/projection-settings/service/projection-settings.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/projection-settings/service/projection-settings.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/projection-settings/store/projectionSetting.actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/projection-settings/store/projectionSetting.effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/projection-settings/store/projectionSetting.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/projection-settings/store/projectionSetting.reducers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/projection-settings/store/projectionSetting.selectors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/projection-settings/store/projectionSetting.state.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/specification-settings/components/add-specification/add-specification.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/specification-settings/components/add-specification/add-specification.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/specification-settings/components/add-specification/add-specification.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/specification-settings/components/add-specification/add-specification.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/specification-settings/components/specification-settings.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/specification-settings/components/specification-settings.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/specification-settings/components/specification-settings.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/specification-settings/components/specification-settings.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/specification-settings/service/specification-settings.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/specification-settings/service/specification-settings.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/specification-settings/store/specificationSetting.actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/specification-settings/store/specificationSetting.effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/specification-settings/store/specificationSetting.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/specification-settings/store/specificationSetting.reducers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/specification-settings/store/specificationSetting.selectors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/specification-settings/store/specificationSetting.state.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/overview/HeaderDataController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/overview/TechnicalDataController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/settings/HeaderDataSettingController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/settings/TechnicalDataSettingController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/types/SettingType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/overview/HeaderDataRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/overview/TechnicalDataRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/settings/HeaderDataSettingRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/settings/TechnicalDataSettingRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/LogService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/HeaderDataService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/TechnicalDataService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/HeaderDataSettingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/TechnicalDataSettingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/lop/components/lop.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/lop/components/lop.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-loadingspinner/sys-loadingspinner.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-loadingspinner/sys-loadingspinner.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth-guard.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth-guard.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/active-project/active-project.state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/active-project/active-project.state.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/store/app.effect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/store/app.effect.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/store/app.state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/store/app.state.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/sys-confirmation/sys-confirmation.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/sys-confirmation/sys-confirmation.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/sys-confirmation/sys-confirmation.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/sys-confirmation/sys-confirmation.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/components/overview.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/components/overview.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/components/overview.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/components/overview.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/components/overview.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/components/overview.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/store/history.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/store/history.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/store/history.state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/store/history.state.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/lop/store/lop.effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/lop/store/lop.effects.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/lop/store/lop.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/lop/store/lop.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-administration.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-administration.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-administration.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-administration.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/store/project-administration.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/store/project-administration.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/components/settings.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/components/settings.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/components/settings.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/components/settings.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/lop-settings/components/add-lop/add-lop.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/lop-settings/components/add-lop/add-lop.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/lop-settings/components/lop-settings.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/lop-settings/components/lop-settings.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/lop-settings/components/lop-settings.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/lop-settings/components/lop-settings.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/lop-settings/components/lop-settings.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/lop-settings/components/lop-settings.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/add-station/add-station.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/add-station/add-station.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/store/stationView.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/store/stationView.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/components/user-administration/user-administration.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/components/user-administration/user-administration.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/components/user-administration/user-administration.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/components/user-administration/user-administration.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/version/components/version.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/version/components/version.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-nav-button/sys-nav-button.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-nav-button/sys-nav-button.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-nav-button/sys-nav-button.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-nav-button/sys-nav-button.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/custom-sidenav/custom-sidenav.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/custom-sidenav/custom-sidenav.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/environments/environment.development.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/environments/environment.development.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/environments/environment.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/CorsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/KeycloakConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/KeycloakConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/ProjectConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/ProjectConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/UserConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/UserConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/HistoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/HistoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/ProjectController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/StationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/StationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/VersionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/VersionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/overview/LopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/overview/LopController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/settings/LopSettingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/settings/LopSettingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/History.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/overview/ControlController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/overview/task/ControlController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/overview/DocumentationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/overview/task/DocumentationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/overview/ProjectionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/overview/task/ProjectionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/overview/SpecificationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/overview/task/SpecificationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/settings/ControlSettingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/settings/taskSetting/ControlSettingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/settings/DocumentationSettingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/settings/taskSetting/DocumentationSettingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/settings/ProjectionSettingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/settings/taskSetting/ProjectionSettingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/settings/SpecificationSettingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/settings/taskSetting/SpecificationSettingController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/Role.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/Station.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/Station.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/Version.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/Version.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/VersionStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/VersionStation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/overview/HeaderData.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/overview/HeaderData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/overview/Lop.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/overview/Lop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/overview/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/overview/Task.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/overview/TechnicalData.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/overview/TechnicalData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/projections/ProjectDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/projections/ProjectDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/projections/ProjectView.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/projections/ProjectView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/projections/StationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/projections/StationDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/projections/StationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/projections/StationView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/settings/HeaderDataSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/settings/HeaderDataSetting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/settings/LopSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/settings/LopSetting.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/settings/TaskSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/settings/TaskSetting.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/settings/TechnicalDataSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/settings/TechnicalDataSetting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/HistoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/HistoryRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/ProjectRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/ProjectRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/RoleRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/StationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/StationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/VersionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/VersionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/VersionStationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/VersionStationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/overview/LopRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/overview/LopRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/settings/LopSettingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/settings/LopSettingRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/overview/TaskRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/overview/TaskRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/HistoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/HistoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/KeycloakService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/KeycloakService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/ProjectService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/StationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/StationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/VersionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/VersionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/LopService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/LopService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/ControlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/task/ControlService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/DocumentationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/task/DocumentationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/ProjectionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/task/ProjectionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/SpecificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/task/SpecificationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/ControlSettingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/task/ControlSettingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/DocumentationSettingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/task/DocumentationSettingService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/LopSettingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/LopSettingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/ProjectionSettingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/task/ProjectionSettingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/SpecificationSettingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/task/SpecificationSettingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +326,10 @@
       <list>
         <option value="TypeScript File" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
+        <option value="Dockerfile" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -105,6 +354,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 0
@@ -117,40 +369,55 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.RestapiApplication.executor": "Run",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Coding/StuTo",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "D:\\Coding\\ProMa\\frontend\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.frontend/Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.restapi [package].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.RestapiApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Coding/KeX&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Coding\\ProMa\\frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Coding\ProMa" />
+      <recent name="D:\Coding\ProMa\restapi" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\overview\technicalData\store" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\overview\headerData\store" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\overview\specification\store" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\overview\history\components" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\overview\history\service" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\page-template" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\version\service" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\project-administration\components" />
+      <recent name="D:\Coding\ProMa\frontend" />
+      <recent name="D:\Coding\ProMa\frontend\nginx" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\overview\station\components" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\overview\headerData\sercive" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\overview\technicalData\service" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="org.sysprotec.restapi.controller.overview" />
@@ -159,7 +426,7 @@
       <recent name="org.sysprotec.restapi.service.overview" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.RestapiApplication">
     <configuration name="RestapiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="restapi" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.sysprotec.restapi.RestapiApplication" />
@@ -167,6 +434,40 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="frontend/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="frontend/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+        <item itemvalue="Docker.frontend/Dockerfile" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -244,7 +545,20 @@
       <workItem from="1718886582070" duration="1129000" />
       <workItem from="1719210909807" duration="7517000" />
       <workItem from="1719378993740" duration="7179000" />
-      <workItem from="1719463790234" duration="14547000" />
+      <workItem from="1719463790234" duration="14603000" />
+      <workItem from="1719810582292" duration="4475000" />
+      <workItem from="1719994901031" duration="15913000" />
+      <workItem from="1720069185005" duration="21745000" />
+      <workItem from="1720159652966" duration="15034000" />
+      <workItem from="1720427403668" duration="12191000" />
+      <workItem from="1720499459743" duration="17494000" />
+      <workItem from="1720588385458" duration="13869000" />
+      <workItem from="1720674905801" duration="3522000" />
+      <workItem from="1721634298498" duration="12021000" />
+      <workItem from="1721717560057" duration="17724000" />
+      <workItem from="1721739080023" duration="793000" />
+      <workItem from="1721799658586" duration="17859000" />
+      <workItem from="1721880406564" duration="4972000" />
     </task>
     <task id="LOCAL-00001" summary="loading spinner">
       <option name="closed" value="true" />
@@ -382,7 +696,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718194991741</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="started to implement all &quot;TaskSettings&quot;">
+      <option name="closed" value="true" />
+      <created>1719496399237</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1719496399237</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -416,6 +738,7 @@
     <MESSAGE value="updated all models to have bidirectional access and started implementing History" />
     <MESSAGE value="added history in general and for LOP updates in overview. (Not in settings)" />
     <MESSAGE value="history table scrollable with sticky head and return Desc sorted" />
-    <option name="LAST_COMMIT_MESSAGE" value="history table scrollable with sticky head and return Desc sorted" />
+    <MESSAGE value="started to implement all &quot;TaskSettings&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="started to implement all &quot;TaskSettings&quot;" />
   </component>
 </project>

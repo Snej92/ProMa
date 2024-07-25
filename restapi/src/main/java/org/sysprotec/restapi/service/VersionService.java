@@ -29,13 +29,14 @@ public class VersionService {
 
 
     public List<Version> getVersions() {
+        List<Version> versions = new ArrayList<>();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String username = authentication.getName();
             User user = userRepository.findUserByUsernameIgnoreCase(username);
             if (user != null) {
                 if(user.getActiveProject() != null && user.getActiveProject()>0){
-                    List<Version> versions = versionRepository.findVersionsByProjectIdOrderByVersionAsc(user.getActiveProject());
+                    versions = versionRepository.findVersionsByProjectIdOrderByVersionAsc(user.getActiveProject());
                     for(Version version : versions){
                         List<VersionStation> versionStation = versionStationRepository.findVersionStationsByVersionIdOrderByIdAsc(version.getId());
                         version.setVersionStation(versionStation);
@@ -44,7 +45,7 @@ public class VersionService {
                 }
             }
         }
-        return null;
+        return versions;
     }
 
     public Version addVersion(Version version) {

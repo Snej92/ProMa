@@ -5,6 +5,7 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 import { KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
+import {jwtDecode} from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,10 @@ export class AuthGuard extends KeycloakAuthGuard {
     // Get the roles required from the route.
     const requiredRoles = route.data['roles'];
 
+
+    //get user groups
+    const userRoles = await this.getUserRoles();
+
     // Allow the user to proceed if no additional roles are required to access the route.
     if (!Array.isArray(requiredRoles) || requiredRoles.length === 0) {
       return true;
@@ -38,5 +43,15 @@ export class AuthGuard extends KeycloakAuthGuard {
 
     // Allow the user to proceed if all the required roles are present.
     return requiredRoles.every((role) => this.roles.includes(role));
+  }
+
+  private async getUserRoles(): Promise<string[]> {
+    const token = await this.keycloak.getToken();
+    if (token) {
+      console.log('token is OK - reading roles')
+      const decodedToken: any = jwtDecode(token);
+      return decodedToken?.realm_access?.roles || [];
+    }
+    return [];
   }
 }

@@ -1,15 +1,61 @@
-.div-table{
-  margin-left: 15%;
-  margin-right: 15%;
-  margin-top: 4px;
+.table-container{
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 70vh;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 1.2%;
 }
 
 .mat-mdc-header-row{
   color: white;
   background-color: var(--frontend-primary);
   height: 50px;
+  position: sticky;
+  top: 0;
+  //z-index: 10;
 }
 
 .mat-mdc-row:nth-child(even){
   background-color: var(--frontend-alternate);
+}
+
+.th-center{
+  text-align: center;
+}
+
+.th-Aktion{
+  padding-left: 35px;
+}
+
+.mat-column-Aktion{
+  width: 120px;
+}
+
+.mat-column-Vorname{
+
+}
+
+.mat-column-Nachname{
+
+}
+
+.mat-column-Kürzel{
+
+}
+
+.mat-column-E-Mail{
+
+}
+
+.mat-column-Telefon{
+
+}
+
+.mat-column-Benutzername{
+
+}
+
+.mat-column-Passwort{
+
 }

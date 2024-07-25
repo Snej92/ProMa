@@ -3,10 +3,10 @@
   <ng-container *ngIf="user.user.firstname!='bitte einloggen'">
     <ng-container *ngIf="user.user.activeProject > 0">
       <div class="station-cards-container">
-        <app-station-card class="station-card ms-5 mt-4 mat-elevation-z6"
+        <app-station-card class="station-card ms-5 mt-4 mb-1 mat-elevation-z6"
                           *ngFor="let stationView of stationView.stationViewList" [stationView]="stationView"/>
 
-        <mat-card class="card-container station-card ms-5 mt-4 justify-content-center">
+        <mat-card class="card-container station-card ms-5 mt-4 mb-1 justify-content-center">
           <div class="d-flex justify-content-center">
             <button class="card-button" mat-raised-button color="accent" (click)="addStation()">Hinzufügen</button>
           </div>

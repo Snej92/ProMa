@@ -25,7 +25,10 @@ export class VersionComponent implements OnInit,OnDestroy{
               private confirm:MatDialog) {
   }
 
-  version!:versions;
+  version : versions = {
+    versionList:[],
+    errorMessage:''
+  };
   private subscriptions: Subscription[] = [];
   displayedColumns: String[] = ['Aktion', 'Datum', 'Version', 'Aufgabe', 'Status'];
   extraColumns: String[] = [];

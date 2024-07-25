@@ -1,0 +1,42 @@
+<div class="div-table">
+  <div class="table-container mat-elevation-z8">
+    <table mat-table [dataSource]="controlSettings.controlSettingList">
+
+      <ng-container matColumnDef="Aktion">
+        <th class="th-Aktion" mat-header-cell *matHeaderCellDef> Aktion </th>
+        <td mat-cell *matCellDef="let control">
+          <ng-container *ngIf="!editControlSettings[control.id].isEdit">
+            <app-sys-button icon="edit" color="accent" tooltip="Bearbeiten" (click)="editControlSetting(control.id)"></app-sys-button>
+            <app-sys-button icon="delete" tooltip="Löschen" (click)="deleteControl(control.id,control.name)"></app-sys-button>
+          </ng-container>
+          <ng-container *ngIf="editControlSettings[control.id].isEdit">
+            <app-sys-button icon="check" color="accent" tooltip="Speichern" (click)="updateControlSetting(control.id)"></app-sys-button>
+            <app-sys-button icon="close" tooltip="Abbrechen" (click)="cancelEditControlSetting(control.id)"></app-sys-button>
+          </ng-container>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Kontrolle">
+        <th mat-header-cell *matHeaderCellDef> Kontrolle </th>
+        <td mat-cell *matCellDef="let control">
+          <ng-container *ngIf="!editControlSettings[control.id].isEdit">
+            {{control.item}}
+          </ng-container>
+          <ng-container *ngIf="editControlSettings[control.id].isEdit">
+            <mat-form-field class="alignment edit-mat-form-field-doku">
+              <input matInput [(ngModel)]="editControlSettings[control.id].controlSetting.item">
+            </mat-form-field>
+          </ng-container>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+  </div>
+  <mat-divider class="mt-4"></mat-divider>
+  <div class="d-flex flex-row-reverse">
+    <button class="mt-2" mat-raised-button color="accent" (click)="addControlSetting()">Hinzufügen</button>
+  </div>
+</div>

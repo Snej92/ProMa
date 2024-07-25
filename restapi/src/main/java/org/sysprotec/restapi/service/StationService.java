@@ -7,6 +7,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.sysprotec.restapi.model.*;
+import org.sysprotec.restapi.model.overview.Lop;
+import org.sysprotec.restapi.model.overview.Task;
 import org.sysprotec.restapi.model.projections.StationDto;
 import org.sysprotec.restapi.model.projections.StationView;
 import org.sysprotec.restapi.model.settings.LopSetting;
@@ -14,6 +16,7 @@ import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.StationRepository;
 import org.sysprotec.restapi.repository.UserRepository;
 import org.sysprotec.restapi.repository.VersionRepository;
+import org.sysprotec.restapi.repository.overview.TaskRepository;
 import org.sysprotec.restapi.service.overview.LopService;
 
 import java.util.ArrayList;
@@ -29,6 +32,8 @@ public class StationService {
     private final ProjectRepository projectRepository;
     private final VersionRepository versionRepository;
     private final LopService lopService;
+    private final TaskRepository taskRepository;
+    private final LogService logService;
 
 
     public List<StationView> getAllStations() {
@@ -37,8 +42,8 @@ public class StationService {
             String username = authentication.getName();
             User user = userRepository.findUserByUsernameIgnoreCase(username);
             if (user != null) {
-                if(stationRepository.getProjectedByProjectId(user.getActiveProject()).isPresent()){
-                    return stationRepository.getProjectedByProjectId(user.getActiveProject()).get();
+                if(stationRepository.getProjectedByProjectIdOrderById(user.getActiveProject()).isPresent()){
+                    return stationRepository.getProjectedByProjectIdOrderById(user.getActiveProject()).get();
                 }
             }
         }
@@ -57,7 +62,6 @@ public class StationService {
                     Station newStation = Station.builder()
                             .name(stationDto.getName())
                             .description(stationDto.getDescription())
-                            .favorite(stationDto.getFavorite())
                             .issuer(stationDto.getIssuer())
                             .status(stationDto.getStatus())
                             .totalProgress(stationDto.getTotalProgress())
@@ -135,7 +139,6 @@ public class StationService {
             Station saveStation = optionalStation.get();
             saveStation.setName(stationDto.getName());
             saveStation.setDescription(stationDto.getDescription());
-            saveStation.setFavorite(stationDto.getFavorite());
             saveStation.setIssuer(stationDto.getIssuer());
             saveStation.setStatus(stationDto.getStatus());
             saveStation.setTotalProgress(stationDto.getTotalProgress());
@@ -168,5 +171,69 @@ public class StationService {
     public Station getStation(Long stationId) {
         Optional<Station> optionalStation = stationRepository.findById(stationId);
         return optionalStation.orElse(null);
+    }
+
+    //#######################Additional Functions##############################
+
+    public void updateAllStationStatus(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String username = authentication.getName();
+            User user = userRepository.findUserByUsernameIgnoreCase(username);
+            if (user != null) {
+                Optional<Project> optionalProject = projectRepository.findProjectById(user.getActiveProject());
+                if (optionalProject.isPresent()) {
+                    Project savedProject = optionalProject.get();
+                    for(Station station : savedProject.getStations()){
+//                        List<Task> control = taskRepository.findAllByTaskSettingTypeAndStationId("control", stationId);
+//                        List<Task> specification = taskRepository.findAllByTaskSettingTypeAndStationId("specification", stationId);
+//                        List<Lop> lop = lopService.getStationLop(stationId);
+
+                        updateStationDocumentationProgress(station);
+                    }
+                }
+            }
+        }
+
+    }
+
+    public void updateStationDocumentationProgress(Station station){
+        List<Task> documentations = taskRepository.findAllByTaskSettingTypeAndStationId("doku", station.getId());
+        if(documentations != null){
+            int done = 0;
+            int toDo = 0;
+            int progress = 0;
+            int total = 0;
+            if(!documentations.isEmpty()){
+                //Total Documentations
+               total = documentations.size();
+
+                //Done Documentations + still to do documentations
+                for(Task task: documentations){
+                    if(task.getDone()){
+                        done += 1;
+                    } else {
+                        toDo += 1;
+                    }
+                }
+
+                //Progress
+                progress = (done/station.getDocumentationTotal())*100;
+            } else{
+                progress = 100;
+            }
+
+            station.setDocumentationTotal(total);
+            station.setDocumentationProgress(progress);
+            station.setDocumentationDone(done);
+            station.setDocumentationToDo(toDo);
+
+            logService.SeparatorLog();
+            log.info("documentation Total of '{}' set to: {}", station.getName(), station.getDocumentationTotal());
+            log.info("documentation Done of '{}' set to: {}", station.getName(), station.getDocumentationDone());
+            log.info("documentation ToDo of '{}' set to: {}", station.getName(), station.getDocumentationToDo());
+            log.info("documentation Progress of '{}' set to: {}%", station.getName(), station.getDocumentationProgress());
+            stationRepository.save(station);
+        }
     }
 }

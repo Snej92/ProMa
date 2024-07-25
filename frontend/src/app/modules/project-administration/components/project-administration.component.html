@@ -1,12 +1,12 @@
-<div class="project-cards-container">
+<div class="project-cards-container mt-3">
   <ng-container *ngIf="loggedUser as user">
       <app-project-card appProjectElevation [defaultElevation]="4" [raisedElevation]="16"
-                        class="project-card ms-5 mt-4 "
+                        class="project-card ms-5 mt-2 mb-5"
                         [loggedUser]="loggedUser"
                         *ngFor="let projectViews of projectView.projectViewList" [projectView]="projectViews"
                         [ngClass]="{'selected-card':projectViews.id===user.user.activeProject}"/>
 
-    <mat-card class="card-container project-card ms-5 mt-4 justify-content-center">
+    <mat-card class="card-container project-card ms-5 mt-2 mb-5 justify-content-center">
       <div class="d-flex justify-content-center">
         <button class="card-button" mat-raised-button color="accent" (click)="addProject()">Hinzufügen</button>
       </div>

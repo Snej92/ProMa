@@ -2,7 +2,6 @@ export interface stationViewModel{
   id:number,
   name:string,
   description:string,
-  favorite:boolean,
   issuer:string,
   status:string,
   version:string,

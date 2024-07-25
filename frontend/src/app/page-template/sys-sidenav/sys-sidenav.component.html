@@ -1,27 +1,42 @@
 <mat-toolbar color="primary" class="mat-elevation-z4 justify-content-between">
   <!--  left side-->
-  <span>
-    <button mat-icon-button (click)="collapsed.set(!collapsed())"> <mat-icon>menu</mat-icon> </button>
-  </span>
-  <span>
-    {{activeProjectView.projectView.name}}
-  </span>
-  <span>
-    Hallo, {{loggedUser.user.firstname}}
-  </span>
+  <div class="flex-container">
+    <span class="alignment-collapse-button">
+      <button mat-icon-button (click)="collapsed.set(!collapsed())"> <mat-icon>menu</mat-icon> </button>
+    </span>
+    <span>
+      <mat-divider class="divider-container" vertical="true"></mat-divider>
+    </span>
+    <span class="alignment-project">
+      {{activeProjectView.projectView.name}}
+    </span>
+  </div>
   <!--  right side-->
-  <span class="justify-content-between">
-    <button mat-icon-button routerLink="/projectAdministration" matTooltip="Projektverwaltung">
+  <span class="flex-container justify-content-between">
+    <span class="alignment-user">
+      Hallo, {{loggedUser.user.firstname}}
+    </span>
+    <span>
+      <mat-divider class="divider-container ms-4" vertical="true"></mat-divider>
+    </span>
+    <button mat-icon-button routerLink="/projectAdministration" matTooltip="Projektverwaltung" class="ms-1">
       <mat-icon>folder</mat-icon>
     </button>
-    <button mat-icon-button [matMenuTriggerFor]="menu">
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="me-2">
       <mat-icon>account_box</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/userAdministration"><span>Benutzerverwaltung</span></button>
+      <ng-container *ngIf="loggedUser.user.roles.adminRole">
+        <button mat-menu-item routerLink="/userAdministration"><span>Benutzerverwaltung</span></button>
+      </ng-container>
       <button mat-menu-item (click)="onLogout()"><span>Ausloggen</span></button>
     </mat-menu>
-    <app-theme-toggle></app-theme-toggle>
+    <span>
+      <mat-divider class="divider-container" vertical="true"></mat-divider>
+    </span>
+    <div class="alignment-theme-toggle">
+      <app-theme-toggle></app-theme-toggle>
+    </div>
   </span>
 </mat-toolbar>
 

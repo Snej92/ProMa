@@ -17,6 +17,8 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     ProjectDto getProjectedById(Long id);
     ProjectDto findTopByOrderByIdDesc();
 
+    Project findProjectByNameIgnoreCase(String name);
+
     //find By other ID
     Optional<Project> findProjectByVersionsId(Long id);
     Optional<Project> findProjectByLopSettingId(Long id);

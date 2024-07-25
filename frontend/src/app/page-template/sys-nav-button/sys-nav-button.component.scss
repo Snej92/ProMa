@@ -24,6 +24,10 @@
   min-width: unset!important;
 }
 
+.sys-nav-button.selected-text-color{
+  color: var(--frontend-nav-button-selected-text);
+}
+
 .sys-nav-button-content-right{
   border-radius: 0 4px 4px 0;
   display: flex;

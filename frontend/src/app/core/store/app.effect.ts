@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 import {emptyAction, showAlert} from "./app.action";
 import {exhaustMap, map} from "rxjs";
 
@@ -30,12 +30,14 @@ export class AppEffect{
 
   showSnackBarAlert(message:string, actionResult:string='fail'){
     let _class=actionResult=='pass'?'pass-snackbar':'fail-snackbar'
-    let _duration=actionResult=='pass'?3000:12000
-    return this.snackBar.open(message,'OK',{
-      duration:_duration,
-      verticalPosition:'bottom',
-      horizontalPosition:'end',
-      panelClass:[_class]
-    })
+    let _duration=actionResult=='pass'?3000:8000
+
+    const config = new MatSnackBarConfig();
+    config.duration = _duration;
+    config.verticalPosition = 'bottom';
+    config.horizontalPosition = 'end';
+    config.panelClass = [_class];
+
+    return this.snackBar.open(message,'OK',config)
   }
 }

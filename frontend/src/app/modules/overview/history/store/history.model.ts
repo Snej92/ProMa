@@ -9,5 +9,5 @@ export interface historyModel {
 
 export interface history {
   historyList : historyModel[],
-  errormessage : string
+  errorMessage : string
 }

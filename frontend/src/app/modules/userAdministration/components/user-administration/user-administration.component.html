@@ -1,10 +1,8 @@
-<div class="div-table">
-  <div>
+  <div class="table-container">
     <table mat-table [dataSource]="user.userList" class="mat-elevation-z8">
-
       <!-- Firstname Column -->
       <ng-container matColumnDef="Aktion">
-        <th mat-header-cell *matHeaderCellDef> Aktion </th>
+        <th class="th-Aktion" mat-header-cell *matHeaderCellDef> Aktion </th>
         <td mat-cell *matCellDef="let user">
           <app-sys-button icon="edit" color="accent" tooltip="Bearbeiten" (click)="editUser(user.id)"></app-sys-button>
           <app-sys-button icon="delete" tooltip="löschen" (click)="deleteUser(user.sub, user.firstname)"></app-sys-button>
@@ -62,4 +60,3 @@
       <button class="mt-2" mat-raised-button color="accent" (click)="addUser()">Hinzufügen</button>
     </div>
   </div>
-</div>

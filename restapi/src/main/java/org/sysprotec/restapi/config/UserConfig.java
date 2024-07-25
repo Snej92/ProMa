@@ -22,29 +22,20 @@ public class UserConfig {
                 .build();
 
         User Admin = User.builder()
-                .firstname("Test")
-                .lastname("Admin")
+                .firstname("Admin")
+                .lastname("Test")
                 .acronym("TAD")
                 .email("admin@admin.com")
                 .phone("geheim")
                 .username("admin@admin.com")
                 .password("test")
                 .roles(roleAll)
-                .activeProject(1L)
+                .activeProject(0L)
                 .build();
-//
-//        User BWA = User.builder()
-//                .firstname("Bernd")
-//                .lastname("Waegner")
-//                .acronym("BWA")
-//                .email("b.waegner@sysprotec.de")
-//                .phone("+49 911 ...")
-//                .username("bernd.waegner")
-//                .password("password")
-//                .roles(roleBWA)
-//                .build();
-//
-        return args -> userRepository.saveAll(List.of(
-                Admin));
+        if (userRepository.findUserByUsernameIgnoreCase("admin@admin.com") == null) {
+            userRepository.save(Admin);
+        }
+
+        return args -> userRepository.findUserByUsernameIgnoreCase("admin@admin.com");
     }
 }

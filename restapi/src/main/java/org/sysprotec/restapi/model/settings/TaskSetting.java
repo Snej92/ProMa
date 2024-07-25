@@ -22,7 +22,7 @@ public class TaskSetting {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TASK_SETTING_ID_GEN")
     @SequenceGenerator(name = "TASK_SETTING_ID_GEN", sequenceName = "TASK_SETTING_ID_SEQ", initialValue = 1, allocationSize = 1)
     private Long id;
-    private String name;
+    private String item;
     private String type;
 
     @ManyToOne

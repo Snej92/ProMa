@@ -1,0 +1,57 @@
+<mat-card class="card-container">
+  <div class="d-flex justify-content-between ms-2 mt-2 me-2">
+    <div class="card-header-left">
+      <button mat-raised-button matTooltip="Favorit" color="accent" class="button small-button">
+        <i class="material-icons star-icon" [ngClass]="{'star-icon': favorite}" >star</i>
+      </button>
+      <div class="card-header-text">
+        <h3 class="header-font">Allgemein</h3>
+      </div>
+    </div>
+
+    <div class="card-header-right">
+      <button class="align-menu-button" mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          Bearbeiten
+        </button>
+        <button mat-menu-item>
+          Löschen
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+
+  <div class="ms-2 mt-2">
+    <span class="properties-font">Stationsname: </span> <span class="ms-1">{{stationViewInput.name}}</span>
+  </div>
+
+  <div class="ms-2">
+    <span class="properties-font">Beschreibung: </span> <span class="ms-1">{{stationViewInput.description}}</span>
+  </div>
+
+  <div class="ms-2 mt-4 mb-4">
+    <span class="properties-font">
+      Status:
+    </span>
+    <span class="ms-1 station-status" [ngClass]="{
+          'station-status-ausgelagert': stationViewInput.status=='AUSGELAGERT',
+          'station-status-inarbeit': stationViewInput.status=='INARBEIT',
+          'station-status-eingelagert': stationViewInput.status=='EINGELAGERT'
+          }">
+      {{stationViewInput.status}}
+    </span>
+  </div>
+
+  <div class="ms-2">
+    <span class="properties-font">Bearbeiter: </span> <span class="ms-1">{{stationViewInput.issuer}}</span>
+  </div>
+
+  <div class="ms-2 mt-4">
+    <span class="properties-font">Projektfortschritt: </span>
+    <span [ngClass]="stationViewInput.totalProgress >= 100 ? 'progress-text-align-100' : 'progress-text-align'">{{stationViewInput.totalProgress}}</span>
+    <mat-progress-spinner class="progress-spinner-align" value="{{stationViewInput.totalProgress}}" mode="determinate" [diameter]="38" color="accent"></mat-progress-spinner>
+  </div>
+</mat-card>

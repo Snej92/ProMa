@@ -23,13 +23,13 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TASK_ID_GEN")
     @SequenceGenerator(name = "TASK_ID_GEN", sequenceName = "TASK_ID_SEQ", initialValue = 1, allocationSize = 1)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name= "task_setting_id")
-    private TaskSetting taskSetting;
     private String date;
     private String addition;
     private Boolean done;
     private Boolean commited;
+    @ManyToOne
+    @JoinColumn(name= "task_setting_id")
+    private TaskSetting taskSetting;
     @ManyToOne
     @JoinColumn(name = "station_id")
     private Station station;

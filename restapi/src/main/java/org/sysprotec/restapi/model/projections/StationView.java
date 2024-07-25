@@ -4,7 +4,6 @@ public interface StationView {
     Integer getId();
     String getName();
     String getDescription();
-    Boolean getFavorite();
     String getIssuer();
     String getStatus();
     String getVersion();

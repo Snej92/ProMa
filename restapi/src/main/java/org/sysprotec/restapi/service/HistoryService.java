@@ -34,7 +34,12 @@ public class HistoryService {
                     .filename("")
                     .station(station)
                     .build();
-            historyRepository.save(newHistory);
+            if(!newHistory.getItem().isBlank()){
+                historyRepository.save(newHistory);
+                log.info("New history saved");
+            } else {
+                log.warn("New history not saved cause item was blank");
+            }
         }
     }
 

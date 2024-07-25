@@ -19,6 +19,7 @@ import {deleteProject} from "../../store/project-administration.actions";
 export class ProjectCardComponent {
   @Input() projectView: projectViewModel | undefined;
   @Input() loggedUser!: loggedUser;
+  @Input() favorite : boolean = false;
 
   constructor(private store:Store<AppStateModel>,
               private dialog:MatDialog,

@@ -13,13 +13,16 @@ import java.util.Optional;
 public interface StationRepository extends JpaRepository<Station, Long> {
 
     StationView getProjectedById(Long id);
-    Optional<List<StationView>> getProjectedByProjectId(Long projectId);
+    Optional<List<StationView>> getProjectedByProjectIdOrderById(Long projectId);
     StationDto findTopByOrderByIdDesc();
     StationDto findProjectedById(Long id);
     Station getTopByOrderByIdDesc();
+
     Optional<Station> findStationByNameAndLopLopSettingId(String name, Long LopSettingId);
     Optional<Station> findStationByNameAndDocumentationTaskSettingId(String name, Long TaskSettingId);
     Optional<Station> findStationByNameAndSpecificationTaskSettingId(String name, Long TaskSettingId);
     Optional<Station> findStationByNameAndProjectionTaskSettingId(String name, Long TaskSettingId);
     Optional<Station> findStationByNameAndControlTaskSettingId(String name, Long TaskSettingId);
+    Optional<Station> findStationByNameAndTechnicalDataTechnicalDataSettingId(String name, Long TechnicalDataSettingId);
+    Optional<Station> findStationByNameAndHeaderDataHeaderDataSettingId(String name, Long HeaderDataSettingId);
 }

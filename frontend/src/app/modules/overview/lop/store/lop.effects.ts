@@ -44,7 +44,9 @@ export class LopEffects {
             loadSpinner({isLoading:false}),
             showAlert({message: 'Erfolgreich aktualisiert', actionResult:'pass'})
           )),
-          catchError((error)=> of(showAlert({message: 'Aktualisierung fehlgeschlagen wegen '+error.message, actionResult:'fail'}),loadSpinner({isLoading:false})))
+          catchError((error)=> of(
+            showAlert({message: 'Aktualisierung fehlgeschlagen wegen '+error.message, actionResult:'fail'}),
+            loadSpinner({isLoading:false})))
         )
       )
     )

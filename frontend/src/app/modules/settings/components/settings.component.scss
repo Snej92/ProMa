@@ -2,6 +2,7 @@
   margin-top: 4px;
   margin-left: 20px;
   display: flex;
+  flex-direction: row;
 }
 
 .settings-nav{
@@ -15,6 +16,13 @@
 }
 
 .settings-content{
+  margin-left: 2%;
+  margin-right: 2%;
   margin-top: 4px;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 85%;
+  min-width: 20%;
 }

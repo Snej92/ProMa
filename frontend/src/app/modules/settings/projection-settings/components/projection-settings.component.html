@@ -1,0 +1,42 @@
+<div class="div-table">
+  <div class="table-container mat-elevation-z8">
+    <table mat-table [dataSource]="projectionSettings.projectionSettingList">
+
+      <ng-container matColumnDef="Aktion">
+        <th class="th-Aktion" mat-header-cell *matHeaderCellDef> Aktion </th>
+        <td mat-cell *matCellDef="let projection">
+          <ng-container *ngIf="!editProjectionSettings[projection.id].isEdit">
+            <app-sys-button icon="edit" color="accent" tooltip="Bearbeiten" (click)="editProjectionSetting(projection.id)"></app-sys-button>
+            <app-sys-button icon="delete" tooltip="Löschen" (click)="deleteProjection(projection.id,projection.name)"></app-sys-button>
+          </ng-container>
+          <ng-container *ngIf="editProjectionSettings[projection.id].isEdit">
+            <app-sys-button icon="check" color="accent" tooltip="Speichern" (click)="updateProjectionSetting(projection.id)"></app-sys-button>
+            <app-sys-button icon="close" tooltip="Abbrechen" (click)="cancelEditProjectionSetting(projection.id)"></app-sys-button>
+          </ng-container>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Projektierung">
+        <th mat-header-cell *matHeaderCellDef> Projektierung </th>
+        <td mat-cell *matCellDef="let projection">
+          <ng-container *ngIf="!editProjectionSettings[projection.id].isEdit">
+            {{projection.item}}
+          </ng-container>
+          <ng-container *ngIf="editProjectionSettings[projection.id].isEdit">
+            <mat-form-field class="alignment edit-mat-form-field-doku">
+              <input matInput [(ngModel)]="editProjectionSettings[projection.id].projectionSetting.item">
+            </mat-form-field>
+          </ng-container>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+  </div>
+  <mat-divider class="mt-4"></mat-divider>
+  <div class="d-flex flex-row-reverse">
+    <button class="mt-2" mat-raised-button color="accent" (click)="addProjectionSetting()">Hinzufügen</button>
+  </div>
+</div>

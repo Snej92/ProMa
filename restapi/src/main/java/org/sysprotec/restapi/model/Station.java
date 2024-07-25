@@ -27,7 +27,6 @@ public class Station {
     private Long id;
     private String name;
     private String description;
-    private Boolean favorite;
     private String issuer;
     @Enumerated(EnumType.STRING)
     private StatusEPLAN status;

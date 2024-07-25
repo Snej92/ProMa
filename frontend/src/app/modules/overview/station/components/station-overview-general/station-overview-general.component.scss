@@ -1,0 +1,91 @@
+.card-container{
+  width: 350px;
+  border-radius: 12px;
+  background-color: var(--frontend-nav-button);
+  border-color: var(--frontend-nav-button-border);
+  border-width: 2px;
+}
+
+.align-menu-button{
+  position: relative;
+  top: -4px;
+}
+
+.card-header{
+  display: flex;
+}
+
+.card-header-left{
+  display: flex;
+}
+
+.card-header-right{
+  display:flex;
+}
+
+.card-header-text{
+  display: flex;
+  margin-left: 10px;
+  position: relative;
+  top: 8px;
+}
+
+.header-font{
+  font-size: 16px;
+  font-weight: 450;
+}
+
+.properties-font{
+  font-size: 14px;
+  font-weight: 450;
+}
+
+.progress-text-align-100{
+  position: relative;
+  left: 9.5px;
+}
+
+.progress-text-align{
+  position: relative;
+  left: 13.5px;
+}
+
+.progress-spinner-align{
+  position: relative;
+  top: -29px;
+  left: 123px;
+}
+
+.station-status{
+  color: white;
+  background-color: #6a6a6a;
+  align-content: center;
+  padding: 7px;
+  border-radius: 4px;
+}
+
+.station-status-ausgelagert{
+  background-color: var(--frontend-error);
+}
+
+.station-status-inarbeit{
+  background-color: var(--frontend-warning);
+}
+
+.station-status-eingelagert{
+  background-color: var(--frontend-success)
+}
+
+.star-icon{
+  color: var(--frontend-warning);
+}
+
+.small-button{
+  width: 36px;
+  height: 36px;
+  min-width: 38px !important;
+  padding: 0 !important;
+  margin-right: 4px;
+  margin-top: 4px;
+  //border-radius: 20px;
+}

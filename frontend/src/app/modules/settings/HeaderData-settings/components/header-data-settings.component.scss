@@ -1,0 +1,44 @@
+.table-container{
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 70vh;
+}
+
+.mat-mdc-header-row{
+  color: white;
+  background-color: var(--frontend-primary);
+  height: 50px;
+  position: sticky;
+  top: 0;
+  //z-index: 10;
+}
+
+.mat-mdc-row:nth-child(even){
+  background-color: var(--frontend-alternate);
+}
+
+.th-center{
+  text-align: center;
+}
+
+.th-Aktion{
+  padding-left: 35px;
+}
+
+.mat-column-Kopfdaten{
+  text-align: left;
+}
+
+.mat-column-Aktion{
+  width: 150px;
+}
+
+
+.alignment{
+  position: relative;
+  top: 9px;
+}
+
+.edit-mat-form-field-doku{
+  width: 100%;
+}

@@ -1,0 +1,63 @@
+.table-container{
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 70vh;
+}
+
+.mat-mdc-header-row{
+  color: white;
+  background-color: var(--frontend-primary);
+  height: 50px;
+  position: sticky;
+  top: 0;
+  //z-index: 10;
+}
+
+.mat-mdc-row:nth-child(even){
+  background-color: var(--frontend-alternate);
+}
+
+.editable-field {
+  cursor: pointer;
+}
+
+.editable-field:hover {
+  color: var(--frontend-primary);
+}
+
+.th-center{
+  text-align: center;
+}
+
+.th-left{
+  text-align: left;
+}
+
+.mat-column-Vorgabe{
+  width: 40%;
+}
+
+.mat-column-Erledigt{
+  width: 5%;
+}
+
+.mat-column-Übergeben{
+  width: 5%;
+}
+
+.mat-column-Zusatz{
+  width: 40%;
+}
+
+.mat-column-Datum{
+  width: 10%;
+}
+
+.alignment{
+  position: relative;
+  top: 9px;
+}
+
+.edit-mat-form-field-data{
+  width: 100%
+}

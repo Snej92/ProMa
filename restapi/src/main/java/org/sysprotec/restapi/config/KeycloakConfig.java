@@ -11,11 +11,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class KeycloakConfig {
 
-    private String authServerUrl = "http://localhost:8081";
+    private String authServerUrl = "https://kc.snejcloud.de/";
     //Arbeits Laptop
 //    private String adminClientSecret = "dZwaCJrCVnaEpV3LmIAQD0ts3DoSItu5";
     //Home
-    private String adminClientSecret = "ciTuUNXc8IURd1YkOI2v76bbl0i9zuwc";
+    private String adminClientSecret = "8tZR1kmBNEyX4q8u9Hp5WiW3FFvX63IT";
     private String realm = "ProMa";
     private String clientId = "admin-cli";
     @Bean

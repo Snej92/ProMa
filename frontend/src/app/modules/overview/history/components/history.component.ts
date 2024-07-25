@@ -18,7 +18,6 @@ export class HistoryComponent implements OnInit, OnDestroy{
 
   private subscriptions: Subscription[] = [];
   history !: history;
-  editData!:historyModel;
   displayedColumns: string[] = ['Zeitstempel', 'Historie', 'Benutzer', 'Dateiname'];
   @Input() stationId!:number;
 

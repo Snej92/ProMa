@@ -15,6 +15,7 @@ import {AddStationComponent} from "../add-station/add-station.component";
 })
 export class StationCardComponent {
   @Input() stationView: stationViewModel | undefined;
+  @Input() favorite : boolean = false;
 
   constructor(private store:Store<AppStateModel>,
               private dialog:MatDialog,

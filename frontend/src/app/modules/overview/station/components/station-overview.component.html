@@ -1,0 +1,22 @@
+<div class="station-overview-container">
+  <div class="ms-2 mt-2 station-overview-general mat-elevation-z8">
+    <app-station-overview-general class="mat-elevation-z8" [stationViewInput]="stationViewInput"></app-station-overview-general>
+  </div>
+  <div class="ms-5 mt-2">
+    <div class="mat-elevation-z8 station-overview-documentation">
+      <app-station-overview-documentation [stationViewInput]="stationViewInput" ></app-station-overview-documentation>
+    </div>
+    <div class="mat-elevation-z8 station-overview-control mt-5">
+      <app-station-overview-control [stationViewInput]="stationViewInput" ></app-station-overview-control>
+    </div>
+  </div>
+  <div class="ms-5 mt-2">
+    <div class="mat-elevation-z8 station-overview-specification">
+      <app-station-overview-specification [stationViewInput]="stationViewInput" ></app-station-overview-specification>
+    </div>
+    <div class="mat-elevation-z8 station-overview-lop mt-5">
+      <app-station-overview-lop [stationViewInput]="stationViewInput" ></app-station-overview-lop>
+    </div>
+  </div>
+</div>
+

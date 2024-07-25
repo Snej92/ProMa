@@ -103,6 +103,7 @@ $dark-theme: mat.define-dark-theme((
   @include mat.all-component-colors($dark-theme);
   --frontend-nav-button: rgba(255,255,255,.08);
   --frontend-nav-button-selected: rgba(255,255,255,0.2);
+  --frontend-nav-button-selected-text: #ff6742;
   background-color: #202124;
   color: #ffffff;
 }
@@ -126,13 +127,28 @@ body { margin: 0;
   --frontend-warning: #fb8C00;
   --frontend-alternate: rgba(0,0,0,0.06);
   --frontend-nav-button: rgba(0,0,0,0.08);
-  --frontend-nav-button-selected: rgba(0,0,0,0.16);
+  --frontend-nav-button-selected: rgba(0,0,0,0.12);
+  --frontend-nav-button-selected-text: #e63212;
   --frontend-nav-button-border: rgba(255,255,255,0.1);
   --mat-snack-bar-button-color: #c6c6c6;
+  --mat-divider-white-opacity: rgba(255,255,255,0.6)
 }
 
 .pass-snackbar {
+  position: relative;
+  //padding-left: 0px;
+}
 
+.pass-snackbar::after{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background-color: #5cb85c;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
 }
 
 .pass-snackbar .mat-mdc-button {
@@ -140,7 +156,20 @@ body { margin: 0;
 }
 
 .fail-snackbar {
+  position: relative;
+  //padding-left: 0px;
+}
 
+.fail-snackbar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background-color: #ed4337;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
 }
 
 .fail-snackbar .mat-mdc-button {

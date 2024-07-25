@@ -3,8 +3,16 @@
 }
 
 .sys-confirmation-header{
+  display: flex;
+  align-items: center;
+  text-align: center;
   background-color: var(--frontend-primary);
   color: white;
+  height: 50px;
+}
+
+.sys-confirmation-header-text{
+
 }
 
 .sys-confirmation-subtitle{

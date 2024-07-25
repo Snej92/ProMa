@@ -1,5 +1,6 @@
 package org.sysprotec.restapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +18,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"stations"})
 public class Project {
 
     @Id
@@ -25,7 +27,6 @@ public class Project {
     private Long id;
     private String name;
     private String description;
-    private Boolean favorite;
     private Integer amountStations;
     private Integer inProgressStations;
     private Integer storedStations;

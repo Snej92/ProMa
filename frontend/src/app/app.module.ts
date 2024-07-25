@@ -86,12 +86,63 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { HistoryComponent } from './modules/overview/history/components/history.component';
 import {HistoryEffects} from "./modules/overview/history/store/history.effects";
 import { AddHistoryComponent } from './modules/overview/history/components/add-history/add-history.component';
+import { ControlSettingsComponent } from './modules/settings/control-settings/components/control-settings.component';
+import { DocumentationSettingsComponent } from './modules/settings/documentation-settings/components/documentation-settings.component';
+import {
+  DocumentationSettingEffects
+} from "./modules/settings/documentation-settings/store/documentationSetting.effects";
+import { AddDocumentationComponent } from './modules/settings/documentation-settings/components/add-documentation/add-documentation.component';
+import { ProjectionSettingsComponent } from './modules/settings/projection-settings/components/projection-settings.component';
+import { SpecificationSettingsComponent } from './modules/settings/specification-settings/components/specification-settings.component';
+import {ControlSettingEffects} from "./modules/settings/control-settings/store/controlSetting.effects";
+import {ProjectionSettingEffects} from "./modules/settings/projection-settings/store/projectionSetting.effects";
+import {
+  SpecificationSettingEffects
+} from "./modules/settings/specification-settings/store/specificationSetting.effects";
+import { AddControlComponent } from './modules/settings/control-settings/components/add-control/add-control.component';
+import { AddProjectionComponent } from './modules/settings/projection-settings/components/add-projection/add-projection.component';
+import { AddSpecificationComponent } from './modules/settings/specification-settings/components/add-specification/add-specification.component';
+import { TechnicalDataSettingsComponent } from './modules/settings/TechnicalData-settings/components/technical-data-settings.component';
+import { HeaderDataSettingsComponent } from './modules/settings/HeaderData-settings/components/header-data-settings.component';
+import { AddHeaderDataComponent } from './modules/settings/HeaderData-settings/components/add-header-data/add-header-data.component';
+import { AddTechnicalDataComponent } from './modules/settings/TechnicalData-settings/components/add-technical-data/add-technical-data.component';
+import {HeaderDataSettingEffects} from "./modules/settings/HeaderData-settings/store/headerDataSetting.effects";
+import {
+  TechnicalDataSettingEffects
+} from "./modules/settings/TechnicalData-settings/store/technicalDataSetting.effects";
+import { DocumentationComponent } from './modules/overview/documentation/components/documentation.component';
+import {DocumentationEffects} from "./modules/overview/documentation/store/documentation.effects";
+import { ControlComponent } from './modules/overview/control/components/control.component';
+import { ProjectionComponent } from './modules/overview/projection/components/projection.component';
+import { SpecificationComponent } from './modules/overview/specification/components/specification.component';
+import {ControlEffects} from "./modules/overview/control/store/control.effects";
+import {SpecificationEffects} from "./modules/overview/specification/store/specification.effects";
+import {ProjectionEffects} from "./modules/overview/projection/store/projection.effects";
+import { HeaderDataComponent } from './modules/overview/headerData/components/header-data.component';
+import { TechnicalDataComponent } from './modules/overview/technicalData/components/technical-data.component';
+import {HeaderDataEffects} from "./modules/overview/headerData/store/headerData.effects";
+import {TechnicalDataEffects} from "./modules/overview/technicalData/store/technicalData.effects";
+import { StationOverviewComponent } from './modules/overview/station/components/station-overview.component';
+import { StationOverviewGeneralComponent } from './modules/overview/station/components/station-overview-general/station-overview-general.component';
+import {
+  StationOverviewDocumentationComponent
+} from "./modules/overview/station/components/station-overview-documentation/station-overview-documentation.component";
+import {
+  StationOverviewSpecificationComponent
+} from "./modules/overview/station/components/station-overview-specification/station-overview-specification.component";
+import {
+  StationOverviewControlComponent
+} from "./modules/overview/station/components/station-overview-control/station-overview-control.component";
+import {
+  StationOverviewLopComponent
+} from "./modules/overview/station/components/station-overview-lop/station-overview-lop.component";
+
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
       config: {
-        url: 'http://localhost:8081',
+        url: 'https://kc.snejcloud.de/',
         realm: 'ProMa',
         clientId: 'backend'
       },
@@ -132,7 +183,31 @@ function initializeKeycloak(keycloak: KeycloakService) {
     AddStationComponent,
     SysStatusLedComponent,
     HistoryComponent,
-    AddHistoryComponent
+    AddHistoryComponent,
+    ControlSettingsComponent,
+    DocumentationSettingsComponent,
+    AddDocumentationComponent,
+    ProjectionSettingsComponent,
+    SpecificationSettingsComponent,
+    AddControlComponent,
+    AddProjectionComponent,
+    AddSpecificationComponent,
+    TechnicalDataSettingsComponent,
+    HeaderDataSettingsComponent,
+    AddHeaderDataComponent,
+    AddTechnicalDataComponent,
+    DocumentationComponent,
+    ControlComponent,
+    ProjectionComponent,
+    SpecificationComponent,
+    HeaderDataComponent,
+    TechnicalDataComponent,
+    StationOverviewComponent,
+    StationOverviewGeneralComponent,
+    StationOverviewDocumentationComponent,
+    StationOverviewSpecificationComponent,
+    StationOverviewControlComponent,
+    StationOverviewLopComponent
   ],
     imports: [
         AppRoutingModule,
@@ -150,7 +225,19 @@ function initializeKeycloak(keycloak: KeycloakService) {
             ActiveProjectEffects,
             StationViewEffects,
             VersionEffects,
-            HistoryEffects]),
+            HistoryEffects,
+            DocumentationSettingEffects,
+            ControlSettingEffects,
+            ProjectionSettingEffects,
+            SpecificationSettingEffects,
+            HeaderDataSettingEffects,
+            TechnicalDataSettingEffects,
+            DocumentationEffects,
+            ControlEffects,
+            SpecificationEffects,
+            ProjectionEffects,
+            HeaderDataEffects,
+            TechnicalDataEffects]),
 
 
         MatToolbar,

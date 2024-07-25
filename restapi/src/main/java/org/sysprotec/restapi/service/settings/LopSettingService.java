@@ -16,6 +16,7 @@ import org.sysprotec.restapi.repository.overview.LopRepository;
 import org.sysprotec.restapi.repository.settings.LopSettingRepository;
 import org.sysprotec.restapi.service.overview.LopService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +33,7 @@ public class LopSettingService {
     private final LopService lopService;
 
     public List<LopSetting> getLopSetting() {
+        List<LopSetting> lopSettings = new ArrayList<>();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String username = authentication.getName();
@@ -43,7 +45,7 @@ public class LopSettingService {
                 } else log.error("Project with ID" + user.getActiveProject() + " does not exist in database");
             }
         }
-        return null;
+        return lopSettings;
     }
 
     public LopSetting addLopSetting(LopSetting lopSetting) {
