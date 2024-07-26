@@ -2,7 +2,8 @@ import {controlSettingModel} from "../../../settings/control-settings/store/cont
 
 export interface controlModel {
   id : number,
-  date : string,
+  dateDone : string,
+  dateCommited : string,
   addition : string,
   done : boolean,
   commited : boolean,

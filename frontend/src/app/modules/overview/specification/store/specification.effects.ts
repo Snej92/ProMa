@@ -8,6 +8,7 @@ import {
   loadStationSpecificationSuccess, updateStationSpecification, updateStationSpecificationSuccess
 } from "./specification.actions";
 import {SpecificationService} from "../service/specification.service";
+import {specificationModel} from "../../specification/store/specification.model";
 
 @Injectable()
 export class SpecificationEffects {
@@ -35,9 +36,9 @@ export class SpecificationEffects {
     this.action$.pipe(
       ofType(updateStationSpecification),
       switchMap(action=>
-        this.service.updateStationSpecification(action.specificationStationInput).pipe(
+        this.service.updateStationSpecification(action.specificationInput).pipe(
           switchMap(data=> of(
-            updateStationSpecificationSuccess({specificationStationInput:action.specificationStationInput}),
+            updateStationSpecificationSuccess({specificationNew:data as specificationModel, specificationOld:action.specificationInput}),
             loadSpinner({isLoading:false}),
             showAlert({message: 'Erfolgreich aktualisiert', actionResult:'pass'})
           )),

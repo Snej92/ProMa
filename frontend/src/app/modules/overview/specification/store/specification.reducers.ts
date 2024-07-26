@@ -33,13 +33,14 @@ const _specificationReducer = createReducer(
   }),
 
   on(updateStationSpecificationSuccess, (state,action) => {
-    const _specification={...action.specificationStationInput};
-    const updatedSpecification=state.specificationList.map(specification=>{
-      return _specification.id===specification.id?_specification:specification;
+    const specificationOld = {...action.specificationOld};
+    const specificationNew = {...action.specificationNew};
+    const updatedSpecification = state.specificationList.map(specification => {
+      return specificationOld.id === specification.id?specificationNew:specification;
     });
-    return{
+    return {
       ...state,
-      specificationList:updatedSpecification
+      specificationList: updatedSpecification
     };
   }),
 );

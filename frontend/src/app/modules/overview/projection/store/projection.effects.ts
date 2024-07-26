@@ -8,6 +8,8 @@ import {
   loadStationProjectionSuccess, updateStationProjection, updateStationProjectionSuccess
 } from "./projection.actions";
 import {ProjectionService} from "../service/projection.service";
+import {projectionModel} from "./projection.model";
+
 
 @Injectable()
 export class ProjectionEffects {
@@ -35,9 +37,9 @@ export class ProjectionEffects {
     this.action$.pipe(
       ofType(updateStationProjection),
       switchMap(action=>
-        this.service.updateStationProjection(action.projectionStationInput).pipe(
+        this.service.updateStationProjection(action.projectionInput).pipe(
           switchMap(data=> of(
-            updateStationProjectionSuccess({projectionStationInput:action.projectionStationInput}),
+            updateStationProjectionSuccess({projectionNew:data as projectionModel, projectionOld:action.projectionInput}),
             loadSpinner({isLoading:false}),
             showAlert({message: 'Erfolgreich aktualisiert', actionResult:'pass'})
           )),

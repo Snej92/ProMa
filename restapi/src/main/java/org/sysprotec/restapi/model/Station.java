@@ -92,15 +92,10 @@ public class Station {
         this.lop.add(lop);
     }
 
-    public void removeLop(Long lopSettingId) {
+    public void removeLop(Long lopId) {
+        Lop lop = this.lop.stream().filter(t -> t.getId() == lopId).findFirst().orElse(null);
         if (lop != null) {
-            lop.removeIf(lop -> {
-                boolean match = lop.getLopSetting() != null && lop.getLopSetting().getId().equals(lopSettingId);
-                if (match) {
-                    lop.setStation(null);
-                }
-                return match;
-            });
+            this.lop.remove(lop);
         }
     }
 

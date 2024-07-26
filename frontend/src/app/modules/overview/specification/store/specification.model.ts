@@ -2,7 +2,8 @@ import {specificationSettingModel} from "../../../settings/specification-setting
 
 export interface specificationModel {
   id : number,
-  date : string,
+  dateDone : string,
+  dateCommited : string,
   addition : string,
   done : boolean,
   commited : boolean,

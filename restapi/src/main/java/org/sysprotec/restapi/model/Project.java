@@ -7,9 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.sysprotec.restapi.model.settings.HeaderDataSetting;
-import org.sysprotec.restapi.model.settings.LopSetting;
 import org.sysprotec.restapi.model.settings.TaskSetting;
 import org.sysprotec.restapi.model.settings.TechnicalDataSetting;
+import org.sysprotec.restapi.model.settings.Version;
 
 import java.util.List;
 
@@ -32,12 +32,10 @@ public class Project {
     private Integer storedStations;
     private Integer notStoredStations;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    private List<Version> versions;
+    private List<org.sysprotec.restapi.model.settings.Version> versions;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private List<Station> stations;
     //Settings
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    private List<LopSetting> lopSetting;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private List<TaskSetting> documentationSetting;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
@@ -52,7 +50,7 @@ public class Project {
     private List<TechnicalDataSetting> technicalDataSetting;
 
     //Version
-    public void addVersion(Version version) {
+    public void addVersion(org.sysprotec.restapi.model.settings.Version version) {
         this.versions.add(version);
     }
 
@@ -72,18 +70,6 @@ public class Project {
         Station station = this.stations.stream().filter(t -> t.getId() == stationId).findFirst().orElse(null);
         if (station != null) {
             this.stations.remove(station);
-        }
-    }
-
-    //Lop
-    public void addLop(LopSetting lopSetting) {
-        this.lopSetting.add(lopSetting);
-    }
-
-    public void removeLop(Long lopId) {
-        LopSetting lopSetting = this.lopSetting.stream().filter(t -> t.getId() == lopId).findFirst().orElse(null);
-        if (lopSetting != null) {
-            this.lopSetting.remove(lopSetting);
         }
     }
 

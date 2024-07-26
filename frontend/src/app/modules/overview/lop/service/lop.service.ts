@@ -19,4 +19,13 @@ export class LopService {
   updateStationLop(lopInput:lopModel){
     return this.http.put(this.API_URL + "/lop/station", lopInput);
   }
+
+  addLop(lopInput:lopModel, stationId:number){
+    console.log(lopInput)
+    return this.http.post(this.API_URL + "/lop/station/"+stationId, lopInput);
+  }
+
+  deleteLop(lopId:number){
+    return this.http.delete(this.API_URL + "/lop/station/"+lopId);
+  }
 }

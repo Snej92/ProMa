@@ -2,11 +2,11 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, Validators} from "@angular/forms";
 import {versionModel, versionStationModel} from "../../store/version.model";
-import {AppStateModel} from "../../../../core/store/appState.model";
+import {AppStateModel} from "../../../../../core/store/appState.model";
 import {Store} from "@ngrx/store";
 import {addVersion, updateVersion} from "../../store/version.actions";
 import {getVersionById} from "../../store/version.selectors";
-import {loadSpinner} from "../../../../core/store/app.action";
+import {loadSpinner} from "../../../../../core/store/app.action";
 
 @Component({
   selector: 'app-add-version',

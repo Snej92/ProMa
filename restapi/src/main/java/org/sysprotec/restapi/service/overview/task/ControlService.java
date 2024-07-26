@@ -66,7 +66,8 @@ public class ControlService {
             }
 
             saveTask.setTaskSetting(taskSetting);
-            saveTask.setDate(task.getDate());
+            saveTask.setDateDone(task.getDateDone());
+            saveTask.setDateCommited(task.getDateCommited());
             saveTask.setAddition(task.getAddition());
             saveTask.setDone(task.getDone());
             saveTask.setCommited(task.getCommited());
@@ -77,7 +78,7 @@ public class ControlService {
                     user,
                     saveTask.getStation().getId(),
                     historyText);
-            return saveTask;
+            return taskRepository.findById(task.getId()).get();
         }
         return null;
     }
@@ -91,7 +92,8 @@ public class ControlService {
                 if (stationRepository.findStationByNameAndControlTaskSettingId(station.getName(), taskSetting.getId()).isEmpty()) {
                     Task task = Task.builder()
                             .taskSetting(taskSetting)
-                            .date("")
+                            .dateDone("")
+                            .dateCommited("")
                             .addition("")
                             .done(false)
                             .commited(false)

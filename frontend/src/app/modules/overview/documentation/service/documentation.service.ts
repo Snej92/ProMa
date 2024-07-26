@@ -17,6 +17,7 @@ export class DocumentationService {
   }
 
   updateStationDocumentation(documentationInput:documentationModel){
+    console.log(documentationInput)
     return this.http.put(this.API_URL + "/documentation/station" , documentationInput);
   }
 }

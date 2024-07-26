@@ -1,9 +1,6 @@
 import {createAction, props} from "@ngrx/store";
 import {documentationModel} from "./documentation.model";
 
-
-
-
 export const UPDATE_STATION_DOCUMENTATION='[documentation overview page] update documentation'
 export const UPDATE_STATION_DOCUMENTATION_SUCCESS='[documentation overview page] update documentation success'
 
@@ -21,5 +18,6 @@ export const loadStationDocumentation=createAction(LOAD_STATION_DOCUMENTATION, p
 export const loadStationDocumentationSuccess=createAction(LOAD_STATION_DOCUMENTATION_SUCCESS, props<{documentationList:documentationModel[]}>())
 export const loadStationDocumentationFail=createAction(LOAD_STATION_DOCUMENTATION_FAIL, props<{errorText:any}>())
 
-export const updateStationDocumentation=createAction(UPDATE_STATION_DOCUMENTATION, props<{documentationStationInput:documentationModel}>())
-export const updateStationDocumentationSuccess=createAction(UPDATE_STATION_DOCUMENTATION_SUCCESS, props<{documentationStationInput:documentationModel}>())
+export const updateStationDocumentation=createAction(UPDATE_STATION_DOCUMENTATION, props<{documentationInput:documentationModel}>())
+export const updateStationDocumentationSuccess=createAction(
+  UPDATE_STATION_DOCUMENTATION_SUCCESS, props<{documentationNew:documentationModel, documentationOld:documentationModel}>())

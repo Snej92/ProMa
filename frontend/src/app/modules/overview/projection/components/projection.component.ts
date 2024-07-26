@@ -19,9 +19,11 @@ export class ProjectionComponent implements OnInit, OnDestroy{
   private subscriptions: Subscription[] = [];
   projection !: projection;
   editProjection: { [key: number]: editProjectionModel } = {};
-  displayedColumns: string[] = ['Projektierung', 'Erledigt', 'Übergeben', 'Zusatz', 'Datum'];
+  editProjectionDateDone: { [key: number]: editProjectionModel } = {};
+  displayedColumns: string[] = ['Projektierung', 'Zusatz', 'Erledigt', 'Datum'];
   @Input() stationId!:number;
   @ViewChild('inputField', {static: false}) inputField!: ElementRef;
+  @ViewChild('inputFieldDateDone', {static: false}) inputFieldDateDone!: ElementRef;
 
 
   constructor(private store:Store<AppStateModel>) {
@@ -42,6 +44,13 @@ export class ProjectionComponent implements OnInit, OnDestroy{
             };
             return acc;
           }, {} as { [key: number]: editProjectionModel });
+          this.editProjectionDateDone = data.projectionList.reduce((acc, item) => {
+            acc[item.id] = {
+              projection: { ...item },
+              isEdit: false,
+            };
+            return acc;
+          }, {} as { [key: number]: editProjectionModel });
         })
     )
   }
@@ -51,6 +60,14 @@ export class ProjectionComponent implements OnInit, OnDestroy{
     this.editProjection[id].isEdit = !this.editProjection[id].isEdit
     setTimeout(()=> {
       this.inputField.nativeElement.focus();
+    }, 0);
+  }
+
+  setEditDateDone(id:any){
+    console.log("enable edit ID: "+ id);
+    this.editProjectionDateDone[id].isEdit = !this.editProjectionDateDone[id].isEdit
+    setTimeout(()=> {
+      this.inputFieldDateDone.nativeElement.focus();
     }, 0);
   }
 
@@ -67,15 +84,23 @@ export class ProjectionComponent implements OnInit, OnDestroy{
       this.editProjection[id].projection.commited = event.checked;
     }
     this.store.dispatch(loadSpinner({isLoading:true}))
-    this.store.dispatch(updateStationProjection({projectionStationInput:this.editProjection[id].projection}))
+    this.store.dispatch(updateStationProjection({projectionInput:this.editProjection[id].projection}))
   }
 
   updateStationProjection(id:any){
-    console.log("update header data")
+    console.log("update projection")
     this.editProjection[id].isEdit = !this.editProjection[id].isEdit
     console.log(this.editProjection[id].projection);
     this.store.dispatch(loadSpinner({isLoading:true}))
-    this.store.dispatch(updateStationProjection({projectionStationInput:this.editProjection[id].projection}))
+    this.store.dispatch(updateStationProjection({projectionInput:this.editProjection[id].projection}))
+  }
+
+  updateStationProjectionDateDone(id:any){
+    console.log("update projection date done")
+    this.editProjectionDateDone[id].isEdit = !this.editProjectionDateDone[id].isEdit
+    console.log(this.editProjectionDateDone[id].projection);
+    this.store.dispatch(loadSpinner({isLoading:true}))
+    this.store.dispatch(updateStationProjection({projectionInput:this.editProjectionDateDone[id].projection}))
   }
 
   ngOnDestroy(): void {

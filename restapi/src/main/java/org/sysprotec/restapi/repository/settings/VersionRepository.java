@@ -1,8 +1,8 @@
-package org.sysprotec.restapi.repository;
+package org.sysprotec.restapi.repository.settings;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.sysprotec.restapi.model.Version;
+import org.sysprotec.restapi.model.settings.Version;
 
 import java.util.List;
 import java.util.Optional;

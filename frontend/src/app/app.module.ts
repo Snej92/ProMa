@@ -37,18 +37,16 @@ import { CustomSidenavComponent } from './page-template/sys-sidenav/custom-siden
 import {MatListItem, MatListItemIcon, MatListItemTitle, MatNavList} from "@angular/material/list";
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { OverviewComponent } from './modules/overview/components/overview.component';
-import { VersionComponent } from './modules/version/components/version.component';
+import { VersionComponent } from './modules/settings/version/components/version.component';
 import { StationComponent } from './modules/station/components/station.component';
 import { SettingsComponent } from './modules/settings/components/settings.component';
 import {AppState} from "./core/store/app.state";
-import { AddVersionComponent } from './modules/version/components/add-version/add-version.component';
+import { AddVersionComponent } from './modules/settings/version/components/add-version/add-version.component';
 import { SysButtonComponent } from './page-template/sys-button/sys-button.component';
 import { LopComponent } from './modules/overview/lop/components/lop.component';
 import {LopEffects} from "./modules/overview/lop/store/lop.effects";
-import { LopSettingsComponent } from './modules/settings/lop-settings/components/lop-settings.component';
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
 import { SysNavButtonComponent } from './page-template/sys-nav-button/sys-nav-button.component';
-import { AddLopComponent } from './modules/settings/lop-settings/components/add-lop/add-lop.component';
 import {AppEffect} from "./core/store/app.effect";
 import { SysLoadingspinnerComponent } from './page-template/sys-loadingspinner/sys-loadingspinner.component';
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
@@ -71,8 +69,7 @@ import { StationCardComponent } from './modules/station/components/station-card/
 import {StationViewEffects} from "./modules/station/store/stationView.effects";
 import { AddStationComponent } from './modules/station/components/add-station/add-station.component';
 import {MatTab, MatTabContent, MatTabGroup, MatTabLink, MatTabNav, MatTabNavPanel} from "@angular/material/tabs";
-import {LopSettingEffects} from "./modules/settings/lop-settings/store/lopSetting.effects";
-import {VersionEffects} from "./modules/version/store/version.effects";
+import {VersionEffects} from "./modules/settings/version/store/version.effects";
 import {CdkScrollable} from "@angular/cdk/overlay";
 import { SysStatusLedComponent } from './page-template/sys-status-led/sys-status-led.component';
 import {
@@ -136,6 +133,7 @@ import {
 import {
   StationOverviewLopComponent
 } from "./modules/overview/station/components/station-overview-lop/station-overview-lop.component";
+import { AddLopComponent } from './modules/overview/lop/components/add-lop/add-lop.component';
 
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -169,9 +167,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     AddVersionComponent,
     SysButtonComponent,
     LopComponent,
-    LopSettingsComponent,
     SysNavButtonComponent,
-    AddLopComponent,
     SysLoadingspinnerComponent,
     ProjectAdministrationComponent,
     ProjectCardComponent,
@@ -207,7 +203,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     StationOverviewDocumentationComponent,
     StationOverviewSpecificationComponent,
     StationOverviewControlComponent,
-    StationOverviewLopComponent
+    StationOverviewLopComponent,
+    AddLopComponent
   ],
     imports: [
         AppRoutingModule,
@@ -217,7 +214,6 @@ function initializeKeycloak(keycloak: KeycloakService) {
         StoreModule.forRoot(AppState),
         EffectsModule.forRoot([
             LopEffects,
-            LopSettingEffects,
             AppEffect,
             ProjectAdministrationEffects,
             UserAdministrationEffects,

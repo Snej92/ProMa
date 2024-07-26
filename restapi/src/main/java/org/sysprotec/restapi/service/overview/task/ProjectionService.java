@@ -66,7 +66,8 @@ public class ProjectionService {
             }
 
             saveTask.setTaskSetting(taskSetting);
-            saveTask.setDate(task.getDate());
+            saveTask.setDateDone(task.getDateDone());
+            saveTask.setDateCommited(task.getDateCommited());
             saveTask.setAddition(task.getAddition());
             saveTask.setDone(task.getDone());
             saveTask.setCommited(task.getCommited());
@@ -91,7 +92,8 @@ public class ProjectionService {
                 if (stationRepository.findStationByNameAndProjectionTaskSettingId(station.getName(), taskSetting.getId()).isEmpty()) {
                     Task task = Task.builder()
                             .taskSetting(taskSetting)
-                            .date("")
+                            .dateDone("")
+                            .dateCommited("")
                             .addition("")
                             .done(false)
                             .commited(false)

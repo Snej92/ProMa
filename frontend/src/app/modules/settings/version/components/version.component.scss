@@ -17,15 +17,39 @@
   background-color: var(--frontend-alternate);
 }
 
+.th-center{
+  text-align: center;
+}
+
+.th-Aktion{
+  padding-left: 35px;
+}
+
 .mat-column-Aktion{
   width: 150px;
 }
 
-.mat-column-Aufnahme{
-  width: 8%;
+.alignment{
+  position: relative;
+  top: 9px;
 }
 
-.mat-column-LOP{
-  //width: 80%;
-  text-align: left;
+.mat-column-Datum{
+
+}
+
+.mat-column-Version{
+
+}
+
+.mat-column-status{
+
+}
+
+.mat-column-Aufgabe{
+  text-align: start;
+}
+
+.mat-column-Station{
+
 }

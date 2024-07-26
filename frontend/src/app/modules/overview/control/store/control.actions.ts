@@ -21,5 +21,6 @@ export const loadStationControl=createAction(LOAD_STATION_CONTROL, props<{statio
 export const loadStationControlSuccess=createAction(LOAD_STATION_CONTROL_SUCCESS, props<{controlList:controlModel[]}>())
 export const loadStationControlFail=createAction(LOAD_STATION_CONTROL_FAIL, props<{errorText:any}>())
 
-export const updateStationControl=createAction(UPDATE_STATION_CONTROL, props<{controlStationInput:controlModel}>())
-export const updateStationControlSuccess=createAction(UPDATE_STATION_CONTROL_SUCCESS, props<{controlStationInput:controlModel}>())
+export const updateStationControl=createAction(UPDATE_STATION_CONTROL, props<{controlInput:controlModel}>())
+export const updateStationControlSuccess=createAction(
+  UPDATE_STATION_CONTROL_SUCCESS, props<{controlNew:controlModel, controlOld:controlModel}>())

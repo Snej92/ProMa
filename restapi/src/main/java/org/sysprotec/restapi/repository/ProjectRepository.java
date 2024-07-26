@@ -21,7 +21,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 
     //find By other ID
     Optional<Project> findProjectByVersionsId(Long id);
-    Optional<Project> findProjectByLopSettingId(Long id);
     Optional<Project> findProjectByDocumentationSettingId(Long id);
     Optional<Project> findProjectByControlSettingId(Long id);
     Optional<Project> findProjectByHeaderDataSettingId(Long id);

@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {catchError, of, switchMap} from "rxjs";
-import {loadSpinner, showAlert} from "../../../core/store/app.action";
+import {loadSpinner, showAlert} from "../../../../core/store/app.action";
 import {VersionService} from "../service/version.service";
 import {
   addVersion,

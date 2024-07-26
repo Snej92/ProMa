@@ -20,7 +20,7 @@ export class CustomSidenavComponent {
 
   menuItems = signal<MenuItem[]>([
     {
-      icon: "dashboard",
+      icon: "home",
       label: "Dashboard",
       route: "dashboard"
     },
@@ -29,11 +29,6 @@ export class CustomSidenavComponent {
       icon: "checklist",
       label: "Übersicht",
       route: "overview"
-    },
-    {
-      icon: "update",
-      label: "Version",
-      route: "version"
     },
     {
       icon: "dashboard_customize",

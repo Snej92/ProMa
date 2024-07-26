@@ -2,7 +2,8 @@ import {projectionSettingModel} from "../../../settings/projection-settings/stor
 
 export interface projectionModel {
   id : number,
-  date : string,
+  dateDone : string,
+  dateCommited : string,
   addition : string,
   done : boolean,
   commited : boolean,

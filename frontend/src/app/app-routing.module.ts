@@ -4,7 +4,7 @@ import {AuthGuard} from "./auth-guard.guard";
 import {UserAdministrationComponent} from "./modules/userAdministration/components/user-administration/user-administration.component";
 import {DashboardComponent} from "./modules/dashboard/components/dashboard.component";
 import {OverviewComponent} from "./modules/overview/components/overview.component";
-import {VersionComponent} from "./modules/version/components/version.component";
+import {VersionComponent} from "./modules/settings/version/components/version.component";
 import {StationComponent} from "./modules/station/components/station.component";
 import {SettingsComponent} from "./modules/settings/components/settings.component";
 import {ProjectAdministrationComponent} from "./modules/project-administration/components/project-administration.component";

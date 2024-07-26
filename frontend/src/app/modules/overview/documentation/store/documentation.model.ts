@@ -2,7 +2,8 @@ import {documentationSettingModel} from "../../../settings/documentation-setting
 
 export interface documentationModel {
   id : number,
-  date : string,
+  dateDone : string,
+  dateCommited : string,
   addition : string,
   done : boolean,
   commited : boolean,

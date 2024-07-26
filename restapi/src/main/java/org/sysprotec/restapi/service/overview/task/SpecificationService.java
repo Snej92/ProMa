@@ -66,7 +66,8 @@ public class SpecificationService {
             }
 
             saveTask.setTaskSetting(taskSetting);
-            saveTask.setDate(task.getDate());
+            saveTask.setDateDone(task.getDateDone());
+            saveTask.setDateCommited(task.getDateCommited());
             saveTask.setAddition(task.getAddition());
             saveTask.setDone(task.getDone());
             saveTask.setCommited(task.getCommited());
@@ -91,7 +92,8 @@ public class SpecificationService {
                 if (stationRepository.findStationByNameAndSpecificationTaskSettingId(station.getName(), taskSetting.getId()).isEmpty()) {
                     Task task = Task.builder()
                             .taskSetting(taskSetting)
-                            .date("")
+                            .dateDone("")
+                            .dateCommited("")
                             .addition("")
                             .done(false)
                             .commited(false)

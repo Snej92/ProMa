@@ -1,9 +1,6 @@
 import {createAction, props} from "@ngrx/store";
 import {specificationModel} from "./specification.model";
 
-
-
-
 export const UPDATE_STATION_SPECIFICATION='[specification overview page] update specification'
 export const UPDATE_STATION_SPECIFICATION_SUCCESS='[specification overview page] update specification success'
 
@@ -21,5 +18,6 @@ export const loadStationSpecification=createAction(LOAD_STATION_SPECIFICATION, p
 export const loadStationSpecificationSuccess=createAction(LOAD_STATION_SPECIFICATION_SUCCESS, props<{specificationList:specificationModel[]}>())
 export const loadStationSpecificationFail=createAction(LOAD_STATION_SPECIFICATION_FAIL, props<{errorText:any}>())
 
-export const updateStationSpecification=createAction(UPDATE_STATION_SPECIFICATION, props<{specificationStationInput:specificationModel}>())
-export const updateStationSpecificationSuccess=createAction(UPDATE_STATION_SPECIFICATION_SUCCESS, props<{specificationStationInput:specificationModel}>())
+export const updateStationSpecification=createAction(UPDATE_STATION_SPECIFICATION, props<{specificationInput:specificationModel}>())
+export const updateStationSpecificationSuccess=createAction(
+  UPDATE_STATION_SPECIFICATION_SUCCESS, props<{specificationNew:specificationModel, specificationOld:specificationModel}>())

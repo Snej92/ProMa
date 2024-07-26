@@ -1,13 +1,13 @@
 <div class="overview-container">
   <div class="overview-nav">
-    <app-sys-nav-button (click)="selectOverview(1)"  text="Stationen" [selected]="selectedOverview==1"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectOverview(1)"  text="Allgemein" [selected]="selectedOverview==1"></app-sys-nav-button>
     <app-sys-nav-button (click)="selectOverview(2)"  text="Kopfdaten" [selected]="selectedOverview==2"></app-sys-nav-button>
     <app-sys-nav-button (click)="selectOverview(3)"  text="Vorgaben" [selected]="selectedOverview==3"></app-sys-nav-button>
     <app-sys-nav-button (click)="selectOverview(4)"  text="Projektierung" [selected]="selectedOverview==4"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(5)"  text="Technische Daten" [selected]="selectedOverview==5"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(6)"  text="Kontrolle" [selected]="selectedOverview==6"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(7)"  text="Doku" [selected]="selectedOverview==7"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(8)"  text="LOP" [selected]="selectedOverview==88"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectOverview(5)"  text="Kontrolle" [selected]="selectedOverview==5"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectOverview(6)"  text="Doku" [selected]="selectedOverview==6"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectOverview(7)"  text="Technische Daten" [selected]="selectedOverview==7"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectOverview(8)"  text="LOP" [selected]="selectedOverview==8"></app-sys-nav-button>
     <app-sys-nav-button (click)="selectOverview(9)"  text="Historie" [selected]="selectedOverview==9"></app-sys-nav-button>
   </div>
   <div class="overview-divider">
@@ -23,9 +23,9 @@
                 <app-header-data *ngSwitchCase="2" [stationId]="stationView.id"></app-header-data>
                 <app-specification *ngSwitchCase="3" [stationId]="stationView.id"></app-specification>
                 <app-projection *ngSwitchCase="4" [stationId]="stationView.id"></app-projection>
-                <app-technical-data *ngSwitchCase="5" [stationId]="stationView.id"></app-technical-data>
-                <app-control *ngSwitchCase="6" [stationId]="stationView.id"></app-control>
-                <app-documentation *ngSwitchCase="7" [stationId]="stationView.id"></app-documentation>
+                <app-control *ngSwitchCase="5" [stationId]="stationView.id"></app-control>
+                <app-documentation *ngSwitchCase="6" [stationId]="stationView.id"></app-documentation>
+                <app-technical-data *ngSwitchCase="7" [stationId]="stationView.id"></app-technical-data>
                 <app-lop *ngSwitchCase="8" [stationId]="stationView.id"></app-lop>
                 <app-history *ngSwitchCase="9" [stationId]="stationView.id"></app-history>
               </div>

@@ -7,19 +7,22 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.sysprotec.restapi.model.*;
-import org.sysprotec.restapi.model.overview.Lop;
 import org.sysprotec.restapi.model.overview.Task;
 import org.sysprotec.restapi.model.projections.StationDto;
 import org.sysprotec.restapi.model.projections.StationView;
-import org.sysprotec.restapi.model.settings.LopSetting;
+import org.sysprotec.restapi.model.settings.*;
 import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.StationRepository;
 import org.sysprotec.restapi.repository.UserRepository;
-import org.sysprotec.restapi.repository.VersionRepository;
+import org.sysprotec.restapi.repository.settings.VersionRepository;
 import org.sysprotec.restapi.repository.overview.TaskRepository;
-import org.sysprotec.restapi.service.overview.LopService;
+import org.sysprotec.restapi.service.overview.HeaderDataService;
+import org.sysprotec.restapi.service.overview.TechnicalDataService;
+import org.sysprotec.restapi.service.overview.task.ControlService;
+import org.sysprotec.restapi.service.overview.task.DocumentationService;
+import org.sysprotec.restapi.service.overview.task.ProjectionService;
+import org.sysprotec.restapi.service.overview.task.SpecificationService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,9 +34,14 @@ public class StationService {
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
     private final VersionRepository versionRepository;
-    private final LopService lopService;
     private final TaskRepository taskRepository;
     private final LogService logService;
+    private final HeaderDataService headerDataService;
+    private final ProjectionService projectionService;
+    private final SpecificationService specificationService;
+    private final TechnicalDataService technicalDataService;
+    private final ControlService controlService;
+    private final DocumentationService documentationService;
 
 
     public List<StationView> getAllStations() {
@@ -100,10 +108,57 @@ public class StationService {
                     }
 
                     //Add Lops to Station
-                    List<LopSetting> lopSettingList = savedProject.getLopSetting();
-                    if (lopSettingList != null) {
-                        for(LopSetting lopSetting: lopSettingList){
-                            lopService.createLopForStations(lopSetting);
+//                    List<LopSetting> lopSettingList = savedProject.getLopSetting();
+//                    if (lopSettingList != null) {
+//                        for(LopSetting lopSetting: lopSettingList){
+//                            lopService.createLopForStations(lopSetting);
+//                        }
+//                    }
+                    //Add Header to Station
+                    List<HeaderDataSetting> headerDataSettingList = savedProject.getHeaderDataSetting();
+                    if(headerDataSettingList != null){
+                        for(HeaderDataSetting headerDataSetting: headerDataSettingList){
+                            headerDataService.createHeaderDataForStations(headerDataSetting);
+                        }
+                    }
+
+                    //Add Projection to Station
+                    List<TaskSetting> projectionSettingList = savedProject.getProjectionSetting();
+                    if(projectionSettingList != null){
+                        for(TaskSetting projectionSetting : projectionSettingList){
+                            projectionService.createProjectionForStations(projectionSetting);
+                        }
+                    }
+
+                    //Add Specification to Station
+                    List<TaskSetting> specificationSettingList = savedProject.getSpecificationSetting();
+                    if(specificationSettingList != null){
+                        for(TaskSetting specificationSetting : specificationSettingList){
+                            specificationService.createSpecificationForStations(specificationSetting);
+                        }
+                    }
+
+                    //Add Technical Data to Station
+                    List<TechnicalDataSetting> technicalDataSettingList = savedProject.getTechnicalDataSetting();
+                    if(technicalDataSettingList != null){
+                        for(TechnicalDataSetting technicalData : technicalDataSettingList){
+                            technicalDataService.createTechnicalDataForStations(technicalData);
+                        }
+                    }
+
+                    //Add Control to Station
+                    List<TaskSetting> controlSettingList = savedProject.getControlSetting();
+                    if(controlSettingList != null){
+                        for(TaskSetting controlSetting : controlSettingList){
+                            controlService.createControlForStations(controlSetting);
+                        }
+                    }
+
+                    //Add Documentation to Station
+                    List<TaskSetting> documentationSettingList = savedProject.getDocumentationSetting();
+                    if(documentationSettingList != null){
+                        for(TaskSetting documentationSetting : documentationSettingList){
+                            documentationService.createDocumentationForStations(documentationSetting);
                         }
                     }
 

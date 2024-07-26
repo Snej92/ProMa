@@ -33,13 +33,14 @@ const _documentationReducer = createReducer(
   }),
 
   on(updateStationDocumentationSuccess, (state,action) => {
-    const _documentation={...action.documentationStationInput};
-    const updatedDocumentation=state.documentationList.map(documentation=>{
-      return _documentation.id===documentation.id?_documentation:documentation;
+    const documentationOld = {...action.documentationOld};
+    const documentationNew = {...action.documentationNew};
+    const updatedDocumentation = state.documentationList.map(documentation => {
+      return documentationOld.id === documentation.id?documentationNew:documentation;
     });
-    return{
+    return {
       ...state,
-      documentationList:updatedDocumentation
+      documentationList: updatedDocumentation
     };
   }),
 );

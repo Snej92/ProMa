@@ -17,9 +17,11 @@ export class SpecificationComponent implements OnInit, OnDestroy{
   private subscriptions: Subscription[] = [];
   specification !: specification;
   editSpecification: { [key: number]: editSpecificationModel } = {};
-  displayedColumns: string[] = ['Vorgabe', 'Erledigt', 'Übergeben', 'Zusatz', 'Datum'];
+  editSpecificationDateDone: { [key: number]: editSpecificationModel } = {};
+  displayedColumns: string[] = ['Vorgabe', 'Zusatz', 'Erledigt', 'Datum erledigt'];
   @Input() stationId!:number;
   @ViewChild('inputField', {static: false}) inputField!: ElementRef;
+  @ViewChild('inputFieldDateDone', {static: false}) inputFieldDateDone!: ElementRef;
 
 
   constructor(private store:Store<AppStateModel>) {
@@ -40,6 +42,13 @@ export class SpecificationComponent implements OnInit, OnDestroy{
             };
             return acc;
           }, {} as { [key: number]: editSpecificationModel });
+          this.editSpecificationDateDone = data.specificationList.reduce((acc, item) => {
+            acc[item.id] = {
+              specification: { ...item },
+              isEdit: false,
+            };
+            return acc;
+          }, {} as { [key: number]: editSpecificationModel });
         })
     )
   }
@@ -49,6 +58,14 @@ export class SpecificationComponent implements OnInit, OnDestroy{
     this.editSpecification[id].isEdit = !this.editSpecification[id].isEdit
     setTimeout(()=> {
       this.inputField.nativeElement.focus();
+    }, 0);
+  }
+
+  setEditDateDone(id:any){
+    console.log("enable edit ID: "+ id);
+    this.editSpecificationDateDone[id].isEdit = !this.editSpecificationDateDone[id].isEdit
+    setTimeout(()=> {
+      this.inputFieldDateDone.nativeElement.focus();
     }, 0);
   }
 
@@ -65,15 +82,21 @@ export class SpecificationComponent implements OnInit, OnDestroy{
       this.editSpecification[id].specification.commited = event.checked;
     }
     this.store.dispatch(loadSpinner({isLoading:true}))
-    this.store.dispatch(updateStationSpecification({specificationStationInput:this.editSpecification[id].specification}))
+    this.store.dispatch(updateStationSpecification({specificationInput:this.editSpecification[id].specification}))
   }
 
   updateStationSpecification(id:any){
-    console.log("update header data")
+    console.log("update specification")
     this.editSpecification[id].isEdit = !this.editSpecification[id].isEdit
-    console.log(this.editSpecification[id].specification);
     this.store.dispatch(loadSpinner({isLoading:true}))
-    this.store.dispatch(updateStationSpecification({specificationStationInput:this.editSpecification[id].specification}))
+    this.store.dispatch(updateStationSpecification({specificationInput:this.editSpecification[id].specification}))
+  }
+
+  updateStationSpecificationDateDone(id:any){
+    console.log("update specification date done")
+    this.editSpecificationDateDone[id].isEdit = !this.editSpecificationDateDone[id].isEdit
+    this.store.dispatch(loadSpinner({isLoading:true}))
+    this.store.dispatch(updateStationSpecification({specificationInput:this.editSpecificationDateDone[id].specification}))
   }
 
   ngOnDestroy(): void {

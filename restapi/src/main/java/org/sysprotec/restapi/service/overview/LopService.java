@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.sysprotec.restapi.model.*;
 import org.sysprotec.restapi.model.overview.Lop;
-import org.sysprotec.restapi.model.settings.LopSetting;
 import org.sysprotec.restapi.model.types.StatusLOP;
 import org.sysprotec.restapi.repository.overview.LopRepository;
 import org.sysprotec.restapi.repository.ProjectRepository;
@@ -26,7 +25,6 @@ public class LopService {
     private final StationRepository stationRepository;
     private final LopRepository lopRepository;
     private final UserService userService;
-    private final ProjectRepository projectRepository;
     private final HistoryService historyService;
 
     public List<Lop> getStationLop(Long stationId) {
@@ -39,44 +37,44 @@ public class LopService {
         return null;
     }
 
+    public Lop addLop(Long stationId, Lop lop) {
+        Optional<Station> optionalStation = stationRepository.findById(stationId);
+        if (optionalStation.isPresent()) {
+            if(optionalStation.get().getLop() != null) {
+                lop.setStation(optionalStation.get());
+                lopRepository.save(lop);
+                return lopRepository.findTopByOrderByIdDesc();
+            }
+        }
+        return null;
+    }
+
+    public void deleteLop(Long lopId) {
+        Optional<Lop> optionalLop = lopRepository.findById(lopId);
+        optionalLop.ifPresent(lopRepository::delete);
+    }
+
     @Transactional
     public Lop updateLop(Lop lop) {
         Optional<Lop> optionalLop = lopRepository.findLopById(lop.getId());
         if(optionalLop.isEmpty()){
             log.error("LOP with id "+ lop.getId() + " does not exist in database");
         } else {
-            LopSetting lopSetting = optionalLop.get().getLopSetting();
             Lop saveLop = optionalLop.get();
-            saveLop.setLopSetting(lopSetting);
+            saveLop.setStartDate(lop.getStartDate());
+            saveLop.setIssuer(lop.getIssuer());
+            saveLop.setTransmissionType(lop.getTransmissionType());
+            saveLop.setItem(lop.getItem());
+            saveLop.setAddition(lop.getAddition());
             saveLop.setEndDate(lop.getEndDate());
             saveLop.setStatus(lop.getStatus(), userService.getLoggedUser());
             User user = userService.getLoggedUser();
             historyService.newEntryAuto(
                     user,
                     saveLop.getStation().getId(),
-                    "Status von LOP: '" + saveLop.getLopSetting().getItem() + "' von '" + saveLop.getStation().getName() + "' geändert auf: " + saveLop.getStatus());
+                    "Status von LOP: '" + saveLop.getItem() + "' von '" + saveLop.getStation().getName() + "' geändert auf: " + saveLop.getStatus());
             return saveLop;
         }
         return null;
-    }
-
-    public void createLopForStations(LopSetting lopSetting) {
-        Optional<Project> optionalProject = projectRepository.findProjectById(lopSetting.getProject().getId());
-        if(optionalProject.isPresent()) {
-            List<Station> stationList = optionalProject.get().getStations();
-            for(Station station : stationList) {
-                if (stationRepository.findStationByNameAndLopLopSettingId(station.getName(), lopSetting.getId()).isEmpty()) {
-                    Lop lop = Lop.builder()
-                            .lopSetting(lopSetting)
-                            .station(station)
-                            .endDate("")
-                            .status(StatusLOP.OFFEN)
-                            .userAcronym("")
-                            .build();
-                    lopRepository.save(lop);
-                    log.info("Added LOP '" + lop.getLopSetting().getItem() + "' to station '" + station.getName() + "'");
-                }
-            }
-        }
     }
 }

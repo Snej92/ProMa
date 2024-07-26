@@ -19,9 +19,13 @@ export class DocumentationComponent implements OnInit, OnDestroy{
   private subscriptions: Subscription[] = [];
   documentation !: documentation;
   editDocumentation: { [key: number]: editDocumentationModel } = {};
-  displayedColumns: string[] = ['Doku', 'Erledigt', 'Übergeben', 'Zusatz', 'Datum'];
+  editDocumentationDateDone: { [key: number]: editDocumentationModel } = {};
+  editDocumentationDateCommited: { [key: number]: editDocumentationModel } = {};
+  displayedColumns: string[] = ['Doku', 'Zusatz', 'Erledigt', 'Datum erledigt', 'Übergeben', 'Datum übergeben'];
   @Input() stationId!:number;
-  @ViewChild('inputField', {static: false}) inputField!: ElementRef;
+  @ViewChild('inputField', {static: false}) inputFieldAddition!: ElementRef;
+  @ViewChild('inputFieldDateDone', {static: false}) inputFieldDateDone!: ElementRef;
+  @ViewChild('inputFieldDateCommited', {static: false}) inputFieldDateCommited!: ElementRef;
 
 
   constructor(private store:Store<AppStateModel>) {
@@ -42,15 +46,45 @@ export class DocumentationComponent implements OnInit, OnDestroy{
             };
             return acc;
           }, {} as { [key: number]: editDocumentationModel });
+          this.editDocumentationDateDone = data.documentationList.reduce((acc, item) => {
+            acc[item.id] = {
+              documentation: { ...item },
+              isEdit: false,
+            };
+            return acc;
+          }, {} as { [key: number]: editDocumentationModel });
+          this.editDocumentationDateCommited = data.documentationList.reduce((acc, item) => {
+            acc[item.id] = {
+              documentation: { ...item },
+              isEdit: false,
+            };
+            return acc;
+          }, {} as { [key: number]: editDocumentationModel });
         })
     )
   }
 
-  setEdit(id:any){
+  setEditAddition(id:any){
     console.log("enable edit ID: "+ id);
     this.editDocumentation[id].isEdit = !this.editDocumentation[id].isEdit
     setTimeout(()=> {
-      this.inputField.nativeElement.focus();
+      this.inputFieldAddition.nativeElement.focus();
+    }, 0);
+  }
+
+  setEditDateDone(id:any){
+    console.log("enable edit ID: "+ id);
+    this.editDocumentationDateDone[id].isEdit = !this.editDocumentationDateDone[id].isEdit
+    setTimeout(()=> {
+      this.inputFieldDateDone.nativeElement.focus();
+    }, 0);
+  }
+
+  setEditDateCommited(id:any){
+    console.log("enable edit ID: "+ id);
+    this.editDocumentationDateCommited[id].isEdit = !this.editDocumentationDateCommited[id].isEdit
+    setTimeout(()=> {
+      this.inputFieldDateCommited.nativeElement.focus();
     }, 0);
   }
 
@@ -67,15 +101,28 @@ export class DocumentationComponent implements OnInit, OnDestroy{
       this.editDocumentation[id].documentation.commited = event.checked;
     }
     this.store.dispatch(loadSpinner({isLoading:true}))
-    this.store.dispatch(updateStationDocumentation({documentationStationInput:this.editDocumentation[id].documentation}))
+    this.store.dispatch(updateStationDocumentation({documentationInput:this.editDocumentation[id].documentation}))
   }
 
   updateStationDocumentation(id:any){
-    console.log("update header data")
+    console.log("update documentation")
     this.editDocumentation[id].isEdit = !this.editDocumentation[id].isEdit
-    console.log(this.editDocumentation[id].documentation);
     this.store.dispatch(loadSpinner({isLoading:true}))
-    this.store.dispatch(updateStationDocumentation({documentationStationInput:this.editDocumentation[id].documentation}))
+    this.store.dispatch(updateStationDocumentation({documentationInput:this.editDocumentation[id].documentation}))
+  }
+
+  updateStationDocumentationDateDone(id:any){
+    console.log("update documentation date done")
+    this.editDocumentationDateDone[id].isEdit = !this.editDocumentationDateDone[id].isEdit
+    this.store.dispatch(loadSpinner({isLoading:true}))
+    this.store.dispatch(updateStationDocumentation({documentationInput:this.editDocumentationDateDone[id].documentation}))
+  }
+
+  updateStationDocumentationDateCommited(id:any){
+    console.log("update documentation date commited")
+    this.editDocumentationDateCommited[id].isEdit = !this.editDocumentationDateCommited[id].isEdit
+    this.store.dispatch(loadSpinner({isLoading:true}))
+    this.store.dispatch(updateStationDocumentation({documentationInput:this.editDocumentationDateCommited[id].documentation}))
   }
 
   ngOnDestroy(): void {

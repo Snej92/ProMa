@@ -33,13 +33,14 @@ const _controlReducer = createReducer(
   }),
 
   on(updateStationControlSuccess, (state,action) => {
-    const _control={...action.controlStationInput};
-    const updatedControl=state.controlList.map(control=>{
-      return _control.id===control.id?_control:control;
+    const controlOld = {...action.controlOld};
+    const controlNew = {...action.controlNew};
+    const updatedControl = state.controlList.map(control => {
+      return controlOld.id === control.id?controlNew:control;
     });
-    return{
+    return {
       ...state,
-      controlList:updatedControl
+      controlList: updatedControl
     };
   }),
 );

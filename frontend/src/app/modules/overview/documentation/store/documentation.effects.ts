@@ -8,6 +8,7 @@ import {
   loadStationDocumentationSuccess, updateStationDocumentation, updateStationDocumentationSuccess
 } from "./documentation.actions";
 import {DocumentationService} from "../service/documentation.service";
+import {documentationModel} from "./documentation.model";
 
 @Injectable()
 export class DocumentationEffects {
@@ -35,9 +36,9 @@ export class DocumentationEffects {
     this.action$.pipe(
       ofType(updateStationDocumentation),
       switchMap(action=>
-        this.service.updateStationDocumentation(action.documentationStationInput).pipe(
+        this.service.updateStationDocumentation(action.documentationInput).pipe(
           switchMap(data=> of(
-            updateStationDocumentationSuccess({documentationStationInput:action.documentationStationInput}),
+            updateStationDocumentationSuccess({documentationNew:data as documentationModel, documentationOld:action.documentationInput}),
             loadSpinner({isLoading:false}),
             showAlert({message: 'Erfolgreich aktualisiert', actionResult:'pass'})
           )),

@@ -17,9 +17,11 @@ export class ControlComponent implements OnInit, OnDestroy{
   private subscriptions: Subscription[] = [];
   control !: control;
   editControl: { [key: number]: editControlModel } = {};
-  displayedColumns: string[] = ['Kontrolle', 'Erledigt', 'Übergeben', 'Zusatz', 'Datum'];
+  editControlDateDone: { [key: number]: editControlModel } = {};
+  displayedColumns: string[] = ['Kontrolle', 'Zusatz', 'Erledigt', 'Datum erledigt'];
   @Input() stationId!:number;
   @ViewChild('inputField', {static: false}) inputField!: ElementRef;
+  @ViewChild('inputFieldDateDone', {static: false}) inputFieldDateDone!: ElementRef;
 
 
   constructor(private store:Store<AppStateModel>) {
@@ -40,6 +42,13 @@ export class ControlComponent implements OnInit, OnDestroy{
             };
             return acc;
           }, {} as { [key: number]: editControlModel });
+          this.editControlDateDone = data.controlList.reduce((acc, item) => {
+            acc[item.id] = {
+              control: { ...item },
+              isEdit: false,
+            };
+            return acc;
+          }, {} as { [key: number]: editControlModel });
         })
     )
   }
@@ -49,6 +58,14 @@ export class ControlComponent implements OnInit, OnDestroy{
     this.editControl[id].isEdit = !this.editControl[id].isEdit
     setTimeout(()=> {
       this.inputField.nativeElement.focus();
+    }, 0);
+  }
+
+  setEditDateDone(id:any){
+    console.log("enable edit ID: "+ id);
+    this.editControlDateDone[id].isEdit = !this.editControlDateDone[id].isEdit
+    setTimeout(()=> {
+      this.inputFieldDateDone.nativeElement.focus();
     }, 0);
   }
 
@@ -65,15 +82,21 @@ export class ControlComponent implements OnInit, OnDestroy{
       this.editControl[id].control.commited = event.checked;
     }
     this.store.dispatch(loadSpinner({isLoading:true}))
-    this.store.dispatch(updateStationControl({controlStationInput:this.editControl[id].control}))
+    this.store.dispatch(updateStationControl({controlInput:this.editControl[id].control}))
   }
 
   updateStationControl(id:any){
-    console.log("update header data")
+    console.log("update control")
     this.editControl[id].isEdit = !this.editControl[id].isEdit
-    console.log(this.editControl[id].control);
     this.store.dispatch(loadSpinner({isLoading:true}))
-    this.store.dispatch(updateStationControl({controlStationInput:this.editControl[id].control}))
+    this.store.dispatch(updateStationControl({controlInput:this.editControl[id].control}))
+  }
+
+  updateStationControlDateDone(id:any){
+    console.log("update control date done")
+    this.editControlDateDone[id].isEdit = !this.editControlDateDone[id].isEdit
+    this.store.dispatch(loadSpinner({isLoading:true}))
+    this.store.dispatch(updateStationControl({controlInput:this.editControlDateDone[id].control}))
   }
 
   ngOnDestroy(): void {

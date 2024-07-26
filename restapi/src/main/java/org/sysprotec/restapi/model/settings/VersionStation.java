@@ -1,4 +1,4 @@
-package org.sysprotec.restapi.model;
+package org.sysprotec.restapi.model.settings;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;

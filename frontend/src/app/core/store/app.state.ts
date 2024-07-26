@@ -1,4 +1,4 @@
-import {versionReducer} from "../../modules/version/store/version.reducers";
+import {versionReducer} from "../../modules/settings/version/store/version.reducers";
 import {lopReducer} from "../../modules/overview/lop/store/lop.reducers";
 import {appReducer} from "./app.reducer";
 import {
@@ -8,7 +8,6 @@ import {userReducer} from "../../modules/userAdministration/store/user-administr
 import {loggedUserReducer} from "../logged-user/logged-user.reducers";
 import {activeProjectViewReducer} from "../active-project/active-project.reducer";
 import {stationViewReducer} from "../../modules/station/store/stationView.reducers";
-import {lopSettingReducer} from "../../modules/settings/lop-settings/store/lopSetting.reducers";
 import {historyReducer} from "../../modules/overview/history/store/history.reducers";
 import {
   documentationSettingReducer
@@ -33,7 +32,6 @@ import {technicalDataReducer} from "../../modules/overview/technicalData/store/t
 export const AppState={
   version:versionReducer,
   lop:lopReducer,
-  lopSetting:lopSettingReducer,
   app:appReducer,
   projectView:projectViewReducer,
   user:userReducer,

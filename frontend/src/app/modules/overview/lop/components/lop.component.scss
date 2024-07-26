@@ -2,30 +2,49 @@
   //margin-top: 10px;
 }
 
+.th-Aktion{
+  padding-left: 35px;
+}
+
+.mat-column-Aktion{
+  width: 8.75%;
+}
+
 .mat-column-Aufnahme{
+  width: 8.75%;
+}
+
+.mat-column-von{
   width: 10%;
 }
 
-.mat-column-LOP{
-  width: 50%;
+.mat-column-Übermittlungsart{
+  width: 6%;
+}
+
+.mat-column-ToDo{
+  width: 25%;
+}
+
+.mat-column-Zusatz{
+  width: 13.75%;
 }
 
 .mat-column-Status{
-  width: 10%;
+  width: 8.75%;
 }
 
 .mat-column-Erledigt{
-  width: 10%;
+  width: 8.75%;
 }
 
 .mat-column-Benutzer{
-  width: 10%;
+  width: 5%;
 }
 
 .th-center{
   text-align: center;
 }
-
 
 .mat-mdc-header-row{
   color: white;

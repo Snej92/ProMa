@@ -7,6 +7,7 @@ import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../../core/store/appState.model";
 import {addStationView, updateStation} from "../../store/stationView.actions";
 import {getStationById} from "../../store/stationView.selectors";
+import {loadSpinner} from "../../../../core/store/app.action";
 
 @Component({
   selector: 'app-add-station',
@@ -110,16 +111,18 @@ export class AddStationComponent implements OnInit{
       controlToDo:this.stationForm.value.controlToDo as number,
       controlProgress:this.stationForm.value.controlProgress as number
     }
-    // this.store.dispatch(loadSpinner({isLoading:true}));
     if(this.data.isEdit){
       stationInput.id = this.stationForm.value.id as number
       console.log(stationInput)
+      this.store.dispatch(loadSpinner({isLoading:true}));
       this.store.dispatch(updateStation({stationViewInput:stationInput}))
-    }else{
+      this.closePopup();
+    }else if(!this.data.isEdit && this.stationForm.valid){
       console.log(stationInput)
+      this.store.dispatch(loadSpinner({isLoading:true}));
       this.store.dispatch(addStationView({stationViewInput:stationInput}))
+      this.closePopup();
     }
-    this.closePopup();
   }
 
   closePopup(){

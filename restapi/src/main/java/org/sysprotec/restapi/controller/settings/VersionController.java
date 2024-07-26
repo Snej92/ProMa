@@ -1,8 +1,8 @@
-package org.sysprotec.restapi.controller;
+package org.sysprotec.restapi.controller.settings;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.sysprotec.restapi.model.Version;
+import org.sysprotec.restapi.model.settings.Version;
 import org.sysprotec.restapi.service.VersionService;
 
 import java.util.List;

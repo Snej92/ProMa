@@ -8,7 +8,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.sysprotec.restapi.model.Station;
-import org.sysprotec.restapi.model.settings.LopSetting;
 import org.sysprotec.restapi.model.settings.TechnicalDataSetting;
 
 @Entity

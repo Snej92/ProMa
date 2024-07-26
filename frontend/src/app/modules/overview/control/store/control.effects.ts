@@ -8,6 +8,7 @@ import {
   loadStationControlSuccess, updateStationControl, updateStationControlSuccess
 } from "./control.actions";
 import {ControlService} from "../service/control.service";
+import {controlModel} from "../../control/store/control.model";
 
 @Injectable()
 export class ControlEffects {
@@ -35,9 +36,9 @@ export class ControlEffects {
     this.action$.pipe(
       ofType(updateStationControl),
       switchMap(action=>
-        this.service.updateStationControl(action.controlStationInput).pipe(
+        this.service.updateStationControl(action.controlInput).pipe(
           switchMap(data=> of(
-            updateStationControlSuccess({controlStationInput:action.controlStationInput}),
+            updateStationControlSuccess({controlNew:data as controlModel, controlOld:action.controlInput}),
             loadSpinner({isLoading:false}),
             showAlert({message: 'Erfolgreich aktualisiert', actionResult:'pass'})
           )),

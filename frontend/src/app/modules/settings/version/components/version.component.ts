@@ -2,15 +2,13 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {versionModel, versions} from "../store/version.model";
 import {Store} from "@ngrx/store";
 import {getVersionById, getVersionInfo} from "../store/version.selectors";
-import {AppStateModel} from "../../../core/store/appState.model";
+import {AppStateModel} from "../../../../core/store/appState.model";
 import {MatDialog} from "@angular/material/dialog";
 import {AddVersionComponent} from "./add-version/add-version.component";
 import {deleteVersion, loadVersion, updateVersion} from "../store/version.actions";
 import {Subscription} from "rxjs";
-import {loadSpinner} from "../../../core/store/app.action";
-import {matDatepickerAnimations} from "@angular/material/datepicker";
-import {SysConfirmationComponent} from "../../../core/sys-confirmation/sys-confirmation.component";
-import {deleteSettingLop} from "../../settings/lop-settings/store/lopSetting.actions";
+import {loadSpinner} from "../../../../core/store/app.action";
+import {SysConfirmationComponent} from "../../../../core/sys-confirmation/sys-confirmation.component";
 
 
 @Component({

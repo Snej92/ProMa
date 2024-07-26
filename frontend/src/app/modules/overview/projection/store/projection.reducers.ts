@@ -33,13 +33,14 @@ const _projectionReducer = createReducer(
   }),
 
   on(updateStationProjectionSuccess, (state,action) => {
-    const _projection={...action.projectionStationInput};
-    const updatedProjection=state.projectionList.map(projection=>{
-      return _projection.id===projection.id?_projection:projection;
+    const projectionOld = {...action.projectionOld};
+    const projectionNew = {...action.projectionNew};
+    const updatedProjection = state.projectionList.map(projection => {
+      return projectionOld.id === projection.id?projectionNew:projection;
     });
-    return{
+    return {
       ...state,
-      projectionList:updatedProjection
+      projectionList: updatedProjection
     };
   }),
 );

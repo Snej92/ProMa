@@ -6,12 +6,13 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.sysprotec.restapi.model.*;
+import org.sysprotec.restapi.model.settings.Version;
+import org.sysprotec.restapi.model.settings.VersionStation;
 import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.UserRepository;
-import org.sysprotec.restapi.repository.VersionRepository;
-import org.sysprotec.restapi.repository.VersionStationRepository;
+import org.sysprotec.restapi.repository.settings.VersionRepository;
+import org.sysprotec.restapi.repository.settings.VersionStationRepository;
 
 import java.util.ArrayList;
 import java.util.List;

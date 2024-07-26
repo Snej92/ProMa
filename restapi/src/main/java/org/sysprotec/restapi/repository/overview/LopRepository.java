@@ -13,5 +13,4 @@ public interface LopRepository extends JpaRepository<Lop, Long> {
     Optional<Lop> findLopById(Long Id);
     Lop findTopByOrderByIdDesc();
 
-    List<Lop> findAllByLopSettingId(Long Id);
 }

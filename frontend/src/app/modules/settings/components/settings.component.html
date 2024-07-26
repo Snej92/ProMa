@@ -1,29 +1,25 @@
 <div class="settings-container">
   <div class="settings-nav">
-    <app-sys-nav-button (click)="selectSetting(1)" [selected]="selectedSetting==1" text="Stationen"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectSetting(2)" [selected]="selectedSetting==2" text="Kopfdaten"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectSetting(3)" [selected]="selectedSetting==3" text="Vorgaben"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectSetting(4)" [selected]="selectedSetting==4" text="Projektierung"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectSetting(5)" [selected]="selectedSetting==5" text="Technische Daten"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectSetting(6)" [selected]="selectedSetting==6" text="Kontrolle"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectSetting(7)" [selected]="selectedSetting==7" text="Doku"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectSetting(8)" [selected]="selectedSetting==8" text="LOP"></app-sys-nav-button>
-<!--    <app-sys-nav-button (click)="selectSetting(9)" [selected]="selectedSetting==9" text="Historie"></app-sys-nav-button>-->
+    <app-sys-nav-button (click)="selectSetting(1)" [selected]="selectedSetting==1" text="Kopfdaten"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(2)" [selected]="selectedSetting==2" text="Vorgaben"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(3)" [selected]="selectedSetting==3" text="Projektierung"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(4)" [selected]="selectedSetting==4" text="Kontrolle"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(5)" [selected]="selectedSetting==5" text="Doku"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(6)" [selected]="selectedSetting==6" text="Technische Daten"></app-sys-nav-button>
+    <app-sys-nav-button (click)="selectSetting(7)" [selected]="selectedSetting==7" text="Version"></app-sys-nav-button>
   </div>
   <div class="settings-divider">
     <mat-divider vertical="true"></mat-divider>
   </div>
   <div class="settings-content">
     <ng-container [ngSwitch]="selectedSetting">
-      <div *ngSwitchCase="1"> Stationen </div>
-      <app-header-data-settings *ngSwitchCase="2"></app-header-data-settings>
-      <app-specification-settings *ngSwitchCase="3"></app-specification-settings>
-      <app-projection-settings *ngSwitchCase="4"></app-projection-settings>
-      <app-technical-data-settings *ngSwitchCase="5"></app-technical-data-settings>
-      <app-control-settings *ngSwitchCase="6"></app-control-settings>
-      <app-documentation-settings *ngSwitchCase="7"></app-documentation-settings>
-      <app-lop-settings *ngSwitchCase="8"></app-lop-settings>
-<!--      <div *ngSwitchCase="9"> Historie </div>-->
+      <app-header-data-settings *ngSwitchCase="1"></app-header-data-settings>
+      <app-specification-settings *ngSwitchCase="2"></app-specification-settings>
+      <app-projection-settings *ngSwitchCase="3"></app-projection-settings>
+      <app-control-settings *ngSwitchCase="4"></app-control-settings>
+      <app-documentation-settings *ngSwitchCase="5"></app-documentation-settings>
+      <app-technical-data-settings *ngSwitchCase="6"></app-technical-data-settings>
+      <app-version *ngSwitchCase="7"></app-version>
     </ng-container>
   </div>
 </div>

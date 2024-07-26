@@ -1,0 +1,75 @@
+<form [formGroup]="lopForm" (ngSubmit)="saveLop()">
+
+  <mat-card>
+    <mat-card-header>
+      <h1>{{data.title}}</h1>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <div class="d-flex justify-content-between">
+        <mat-form-field class="mat-form-field-3" floatLabel="always">
+          <mat-label>Aufnahmedatum</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="startDate" (dateChange)="onLopStartDateChange($event.value)" [placeholder]="startDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="mat-form-field-3">
+          <mat-label>von wem?</mat-label>
+          <input matInput formControlName="issuer">
+        </mat-form-field>
+
+        <mat-form-field class="mat-form-field-3">
+          <mat-label>Übermittlungsart</mat-label>
+          <input matInput formControlName="transmissionType">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field class="mat-form-field-1">
+          <mat-label>LOP</mat-label>
+          <input matInput formControlName="item">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field class="mat-form-field-1">
+          <mat-label>Zusatz</mat-label>
+          <input matInput formControlName="addition">
+        </mat-form-field>
+      </div>
+
+      <ng-container *ngIf="data.isEdit">
+        <div class="d-flex justify-content-between">
+          <mat-form-field class="mat-form-field-3">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+              <mat-option value="OFFEN">OFFEN</mat-option>
+              <mat-option value="INARBEIT">INARBEIT</mat-option>
+              <mat-option value="ERLEDIGT ">ERLEDIGT</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="mat-form-field-3" floatLabel="always">
+            <mat-label>Erledigt am?</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="endDate" (dateChange)="onLopEndDateChange($event.value)" [placeholder]="endDate">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="mat-form-field-3">
+            <mat-label>Benutzer</mat-label>
+            <input matInput formControlName="userAcronym">
+          </mat-form-field>
+        </div>
+      </ng-container>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button type="submit" mat-raised-button color="accent"> {{data.button}} </button>
+      <button type="reset" mat-raised-button color="primary" (click)="closePopup()"> Abbrechen </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -19,6 +19,17 @@ public class LopController {
         return lopService.getStationLop(stationId);
     }
 
+    @PostMapping("{stationId}")
+    public Lop addLop(@RequestBody Lop lop,
+                      @PathVariable Long stationId){
+        return lopService.addLop(stationId, lop);
+    }
+
+    @DeleteMapping("{lopId}")
+    public void deleteLop(@PathVariable Long lopId){
+        lopService.deleteLop(lopId);
+    }
+
     @PutMapping
     public Lop updateLop(@RequestBody Lop lop){
         return lopService.updateLop(lop);
