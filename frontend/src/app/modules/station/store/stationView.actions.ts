@@ -27,3 +27,4 @@ export const updateStationSuccess=createAction(UPDATE_STATION_SUCCESS, props<{st
 
 export const deleteStation=createAction(DELETE_STATION, props<{id:number}>())
 export const deleteStationSuccess=createAction(DELETE_STATION_SUCCESS, props<{id:number}>())
+

@@ -53,7 +53,6 @@ export class SysSidenavComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     console.log('Nav Init')
     console.log('production: ' + environment.production)
-    console.log('API url: ' + environment.API_URL)
     this.store.dispatch(loadSpinner({isLoading:true}))
     this.store.dispatch(loadActiveProjectView());
     this.subscriptions.push(

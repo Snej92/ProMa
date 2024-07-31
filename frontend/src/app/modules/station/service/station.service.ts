@@ -16,11 +16,6 @@ export class StationService {
     return this.http.get<stationViewModel[]>(this.API_URL + "/station/all")
   }
 
-  getStation():Observable<stationViewModel>{
-    console.log("Fetch selected Station")
-    return this.http.get<stationViewModel>(this.API_URL + "/station")
-  }
-
   addStation(stationViewInput:stationViewModel){
     return this.http.post(this.API_URL + "/station", stationViewInput);
   }

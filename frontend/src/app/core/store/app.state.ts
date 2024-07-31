@@ -27,6 +27,7 @@ import {projectionReducer} from "../../modules/overview/projection/store/project
 import {controlReducer} from "../../modules/overview/control/store/control.reducers";
 import {headerDataReducer} from "../../modules/overview/headerData/store/headerData.reducers";
 import {technicalDataReducer} from "../../modules/overview/technicalData/store/technicalData.reducers";
+import {stationViewOverviewReducer} from "../../modules/overview/station/store/stationViewOverview.reducers";
 
 
 export const AppState={
@@ -50,5 +51,6 @@ export const AppState={
   projection:projectionReducer,
   control:controlReducer,
   headerData:headerDataReducer,
-  technicalData:technicalDataReducer
+  technicalData:technicalDataReducer,
+  stationViewOverview:stationViewOverviewReducer,
 }

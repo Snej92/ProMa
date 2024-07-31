@@ -25,7 +25,12 @@ export interface stationViewModel{
   controlTotal:number,
   controlDone:number,
   controlToDo:number,
-  controlProgress:number
+  controlProgress:number,
+  //Projection
+  projectionTotal:number,
+  projectionDone:number,
+  projectionToDo:number,
+  projectionProgress:number,
 }
 
 export interface stationView{

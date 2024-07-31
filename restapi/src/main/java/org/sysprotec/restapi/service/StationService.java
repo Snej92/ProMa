@@ -7,16 +7,20 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.sysprotec.restapi.model.*;
+import org.sysprotec.restapi.model.overview.Lop;
 import org.sysprotec.restapi.model.overview.Task;
 import org.sysprotec.restapi.model.projections.StationDto;
 import org.sysprotec.restapi.model.projections.StationView;
 import org.sysprotec.restapi.model.settings.*;
+import org.sysprotec.restapi.model.types.StatusLOP;
 import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.StationRepository;
 import org.sysprotec.restapi.repository.UserRepository;
+import org.sysprotec.restapi.repository.overview.LopRepository;
 import org.sysprotec.restapi.repository.settings.VersionRepository;
 import org.sysprotec.restapi.repository.overview.TaskRepository;
 import org.sysprotec.restapi.service.overview.HeaderDataService;
+import org.sysprotec.restapi.service.overview.LopService;
 import org.sysprotec.restapi.service.overview.TechnicalDataService;
 import org.sysprotec.restapi.service.overview.task.ControlService;
 import org.sysprotec.restapi.service.overview.task.DocumentationService;
@@ -42,6 +46,7 @@ public class StationService {
     private final TechnicalDataService technicalDataService;
     private final ControlService controlService;
     private final DocumentationService documentationService;
+    private final LopService lopService;
 
 
     public List<StationView> getAllStations() {
@@ -223,9 +228,8 @@ public class StationService {
         }
     }
 
-    public Station getStation(Long stationId) {
-        Optional<Station> optionalStation = stationRepository.findById(stationId);
-        return optionalStation.orElse(null);
+    public StationView getStation(Long stationId) {
+        return stationRepository.getProjectedById(stationId);
     }
 
     //#######################Additional Functions##############################
@@ -240,16 +244,26 @@ public class StationService {
                 if (optionalProject.isPresent()) {
                     Project savedProject = optionalProject.get();
                     for(Station station : savedProject.getStations()){
-//                        List<Task> control = taskRepository.findAllByTaskSettingTypeAndStationId("control", stationId);
-//                        List<Task> specification = taskRepository.findAllByTaskSettingTypeAndStationId("specification", stationId);
-//                        List<Lop> lop = lopService.getStationLop(stationId);
-
                         updateStationDocumentationProgress(station);
+                        updateStationControlProgress(station);
+                        updateStationProjectionProgress(station);
+                        updateStationSpecificationProgress(station);
+                        updateStationLopProgress(station);
+
+                        station.setTotalProgress(
+                                        (station.getDocumentationProgress()
+                                        +station.getControlProgress()
+                                        +station.getProjectionProgress()
+                                        +station.getSpecificationProgress()
+                                        +station.getLopProgress())
+                                        /5
+                        );
+
+                        stationRepository.save(station);
                     }
                 }
             }
         }
-
     }
 
     public void updateStationDocumentationProgress(Station station){
@@ -273,7 +287,7 @@ public class StationService {
                 }
 
                 //Progress
-                progress = (done/station.getDocumentationTotal())*100;
+                progress = (done/total)*100;
             } else{
                 progress = 100;
             }
@@ -288,6 +302,166 @@ public class StationService {
             log.info("documentation Done of '{}' set to: {}", station.getName(), station.getDocumentationDone());
             log.info("documentation ToDo of '{}' set to: {}", station.getName(), station.getDocumentationToDo());
             log.info("documentation Progress of '{}' set to: {}%", station.getName(), station.getDocumentationProgress());
+            stationRepository.save(station);
+        }
+    }
+
+    public void updateStationControlProgress(Station station){
+        List<Task> controls = taskRepository.findAllByTaskSettingTypeAndStationId("control", station.getId());
+        if(controls != null){
+            int done = 0;
+            int toDo = 0;
+            int progress = 0;
+            int total = 0;
+            if(!controls.isEmpty()){
+                //Total controls
+                total = controls.size();
+
+                //Done controls + still to do controls
+                for(Task task: controls){
+                    if(task.getDone()){
+                        done += 1;
+                    } else {
+                        toDo += 1;
+                    }
+                }
+
+                //Progress
+                progress = (done/total)*100;
+            } else{
+                progress = 100;
+            }
+
+            station.setControlTotal(total);
+            station.setControlProgress(progress);
+            station.setControlDone(done);
+            station.setControlToDo(toDo);
+
+            logService.SeparatorLog();
+            log.info("control Total of '{}' set to: {}", station.getName(), station.getControlTotal());
+            log.info("control Done of '{}' set to: {}", station.getName(), station.getControlDone());
+            log.info("control ToDo of '{}' set to: {}", station.getName(), station.getControlToDo());
+            log.info("control Progress of '{}' set to: {}%", station.getName(), station.getControlProgress());
+            stationRepository.save(station);
+        }
+    }
+
+    public void updateStationSpecificationProgress(Station station){
+        List<Task> specifications = taskRepository.findAllByTaskSettingTypeAndStationId("specification", station.getId());
+        if(specifications != null){
+            int done = 0;
+            int toDo = 0;
+            int progress = 0;
+            int total = 0;
+            if(!specifications.isEmpty()){
+                //Total specifications
+                total = specifications.size();
+
+                //Done specifications + still to do specifications
+                for(Task task: specifications){
+                    if(task.getDone()){
+                        done += 1;
+                    } else {
+                        toDo += 1;
+                    }
+                }
+
+                //Progress
+                progress = (done/total)*100;
+            } else{
+                progress = 100;
+            }
+
+            station.setSpecificationTotal(total);
+            station.setSpecificationProgress(progress);
+            station.setSpecificationDone(done);
+            station.setSpecificationToDo(toDo);
+
+            logService.SeparatorLog();
+            log.info("specification Total of '{}' set to: {}", station.getName(), station.getSpecificationTotal());
+            log.info("specification Done of '{}' set to: {}", station.getName(), station.getSpecificationDone());
+            log.info("specification ToDo of '{}' set to: {}", station.getName(), station.getSpecificationToDo());
+            log.info("specification Progress of '{}' set to: {}%", station.getName(), station.getSpecificationProgress());
+            stationRepository.save(station);
+        }
+    }
+
+    public void updateStationProjectionProgress(Station station){
+        List<Task> projections = taskRepository.findAllByTaskSettingTypeAndStationId("projection", station.getId());
+        if(projections != null){
+            int done = 0;
+            int toDo = 0;
+            int progress = 0;
+            int total = 0;
+            if(!projections.isEmpty()){
+                //Total projections
+                total = projections.size();
+
+                //Done projections + still to do projections
+                for(Task task: projections){
+                    if(task.getDone()){
+                        done += 1;
+                    } else {
+                        toDo += 1;
+                    }
+                }
+
+                //Progress
+                progress = (done/total)*100;
+            } else{
+                progress = 100;
+            }
+
+            station.setProjectionTotal(total);
+            station.setProjectionProgress(progress);
+            station.setProjectionDone(done);
+            station.setProjectionToDo(toDo);
+
+            logService.SeparatorLog();
+            log.info("projection Total of '{}' set to: {}", station.getName(), station.getProjectionTotal());
+            log.info("projection Done of '{}' set to: {}", station.getName(), station.getProjectionDone());
+            log.info("projection ToDo of '{}' set to: {}", station.getName(), station.getProjectionToDo());
+            log.info("projection Progress of '{}' set to: {}%", station.getName(), station.getProjectionProgress());
+            stationRepository.save(station);
+        }
+    }
+
+    public void updateStationLopProgress(Station station){
+        List<Lop> lops = lopService.getStationLop(station.getId());
+        if(lops != null){
+            int done = 0;
+            int toDo = 0;
+            int progress = 0;
+            int total = 0;
+            if(!lops.isEmpty()){
+                //Total Lops
+                total = lops.size();
+
+                //Done lops + still to do lops
+                for(Lop lop : lops){
+                    if(lop.getStatus() == StatusLOP.ERLEDIGT){
+                        done += 1;
+                    } else {
+                        toDo += 1;
+                    }
+                }
+
+                //Progress
+                progress = (done/total)*100;
+            } else{
+                progress = 100;
+            }
+
+            station.setLopTotal(total);
+            station.setLopProgress(progress);
+            station.setLopDone(done);
+            station.setLopToDo(toDo);
+
+            logService.SeparatorLog();
+            log.info("lop Total of '{}' set to: {}", station.getName(), station.getLopTotal());
+            log.info("lop Done of '{}' set to: {}", station.getName(), station.getLopDone());
+            log.info("lop ToDo of '{}' set to: {}", station.getName(), station.getLopToDo());
+            log.info("lop Progress of '{}' set to: {}%", station.getName(), station.getLopProgress());
             stationRepository.save(station);
         }
     }

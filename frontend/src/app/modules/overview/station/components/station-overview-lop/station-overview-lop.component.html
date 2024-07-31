@@ -11,11 +11,11 @@
   </div>
 
   <div class="ms-2 mt-2">
-    <span class="properties-font">Gesamtanzahl: </span> <span class="ms-1">{{stationViewInput.lopTotal}}</span>
+    <span class="properties-font">Gesamtanzahl: </span> <span class="ms-1">{{stationViewInput.stationViewOverview.lopTotal}}</span>
   </div>
 
   <div class="ms-2">
-    <span class="properties-font">Erledigt: </span> <span class="ms-1">{{stationViewInput.lopDone}}</span>
+    <span class="properties-font">Erledigt: </span> <span class="ms-1">{{stationViewInput.stationViewOverview.lopDone}}</span>
   </div>
 
   <div class="ms-2 mt-4 mb-4">
@@ -23,11 +23,11 @@
       Status:
     </span>
     <span class="ms-1 status"
-          [ngClass]="stationViewInput.lopTotal==stationViewInput.lopDone ? 'status-done' : 'status-not-done'">
-      <span *ngIf="stationViewInput.lopTotal==stationViewInput.lopDone">
+          [ngClass]="stationViewInput.stationViewOverview.lopTotal==stationViewInput.stationViewOverview.lopDone ? 'status-done' : 'status-not-done'">
+      <span *ngIf="stationViewInput.stationViewOverview.lopTotal==stationViewInput.stationViewOverview.lopDone">
         vollständig
       </span>
-      <span *ngIf="stationViewInput.lopTotal!=stationViewInput.lopDone">
+      <span *ngIf="stationViewInput.stationViewOverview.lopTotal!=stationViewInput.stationViewOverview.lopDone">
         unvollständig
       </span>
     </span>
@@ -35,9 +35,9 @@
 
   <div class="ms-2">
     <span class="properties-font">Fortschritt: </span>
-    <span [ngClass]="stationViewInput.lopProgress >= 100 ? 'progress-text-align-100' : 'progress-text-align'">{{stationViewInput.lopProgress}}</span>
+    <span [ngClass]="stationViewInput.stationViewOverview.lopProgress >= 100 ? 'progress-text-align-100' : 'progress-text-align'">{{stationViewInput.stationViewOverview.lopProgress}}</span>
     <mat-progress-spinner class="progress-spinner-align"
-                          value="{{stationViewInput.lopProgress}}"
+                          value="{{stationViewInput.stationViewOverview.lopProgress}}"
                           mode="determinate" [diameter]="38" color="accent">
 
     </mat-progress-spinner>

@@ -5,7 +5,6 @@
      routerLinkActive="selected-menu-item"
      #rla="routerLinkActive"
      [activated]="rla.isActive">
-
     <mat-icon [fontSet]="rla.isActive ? 'material-icons' : 'material-symbols-outlined'" matListItemIcon>{{item.icon}}</mat-icon>
     <span matListItemTitle *ngIf="!sideNavCollapsed()">{{item.label}}</span>
   </a>

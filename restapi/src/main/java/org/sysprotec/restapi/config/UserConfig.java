@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.sysprotec.restapi.model.Role;
 import org.sysprotec.restapi.model.User;
-import org.sysprotec.restapi.repository.RoleRepository;
 import org.sysprotec.restapi.repository.UserRepository;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public class UserConfig {
                 .email("admin@admin.com")
                 .phone("geheim")
                 .username("admin@admin.com")
-                .password("test")
+                .password("!FDJEWGQS§pukr9a")
                 .roles(roleAll)
                 .activeProject(0L)
                 .build();

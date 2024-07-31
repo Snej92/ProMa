@@ -23,7 +23,7 @@ public class StationController {
     }
 
     @GetMapping("{stationId}")
-    public Station getStation(@PathVariable Long stationId){
+    public StationView getStation(@PathVariable Long stationId){
         return stationService.getStation(stationId);
     }
 

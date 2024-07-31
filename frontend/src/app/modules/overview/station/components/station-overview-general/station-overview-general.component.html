@@ -25,11 +25,11 @@
   </div>
 
   <div class="ms-2 mt-2">
-    <span class="properties-font">Stationsname: </span> <span class="ms-1">{{stationViewInput.name}}</span>
+    <span class="properties-font">Stationsname: </span> <span class="ms-1">{{stationViewInput.stationViewOverview.name}}</span>
   </div>
 
   <div class="ms-2">
-    <span class="properties-font">Beschreibung: </span> <span class="ms-1">{{stationViewInput.description}}</span>
+    <span class="properties-font">Beschreibung: </span> <span class="ms-1">{{stationViewInput.stationViewOverview.description}}</span>
   </div>
 
   <div class="ms-2 mt-4 mb-4">
@@ -37,21 +37,21 @@
       Status:
     </span>
     <span class="ms-1 station-status" [ngClass]="{
-          'station-status-ausgelagert': stationViewInput.status=='AUSGELAGERT',
-          'station-status-inarbeit': stationViewInput.status=='INARBEIT',
-          'station-status-eingelagert': stationViewInput.status=='EINGELAGERT'
+          'station-status-ausgelagert': stationViewInput.stationViewOverview.status=='AUSGELAGERT',
+          'station-status-inarbeit': stationViewInput.stationViewOverview.status=='INARBEIT',
+          'station-status-eingelagert': stationViewInput.stationViewOverview.status=='EINGELAGERT'
           }">
-      {{stationViewInput.status}}
+      {{stationViewInput.stationViewOverview.status}}
     </span>
   </div>
 
   <div class="ms-2">
-    <span class="properties-font">Bearbeiter: </span> <span class="ms-1">{{stationViewInput.issuer}}</span>
+    <span class="properties-font">Bearbeiter: </span> <span class="ms-1">{{stationViewInput.stationViewOverview.issuer}}</span>
   </div>
 
   <div class="ms-2 mt-4">
     <span class="properties-font">Projektfortschritt: </span>
-    <span [ngClass]="stationViewInput.totalProgress >= 100 ? 'progress-text-align-100' : 'progress-text-align'">{{stationViewInput.totalProgress}}</span>
-    <mat-progress-spinner class="progress-spinner-align" value="{{stationViewInput.totalProgress}}" mode="determinate" [diameter]="38" color="accent"></mat-progress-spinner>
+    <span [ngClass]="stationViewInput.stationViewOverview.totalProgress >= 100 ? 'progress-text-align-100' : 'progress-text-align'">{{stationViewInput.stationViewOverview.totalProgress}}</span>
+    <mat-progress-spinner class="progress-spinner-align" value="{{stationViewInput.stationViewOverview.totalProgress}}" mode="determinate" [diameter]="38" color="accent"></mat-progress-spinner>
   </div>
 </mat-card>

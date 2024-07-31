@@ -35,6 +35,7 @@ export class AuthGuard extends KeycloakAuthGuard {
 
     //get user groups
     const userRoles = await this.getUserRoles();
+    // console.log(userRoles)
 
     // Allow the user to proceed if no additional roles are required to access the route.
     if (!Array.isArray(requiredRoles) || requiredRoles.length === 0) {

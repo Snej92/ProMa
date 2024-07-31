@@ -134,6 +134,7 @@ import {
   StationOverviewLopComponent
 } from "./modules/overview/station/components/station-overview-lop/station-overview-lop.component";
 import { AddLopComponent } from './modules/overview/lop/components/add-lop/add-lop.component';
+import {StationViewOverviewEffects} from "./modules/overview/station/store/stationViewOverview.effects";
 
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -233,7 +234,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
             SpecificationEffects,
             ProjectionEffects,
             HeaderDataEffects,
-            TechnicalDataEffects]),
+            TechnicalDataEffects,
+            StationViewOverviewEffects]),
 
 
         MatToolbar,

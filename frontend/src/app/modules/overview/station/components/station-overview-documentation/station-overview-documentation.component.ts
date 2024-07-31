@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {stationViewModel} from "../../../../station/store/stationView.model";
+import {stationViewOverview} from "../../store/stationViewOverview.model";
 
 @Component({
   selector: 'app-station-overview-documentation',
@@ -7,12 +7,11 @@ import {stationViewModel} from "../../../../station/store/stationView.model";
   styleUrl: './station-overview-documentation.component.scss'
 })
 export class StationOverviewDocumentationComponent implements OnInit, OnDestroy{
-  @Input() stationViewInput!:stationViewModel;
+  @Input() stationViewInput!:stationViewOverview;
   @Input() favorite:boolean = false;
 
   ngOnInit(): void {
-    console.log("Init station overview general")
-    console.log(this.stationViewInput)
+
   }
 
   ngOnDestroy(): void {

@@ -51,7 +51,11 @@ export class AddStationComponent implements OnInit{
           controlTotal:this.editData.controlTotal,
           controlDone:this.editData.controlDone,
           controlToDo:this.editData.controlToDo,
-          controlProgress:this.editData.controlProgress
+          controlProgress:this.editData.controlProgress,
+          projectionTotal:this.editData.projectionTotal,
+          projectionDone:this.editData.projectionDone,
+          projectionToDo:this.editData.projectionToDo,
+          projectionProgress:this.editData.projectionProgress
         })
       })
       this.onInitSub.unsubscribe();
@@ -82,6 +86,10 @@ export class AddStationComponent implements OnInit{
     controlDone:this.builder.control(0),
     controlToDo:this.builder.control(0),
     controlProgress:this.builder.control(0),
+    projectionTotal:this.builder.control(0),
+    projectionDone:this.builder.control(0),
+    projectionToDo:this.builder.control(0),
+    projectionProgress:this.builder.control(0),
   })
 
 
@@ -109,7 +117,11 @@ export class AddStationComponent implements OnInit{
       controlTotal:this.stationForm.value.controlTotal as number,
       controlDone:this.stationForm.value.controlDone as number,
       controlToDo:this.stationForm.value.controlToDo as number,
-      controlProgress:this.stationForm.value.controlProgress as number
+      controlProgress:this.stationForm.value.controlProgress as number,
+      projectionTotal:this.stationForm.value.projectionTotal as number,
+      projectionDone:this.stationForm.value.projectionDone as number,
+      projectionToDo:this.stationForm.value.projectionToDo as number,
+      projectionProgress:this.stationForm.value.projectionProgress as number,
     }
     if(this.data.isEdit){
       stationInput.id = this.stationForm.value.id as number
