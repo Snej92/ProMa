@@ -27,6 +27,7 @@ public class VersionService {
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
     private final VersionStationRepository versionStationRepository;
+    private final StationService stationService;
 
 
     public List<Version> getVersions() {
@@ -133,6 +134,7 @@ public class VersionService {
             }
             versionRepository.save(saveVersion);
             log.info("Version '"+ version.getVersion() + "' updated");
+            stationService.updateStationVersion();
             if(versionRepository.findVersionById(version.getId()).isPresent()){
                 Version returnVersion = versionRepository.findVersionById(version.getId()).get();
                 returnVersion.setVersionStation(versionStationRepository.findVersionStationsByVersionIdOrderByIdAsc(returnVersion.getId()));

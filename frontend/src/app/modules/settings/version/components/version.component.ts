@@ -77,6 +77,7 @@ export class VersionComponent implements OnInit,OnDestroy{
         };
       }
       console.log(this.updateVersion);
+      this.store.dispatch(loadSpinner({isLoading:true}))
       this.store.dispatch(updateVersion({versionInput:this.updateVersion}));
 
     });

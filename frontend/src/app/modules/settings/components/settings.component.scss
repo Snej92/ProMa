@@ -26,3 +26,20 @@
   max-width: 85%;
   min-width: 20%;
 }
+
+.card-container-no-project{
+  width: 35%;
+  border-radius: 12px;
+  background-color: var(--frontend-nav-button);
+  border-color: var(--frontend-nav-button-border);
+  border-width: 2px;
+  margin-left: 32%;
+}
+
+.container-no-project {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  margin-top: 5%;
+}

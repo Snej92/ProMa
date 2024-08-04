@@ -14,8 +14,16 @@
     <div class="mat-elevation-z8 station-overview-specification">
       <app-station-overview-specification [stationViewInput]="stationViewOverview" ></app-station-overview-specification>
     </div>
-    <div class="mat-elevation-z8 station-overview-lop mt-5">
+    <div class="mat-elevation-z8 station-overview-projection mt-5">
+      <app-station-overview-projection [stationViewInput]="stationViewOverview"></app-station-overview-projection>
+    </div>
+  </div>
+  <div class="ms-5 mt-2">
+    <div class="mat-elevation-z8 station-overview-lop">
       <app-station-overview-lop [stationViewInput]="stationViewOverview" ></app-station-overview-lop>
+    </div>
+    <div>
+
     </div>
   </div>
 </div>

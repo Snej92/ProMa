@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.sysprotec.restapi.model.User;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -13,4 +14,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findUserBySub(String sub);
     Optional<User> getUserBySub(String sub);
     User findTopByOrderByIdDesc();
+    List<User> findUserByActiveProject(Long activeProject);
 }

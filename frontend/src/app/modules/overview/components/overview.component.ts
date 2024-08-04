@@ -1,4 +1,4 @@
-import {Component, computed, OnDestroy, OnInit, signal, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit,} from '@angular/core';
 import {loadStationView} from "../../station/store/stationView.actions";
 import {getStationViewInfo} from "../../station/store/stationView.selectors";
 import {Store} from "@ngrx/store";
@@ -6,6 +6,8 @@ import {AppStateModel} from "../../../core/store/appState.model";
 import {Subscription} from "rxjs";
 import {stationView} from "../../station/store/stationView.model";
 import {loadSpinner} from "../../../core/store/app.action";
+import {loggedUser} from "../../../core/logged-user/logged-user.model";
+import {getLoggedUserInfo} from "../../../core/logged-user/logged-user.selectors";
 
 @Component({
   selector: 'app-overview',
@@ -16,6 +18,7 @@ export class OverviewComponent implements OnInit,OnDestroy{
 
   private subscriptions: Subscription[] = [];
   stationView!:stationView;
+  loggedUser!:loggedUser;
 
   selectedOverview!:number;
 
@@ -29,6 +32,14 @@ export class OverviewComponent implements OnInit,OnDestroy{
 
   ngOnInit(): void {
     this.selectedOverview = Number(localStorage.getItem('selectedOverview')) || 1; // Default to 1 if no value is found
+
+    this.store.dispatch(loadSpinner({isLoading:true}))
+    this.subscriptions.push(
+      this.store.select(getLoggedUserInfo).pipe()
+        .subscribe(data =>{
+          this.loggedUser=data;
+        })
+    )
 
     this.store.dispatch(loadSpinner({isLoading:true}))
     this.store.dispatch(loadStationView())

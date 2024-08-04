@@ -17,6 +17,7 @@ import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.UserRepository;
 import org.sysprotec.restapi.repository.overview.TaskRepository;
 import org.sysprotec.restapi.repository.settings.TaskSettingRepository;
+import org.sysprotec.restapi.service.StationService;
 import org.sysprotec.restapi.service.overview.task.ProjectionService;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class ProjectionSettingService {
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
     private final ProjectionService projectionService;
+    private final StationService stationService;
 
     public List<TaskSetting> getProjectionSetting() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -64,7 +66,13 @@ public class ProjectionSettingService {
 
                     log.info("ProjectionSetting Punkt: '" + taskSetting.getItem() + "' zu '" + saveProject.getName() + "' hinzugefügt");
                     TaskSetting newTaskSetting = taskSettingRepository.findTopByOrderByIdDesc();
-                    projectionService.createProjectionForStations(newTaskSetting);
+
+                    stationService.createProjectionForStations(newTaskSetting);
+
+                    //Update Progress
+                    for(Station station : taskSetting.getProject().getStations()){
+                        stationService.updateStationProjectionProgress(station);
+                    }
 
                     return newTaskSetting;
                 }
@@ -103,6 +111,11 @@ public class ProjectionSettingService {
             saveProject.removeProjection(taskSettingId);
             log.info("Projektierung : '" + optionalTaskSetting.get().getItem() + "' von '" + saveProject.getName() + "' entfernt");
             taskSettingRepository.deleteById(taskSettingId);
+
+            //Update Progress
+            for(Station station : optionalTaskSetting.get().getProject().getStations()){
+                stationService.updateStationProjectionProgress(station);
+            }
         }
     }
 }

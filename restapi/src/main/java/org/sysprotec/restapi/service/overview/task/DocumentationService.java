@@ -13,6 +13,7 @@ import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.StationRepository;
 import org.sysprotec.restapi.repository.overview.TaskRepository;
 import org.sysprotec.restapi.service.HistoryService;
+import org.sysprotec.restapi.service.StationService;
 import org.sysprotec.restapi.service.UserService;
 
 import java.util.List;
@@ -24,10 +25,10 @@ import java.util.Optional;
 @Slf4j
 public class DocumentationService {
     private final TaskRepository taskRepository;
-    private final ProjectRepository projectRepository;
     private final StationRepository stationRepository;
     private final UserService userService;
     private final HistoryService historyService;
+    private final StationService stationService;
 
     public List<Task> getDocumentation(Long stationId) {
         Optional<Station> optionalStation = stationRepository.findById(stationId);
@@ -78,6 +79,8 @@ public class DocumentationService {
             saveTask.setCommited(task.getCommited());
             User user = userService.getLoggedUser();
 
+            stationService.updateStationDocumentationProgress(stationRepository.getStationByDocumentationId(task.getId()));
+
             historyService.newEntryAuto(
                     user,
                     saveTask.getStation().getId(),
@@ -85,30 +88,5 @@ public class DocumentationService {
             return saveTask;
         }
         return null;
-    }
-
-
-    public void createDocumentationForStations(TaskSetting taskSetting) {
-        if(taskSetting != null){
-            Optional<Project> optionalProject = projectRepository.findProjectById(taskSetting.getProject().getId());
-            if(optionalProject.isPresent()) {
-                List<Station> stationList = optionalProject.get().getStations();
-                for(Station station : stationList) {
-                    if (stationRepository.findStationByNameAndDocumentationTaskSettingId(station.getName(), taskSetting.getId()).isEmpty()) {
-                        Task task = Task.builder()
-                                .taskSetting(taskSetting)
-                                .dateDone("")
-                                .dateCommited("")
-                                .addition("")
-                                .done(false)
-                                .commited(false)
-                                .station(station)
-                                .build();
-                        taskRepository.save(task);
-                        log.info("Added Documentation Task '" + task.getTaskSetting().getItem() + "' to station '" + station.getName() + "'");
-                    }
-                }
-            }
-        }
     }
 }

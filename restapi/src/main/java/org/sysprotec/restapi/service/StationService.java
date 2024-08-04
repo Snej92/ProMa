@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.sysprotec.restapi.model.*;
 import org.sysprotec.restapi.model.overview.Lop;
 import org.sysprotec.restapi.model.overview.Task;
+import org.sysprotec.restapi.model.projections.ProjectDto;
 import org.sysprotec.restapi.model.projections.StationDto;
 import org.sysprotec.restapi.model.projections.StationView;
 import org.sysprotec.restapi.model.settings.*;
@@ -19,6 +20,7 @@ import org.sysprotec.restapi.repository.UserRepository;
 import org.sysprotec.restapi.repository.overview.LopRepository;
 import org.sysprotec.restapi.repository.settings.VersionRepository;
 import org.sysprotec.restapi.repository.overview.TaskRepository;
+import org.sysprotec.restapi.repository.settings.VersionStationRepository;
 import org.sysprotec.restapi.service.overview.HeaderDataService;
 import org.sysprotec.restapi.service.overview.LopService;
 import org.sysprotec.restapi.service.overview.TechnicalDataService;
@@ -27,6 +29,7 @@ import org.sysprotec.restapi.service.overview.task.DocumentationService;
 import org.sysprotec.restapi.service.overview.task.ProjectionService;
 import org.sysprotec.restapi.service.overview.task.SpecificationService;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,12 +44,9 @@ public class StationService {
     private final TaskRepository taskRepository;
     private final LogService logService;
     private final HeaderDataService headerDataService;
-    private final ProjectionService projectionService;
-    private final SpecificationService specificationService;
     private final TechnicalDataService technicalDataService;
-    private final ControlService controlService;
-    private final DocumentationService documentationService;
-    private final LopService lopService;
+    private final ProjectService projectService;
+    private final VersionStationRepository versionStationRepository;
 
 
     public List<StationView> getAllStations() {
@@ -95,6 +95,10 @@ public class StationService {
                             .controlDone(stationDto.getControlDone())
                             .controlToDo(stationDto.getControlToDo())
                             .controlProgress(stationDto.getControlProgress())
+                            .projectionTotal(stationDto.getProjectionTotal())
+                            .projectionDone(stationDto.getProjectionDone())
+                            .projectionToDo(stationDto.getProjectionToDo())
+                            .projectionProgress(stationDto.getProjectionProgress())
                             .project(savedProject)
                             .build();
                     savedProject.addStation(newStation);
@@ -108,17 +112,11 @@ public class StationService {
                                 .version(version)
                                 .build();
                         version.addVersionStation(newVersionStation);
+                        version.setDone(false);
                         versionRepository.save(version);
                         log.info("Version '" + version.getVersion() + "' added to Station '" + stationDto.getName() + "'");
                     }
 
-                    //Add Lops to Station
-//                    List<LopSetting> lopSettingList = savedProject.getLopSetting();
-//                    if (lopSettingList != null) {
-//                        for(LopSetting lopSetting: lopSettingList){
-//                            lopService.createLopForStations(lopSetting);
-//                        }
-//                    }
                     //Add Header to Station
                     List<HeaderDataSetting> headerDataSettingList = savedProject.getHeaderDataSetting();
                     if(headerDataSettingList != null){
@@ -131,7 +129,7 @@ public class StationService {
                     List<TaskSetting> projectionSettingList = savedProject.getProjectionSetting();
                     if(projectionSettingList != null){
                         for(TaskSetting projectionSetting : projectionSettingList){
-                            projectionService.createProjectionForStations(projectionSetting);
+                            createProjectionForStations(projectionSetting);
                         }
                     }
 
@@ -139,7 +137,7 @@ public class StationService {
                     List<TaskSetting> specificationSettingList = savedProject.getSpecificationSetting();
                     if(specificationSettingList != null){
                         for(TaskSetting specificationSetting : specificationSettingList){
-                            specificationService.createSpecificationForStations(specificationSetting);
+                            createSpecificationForStations(specificationSetting);
                         }
                     }
 
@@ -155,7 +153,7 @@ public class StationService {
                     List<TaskSetting> controlSettingList = savedProject.getControlSetting();
                     if(controlSettingList != null){
                         for(TaskSetting controlSetting : controlSettingList){
-                            controlService.createControlForStations(controlSetting);
+                            createControlForStations(controlSetting);
                         }
                     }
 
@@ -163,7 +161,7 @@ public class StationService {
                     List<TaskSetting> documentationSettingList = savedProject.getDocumentationSetting();
                     if(documentationSettingList != null){
                         for(TaskSetting documentationSetting : documentationSettingList){
-                            documentationService.createDocumentationForStations(documentationSetting);
+                            createDocumentationForStations(documentationSetting);
                         }
                     }
 
@@ -187,6 +185,9 @@ public class StationService {
                 if (optionalProject.isPresent()) {
                     Project savedProject = optionalProject.get();
                     savedProject.removeStation(stationId);
+                    Station station = stationRepository.findById(stationId).get();
+                    List<VersionStation> versionStation = versionStationRepository.findVersionStationsByStationNameOrderByIdAsc(station.getName());
+                    versionStationRepository.deleteAll(versionStation);
                     stationRepository.deleteById(stationId);
                 }
             }
@@ -234,6 +235,31 @@ public class StationService {
 
     //#######################Additional Functions##############################
 
+
+    public void updateStationVersion(){
+        ProjectDto activeProject = projectService.getActiveProject();
+        List<Station> stationList = stationRepository.getStationsByProjectId(activeProject.getId());
+        for(Station station : stationList){
+            boolean versionOK = true;
+            List<VersionStation> versionStationList = versionStationRepository.findVersionStationsByStationNameOrderByIdAsc(station.getName());
+            for(VersionStation versionStation : versionStationList){
+                if(versionStation.getDone() && versionOK){
+                    station.setVersion(versionStation.getVersion().getVersion());
+                    stationRepository.save(station);
+                    log.info("set Version '" + versionStation.getVersion().getVersion() +"' to Station '" + station.getName() +"'");
+                }else{
+                    log.info("Version '" + versionStation.getVersion().getVersion() +"' for Station '" + station.getName() +"' not done");
+                    versionOK = false;
+                    if(versionStation == versionStationList.getFirst()){
+                        station.setVersion("-");
+                        stationRepository.save(station);
+                        log.info("no Version done for Station " + station.getName() +"'");
+                    }
+                }
+            }
+        }
+    }
+
     public void updateAllStationStatus(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
@@ -250,14 +276,7 @@ public class StationService {
                         updateStationSpecificationProgress(station);
                         updateStationLopProgress(station);
 
-                        station.setTotalProgress(
-                                        (station.getDocumentationProgress()
-                                        +station.getControlProgress()
-                                        +station.getProjectionProgress()
-                                        +station.getSpecificationProgress()
-                                        +station.getLopProgress())
-                                        /5
-                        );
+                        updateTotalProgress(station);
 
                         stationRepository.save(station);
                     }
@@ -269,10 +288,10 @@ public class StationService {
     public void updateStationDocumentationProgress(Station station){
         List<Task> documentations = taskRepository.findAllByTaskSettingTypeAndStationId("doku", station.getId());
         if(documentations != null){
-            int done = 0;
-            int toDo = 0;
-            int progress = 0;
-            int total = 0;
+            float done = 0;
+            float toDo = 0;
+            float progress = 0;
+            float total = 0;
             if(!documentations.isEmpty()){
                 //Total Documentations
                total = documentations.size();
@@ -292,16 +311,19 @@ public class StationService {
                 progress = 100;
             }
 
-            station.setDocumentationTotal(total);
-            station.setDocumentationProgress(progress);
-            station.setDocumentationDone(done);
-            station.setDocumentationToDo(toDo);
+            station.setDocumentationTotal((int)total);
+            station.setDocumentationProgress((int)progress);
+            station.setDocumentationDone((int)done);
+            station.setDocumentationToDo((int)toDo);
 
             logService.SeparatorLog();
             log.info("documentation Total of '{}' set to: {}", station.getName(), station.getDocumentationTotal());
             log.info("documentation Done of '{}' set to: {}", station.getName(), station.getDocumentationDone());
             log.info("documentation ToDo of '{}' set to: {}", station.getName(), station.getDocumentationToDo());
             log.info("documentation Progress of '{}' set to: {}%", station.getName(), station.getDocumentationProgress());
+
+            updateTotalProgress(station);
+
             stationRepository.save(station);
         }
     }
@@ -309,10 +331,10 @@ public class StationService {
     public void updateStationControlProgress(Station station){
         List<Task> controls = taskRepository.findAllByTaskSettingTypeAndStationId("control", station.getId());
         if(controls != null){
-            int done = 0;
-            int toDo = 0;
-            int progress = 0;
-            int total = 0;
+            float done = 0;
+            float toDo = 0;
+            float progress = 0;
+            float total = 0;
             if(!controls.isEmpty()){
                 //Total controls
                 total = controls.size();
@@ -332,16 +354,19 @@ public class StationService {
                 progress = 100;
             }
 
-            station.setControlTotal(total);
-            station.setControlProgress(progress);
-            station.setControlDone(done);
-            station.setControlToDo(toDo);
+            station.setControlTotal((int)total);
+            station.setControlProgress((int)progress);
+            station.setControlDone((int)done);
+            station.setControlToDo((int)toDo);
 
             logService.SeparatorLog();
             log.info("control Total of '{}' set to: {}", station.getName(), station.getControlTotal());
             log.info("control Done of '{}' set to: {}", station.getName(), station.getControlDone());
             log.info("control ToDo of '{}' set to: {}", station.getName(), station.getControlToDo());
             log.info("control Progress of '{}' set to: {}%", station.getName(), station.getControlProgress());
+
+            updateTotalProgress(station);
+
             stationRepository.save(station);
         }
     }
@@ -349,10 +374,10 @@ public class StationService {
     public void updateStationSpecificationProgress(Station station){
         List<Task> specifications = taskRepository.findAllByTaskSettingTypeAndStationId("specification", station.getId());
         if(specifications != null){
-            int done = 0;
-            int toDo = 0;
-            int progress = 0;
-            int total = 0;
+            float done = 0;
+            float toDo = 0;
+            float progress = 0;
+            float total = 0;
             if(!specifications.isEmpty()){
                 //Total specifications
                 total = specifications.size();
@@ -372,16 +397,19 @@ public class StationService {
                 progress = 100;
             }
 
-            station.setSpecificationTotal(total);
-            station.setSpecificationProgress(progress);
-            station.setSpecificationDone(done);
-            station.setSpecificationToDo(toDo);
+            station.setSpecificationTotal((int)total);
+            station.setSpecificationProgress((int)progress);
+            station.setSpecificationDone((int)done);
+            station.setSpecificationToDo((int)toDo);
 
             logService.SeparatorLog();
             log.info("specification Total of '{}' set to: {}", station.getName(), station.getSpecificationTotal());
             log.info("specification Done of '{}' set to: {}", station.getName(), station.getSpecificationDone());
             log.info("specification ToDo of '{}' set to: {}", station.getName(), station.getSpecificationToDo());
             log.info("specification Progress of '{}' set to: {}%", station.getName(), station.getSpecificationProgress());
+
+            updateTotalProgress(station);
+
             stationRepository.save(station);
         }
     }
@@ -389,10 +417,10 @@ public class StationService {
     public void updateStationProjectionProgress(Station station){
         List<Task> projections = taskRepository.findAllByTaskSettingTypeAndStationId("projection", station.getId());
         if(projections != null){
-            int done = 0;
-            int toDo = 0;
-            int progress = 0;
-            int total = 0;
+            float done = 0;
+            float toDo = 0;
+            float progress = 0;
+            float total = 0;
             if(!projections.isEmpty()){
                 //Total projections
                 total = projections.size();
@@ -412,27 +440,30 @@ public class StationService {
                 progress = 100;
             }
 
-            station.setProjectionTotal(total);
-            station.setProjectionProgress(progress);
-            station.setProjectionDone(done);
-            station.setProjectionToDo(toDo);
+            station.setProjectionTotal((int)total);
+            station.setProjectionProgress((int)progress);
+            station.setProjectionDone((int)done);
+            station.setProjectionToDo((int)toDo);
 
             logService.SeparatorLog();
             log.info("projection Total of '{}' set to: {}", station.getName(), station.getProjectionTotal());
             log.info("projection Done of '{}' set to: {}", station.getName(), station.getProjectionDone());
             log.info("projection ToDo of '{}' set to: {}", station.getName(), station.getProjectionToDo());
             log.info("projection Progress of '{}' set to: {}%", station.getName(), station.getProjectionProgress());
+
+            updateTotalProgress(station);
+
             stationRepository.save(station);
         }
     }
 
     public void updateStationLopProgress(Station station){
-        List<Lop> lops = lopService.getStationLop(station.getId());
+        List<Lop> lops = station.getLop();
         if(lops != null){
-            int done = 0;
-            int toDo = 0;
-            int progress = 0;
-            int total = 0;
+            float done = 0;
+            float toDo = 0;
+            float progress = 0;
+            float total = 0;
             if(!lops.isEmpty()){
                 //Total Lops
                 total = lops.size();
@@ -452,17 +483,125 @@ public class StationService {
                 progress = 100;
             }
 
-            station.setLopTotal(total);
-            station.setLopProgress(progress);
-            station.setLopDone(done);
-            station.setLopToDo(toDo);
+            station.setLopTotal((int)total);
+            station.setLopProgress((int)progress);
+            station.setLopDone((int)done);
+            station.setLopToDo((int)toDo);
 
             logService.SeparatorLog();
             log.info("lop Total of '{}' set to: {}", station.getName(), station.getLopTotal());
             log.info("lop Done of '{}' set to: {}", station.getName(), station.getLopDone());
             log.info("lop ToDo of '{}' set to: {}", station.getName(), station.getLopToDo());
             log.info("lop Progress of '{}' set to: {}%", station.getName(), station.getLopProgress());
+
+            updateTotalProgress(station);
+            
             stationRepository.save(station);
+        }
+    }
+
+    public void updateTotalProgress(Station station){
+        station.setTotalProgress(
+                (station.getDocumentationProgress()
+                        +station.getControlProgress()
+                        +station.getProjectionProgress()
+                        +station.getSpecificationProgress()
+                        +station.getLopProgress())
+                        /5
+        );
+    }
+
+    public void createControlForStations(TaskSetting taskSetting) {
+        Optional<Project> optionalProject = projectRepository.findProjectById(taskSetting.getProject().getId());
+        if(optionalProject.isPresent()) {
+            List<Station> stationList = optionalProject.get().getStations();
+            for(Station station : stationList) {
+                if (stationRepository.findStationByNameAndControlTaskSettingId(station.getName(), taskSetting.getId()).isEmpty()) {
+                    Task task = Task.builder()
+                            .taskSetting(taskSetting)
+                            .dateDone("")
+                            .dateCommited("")
+                            .addition("")
+                            .done(false)
+                            .commited(false)
+                            .station(station)
+                            .build();
+                    taskRepository.save(task);
+                    updateStationControlProgress(station);
+                    log.info("Added Control Task '" + task.getTaskSetting().getItem() + "' to station '" + station.getName() + "'");
+                }
+            }
+        }
+    }
+
+    public void createDocumentationForStations(TaskSetting taskSetting) {
+        if(taskSetting != null){
+            Optional<Project> optionalProject = projectRepository.findProjectById(taskSetting.getProject().getId());
+            if(optionalProject.isPresent()) {
+                List<Station> stationList = optionalProject.get().getStations();
+                for(Station station : stationList) {
+                    if (stationRepository.findStationByNameAndDocumentationTaskSettingId(station.getName(), taskSetting.getId()).isEmpty()) {
+                        Task task = Task.builder()
+                                .taskSetting(taskSetting)
+                                .dateDone("")
+                                .dateCommited("")
+                                .addition("")
+                                .done(false)
+                                .commited(false)
+                                .station(station)
+                                .build();
+                        taskRepository.save(task);
+                        updateStationDocumentationProgress(station);
+                        log.info("Added Documentation Task '" + task.getTaskSetting().getItem() + "' to station '" + station.getName() + "'");
+                    }
+                }
+            }
+        }
+    }
+
+    public void createProjectionForStations(TaskSetting taskSetting) {
+        Optional<Project> optionalProject = projectRepository.findProjectById(taskSetting.getProject().getId());
+        if(optionalProject.isPresent()) {
+            List<Station> stationList = optionalProject.get().getStations();
+            for(Station station : stationList) {
+                if (stationRepository.findStationByNameAndProjectionTaskSettingId(station.getName(), taskSetting.getId()).isEmpty()) {
+                    Task task = Task.builder()
+                            .taskSetting(taskSetting)
+                            .dateDone("")
+                            .dateCommited("")
+                            .addition("")
+                            .done(false)
+                            .commited(false)
+                            .station(station)
+                            .build();
+                    taskRepository.save(task);
+                    updateStationProjectionProgress(station);
+                    log.info("Added Projection Task '" + task.getTaskSetting().getItem() + "' to station '" + station.getName() + "'");
+                }
+            }
+        }
+    }
+
+    public void createSpecificationForStations(TaskSetting taskSetting) {
+        Optional<Project> optionalProject = projectRepository.findProjectById(taskSetting.getProject().getId());
+        if(optionalProject.isPresent()) {
+            List<Station> stationList = optionalProject.get().getStations();
+            for(Station station : stationList) {
+                if (stationRepository.findStationByNameAndSpecificationTaskSettingId(station.getName(), taskSetting.getId()).isEmpty()) {
+                    Task task = Task.builder()
+                            .taskSetting(taskSetting)
+                            .dateDone("")
+                            .dateCommited("")
+                            .addition("")
+                            .done(false)
+                            .commited(false)
+                            .station(station)
+                            .build();
+                    taskRepository.save(task);
+                    updateStationSpecificationProgress(station);
+                    log.info("Added Specification Task '" + task.getTaskSetting().getItem() + "' to station '" + station.getName() + "'");
+                }
+            }
         }
     }
 }

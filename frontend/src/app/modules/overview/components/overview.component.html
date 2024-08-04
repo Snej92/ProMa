@@ -1,19 +1,20 @@
-<div class="overview-container">
-  <div class="overview-nav">
-    <app-sys-nav-button (click)="selectOverview(1)"  text="Allgemein" [selected]="selectedOverview==1"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(2)"  text="Kopfdaten" [selected]="selectedOverview==2"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(3)"  text="Vorgaben" [selected]="selectedOverview==3"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(4)"  text="Projektierung" [selected]="selectedOverview==4"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(5)"  text="Kontrolle" [selected]="selectedOverview==5"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(6)"  text="Doku" [selected]="selectedOverview==6"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(7)"  text="Technische Daten" [selected]="selectedOverview==7"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(8)"  text="LOP" [selected]="selectedOverview==8"></app-sys-nav-button>
-    <app-sys-nav-button (click)="selectOverview(9)"  text="Historie" [selected]="selectedOverview==9"></app-sys-nav-button>
-  </div>
-  <div class="overview-divider">
-    <mat-divider vertical="true"></mat-divider>
-  </div>
-  <div class="overview-content">
+<ng-container *ngIf="loggedUser.user.activeProject > 0">
+  <div class="overview-container">
+    <div class="overview-nav">
+      <app-sys-nav-button (click)="selectOverview(1)"  text="Allgemein" [selected]="selectedOverview==1"></app-sys-nav-button>
+      <app-sys-nav-button (click)="selectOverview(2)"  text="Kopfdaten" [selected]="selectedOverview==2"></app-sys-nav-button>
+      <app-sys-nav-button (click)="selectOverview(3)"  text="Vorgaben" [selected]="selectedOverview==3"></app-sys-nav-button>
+      <app-sys-nav-button (click)="selectOverview(4)"  text="Projektierung" [selected]="selectedOverview==4"></app-sys-nav-button>
+      <app-sys-nav-button (click)="selectOverview(5)"  text="Kontrolle" [selected]="selectedOverview==5"></app-sys-nav-button>
+      <app-sys-nav-button (click)="selectOverview(6)"  text="Doku" [selected]="selectedOverview==6"></app-sys-nav-button>
+      <app-sys-nav-button (click)="selectOverview(7)"  text="Technische Daten" [selected]="selectedOverview==7"></app-sys-nav-button>
+      <app-sys-nav-button (click)="selectOverview(8)"  text="LOP" [selected]="selectedOverview==8"></app-sys-nav-button>
+      <app-sys-nav-button (click)="selectOverview(9)"  text="Historie" [selected]="selectedOverview==9"></app-sys-nav-button>
+    </div>
+    <div class="overview-divider">
+      <mat-divider vertical="true"></mat-divider>
+    </div>
+    <div class="overview-content">
       <mat-tab-group mat-stretch-tabs="false" animationDuration="0ms">
         <ng-container *ngFor="let stationView of stationView.stationViewList">
           <mat-tab [label]="stationView.name">
@@ -33,5 +34,14 @@
           </mat-tab>
         </ng-container>
       </mat-tab-group>
+    </div>
   </div>
-</div>
+</ng-container>
+<ng-container *ngIf="loggedUser.user.activeProject == 0">
+  <div routerLink="/projectAdministration" class="card-container-no-project" appProjectElevation [defaultElevation]="4" [raisedElevation]="16">
+    <div class="container-no-project">
+      <h1>Kein Projekt ausgewählt</h1>
+      <h3>hier klicken</h3>
+    </div>
+  </div>
+</ng-container>

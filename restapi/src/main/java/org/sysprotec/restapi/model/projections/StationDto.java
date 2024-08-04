@@ -41,6 +41,11 @@ public class StationDto {
     private Integer controlDone;
     private Integer controlToDo;
     private Integer controlProgress;
+    //Projection
+    private Integer projectionTotal;
+    private Integer projectionDone;
+    private Integer projectionToDo;
+    private Integer projectionProgress;
 
     public StationDto(Long id,
                       String name,
@@ -64,7 +69,11 @@ public class StationDto {
                       Integer controlTotal,
                       Integer controlDone,
                       Integer controlToDo,
-                      Integer controlProgress){
+                      Integer controlProgress,
+                      Integer projectionTotal,
+                      Integer projectionDone,
+                      Integer projectionToDo,
+                      Integer projectionProgress){
         this.id = id;
         this.name = name;
         this.description = description;
@@ -88,5 +97,9 @@ public class StationDto {
         this.controlDone = controlDone;
         this.controlToDo = controlToDo;
         this.controlProgress = controlProgress;
+        this.projectionTotal = projectionTotal;
+        this.projectionDone = projectionDone;
+        this.projectionToDo = projectionToDo;
+        this.projectionProgress = projectionProgress;
     }
 }

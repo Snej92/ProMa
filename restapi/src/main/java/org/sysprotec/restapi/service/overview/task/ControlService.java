@@ -13,6 +13,7 @@ import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.StationRepository;
 import org.sysprotec.restapi.repository.overview.TaskRepository;
 import org.sysprotec.restapi.service.HistoryService;
+import org.sysprotec.restapi.service.StationService;
 import org.sysprotec.restapi.service.UserService;
 
 import java.util.List;
@@ -24,10 +25,10 @@ import java.util.Optional;
 @Slf4j
 public class ControlService {
     private final TaskRepository taskRepository;
-    private final ProjectRepository projectRepository;
     private final StationRepository stationRepository;
     private final UserService userService;
     private final HistoryService historyService;
+    private final StationService stationService;
 
     public List<Task> getControl(Long stationId) {
         Optional<Station> optionalStation = stationRepository.findById(stationId);
@@ -73,6 +74,7 @@ public class ControlService {
             saveTask.setCommited(task.getCommited());
             User user = userService.getLoggedUser();
 
+            stationService.updateStationControlProgress(stationRepository.getStationByControlId(task.getId()));
 
             historyService.newEntryAuto(
                     user,
@@ -81,28 +83,5 @@ public class ControlService {
             return taskRepository.findById(task.getId()).get();
         }
         return null;
-    }
-
-
-    public void createControlForStations(TaskSetting taskSetting) {
-        Optional<Project> optionalProject = projectRepository.findProjectById(taskSetting.getProject().getId());
-        if(optionalProject.isPresent()) {
-            List<Station> stationList = optionalProject.get().getStations();
-            for(Station station : stationList) {
-                if (stationRepository.findStationByNameAndControlTaskSettingId(station.getName(), taskSetting.getId()).isEmpty()) {
-                    Task task = Task.builder()
-                            .taskSetting(taskSetting)
-                            .dateDone("")
-                            .dateCommited("")
-                            .addition("")
-                            .done(false)
-                            .commited(false)
-                            .station(station)
-                            .build();
-                    taskRepository.save(task);
-                    log.info("Added Control Task '" + task.getTaskSetting().getItem() + "' to station '" + station.getName() + "'");
-                }
-            }
-        }
     }
 }

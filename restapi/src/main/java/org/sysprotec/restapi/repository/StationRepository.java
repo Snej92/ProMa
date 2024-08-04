@@ -14,9 +14,15 @@ public interface StationRepository extends JpaRepository<Station, Long> {
 
     StationView getProjectedById(Long id);
     Optional<List<StationView>> getProjectedByProjectIdOrderById(Long projectId);
+    Optional<Station> findStationByName(String name);
     StationDto findTopByOrderByIdDesc();
     StationDto findProjectedById(Long id);
-    Station getTopByOrderByIdDesc();
+    Station getStationByDocumentationId(Long id);
+    Station getStationByControlId(Long id);
+    Station getStationBySpecificationId(Long id);
+    Station getStationByProjectionId(Long id);
+    Station getStationByLopId(Long id);
+    List<Station> getStationsByProjectId(Long id);
 
     Optional<Station> findStationByNameAndDocumentationTaskSettingId(String name, Long TaskSettingId);
     Optional<Station> findStationByNameAndSpecificationTaskSettingId(String name, Long TaskSettingId);

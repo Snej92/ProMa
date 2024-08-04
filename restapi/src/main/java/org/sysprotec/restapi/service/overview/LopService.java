@@ -11,6 +11,7 @@ import org.sysprotec.restapi.repository.overview.LopRepository;
 import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.StationRepository;
 import org.sysprotec.restapi.service.HistoryService;
+import org.sysprotec.restapi.service.StationService;
 import org.sysprotec.restapi.service.UserService;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class LopService {
     private final LopRepository lopRepository;
     private final UserService userService;
     private final HistoryService historyService;
+    private final StationService stationService;
 
     public List<Lop> getStationLop(Long stationId) {
         Optional<Station> optionalStation = stationRepository.findById(stationId);
@@ -43,6 +45,7 @@ public class LopService {
             if(optionalStation.get().getLop() != null) {
                 lop.setStation(optionalStation.get());
                 lopRepository.save(lop);
+                stationService.updateStationLopProgress(optionalStation.get());
                 return lopRepository.findTopByOrderByIdDesc();
             }
         }
@@ -69,6 +72,9 @@ public class LopService {
             saveLop.setEndDate(lop.getEndDate());
             saveLop.setStatus(lop.getStatus(), userService.getLoggedUser());
             User user = userService.getLoggedUser();
+
+            stationService.updateStationLopProgress(stationRepository.getStationByLopId(lop.getId()));
+
             historyService.newEntryAuto(
                     user,
                     saveLop.getStation().getId(),

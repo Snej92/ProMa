@@ -17,6 +17,7 @@ import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.UserRepository;
 import org.sysprotec.restapi.repository.overview.TaskRepository;
 import org.sysprotec.restapi.repository.settings.TaskSettingRepository;
+import org.sysprotec.restapi.service.StationService;
 import org.sysprotec.restapi.service.overview.task.ControlService;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class ControlSettingService {
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
-    private final ControlService controlService;
+    private final StationService stationService;
 
     public List<TaskSetting> getControlSetting() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -64,7 +65,7 @@ public class ControlSettingService {
 
                     log.info("ControlSetting Punkt: '" + taskSetting.getItem() + "' zu '" + saveProject.getName() + "' hinzugefügt");
                     TaskSetting newTaskSetting = taskSettingRepository.findTopByOrderByIdDesc();
-                    controlService.createControlForStations(newTaskSetting);
+                    stationService.createControlForStations(newTaskSetting);
 
                     return newTaskSetting;
                 }
@@ -81,6 +82,12 @@ public class ControlSettingService {
         } else {
             TaskSetting saveTaskSetting = optionalTaskSetting.get();
             saveTaskSetting.setItem(taskSetting.getItem());
+
+            //Update Progress
+            for(Station station : taskSetting.getProject().getStations()){
+                stationService.updateStationControlProgress(station);
+            }
+
             log.info("Control with id " + taskSetting.getId() + " updated");
         }
     }
@@ -103,6 +110,11 @@ public class ControlSettingService {
             saveProject.removeControl(taskSettingId);
             log.info("Kontrolle : '" + optionalTaskSetting.get().getItem() + "' von '" + saveProject.getName() + "' entfernt");
             taskSettingRepository.deleteById(taskSettingId);
+
+            //Update Progress
+            for(Station station : optionalTaskSetting.get().getProject().getStations()){
+                stationService.updateStationControlProgress(station);
+            }
         }
     }
 }

@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface VersionStationRepository extends JpaRepository<VersionStation, Long> {
     List<VersionStation> findVersionStationsByVersionIdOrderByIdAsc(Long versionStationId);
+    List<VersionStation> findVersionStationsByStationNameOrderByIdAsc(String stationName);
 }

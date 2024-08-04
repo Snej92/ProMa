@@ -135,6 +135,7 @@ import {
 } from "./modules/overview/station/components/station-overview-lop/station-overview-lop.component";
 import { AddLopComponent } from './modules/overview/lop/components/add-lop/add-lop.component';
 import {StationViewOverviewEffects} from "./modules/overview/station/store/stationViewOverview.effects";
+import { StationOverviewProjectionComponent } from './modules/overview/station/components/station-overview-projection/station-overview-projection.component';
 
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -205,7 +206,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     StationOverviewSpecificationComponent,
     StationOverviewControlComponent,
     StationOverviewLopComponent,
-    AddLopComponent
+    AddLopComponent,
+    StationOverviewProjectionComponent
   ],
     imports: [
         AppRoutingModule,

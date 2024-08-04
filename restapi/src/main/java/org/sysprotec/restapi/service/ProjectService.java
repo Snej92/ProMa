@@ -10,9 +10,13 @@ import org.sysprotec.restapi.model.Project;
 import org.sysprotec.restapi.model.User;
 import org.sysprotec.restapi.model.projections.ProjectDto;
 import org.sysprotec.restapi.model.projections.ProjectView;
+import org.sysprotec.restapi.model.settings.Version;
 import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.UserRepository;
+import org.sysprotec.restapi.repository.settings.VersionRepository;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +27,7 @@ public class ProjectService {
 
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
+    private final VersionRepository versionRepository;
 
     public List<Project> getAllProjects() {
         return projectRepository.findAll();
@@ -70,8 +75,18 @@ public class ProjectService {
                     .notStoredStations(projectDto.getNotStoredStations())
                     .build();
             projectRepository.save(saveProject);
+
+            //Add start Version to Project
+            Version startVersion = Version.builder()
+                    .version("V1.0")
+                    .toDo("Projekt angelegt")
+                    .done(true)
+                    .date(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")))
+                    .project(projectRepository.findTopByOrderByIdDesc())
+                    .build();
+            versionRepository.save(startVersion);
             log.info("Project " + projectDto.getName() + " created");
-            return projectRepository.findTopByOrderByIdDesc();
+            return projectRepository.findProjectedTopByOrderByIdDesc();
         }
         return null;
     }
@@ -98,6 +113,10 @@ public class ProjectService {
     public void deleteProject(Long projectId) {
         Optional<Project> optionalProject = projectRepository.findProjectById(projectId);
         if(optionalProject.isPresent()){
+            List<User> userList = userRepository.findUserByActiveProject(projectId);
+            for(User user : userList){
+                user.setActiveProject(0L);
+            }
             projectRepository.delete(optionalProject.get());
         }else log.error("Project with ID " + projectId +" does not exist");
     }

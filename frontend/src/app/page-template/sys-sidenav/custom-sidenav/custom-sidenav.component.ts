@@ -1,4 +1,6 @@
 import {Component, Input, signal} from '@angular/core';
+import {loggedUserModel} from "../../../core/logged-user/logged-user.state";
+import {loggedUser} from "../../../core/logged-user/logged-user.model";
 
 export type MenuItem = {
   icon: string,
@@ -12,6 +14,8 @@ export type MenuItem = {
   styleUrl: './custom-sidenav.component.scss'
 })
 export class CustomSidenavComponent {
+
+  @Input() loggedUser!:loggedUser;
 
   sideNavCollapsed = signal(false);
   @Input() set collapsed(val: boolean){

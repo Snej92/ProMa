@@ -29,4 +29,9 @@ public interface StationView {
     Integer getControlDone();
     Integer getControlToDo();
     Integer getControlProgress();
+    //Projection
+    Integer getProjectionTotal();
+    Integer getProjectionDone();
+    Integer getProjectionToDo();
+    Integer getProjectionProgress();
 }

@@ -17,6 +17,7 @@ import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.UserRepository;
 import org.sysprotec.restapi.repository.overview.TaskRepository;
 import org.sysprotec.restapi.repository.settings.TaskSettingRepository;
+import org.sysprotec.restapi.service.StationService;
 import org.sysprotec.restapi.service.overview.task.DocumentationService;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class DocumentationSettingService {
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
     private final DocumentationService documentationService;
+    private final StationService stationService;
 
     public List<TaskSetting> getDocumentationSetting() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -64,7 +66,12 @@ public class DocumentationSettingService {
 
                     log.info("DocumentationSetting Punkt: '" + taskSetting.getItem() + "' zu '" + saveProject.getName() + "' hinzugefügt");
                     TaskSetting newTaskSetting = taskSettingRepository.findTopByOrderByIdDesc();
-                    documentationService.createDocumentationForStations(newTaskSetting);
+                    stationService.createDocumentationForStations(newTaskSetting);
+
+                    //Update Progress
+                    for(Station station : taskSetting.getProject().getStations()){
+                        stationService.updateStationDocumentationProgress(station);
+                    }
 
                     return newTaskSetting;
                 }
@@ -103,6 +110,11 @@ public class DocumentationSettingService {
             saveProject.removeDocumentation(taskSettingId);
             log.info("Dokumentation : '" + optionalTaskSetting.get().getItem() + "' von '" + saveProject.getName() + "' entfernt");
             taskSettingRepository.deleteById(taskSettingId);
+
+            //Update Progress
+            for(Station station : optionalTaskSetting.get().getProject().getStations()){
+                stationService.updateStationDocumentationProgress(station);
+            }
         }
     }
 }

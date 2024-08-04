@@ -10,6 +10,5 @@ import java.util.Optional;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findAllByTaskSettingId(Long id);
-
     List<Task> findAllByTaskSettingTypeAndStationId(String type, Long StationId);
 }

@@ -4,15 +4,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.sysprotec.restapi.model.Project;
 import org.sysprotec.restapi.model.Station;
 import org.sysprotec.restapi.model.User;
 import org.sysprotec.restapi.model.overview.Task;
 import org.sysprotec.restapi.model.settings.TaskSetting;
-import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.StationRepository;
 import org.sysprotec.restapi.repository.overview.TaskRepository;
 import org.sysprotec.restapi.service.HistoryService;
+import org.sysprotec.restapi.service.StationService;
 import org.sysprotec.restapi.service.UserService;
 
 import java.util.List;
@@ -24,10 +23,10 @@ import java.util.Optional;
 @Slf4j
 public class ProjectionService {
     private final TaskRepository taskRepository;
-    private final ProjectRepository projectRepository;
     private final StationRepository stationRepository;
     private final UserService userService;
     private final HistoryService historyService;
+    private final StationService stationService;
 
     public List<Task> getProjection(Long stationId) {
         Optional<Station> optionalStation = stationRepository.findById(stationId);
@@ -73,6 +72,7 @@ public class ProjectionService {
             saveTask.setCommited(task.getCommited());
             User user = userService.getLoggedUser();
 
+            stationService.updateStationProjectionProgress(stationRepository.getStationByProjectionId(task.getId()));
 
             historyService.newEntryAuto(
                     user,
@@ -81,28 +81,5 @@ public class ProjectionService {
             return saveTask;
         }
         return null;
-    }
-
-
-    public void createProjectionForStations(TaskSetting taskSetting) {
-        Optional<Project> optionalProject = projectRepository.findProjectById(taskSetting.getProject().getId());
-        if(optionalProject.isPresent()) {
-            List<Station> stationList = optionalProject.get().getStations();
-            for(Station station : stationList) {
-                if (stationRepository.findStationByNameAndProjectionTaskSettingId(station.getName(), taskSetting.getId()).isEmpty()) {
-                    Task task = Task.builder()
-                            .taskSetting(taskSetting)
-                            .dateDone("")
-                            .dateCommited("")
-                            .addition("")
-                            .done(false)
-                            .commited(false)
-                            .station(station)
-                            .build();
-                    taskRepository.save(task);
-                    log.info("Added Projection Task '" + task.getTaskSetting().getItem() + "' to station '" + station.getName() + "'");
-                }
-            }
-        }
     }
 }
