@@ -19,9 +19,16 @@
     <span>
       <mat-divider class="divider-container ms-4" vertical="true"></mat-divider>
     </span>
-    <button mat-icon-button routerLink="/projectAdministration" matTooltip="Projektverwaltung" class="ms-1">
+<!--    Projektverwaltung-->
+    <button mat-icon-button [matMenuTriggerFor]="menu2" class="ms-1">
       <mat-icon>folder</mat-icon>
     </button>
+    <mat-menu #menu2=matMenu>
+      <button mat-menu-item [routerLink]="['/projectAdministration', false]">Projektverwaltung</button>
+      <button mat-menu-item [routerLink]="['/projectAdministration', true]">Projektarchiv</button>
+    </mat-menu>
+
+<!--    Benutzerverwaltung-->
     <button mat-icon-button [matMenuTriggerFor]="menu" class="me-2">
       <mat-icon>account_box</mat-icon>
     </button>

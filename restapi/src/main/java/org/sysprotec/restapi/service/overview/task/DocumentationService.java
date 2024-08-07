@@ -33,7 +33,7 @@ public class DocumentationService {
     public List<Task> getDocumentation(Long stationId) {
         Optional<Station> optionalStation = stationRepository.findById(stationId);
         if (optionalStation.isPresent()) {
-            return taskRepository.findAllByTaskSettingTypeAndStationId("doku", stationId);
+            return taskRepository.findAllByTaskSettingTypeAndStationIdOrderByIdAsc("doku", stationId);
         }
         return null;
     }

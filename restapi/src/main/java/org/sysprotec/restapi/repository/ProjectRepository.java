@@ -13,10 +13,12 @@ import java.util.Optional;
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 
     Optional<Project> findProjectById(Long id);
+    List<Project> findProjectsByArchived(Boolean archived);
     List<ProjectView> findBy();
     ProjectDto getProjectedById(Long id);
     Project findTopByOrderByIdDesc();
     ProjectDto findProjectedTopByOrderByIdDesc();
+    Project findProjectByStationsId(Long id);
 
     Project findProjectByNameIgnoreCase(String name);
 

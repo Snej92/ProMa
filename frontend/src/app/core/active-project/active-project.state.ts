@@ -5,6 +5,7 @@ import {
 
 export const activeProjectViewModel:projectViewModel={
   id:0,
+  archived:false,
   name:'Kein Projekt ausgewählt',
   description:'',
   amountStations:0,

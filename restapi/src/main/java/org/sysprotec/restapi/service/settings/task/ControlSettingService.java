@@ -39,7 +39,7 @@ public class ControlSettingService {
             String username = authentication.getName();
             User user = userRepository.findUserByUsernameIgnoreCase(username);
             if (user != null) {
-                return taskSettingRepository.findAllByProjectIdAndTypeOrderByIdDesc(user.getActiveProject(), "control");
+                return taskSettingRepository.findAllByProjectIdAndTypeOrderByIdAsc(user.getActiveProject(), "control");
             }
         }
         return null;

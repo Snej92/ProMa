@@ -104,6 +104,7 @@ $dark-theme: mat.define-dark-theme((
   --frontend-nav-button: rgba(255,255,255,.08);
   --frontend-nav-button-selected: rgba(255,255,255,0.2);
   --frontend-nav-button-selected-text: #ff6742;
+  --frontend-alternate: #303030;
   background-color: #202124;
   color: #ffffff;
 }
@@ -125,7 +126,7 @@ body { margin: 0;
   --frontend-success: #4caf50;
   //--frontend-warning: #fbc800;
   --frontend-warning: #fb8C00;
-  --frontend-alternate: rgba(0,0,0,0.06);
+  --frontend-alternate: #e6e6e6;
   --frontend-nav-button: rgba(0,0,0,0.08);
   --frontend-nav-button-selected: rgba(0,0,0,0.12);
   --frontend-nav-button-selected-text: #e63212;

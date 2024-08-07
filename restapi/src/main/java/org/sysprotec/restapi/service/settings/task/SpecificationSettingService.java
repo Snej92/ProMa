@@ -40,7 +40,7 @@ public class SpecificationSettingService {
             String username = authentication.getName();
             User user = userRepository.findUserByUsernameIgnoreCase(username);
             if (user != null) {
-                return taskSettingRepository.findAllByProjectIdAndTypeOrderByIdDesc(user.getActiveProject(), "specification");
+                return taskSettingRepository.findAllByProjectIdAndTypeOrderByIdAsc(user.getActiveProject(), "specification");
             }
         }
         return null;

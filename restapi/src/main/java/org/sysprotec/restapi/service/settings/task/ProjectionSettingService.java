@@ -40,7 +40,7 @@ public class ProjectionSettingService {
             String username = authentication.getName();
             User user = userRepository.findUserByUsernameIgnoreCase(username);
             if (user != null) {
-                return taskSettingRepository.findAllByProjectIdAndTypeOrderByIdDesc(user.getActiveProject(), "projection");
+                return taskSettingRepository.findAllByProjectIdAndTypeOrderByIdAsc(user.getActiveProject(), "projection");
             }
         }
         return null;

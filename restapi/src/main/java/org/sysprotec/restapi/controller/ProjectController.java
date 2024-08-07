@@ -17,9 +17,9 @@ public class ProjectController {
     private final ProjectService projectService;
 
 
-    @GetMapping("/all")
-    public List<Project> getAllProjects(){
-        return projectService.getAllProjects();
+    @GetMapping("/all/{archive}")
+    public List<Project> getAllProjects(@PathVariable Boolean archive){
+        return projectService.getAllProjects(archive);
     }
 
     @GetMapping

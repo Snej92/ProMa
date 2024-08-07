@@ -1,0 +1,17 @@
+.check-state{
+  color: var(--frontend-success);
+  position: relative;
+  top: 2.5px;
+}
+
+.open-state{
+  color: var(--frontend-primary);
+  position: relative;
+  top: 2.5px;
+}
+
+.not-needed-state{
+  color: var(--frontend-accent);
+  position: relative;
+  top: 2.5px;
+}

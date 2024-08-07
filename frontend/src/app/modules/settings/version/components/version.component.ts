@@ -9,6 +9,7 @@ import {deleteVersion, loadVersion, updateVersion} from "../store/version.action
 import {Subscription} from "rxjs";
 import {loadSpinner} from "../../../../core/store/app.action";
 import {SysConfirmationComponent} from "../../../../core/sys-confirmation/sys-confirmation.component";
+import {state} from "@angular/animations";
 
 
 @Component({
@@ -17,6 +18,8 @@ import {SysConfirmationComponent} from "../../../../core/sys-confirmation/sys-co
   styleUrl: './version.component.scss'
 })
 export class VersionComponent implements OnInit,OnDestroy{
+
+  stateTest : number = 2;
 
   constructor(private store:Store<AppStateModel>,
               private dialog:MatDialog,
@@ -47,6 +50,7 @@ export class VersionComponent implements OnInit,OnDestroy{
               this.extraColumns.push(test.stationName);
               this.displayedColumns.push(test.stationName);
             }
+            console.log(this.version.versionList)
           }
         })
     )
@@ -117,4 +121,6 @@ export class VersionComponent implements OnInit,OnDestroy{
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
+
+  protected readonly state = state;
 }

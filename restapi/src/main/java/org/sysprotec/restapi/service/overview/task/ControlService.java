@@ -33,7 +33,7 @@ public class ControlService {
     public List<Task> getControl(Long stationId) {
         Optional<Station> optionalStation = stationRepository.findById(stationId);
         if (optionalStation.isPresent()) {
-            return taskRepository.findAllByTaskSettingTypeAndStationId("control", stationId);
+            return taskRepository.findAllByTaskSettingTypeAndStationIdOrderByIdAsc("control", stationId);
         }
         return null;
     }

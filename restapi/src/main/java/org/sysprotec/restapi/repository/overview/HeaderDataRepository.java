@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface HeaderDataRepository extends JpaRepository<HeaderData, Long> {
-    List<HeaderData> findAllByHeaderDataSettingId(Long headerDataSettingId);
-    List<HeaderData> findAllByOrderByIdDesc();
+    List<HeaderData> findAllByHeaderDataSettingIdOrderByIdAsc(Long headerDataSettingId);
+    List<HeaderData> findAllByStationIdOrderByIdAsc(Long stationId);
     HeaderData findTopByOrderByIdDesc();
 }

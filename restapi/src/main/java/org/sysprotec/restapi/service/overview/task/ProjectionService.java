@@ -31,7 +31,7 @@ public class ProjectionService {
     public List<Task> getProjection(Long stationId) {
         Optional<Station> optionalStation = stationRepository.findById(stationId);
         if (optionalStation.isPresent()) {
-            return taskRepository.findAllByTaskSettingTypeAndStationId("projection", stationId);
+            return taskRepository.findAllByTaskSettingTypeAndStationIdOrderByIdAsc("projection", stationId);
         }
         return null;
     }

@@ -22,6 +22,11 @@ public class StationController {
         return stationService.getAllStations();
     }
 
+    @GetMapping("/overall")
+    public List<Station> getStationOverallView(){
+        return stationService.getStationOverallView();
+    }
+
     @GetMapping("{stationId}")
     public StationView getStation(@PathVariable Long stationId){
         return stationService.getStation(stationId);

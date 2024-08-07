@@ -26,6 +26,7 @@ export class AddProjectComponent implements OnInit{
 
   projectForm=this.builder.group({
     id:this.builder.control(0),
+    archived:this.builder.control(false),
     name:this.builder.control('', Validators.required),
     description:this.builder.control(''),
     amountStations:this.builder.control(0),
@@ -37,6 +38,7 @@ export class AddProjectComponent implements OnInit{
   saveProject(){
     const projectInput: projectViewModel = {
       id:0,
+      archived:this.projectForm.value.archived as boolean,
       name:this.projectForm.value.name as string,
       description:this.projectForm.value.description as string,
       amountStations:this.projectForm.value.amountStations as number,
@@ -66,6 +68,7 @@ export class AddProjectComponent implements OnInit{
         this.editData=data;
         this.projectForm.setValue({
           id:this.editData.id,
+          archived:this.editData.archived,
           name: this.editData.name,
           description: this.editData.description,
           amountStations: this.editData.amountStations,

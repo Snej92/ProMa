@@ -7,29 +7,25 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.sysprotec.restapi.model.*;
+import org.sysprotec.restapi.model.overview.HeaderData;
 import org.sysprotec.restapi.model.overview.Lop;
 import org.sysprotec.restapi.model.overview.Task;
-import org.sysprotec.restapi.model.projections.ProjectDto;
-import org.sysprotec.restapi.model.projections.StationDto;
-import org.sysprotec.restapi.model.projections.StationView;
+import org.sysprotec.restapi.model.overview.TechnicalData;
+import org.sysprotec.restapi.model.projections.*;
 import org.sysprotec.restapi.model.settings.*;
 import org.sysprotec.restapi.model.types.StatusLOP;
 import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.StationRepository;
 import org.sysprotec.restapi.repository.UserRepository;
-import org.sysprotec.restapi.repository.overview.LopRepository;
+import org.sysprotec.restapi.repository.overview.HeaderDataRepository;
+import org.sysprotec.restapi.repository.overview.TechnicalDataRepository;
 import org.sysprotec.restapi.repository.settings.VersionRepository;
 import org.sysprotec.restapi.repository.overview.TaskRepository;
 import org.sysprotec.restapi.repository.settings.VersionStationRepository;
 import org.sysprotec.restapi.service.overview.HeaderDataService;
-import org.sysprotec.restapi.service.overview.LopService;
 import org.sysprotec.restapi.service.overview.TechnicalDataService;
-import org.sysprotec.restapi.service.overview.task.ControlService;
-import org.sysprotec.restapi.service.overview.task.DocumentationService;
-import org.sysprotec.restapi.service.overview.task.ProjectionService;
-import org.sysprotec.restapi.service.overview.task.SpecificationService;
 
-import javax.swing.text.html.Option;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,6 +43,8 @@ public class StationService {
     private final TechnicalDataService technicalDataService;
     private final ProjectService projectService;
     private final VersionStationRepository versionStationRepository;
+    private final TechnicalDataRepository technicalDataRepository;
+    private final HeaderDataRepository headerDataRepository;
 
 
     public List<StationView> getAllStations() {
@@ -62,6 +60,50 @@ public class StationService {
         }
         return null;
     }
+
+    public List<Station> getStationOverallView() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String username = authentication.getName();
+            User user = userRepository.findUserByUsernameIgnoreCase(username);
+            if (user != null) {
+                if(stationRepository.findByProjectIdOrderById(user.getActiveProject()).isPresent()){
+                    List<Station> stationList = stationRepository.findByProjectIdOrderById(user.getActiveProject()).get();
+
+                    //Sort everything
+                    for(Station station : stationList){
+                        //Header Data
+                        List<HeaderData> headerDataList = headerDataRepository.findAllByStationIdOrderByIdAsc(station.getId());
+                        station.setHeaderData(headerDataList);
+
+                        //Projection
+                        List<Task> projectionList = taskRepository.findAllByTaskSettingTypeAndStationIdOrderByIdAsc("projection", station.getId());
+                        station.setProjection(projectionList);
+
+                        //Specification
+                        List<Task> specificationList = taskRepository.findAllByTaskSettingTypeAndStationIdOrderByIdAsc("specification", station.getId());
+                        station.setSpecification(specificationList);
+
+                        //Documentation
+                        List<Task> documentationList = taskRepository.findAllByTaskSettingTypeAndStationIdOrderByIdAsc("doku", station.getId());
+                        station.setDocumentation(documentationList);
+
+                        //Control
+                        List<Task> controlList = taskRepository.findAllByTaskSettingTypeAndStationIdOrderByIdAsc("control", station.getId());
+                        station.setControl(controlList);
+
+                        //Technical Data
+                        List<TechnicalData> technicalDataList = technicalDataRepository.findAllByStationIdOrderByIdAsc(station.getId());
+                        station.setTechnicalData(technicalDataList);
+                    }
+
+                    return stationList;
+                }
+            }
+        }
+        return null;
+    }
+
 
     public StationDto addStation(StationDto stationDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -167,6 +209,18 @@ public class StationService {
 
                     projectRepository.save(savedProject);
                     log.info("Station '" + stationDto.getName() + "' added to Project '" + savedProject.getName() + "'");
+
+                    projectService.updateStationAmount(projectRepository.findProjectById(user.getActiveProject()).get());
+
+                    updateStationDocumentationProgress(newStation);
+                    updateStationControlProgress(newStation);
+                    updateStationProjectionProgress(newStation);
+                    updateStationSpecificationProgress(newStation);
+                    updateStationLopProgress(newStation);
+
+                    updateTotalProgress(newStation);
+
+
                     return stationRepository.findTopByOrderByIdDesc();
                 }
 
@@ -189,6 +243,9 @@ public class StationService {
                     List<VersionStation> versionStation = versionStationRepository.findVersionStationsByStationNameOrderByIdAsc(station.getName());
                     versionStationRepository.deleteAll(versionStation);
                     stationRepository.deleteById(stationId);
+
+                    //update amount stations
+                    projectService.updateStationAmount(projectRepository.findProjectById(user.getActiveProject()).get());
                 }
             }
         }
@@ -222,6 +279,10 @@ public class StationService {
             saveStation.setControlProgress(stationDto.getControlProgress());
 
             stationRepository.save(saveStation);
+
+            //update amount stations
+            projectService.updateStationAmount(projectRepository.findProjectByStationsId(stationDto.getId()));
+
             return stationRepository.findProjectedById(stationDto.getId());
         } else {
             log.error("Station with ID{} does not exist", stationDto.getId());
@@ -286,7 +347,7 @@ public class StationService {
     }
 
     public void updateStationDocumentationProgress(Station station){
-        List<Task> documentations = taskRepository.findAllByTaskSettingTypeAndStationId("doku", station.getId());
+        List<Task> documentations = taskRepository.findAllByTaskSettingTypeAndStationIdOrderByIdAsc("doku", station.getId());
         if(documentations != null){
             float done = 0;
             float toDo = 0;
@@ -329,7 +390,7 @@ public class StationService {
     }
 
     public void updateStationControlProgress(Station station){
-        List<Task> controls = taskRepository.findAllByTaskSettingTypeAndStationId("control", station.getId());
+        List<Task> controls = taskRepository.findAllByTaskSettingTypeAndStationIdOrderByIdAsc("control", station.getId());
         if(controls != null){
             float done = 0;
             float toDo = 0;
@@ -372,7 +433,7 @@ public class StationService {
     }
 
     public void updateStationSpecificationProgress(Station station){
-        List<Task> specifications = taskRepository.findAllByTaskSettingTypeAndStationId("specification", station.getId());
+        List<Task> specifications = taskRepository.findAllByTaskSettingTypeAndStationIdOrderByIdAsc("specification", station.getId());
         if(specifications != null){
             float done = 0;
             float toDo = 0;
@@ -415,7 +476,7 @@ public class StationService {
     }
 
     public void updateStationProjectionProgress(Station station){
-        List<Task> projections = taskRepository.findAllByTaskSettingTypeAndStationId("projection", station.getId());
+        List<Task> projections = taskRepository.findAllByTaskSettingTypeAndStationIdOrderByIdAsc("projection", station.getId());
         if(projections != null){
             float done = 0;
             float toDo = 0;
@@ -459,12 +520,13 @@ public class StationService {
 
     public void updateStationLopProgress(Station station){
         List<Lop> lops = station.getLop();
+        float done = 0;
+        float toDo = 0;
+        float progress = 0;
+        float total = 0;
         if(lops != null){
-            float done = 0;
-            float toDo = 0;
-            float progress = 0;
-            float total = 0;
             if(!lops.isEmpty()){
+                log.info("LOP is not empty");
                 //Total Lops
                 total = lops.size();
 
@@ -480,6 +542,7 @@ public class StationService {
                 //Progress
                 progress = (done/total)*100;
             } else{
+                log.info("LOP is empty");
                 progress = 100;
             }
 
@@ -496,6 +559,21 @@ public class StationService {
 
             updateTotalProgress(station);
             
+            stationRepository.save(station);
+        } else {
+            station.setLopTotal(0);
+            station.setLopProgress(100);
+            station.setLopDone(0);
+            station.setLopToDo(0);
+
+            logService.SeparatorLog();
+            log.info("lop Total of '{}' set to: 0", station.getName());
+            log.info("lop Done of '{}' set to: 0", station.getName());
+            log.info("lop ToDo of '{}' set to: 0", station.getName());
+            log.info("lop Progress of '{}' set to: 100%", station.getName());
+
+            updateTotalProgress(station);
+
             stationRepository.save(station);
         }
     }

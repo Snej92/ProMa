@@ -4,8 +4,8 @@ import {ProjectAdministrationService} from "../service/project-administration.se
 import {catchError, of, switchMap} from "rxjs";
 import {loadSpinner, showAlert} from "../../../core/store/app.action";
 import {
-  addProjectView, addProjectViewSuccess, deleteProject, deleteProjectSuccess,
-  LOAD_PROJECT_VIEW,
+  addProjectView, addProjectViewSuccess, archiveProject, deArchiveProject, deleteProject, deleteProjectSuccess,
+  LOAD_PROJECT_VIEW, loadProjectView,
   loadProjectViewFail,
   loadProjectViewSuccess, updateProject, updateProjectSuccess
 } from "./project-administration.actions";
@@ -21,9 +21,9 @@ export class ProjectAdministrationEffects {
 
   _getProjectView=createEffect(()=>
     this.action$.pipe(
-      ofType(LOAD_PROJECT_VIEW),
+      ofType(loadProjectView),
       switchMap(action=>
-        this.service.getAllProjects().pipe(
+        this.service.getAllProjects(action.archive).pipe(
           switchMap(data=> of(
             loadProjectViewSuccess({projectViewList:data}),
             loadSpinner({isLoading:false})
@@ -61,6 +61,38 @@ export class ProjectAdministrationEffects {
             showAlert({message: 'Projekt erfolgreich aktualisiert', actionResult:'pass'})
           )),
           catchError((error)=> of(showAlert({message: 'Projekt Aktualisierung fehlgeschlagen wegen '+error.message, actionResult:'fail'}),loadSpinner({isLoading:false})))
+        )
+      )
+    )
+  );
+
+  _archiveProject=createEffect(()=>
+    this.action$.pipe(
+      ofType(archiveProject),
+      switchMap(action =>
+        this.service.updateProject(action.projectViewInput).pipe(
+          switchMap(data=> of(
+            updateProjectSuccess({projectViewNew:data as projectViewModel, projectViewOld:action.projectViewInput}),
+            loadSpinner({isLoading:false}),
+            showAlert({message: 'Projekt erfolgreich archiviert', actionResult:'pass'})
+          )),
+          catchError((error)=> of(showAlert({message: 'Projekt Archivierung fehlgeschlagen wegen '+error.message, actionResult:'fail'}),loadSpinner({isLoading:false})))
+        )
+      )
+    )
+  );
+
+  _deArchiveProject=createEffect(()=>
+    this.action$.pipe(
+      ofType(deArchiveProject),
+      switchMap(action =>
+        this.service.updateProject(action.projectViewInput).pipe(
+          switchMap(data=> of(
+            updateProjectSuccess({projectViewNew:data as projectViewModel, projectViewOld:action.projectViewInput}),
+            loadSpinner({isLoading:false}),
+            showAlert({message: 'Projekt erfolgreich dearchiviert', actionResult:'pass'})
+          )),
+          catchError((error)=> of(showAlert({message: 'Projekt Dearchivierung fehlgeschlagen wegen '+error.message, actionResult:'fail'}),loadSpinner({isLoading:false})))
         )
       )
     )

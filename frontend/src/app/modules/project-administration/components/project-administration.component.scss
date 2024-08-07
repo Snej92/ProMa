@@ -29,3 +29,9 @@
 .card-button{
   width: 120px;
 }
+
+.header{
+  display: flex;
+  justify-content: center;
+  color: var(--frontend-accent)
+}

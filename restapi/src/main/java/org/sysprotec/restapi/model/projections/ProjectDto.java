@@ -8,6 +8,7 @@ import lombok.*;
 @Builder
 public class ProjectDto {
     private Long id;
+    private Boolean archived;
     private String name;
     private String description;
     private Integer amountStations;
@@ -16,6 +17,7 @@ public class ProjectDto {
     private Integer notStoredStations;
 
     public ProjectDto(Long id,
+                      Boolean archived,
                       String name,
                       String description,
                       Integer amountStations,
@@ -23,6 +25,7 @@ public class ProjectDto {
                       Integer storedStations,
                       Integer notStoredStations){
         this.id = id;
+        this.archived = archived;
         this.name = name;
         this.description = description;
         this.amountStations = amountStations;

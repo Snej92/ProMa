@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface TaskSettingRepository extends JpaRepository<TaskSetting, Long> {
     TaskSetting findTopByOrderByIdDesc();
-    List<TaskSetting> findAllByProjectIdAndTypeOrderByIdDesc(Long projectId, String type);
+    List<TaskSetting> findAllByProjectIdAndTypeOrderByIdAsc(Long projectId, String type);
 }

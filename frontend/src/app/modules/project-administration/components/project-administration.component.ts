@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {AppStateModel} from "../../../core/store/appState.model";
 import {Store} from "@ngrx/store";
-import {Subscription} from "rxjs";
+import {filter, Subscription} from "rxjs";
 import {projectView} from "../store/project-administration.model";
 import {loadSpinner} from "../../../core/store/app.action";
 import {loadProjectView} from "../store/project-administration.actions";
@@ -10,6 +10,7 @@ import {loggedUser} from "../../../core/logged-user/logged-user.model";
 import {getLoggedUserInfo} from "../../../core/logged-user/logged-user.selectors";
 import {MatDialog} from "@angular/material/dialog";
 import {AddProjectComponent} from "./add-project/add-project.component";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'app-project-administration',
@@ -21,9 +22,11 @@ export class ProjectAdministrationComponent implements OnInit, OnDestroy{
   private subscriptions: Subscription[] = [];
   projectView!:projectView;
   loggedUser!:loggedUser;
+  archive!:boolean;
 
   constructor(private store:Store<AppStateModel>,
-              private dialog:MatDialog) {
+              private dialog:MatDialog,
+              private activatedRoute: ActivatedRoute) {
   }
 
   addProject(){
@@ -43,8 +46,16 @@ export class ProjectAdministrationComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params => {
+      this.archive = params['archive'] === 'true';
+      this.reloadComponent()
+    });
+  }
+
+  reloadComponent(){
+    console.log("Archive: " + this.archive);
     this.store.dispatch(loadSpinner({isLoading:true}))
-    this.store.dispatch(loadProjectView())
+    this.store.dispatch(loadProjectView({archive:this.archive}))
     this.subscriptions.push(
       this.store.select(getProjectViewInfo).pipe()
         .subscribe(data =>{
@@ -54,8 +65,8 @@ export class ProjectAdministrationComponent implements OnInit, OnDestroy{
     this.subscriptions.push(
       this.store.select(getLoggedUserInfo).pipe()
         .subscribe(data =>{
-      this.loggedUser=data;
-    })
+          this.loggedUser=data;
+        })
     )
   }
 

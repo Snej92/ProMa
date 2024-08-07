@@ -8,7 +8,8 @@ import java.util.List;
 
 @Repository
 public interface TechnicalDataRepository extends JpaRepository<TechnicalData, Long> {
-    List<TechnicalData> findAllByTechnicalDataSettingId(Long technicalDataSettingId);
+    List<TechnicalData> findAllByTechnicalDataSettingIdOrderByIdAsc(Long technicalDataSettingId);
+    List<TechnicalData> findAllByStationIdOrderByIdAsc(Long stationId);
     List<TechnicalData> findAllByOrderByIdDesc();
     TechnicalData findTopByOrderByIdDesc();
 }

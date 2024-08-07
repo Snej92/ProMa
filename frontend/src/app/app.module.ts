@@ -136,6 +136,10 @@ import {
 import { AddLopComponent } from './modules/overview/lop/components/add-lop/add-lop.component';
 import {StationViewOverviewEffects} from "./modules/overview/station/store/stationViewOverview.effects";
 import { StationOverviewProjectionComponent } from './modules/overview/station/components/station-overview-projection/station-overview-projection.component';
+import {MatSlideToggle} from "@angular/material/slide-toggle";
+import { OverallViewComponent } from './modules/overall-view/components/overall-view.component';
+import {StationOverallViewEffects} from "./modules/overall-view/store/stationOverallView.effects";
+import { ThreeStateButtonComponent } from './page-template/three-state-button/three-state-button.component';
 
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -207,7 +211,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     StationOverviewControlComponent,
     StationOverviewLopComponent,
     AddLopComponent,
-    StationOverviewProjectionComponent
+    StationOverviewProjectionComponent,
+    OverallViewComponent,
+    ThreeStateButtonComponent
   ],
     imports: [
         AppRoutingModule,
@@ -237,7 +243,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
             ProjectionEffects,
             HeaderDataEffects,
             TechnicalDataEffects,
-            StationViewOverviewEffects]),
+            StationViewOverviewEffects,
+            StationOverallViewEffects]),
 
 
         MatToolbar,
@@ -302,6 +309,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
         BrowserAnimationsModule,
         MatDatepickerModule,
         MatSuffix,
+        MatSlideToggle,
     ],
   providers: [
     {

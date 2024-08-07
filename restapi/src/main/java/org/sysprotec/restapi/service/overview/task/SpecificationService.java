@@ -33,7 +33,7 @@ public class SpecificationService {
     public List<Task> getSpecification(Long stationId) {
         Optional<Station> optionalStation = stationRepository.findById(stationId);
         if (optionalStation.isPresent()) {
-            return taskRepository.findAllByTaskSettingTypeAndStationId("specification", stationId);
+            return taskRepository.findAllByTaskSettingTypeAndStationIdOrderByIdAsc("specification", stationId);
         }
         return null;
     }

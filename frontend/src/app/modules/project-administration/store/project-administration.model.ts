@@ -1,5 +1,6 @@
 export interface projectViewModel{
   id:number,
+  archived:boolean,
   name:string,
   description:string,
   amountStations:number,

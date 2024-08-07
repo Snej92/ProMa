@@ -37,7 +37,7 @@ public class HeaderDataSettingService {
             String username = authentication.getName();
             User user = userRepository.findUserByUsernameIgnoreCase(username);
             if (user != null) {
-                return headerDataSettingRepository.findAllByOrderByIdDesc();
+                return headerDataSettingRepository.findAllByOrderByIdAsc();
             }
         }
         return null;
@@ -96,7 +96,7 @@ public class HeaderDataSettingService {
                 station.removeHeaderData(headerDataSettingId);
                 log.info("Kopfdaten : '" + optionalHeaderDataSetting.get().getItem() + "' von '" + station.getName() + "' entfernt");
             }
-            List<HeaderData> headerDataList = headerDataRepository.findAllByHeaderDataSettingId(headerDataSettingId);
+            List<HeaderData> headerDataList = headerDataRepository.findAllByHeaderDataSettingIdOrderByIdAsc(headerDataSettingId);
             headerDataRepository.deleteAll(headerDataList);
 
             saveProject.removeHeaderData(headerDataSettingId);

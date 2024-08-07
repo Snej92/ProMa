@@ -37,7 +37,7 @@ public class TechnicalDataSettingService {
             String username = authentication.getName();
             User user = userRepository.findUserByUsernameIgnoreCase(username);
             if (user != null) {
-                return technicalDataSettingRepository.findAllByOrderByIdDesc();
+                return technicalDataSettingRepository.findAllByOrderByIdAsc();
             }
         }
         return null;
@@ -96,7 +96,7 @@ public class TechnicalDataSettingService {
                 station.removeTechnicalData(technicalDataSettingId);
                 log.info("Technische Daten : '" + optionalTechnicalDataSetting.get().getItem() + "' von '" + station.getName() + "' entfernt");
             }
-            List<TechnicalData> technicalDataList = technicalDataRepository.findAllByTechnicalDataSettingId(technicalDataSettingId);
+            List<TechnicalData> technicalDataList = technicalDataRepository.findAllByTechnicalDataSettingIdOrderByIdAsc(technicalDataSettingId);
             technicalDataRepository.deleteAll(technicalDataList);
 
             saveProject.removeTechnicalData(technicalDataSettingId);

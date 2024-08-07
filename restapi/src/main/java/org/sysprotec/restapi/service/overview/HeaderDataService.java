@@ -32,7 +32,7 @@ public class HeaderDataService {
         Optional<Station> optionalStation = stationRepository.findById(stationId);
         if (optionalStation.isPresent()) {
             if(optionalStation.get().getHeaderData() != null) {
-                return optionalStation.get().getHeaderData();
+                return headerDataRepository.findAllByStationIdOrderByIdAsc(optionalStation.get().getId());
             }
         }
         return null;

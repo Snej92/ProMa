@@ -7,10 +7,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.sysprotec.restapi.model.Project;
+import org.sysprotec.restapi.model.Station;
 import org.sysprotec.restapi.model.User;
 import org.sysprotec.restapi.model.projections.ProjectDto;
 import org.sysprotec.restapi.model.projections.ProjectView;
 import org.sysprotec.restapi.model.settings.Version;
+import org.sysprotec.restapi.model.types.StatusEPLAN;
 import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.UserRepository;
 import org.sysprotec.restapi.repository.settings.VersionRepository;
@@ -29,8 +31,9 @@ public class ProjectService {
     private final UserRepository userRepository;
     private final VersionRepository versionRepository;
 
-    public List<Project> getAllProjects() {
-        return projectRepository.findAll();
+    public List<Project> getAllProjects(Boolean archive) {
+//        return projectRepository.findAll();
+        return projectRepository.findProjectsByArchived(archive);
     }
 
     public ProjectDto getActiveProject() {
@@ -67,6 +70,7 @@ public class ProjectService {
     public ProjectDto addProject(ProjectDto projectDto) {
         if(projectRepository.findProjectByNameIgnoreCase(projectDto.getName()) == null){
             Project saveProject = Project.builder()
+                    .archived(projectDto.getArchived())
                     .name(projectDto.getName())
                     .description(projectDto.getDescription())
                     .amountStations(projectDto.getAmountStations())
@@ -95,12 +99,20 @@ public class ProjectService {
         Optional<Project> optionalProject = projectRepository.findProjectById(projectDto.getId());
         if(optionalProject.isPresent()){
             Project saveProject = optionalProject.get();
+            saveProject.setArchived(projectDto.getArchived());
             saveProject.setName(projectDto.getName());
             saveProject.setDescription(projectDto.getDescription());
             saveProject.setAmountStations(projectDto.getAmountStations());
             saveProject.setInProgressStations(projectDto.getInProgressStations());
             saveProject.setStoredStations(projectDto.getStoredStations());
             saveProject.setNotStoredStations(projectDto.getNotStoredStations());
+
+            if(saveProject.getArchived()){
+                List<User> userList = userRepository.findUserByActiveProject(saveProject.getId());
+                for(User user : userList){
+                    user.setActiveProject(0L);
+                }
+            }
 
             projectRepository.save(saveProject);
             return projectRepository.getProjectedById(projectDto.getId());
@@ -119,5 +131,37 @@ public class ProjectService {
             }
             projectRepository.delete(optionalProject.get());
         }else log.error("Project with ID " + projectId +" does not exist");
+    }
+
+//    ########################## addition ##############################
+
+    public void updateStationAmount(Project project){
+        List<Station> station = project.getStations();
+        if(station != null){
+            int amountStations = 0;
+            int inProgressStations = 0;
+            int storedStations = 0;
+            int notStoredStations = 0;
+            if(!station.isEmpty()){
+                //amount stations
+                amountStations = station.size();
+
+                for(Station stations : station){
+                    if(stations.getStatus() == StatusEPLAN.INARBEIT){
+                        inProgressStations += 1;
+                    } else if(stations.getStatus() == StatusEPLAN.AUSGELAGERT){
+                        notStoredStations += 1;
+                    } else if (stations.getStatus() == StatusEPLAN.EINGELAGERT){
+                        storedStations += 1;
+                    }
+                }
+            }
+            project.setAmountStations(amountStations);
+            project.setInProgressStations(inProgressStations);
+            project.setStoredStations(storedStations);
+            project.setNotStoredStations(notStoredStations);
+
+            projectRepository.save(project);
+        }
     }
 }

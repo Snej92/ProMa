@@ -40,6 +40,10 @@ export class HeaderDataComponent implements OnInit, OnDestroy{
             };
             return acc;
           }, {} as { [key: number]: editHeaderDataModel });
+          console.log("edit")
+          console.log(this.editHeaderData)
+          console.log("header")
+          console.log(this.headerData.headerDataList)
         })
     )
   }

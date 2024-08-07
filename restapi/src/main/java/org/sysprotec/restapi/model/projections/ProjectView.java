@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface ProjectView {
     Integer getId();
+    Boolean getArchived();
     String getName();
     String getDescription();
     Integer getAmountStations();

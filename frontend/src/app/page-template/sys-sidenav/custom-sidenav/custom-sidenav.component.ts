@@ -29,6 +29,11 @@ export class CustomSidenavComponent {
       route: "dashboard"
     },
     {
+      icon: "insert_chart",
+      label: "Gesamtübersicht",
+      route: "overall"
+    },
+    {
       // icon: "fact_check",
       icon: "checklist",
       label: "Übersicht",

@@ -9,7 +9,14 @@ import {loggedUser} from "../../../../core/logged-user/logged-user.model";
 import {MatDialog} from "@angular/material/dialog";
 import {AddProjectComponent} from "../add-project/add-project.component";
 import {SysConfirmationComponent} from "../../../../core/sys-confirmation/sys-confirmation.component";
-import {deleteProject} from "../../store/project-administration.actions";
+import {
+  archiveProject, deArchiveProject,
+  deleteProject,
+  loadProjectView,
+  updateProject
+} from "../../store/project-administration.actions";
+import {getProjectById} from "../../store/project-administration.selectors";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-project-card',
@@ -20,10 +27,13 @@ export class ProjectCardComponent {
   @Input() projectView: projectViewModel | undefined;
   @Input() loggedUser!: loggedUser;
   @Input() favorite : boolean = false;
+  @Input() archive : boolean = false;
+  archivedProject!:projectViewModel;
 
   constructor(private store:Store<AppStateModel>,
               private dialog:MatDialog,
-              private confirm:MatDialog) {
+              private confirm:MatDialog,
+              private router: Router) {
   }
 
   editProject(id:any){
@@ -66,32 +76,60 @@ export class ProjectCardComponent {
   }
 
   selectProject(projectId:any) {
-    if(this.loggedUser.user.activeProject!=projectId){
-      console.log('select project ' +projectId)
-      const roles:userRole={
-        id:this.loggedUser.user.roles.id,
-        adminRole: this.loggedUser.user.roles.adminRole,
-        projectRole : this.loggedUser.user.roles.projectRole,
-        userRole : this.loggedUser.user.roles.userRole,
+    if(!this.archive){
+      if(this.loggedUser.user.activeProject!=projectId){
+        console.log('select project ' +projectId)
+        const roles:userRole={
+          id:this.loggedUser.user.roles.id,
+          adminRole: this.loggedUser.user.roles.adminRole,
+          projectRole : this.loggedUser.user.roles.projectRole,
+          userRole : this.loggedUser.user.roles.userRole,
+        }
+        const updatedUser : userModel = {
+          id :this.loggedUser.user.id,
+          activeProject: projectId,
+          sub : this.loggedUser.user.sub,
+          firstname : this.loggedUser.user.firstname,
+          lastname : this.loggedUser.user.lastname,
+          acronym : this.loggedUser.user.acronym,
+          email : this.loggedUser.user.email,
+          phone : this.loggedUser.user.phone,
+          username : this.loggedUser.user.username,
+          password : this.loggedUser.user.password,
+          roles : roles
+        }
+        this.store.dispatch(loadSpinner({isLoading:true}));
+        this.store.dispatch(updateLoggedUser({loggedUser:updatedUser}));
+        console.log(updatedUser.activeProject + " selected");
+      } else {
+        console.log(projectId + ' already selected')
       }
-      const updatedUser : userModel = {
-        id :this.loggedUser.user.id,
-        activeProject: projectId,
-        sub : this.loggedUser.user.sub,
-        firstname : this.loggedUser.user.firstname,
-        lastname : this.loggedUser.user.lastname,
-        acronym : this.loggedUser.user.acronym,
-        email : this.loggedUser.user.email,
-        phone : this.loggedUser.user.phone,
-        username : this.loggedUser.user.username,
-        password : this.loggedUser.user.password,
-        roles : roles
-      }
-      this.store.dispatch(loadSpinner({isLoading:true}));
-      this.store.dispatch(updateLoggedUser({loggedUser:updatedUser}));
-      console.log(updatedUser.activeProject + " selected");
-    } else {
-      console.log(projectId + ' already selected')
     }
+  }
+
+  archiveProject(projectId:any){
+    this.store.select(getProjectById(projectId)).subscribe(data=>{
+      this.archivedProject={...data};
+    })
+    this.archivedProject.archived = true;
+    this.store.dispatch(loadSpinner({isLoading:true}));
+    this.store.dispatch(archiveProject({projectViewInput:this.archivedProject}));
+    this.reloadComponent();
+  }
+
+  deArchiveProject(projectId:any){
+    this.store.select(getProjectById(projectId)).subscribe(data=>{
+      this.archivedProject={...data};
+    })
+    this.archivedProject.archived = false;
+    this.store.dispatch(loadSpinner({isLoading:true}));
+    this.store.dispatch(deArchiveProject({projectViewInput:this.archivedProject}));
+    this.reloadComponent();
+  }
+
+  reloadComponent() {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([this.router.url]);
+    });
   }
 }

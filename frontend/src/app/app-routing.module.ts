@@ -8,6 +8,7 @@ import {VersionComponent} from "./modules/settings/version/components/version.co
 import {StationComponent} from "./modules/station/components/station.component";
 import {SettingsComponent} from "./modules/settings/components/settings.component";
 import {ProjectAdministrationComponent} from "./modules/project-administration/components/project-administration.component";
+import {OverallViewComponent} from "./modules/overall-view/components/overall-view.component";
 
 const routes: Routes = [
   {path: '', pathMatch:'full', redirectTo: "dashboard"},
@@ -16,8 +17,9 @@ const routes: Routes = [
   {path: 'version', component: VersionComponent, canActivate: [AuthGuard]},
   {path: 'station', component: StationComponent, canActivate: [AuthGuard]},
   {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
+  {path: 'overall', component: OverallViewComponent, canActivate: [AuthGuard]},
   {path: 'userAdministration', component: UserAdministrationComponent, canActivate: [AuthGuard], data:{roles:['admin']}},
-  {path: 'projectAdministration', component: ProjectAdministrationComponent, canActivate: [AuthGuard]},
+  {path: 'projectAdministration/:archive', component: ProjectAdministrationComponent, canActivate: [AuthGuard]},
   {path: '**', component: DashboardComponent, canActivate: [AuthGuard]},
 ];
 
