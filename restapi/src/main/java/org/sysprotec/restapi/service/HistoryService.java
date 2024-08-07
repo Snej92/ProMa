@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.sysprotec.restapi.model.History;
 import org.sysprotec.restapi.model.Station;
 import org.sysprotec.restapi.model.User;
+import org.sysprotec.restapi.model.types.StatusEPLAN;
 import org.sysprotec.restapi.repository.HistoryRepository;
 import org.sysprotec.restapi.repository.StationRepository;
 import org.sysprotec.restapi.repository.UserRepository;
@@ -33,6 +34,9 @@ public class HistoryService {
                     .userAcronym(user.getAcronym())
                     .filename("")
                     .station(station)
+                    .fileTransfer(false)
+                    .transferType(0)
+                    .eplan(false)
                     .build();
             if(!newHistory.getItem().isBlank()){
                 historyRepository.save(newHistory);
@@ -63,8 +67,21 @@ public class HistoryService {
                     .userAcronym(user.getAcronym())
                     .filename(history.getFilename())
                     .station(optionalStation.get())
+                    .fileTransfer(history.getFileTransfer())
+                    .transferType(history.getTransferType())
+                    .eplan(history.getEplan())
                     .build();
             historyRepository.save(newHistory);
+
+            if(newHistory.getEplan() && newHistory.getFileTransfer()){
+                if(newHistory.getTransferType() == 1){
+                    optionalStation.get().setStatus(StatusEPLAN.EINGELAGERT);
+                } else if(newHistory.getTransferType() == 2){
+                    optionalStation.get().setStatus(StatusEPLAN.AUSGELAGERT);
+                }
+                stationRepository.save(optionalStation.get());
+            }
+
             return historyRepository.findTopByOrderByIdDesc();
         }
         return null;

@@ -2,7 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../../core/store/appState.model";
 import {Subscription} from "rxjs";
-import {history, historyModel} from "../store/history.model";
+import {history} from "../store/history.model";
 import {loadSpinner} from "../../../../core/store/app.action";
 import {loadStationHistory} from "../store/history.actions";
 import {getHistoryInfo} from "../store/history.selectors";
@@ -21,6 +21,9 @@ export class HistoryComponent implements OnInit, OnDestroy{
   displayedColumns: string[] = ['Zeitstempel', 'Historie', 'Benutzer', 'Dateiname'];
   @Input() stationId!:number;
 
+
+  historyInfo:string = "Helles Grün: Datei erhalten \n Helles Rot: Datei übergeben \n Grün: EPLAN eingelagert \n Rot: EPLAN ausgelagert";
+
   constructor(private store:Store<AppStateModel>,
               private dialog:MatDialog) {
   }
@@ -38,7 +41,7 @@ export class HistoryComponent implements OnInit, OnDestroy{
   }
 
   addHistory(){
-    this.openPopup(0,"Datei übergeben", false, this.stationId);
+    this.openPopup(0,"Manueller Eintrag", false, this.stationId);
   }
 
   openPopup(id:any, title:any, isEdit=false, stationId:any){

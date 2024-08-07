@@ -67,6 +67,12 @@ public class UserService {
                 saveUser.setLastname(user.getLastname());
                 saveUser.setFirstname(user.getFirstname());
                 saveUser.setEmail(user.getEmail());
+                saveUser.setSub(sub);
+            }
+
+            if(firstname.equals("Admin")){
+                saveUser = userRepository.findUserByUsernameIgnoreCase("admin@admin.com");
+                saveUser.setSub(sub);
             }
 
             userRepository.save(saveUser);

@@ -24,6 +24,13 @@ public class History {
     private String item;
     private String userAcronym;
     private String filename;
+    private Boolean fileTransfer;
+
+    //0=keine Dateiübertragung
+    //1=erhalten
+    //2=übergeben
+    private Integer transferType;
+    private Boolean eplan;
     @ManyToOne
     @JoinColumn(name = "station_id")
     private Station station;

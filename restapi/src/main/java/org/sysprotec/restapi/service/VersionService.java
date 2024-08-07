@@ -10,6 +10,7 @@ import org.sysprotec.restapi.model.*;
 import org.sysprotec.restapi.model.settings.Version;
 import org.sysprotec.restapi.model.settings.VersionStation;
 import org.sysprotec.restapi.repository.ProjectRepository;
+import org.sysprotec.restapi.repository.StationRepository;
 import org.sysprotec.restapi.repository.UserRepository;
 import org.sysprotec.restapi.repository.settings.VersionRepository;
 import org.sysprotec.restapi.repository.settings.VersionStationRepository;
@@ -28,6 +29,7 @@ public class VersionService {
     private final UserRepository userRepository;
     private final VersionStationRepository versionStationRepository;
     private final StationService stationService;
+    private final StationRepository stationRepository;
 
 
     public List<Version> getVersions() {
@@ -73,18 +75,17 @@ public class VersionService {
                     List<VersionStation> saveVersionStation = new ArrayList<>();
 
                     //create and add versionStations to Version
-                    if (!optionalProject.get().getStations().isEmpty()) {
-                        for (Station station : optionalProject.get().getStations()) {
-                            VersionStation newVersionStation = VersionStation.builder()
-                                    .done(false)
-                                    .stationName(station.getName())
-                                    .version(newVersion)
-                                    .build();
-                            saveVersionStation.add(newVersionStation);
-                            versionStationRepository.save(newVersionStation);
-                            log.info("Version '" + version.getVersion() + "' added to Station '" + station.getName() + "'");
+                    List<Station> stationList = stationRepository.findByProjectIdOrderByNameAsc(optionalProject.get().getId());
+                    for (Station station : stationList) {
+                        VersionStation newVersionStation = VersionStation.builder()
+                                .state(1)
+                                .stationName(station.getName())
+                                .version(newVersion)
+                                .build();
+                        saveVersionStation.add(newVersionStation);
+                        versionStationRepository.save(newVersionStation);
+                        log.info("Version '" + version.getVersion() + "' added to Station '" + station.getName() + "'");
                         }
-                    }
 
                     //set the versionStations to Version, so we can return it - otherwise versionStation is null
                     saveVersion.setVersionStation(saveVersionStation);
@@ -123,9 +124,9 @@ public class VersionService {
                     for(VersionStation versionStation : versionStationList){
                         Optional<VersionStation> optionalVersionStation = versionStationRepository.findById(versionStation.getId());
                         if(optionalVersionStation.isPresent()){
-                            optionalVersionStation.get().setDone(versionStation.getDone());
+                            optionalVersionStation.get().setState(versionStation.getState());
                             //check if all stations are done
-                            if(!optionalVersionStation.get().getDone()){
+                            if(optionalVersionStation.get().getState() == 1){
                                 saveVersion.setDone(false);
                             }
                         }

@@ -26,7 +26,7 @@
   </div>
 </ng-container>
 <ng-container *ngIf="loggedUser.user.activeProject == 0">
-  <div routerLink="/projectAdministration" class="card-container-no-project" appProjectElevation [defaultElevation]="4" [raisedElevation]="16">
+  <div [routerLink]="['/projectAdministration', false]" class="card-container-no-project" appProjectElevation [defaultElevation]="4" [raisedElevation]="16">
     <div class="container-no-project">
       <h1>Kein Projekt ausgewählt</h1>
       <h3>hier klicken</h3>

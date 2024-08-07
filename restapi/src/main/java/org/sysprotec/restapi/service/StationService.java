@@ -53,8 +53,8 @@ public class StationService {
             String username = authentication.getName();
             User user = userRepository.findUserByUsernameIgnoreCase(username);
             if (user != null) {
-                if(stationRepository.getProjectedByProjectIdOrderById(user.getActiveProject()).isPresent()){
-                    return stationRepository.getProjectedByProjectIdOrderById(user.getActiveProject()).get();
+                if(stationRepository.getProjectedByProjectIdOrderByNameAsc(user.getActiveProject()).isPresent()){
+                    return stationRepository.getProjectedByProjectIdOrderByNameAsc(user.getActiveProject()).get();
                 }
             }
         }
@@ -67,8 +67,8 @@ public class StationService {
             String username = authentication.getName();
             User user = userRepository.findUserByUsernameIgnoreCase(username);
             if (user != null) {
-                if(stationRepository.findByProjectIdOrderById(user.getActiveProject()).isPresent()){
-                    List<Station> stationList = stationRepository.findByProjectIdOrderById(user.getActiveProject()).get();
+                if(stationRepository.getByProjectIdOrderByNameAsc(user.getActiveProject()).isPresent()){
+                    List<Station> stationList = stationRepository.getByProjectIdOrderByNameAsc(user.getActiveProject()).get();
 
                     //Sort everything
                     for(Station station : stationList){
@@ -149,7 +149,7 @@ public class StationService {
                     List<Version> versionList = versionRepository.findVersionsByProjectIdOrderByVersionAsc(savedProject.getId());
                     for(Version version: versionList){
                         VersionStation newVersionStation = VersionStation.builder()
-                                .done(false)
+                                .state(1)
                                 .stationName(stationDto.getName())
                                 .version(version)
                                 .build();
@@ -304,7 +304,7 @@ public class StationService {
             boolean versionOK = true;
             List<VersionStation> versionStationList = versionStationRepository.findVersionStationsByStationNameOrderByIdAsc(station.getName());
             for(VersionStation versionStation : versionStationList){
-                if(versionStation.getDone() && versionOK){
+                if(versionStation.getState() != 1 && versionOK){
                     station.setVersion(versionStation.getVersion().getVersion());
                     stationRepository.save(station);
                     log.info("set Version '" + versionStation.getVersion().getVersion() +"' to Station '" + station.getName() +"'");

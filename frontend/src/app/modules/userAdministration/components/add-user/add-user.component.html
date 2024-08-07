@@ -45,7 +45,7 @@
         <mat-form-field>
           <mat-label>Passwort</mat-label>
           <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-          <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" color="accent">
+          <button type="button" mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" color="accent">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>

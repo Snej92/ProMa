@@ -10,7 +10,6 @@ import org.sysprotec.restapi.model.Project;
 import org.sysprotec.restapi.model.Station;
 import org.sysprotec.restapi.model.User;
 import org.sysprotec.restapi.model.projections.ProjectDto;
-import org.sysprotec.restapi.model.projections.ProjectView;
 import org.sysprotec.restapi.model.settings.Version;
 import org.sysprotec.restapi.model.types.StatusEPLAN;
 import org.sysprotec.restapi.repository.ProjectRepository;
@@ -30,9 +29,9 @@ public class ProjectService {
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
     private final VersionRepository versionRepository;
+    private final UserService userService;
 
     public List<Project> getAllProjects(Boolean archive) {
-//        return projectRepository.findAll();
         return projectRepository.findProjectsByArchived(archive);
     }
 
@@ -41,6 +40,7 @@ public class ProjectService {
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String username = authentication.getName();
             User user = userRepository.findUserByUsernameIgnoreCase(username);
+            userService.SyncUser();
             if(user!=null){
                 if(user.getActiveProject()!=null){
                     if(user.getActiveProject()!=0){

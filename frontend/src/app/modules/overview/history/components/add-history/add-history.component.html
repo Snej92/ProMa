@@ -7,20 +7,39 @@
 
     <mat-card-content>
 
-      <mat-form-field>
-        <mat-label>Eintrag</mat-label>
-        <input matInput formControlName="item">
-      </mat-form-field>
+      <div>
+        <mat-form-field>
+          <mat-label>Eintrag</mat-label>
+          <input matInput formControlName="item">
+        </mat-form-field>
+      </div>
 
-      <mat-form-field>
-        <mat-label>Dateiname</mat-label>
-        <input matInput formControlName="filename">
-      </mat-form-field>
+      <div>
+        <mat-form-field>
+          <mat-label>Dateiname</mat-label>
+          <input matInput formControlName="filename">
+        </mat-form-field>
+      </div>
+
+
+      <div>
+        <mat-checkbox (change)="initTransferType()" formControlName="fileTransfer">Datei Übergabe</mat-checkbox>
+
+        <mat-radio-group formControlName="transferType">
+          <mat-radio-button class="ms-2" value="1">erhalten</mat-radio-button>
+          <mat-radio-button class="ms-2" value="2">übergeben</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div>
+        <mat-checkbox formControlName="eplan">EPLAN</mat-checkbox>
+      </div>
+
     </mat-card-content>
 
     <mat-card-actions>
       <button type="submit" mat-raised-button color="accent"> Hinzufügen </button>
-      <button type="reset" mat-raised-button color="primary" (click)="closePopup()"> Abbrechen </button>
+      <button type="reset" mat-raised-button color="primary" (click)="closePopup(false)"> Abbrechen </button>
     </mat-card-actions>
   </mat-card>
 </form>

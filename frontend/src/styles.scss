@@ -105,6 +105,7 @@ $dark-theme: mat.define-dark-theme((
   --frontend-nav-button-selected: rgba(255,255,255,0.2);
   --frontend-nav-button-selected-text: #ff6742;
   --frontend-alternate: #303030;
+  --frontend-clear: #ffffff;
   background-color: #202124;
   color: #ffffff;
 }
@@ -130,9 +131,15 @@ body { margin: 0;
   --frontend-nav-button: rgba(0,0,0,0.08);
   --frontend-nav-button-selected: rgba(0,0,0,0.12);
   --frontend-nav-button-selected-text: #e63212;
+  --frontend-clear: #4a4a4a;
   --frontend-nav-button-border: rgba(255,255,255,0.1);
   --mat-snack-bar-button-color: #c6c6c6;
-  --mat-divider-white-opacity: rgba(255,255,255,0.6)
+  --mat-divider-white-opacity: rgba(255,255,255,0.6);
+
+  --frontend-fileTransfer-1: rgba(76, 175, 80, 0.2);
+  --frontend-fileTransfer-2: rgba(255, 82, 82, 0.2);
+  --frontend-fileTransfer-1-eplan: rgba(76, 175, 80, 0.6);
+  --frontend-fileTransfer-2-eplan: rgba(255, 82, 82, 0.6);
 }
 
 .pass-snackbar {

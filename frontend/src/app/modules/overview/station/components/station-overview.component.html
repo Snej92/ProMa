@@ -1,6 +1,11 @@
 <div class="station-overview-container">
-  <div class="ms-2 mt-2 station-overview-general mat-elevation-z8">
-    <app-station-overview-general class="mat-elevation-z8" [stationViewInput]="stationViewOverview"></app-station-overview-general>
+  <div>
+    <div class="ms-2 mt-2 station-overview-general mat-elevation-z8">
+      <app-station-overview-general class="mat-elevation-z8" [stationViewInput]="stationViewOverview"></app-station-overview-general>
+    </div>
+    <div class="mt-3 d-flex justify-content-end" >
+      <button mat-raised-button color="accent" (click)="addHistory()">Datei übergeben</button>
+    </div>
   </div>
   <div class="ms-5 mt-2">
     <div class="mat-elevation-z8 station-overview-documentation">

@@ -7,6 +7,8 @@ import {getStationViewOverviewInfo} from "../store/stationViewOverview.selectors
 import {loadSpinner} from "../../../../core/store/app.action";
 import {stationViewModel} from "../../../station/store/stationView.model";
 import {stationViewOverview} from "../store/stationViewOverview.model";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {AddHistoryComponent} from "../../history/components/add-history/add-history.component";
 
 @Component({
   selector: 'app-station-overview',
@@ -20,7 +22,8 @@ export class StationOverviewComponent implements OnInit, OnDestroy{
   @Input() stationViewInput!:stationViewModel;
   stationViewOverview!:stationViewOverview
 
-  constructor(private store:Store<AppStateModel>) {
+  constructor(private store:Store<AppStateModel>,
+              private dialog:MatDialog) {
   }
 
   ngOnInit(): void {
@@ -34,6 +37,28 @@ export class StationOverviewComponent implements OnInit, OnDestroy{
         })
     )
   }
+
+  addHistory(){
+    this.openPopup(0,"Historie Eintrag", false, this.stationId);
+  }
+
+  openPopup(id:any, title:any, isEdit=false, stationId:any){
+    const dialogRef = this.dialog.open(AddHistoryComponent,{
+      width:'40%',
+      data:{
+        id:id,
+        title:title,
+        isEdit:isEdit,
+        stationId:stationId
+      }
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.store.dispatch(loadStationViewOverview({id:this.stationId}))
+      }
+    })
+  }
+
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());

@@ -4,7 +4,10 @@ export interface historyModel {
   date : string,
   item : string,
   userAcronym : string,
-  filename : string
+  filename : string,
+  fileTransfer : boolean,
+  transferType : number,
+  eplan : boolean
 }
 
 export interface history {

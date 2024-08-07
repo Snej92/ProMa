@@ -7,6 +7,8 @@ import {AppStateModel} from "../../../core/store/appState.model";
 import {getStationOverallViewInfo} from "../store/stationOverallView.selectors";
 import {loadStationOverallView} from "../store/stationOverallView.actions";
 import {headerData} from "../../overview/headerData/store/headerData.model";
+import {getLoggedUserInfo} from "../../../core/logged-user/logged-user.selectors";
+import {loggedUser} from "../../../core/logged-user/logged-user.model";
 
 @Component({
   selector: 'app-overall-view',
@@ -14,6 +16,7 @@ import {headerData} from "../../overview/headerData/store/headerData.model";
   styleUrl: './overall-view.component.scss'
 })
 export class OverallViewComponent implements OnInit, OnDestroy{
+  loggedUser!:loggedUser;
   private subscriptions: Subscription[] = [];
   stationOverallView!:stationOverallView;
   generalColumns: String[] = ['general', 'headerData', 'specification', 'projection', 'control', 'docu', 'technicalData'];
@@ -31,6 +34,12 @@ export class OverallViewComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.store.dispatch(loadSpinner({isLoading:true}))
+    this.subscriptions.push(
+      this.store.select(getLoggedUserInfo).pipe()
+        .subscribe(data =>{
+          this.loggedUser=data;
+        })
+    )
     this.store.dispatch(loadStationOverallView())
     this.subscriptions.push(
       this.store.select(getStationOverallViewInfo).pipe()

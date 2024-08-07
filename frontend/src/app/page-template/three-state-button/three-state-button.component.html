@@ -1,4 +1,4 @@
-<button mat-flat-button (click)="toggleState()">
+<button mat-flat-button (click)="toggleState()" class="button">
   <ng-container [ngSwitch]="state">
     <mat-icon *ngSwitchCase="1" class="open-state">radio_button_unchecked</mat-icon>
     <mat-icon *ngSwitchCase="2" class="check-state">check</mat-icon>

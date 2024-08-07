@@ -1,173 +1,184 @@
-<div class="overall-view-container">
-  <div class="table-container mat-elevation-z8">
-    <table mat-table [dataSource]="stationOverallView.stationOverallViewList">
+<ng-container *ngIf="loggedUser.user.activeProject > 0">
+  <div class="overall-view-container">
+    <div class="table-container mat-elevation-z8">
+      <table mat-table [dataSource]="stationOverallView.stationOverallViewList">
 
-<!--      Big Header-->
-      <!-- General Header Row -->
-      <ng-container matColumnDef="general">
-        <th class="th-center header-allgemein" mat-header-cell *matHeaderCellDef colspan="6">Allgemein</th>
-      </ng-container>
-      <!-- Header Data Header Row-->
-      <ng-container matColumnDef="headerData">
-        <th class="th-center header-headerData" mat-header-cell *matHeaderCellDef [colSpan]="headerDataColumns.length">Kopfdaten</th>
-      </ng-container>
-      <!--Specification Header Row-->
-      <ng-container matColumnDef="specification">
-        <th class="th-center header-specification" mat-header-cell *matHeaderCellDef [colSpan]="specificationColumns.length">Vorgaben</th>
-      </ng-container>
-      <!--Projection Header Row-->
-      <ng-container matColumnDef="projection">
-        <th class="th-center header-projection" mat-header-cell *matHeaderCellDef [colSpan]="projectionColumns.length">Projektierung</th>
-      </ng-container>
-      <!--Control Header Row-->
-      <ng-container matColumnDef="control">
-        <th class="th-center header-control" mat-header-cell *matHeaderCellDef [colSpan]="controlColumns.length">Kontrolle</th>
-      </ng-container>
-      <!-- Documentation Header Row -->
-      <ng-container matColumnDef="docu">
-        <th class="th-center header-docu" mat-header-cell *matHeaderCellDef [colSpan]="documentationColumns.length" >Dokumentation</th>
-      </ng-container>
-      <!-- Technical Data Header Row -->
-      <ng-container matColumnDef="technicalData">
-        <th class="th-center header-technicalData" mat-header-cell *matHeaderCellDef [colSpan]="technicalDataColumns.length" >Technische daten</th>
-      </ng-container>
+        <!--      Big Header-->
+        <!-- General Header Row -->
+        <ng-container matColumnDef="general">
+          <th class="th-center header-allgemein" mat-header-cell *matHeaderCellDef colspan="6">Allgemein</th>
+        </ng-container>
+        <!-- Header Data Header Row-->
+        <ng-container matColumnDef="headerData">
+          <th class="th-center header-headerData" mat-header-cell *matHeaderCellDef [colSpan]="headerDataColumns.length">Kopfdaten</th>
+        </ng-container>
+        <!--Specification Header Row-->
+        <ng-container matColumnDef="specification">
+          <th class="th-center header-specification" mat-header-cell *matHeaderCellDef [colSpan]="specificationColumns.length">Vorgaben</th>
+        </ng-container>
+        <!--Projection Header Row-->
+        <ng-container matColumnDef="projection">
+          <th class="th-center header-projection" mat-header-cell *matHeaderCellDef [colSpan]="projectionColumns.length">Projektierung</th>
+        </ng-container>
+        <!--Control Header Row-->
+        <ng-container matColumnDef="control">
+          <th class="th-center header-control" mat-header-cell *matHeaderCellDef [colSpan]="controlColumns.length">Kontrolle</th>
+        </ng-container>
+        <!-- Documentation Header Row -->
+        <ng-container matColumnDef="docu">
+          <th class="th-center header-docu" mat-header-cell *matHeaderCellDef [colSpan]="documentationColumns.length" >Dokumentation</th>
+        </ng-container>
+        <!-- Technical Data Header Row -->
+        <ng-container matColumnDef="technicalData">
+          <th class="th-center header-technicalData" mat-header-cell *matHeaderCellDef [colSpan]="technicalDataColumns.length" >Technische daten</th>
+        </ng-container>
 
-      <ng-container matColumnDef="Station">
-        <th class="th-center rotated-text sticky-column" mat-header-cell *matHeaderCellDef> Station </th>
-        <td class="td-center sticky-column" mat-cell *matCellDef="let stationOverallView">{{stationOverallView.name}}</td>
-      </ng-container>
+        <ng-container matColumnDef="Station">
+          <th class="th-center rotated-text sticky-column" mat-header-cell *matHeaderCellDef> Station </th>
+          <td class="td-center sticky-column" mat-cell *matCellDef="let stationOverallView">{{stationOverallView.name}}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="Bearbeiter">
-        <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> Bearbeiter </th>
-        <td class="td-center" mat-cell *matCellDef="let stationOverallView">{{stationOverallView.issuer}}</td>
-      </ng-container>
+        <ng-container matColumnDef="Bearbeiter">
+          <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> Bearbeiter </th>
+          <td class="td-center" mat-cell *matCellDef="let stationOverallView">{{stationOverallView.issuer}}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="Status">
-        <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> Status </th>
-        <td class="td-center" mat-cell *matCellDef="let stationOverallView">
-          <div class="station-status"
-               [ngClass]="{
+        <ng-container matColumnDef="Status">
+          <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> Status </th>
+          <td class="td-center" mat-cell *matCellDef="let stationOverallView">
+            <div class="station-status"
+                 [ngClass]="{
           'station-status-ausgelagert': stationOverallView?.status=='AUSGELAGERT',
           'station-status-inarbeit': stationOverallView?.status=='INARBEIT',
           'station-status-eingelagert': stationOverallView?.status=='EINGELAGERT'
           }">
-            {{stationOverallView.status}}
-          </div>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="Version">
-        <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> Version </th>
-        <td class="td-center" mat-cell *matCellDef="let stationOverallView">{{stationOverallView.version}}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="Gesamtfortschritt">
-        <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> Gesamtfortschritt </th>
-        <td class="td-center" mat-cell *matCellDef="let stationOverallView">
-          <span [ngClass]="stationOverallView.totalProgress >= 100 ? 'progress-text-align-100' : 'progress-text-align'">{{stationOverallView.totalProgress}}</span>
-          <mat-progress-spinner class="progress-spinner-align"
-                                value="{{stationOverallView.totalProgress}}"
-                                mode="determinate" [diameter]="38" color="accent">
-
-          </mat-progress-spinner>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="LOPfortschritt">
-        <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> LOPfortschritt </th>
-        <td class="td-center" mat-cell *matCellDef="let stationOverallView">
-          <span [ngClass]="stationOverallView.lopProgress >= 100 ? 'progress-text-align-100' : 'progress-text-align'">{{stationOverallView.lopProgress}}</span>
-          <mat-progress-spinner class="progress-spinner-align-lop"
-                                value="{{stationOverallView.lopProgress}}"
-                                mode="determinate" [diameter]="38" color="accent">
-
-          </mat-progress-spinner>
-        </td>
-      </ng-container>
-
-<!--      HeaderData columns-->
-      <ng-container *ngFor="let displayedColumns of headerDataColumns; let colIndex = index">
-        <ng-container  matColumnDef="{{displayedColumns}}">
-          <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> {{displayedColumns}} </th>
-          <td class="td-center" mat-cell *matCellDef="let stationOverallView">
-            {{stationOverallView.headerData[colIndex].data}}
+              {{stationOverallView.status}}
+            </div>
           </td>
         </ng-container>
-      </ng-container>
 
-      <!--      Specification columns-->
-      <ng-container *ngFor="let displayedColumns of specificationColumns; let colIndex = index">
-        <ng-container  matColumnDef="{{displayedColumns}}">
-          <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> {{displayedColumns}} </th>
+        <ng-container matColumnDef="Version">
+          <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> Version </th>
+          <td class="td-center" mat-cell *matCellDef="let stationOverallView">{{stationOverallView.version}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Gesamtfortschritt">
+          <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> Gesamtfortschritt </th>
           <td class="td-center" mat-cell *matCellDef="let stationOverallView">
-            <ng-container *ngIf="stationOverallView.specification[colIndex].done">
-              <mat-icon class="check-icon">check</mat-icon>
-            </ng-container>
-            <ng-container *ngIf="!stationOverallView.specification[colIndex].done">
-              <mat-icon class="close-icon">close</mat-icon>
-            </ng-container>
+            <span [ngClass]="stationOverallView.totalProgress >= 100 ? 'progress-text-align-100' : 'progress-text-align'">{{stationOverallView.totalProgress}}</span>
+            <mat-progress-spinner class="progress-spinner-align"
+                                  value="{{stationOverallView.totalProgress}}"
+                                  mode="determinate" [diameter]="38" color="accent">
+
+            </mat-progress-spinner>
           </td>
         </ng-container>
-      </ng-container>
 
-      <!--      Projection columns-->
-      <ng-container *ngFor="let displayedColumns of projectionColumns; let colIndex = index">
-        <ng-container  matColumnDef="{{displayedColumns}}">
-          <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> {{displayedColumns}} </th>
+        <ng-container matColumnDef="LOPfortschritt">
+          <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> LOPfortschritt </th>
           <td class="td-center" mat-cell *matCellDef="let stationOverallView">
-            <ng-container *ngIf="stationOverallView.projection[colIndex].done">
-              <mat-icon class="check-icon">check</mat-icon>
-            </ng-container>
-            <ng-container *ngIf="!stationOverallView.projection[colIndex].done">
-              <mat-icon class="close-icon">close</mat-icon>
-            </ng-container>
+            <span [ngClass]="stationOverallView.lopProgress >= 100 ? 'progress-text-align-100' : 'progress-text-align'">{{stationOverallView.lopProgress}}</span>
+            <mat-progress-spinner class="progress-spinner-align-lop"
+                                  value="{{stationOverallView.lopProgress}}"
+                                  mode="determinate" [diameter]="38" color="accent">
+
+            </mat-progress-spinner>
           </td>
         </ng-container>
-      </ng-container>
 
-      <!--      Control columns-->
-      <ng-container *ngFor="let displayedColumns of controlColumns; let colIndex = index">
-        <ng-container  matColumnDef="{{displayedColumns}}">
-          <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> {{displayedColumns}} </th>
-          <td class="td-center" mat-cell *matCellDef="let stationOverallView">
-            <ng-container *ngIf="stationOverallView.control[colIndex].done">
-              <mat-icon class="check-icon">check</mat-icon>
-            </ng-container>
-            <ng-container *ngIf="!stationOverallView.control[colIndex].done">
-              <mat-icon class="close-icon">close</mat-icon>
-            </ng-container>
-          </td>
+        <!--      HeaderData columns-->
+        <ng-container *ngFor="let displayedColumns of headerDataColumns; let colIndex = index">
+          <ng-container  matColumnDef="{{displayedColumns}}">
+            <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> {{displayedColumns}} </th>
+            <td class="td-center" mat-cell *matCellDef="let stationOverallView">
+              {{stationOverallView.headerData[colIndex].data}}
+            </td>
+          </ng-container>
         </ng-container>
-      </ng-container>
 
-      <!-- Documentation columns-->
-      <ng-container *ngFor="let displayedColumns of documentationColumns; let colIndex = index">
-        <ng-container  matColumnDef="{{displayedColumns}}">
-          <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> {{displayedColumns}} </th>
-          <td class="td-center" mat-cell *matCellDef="let stationOverallView">
-            <ng-container *ngIf="stationOverallView.documentation[colIndex].done">
-              <mat-icon class="check-icon">check</mat-icon>
-            </ng-container>
-            <ng-container *ngIf="!stationOverallView.documentation[colIndex].done">
-              <mat-icon class="close-icon">close</mat-icon>
-            </ng-container>
-          </td>
+        <!--      Specification columns-->
+        <ng-container *ngFor="let displayedColumns of specificationColumns; let colIndex = index">
+          <ng-container  matColumnDef="{{displayedColumns}}">
+            <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> {{displayedColumns}} </th>
+            <td class="td-center" mat-cell *matCellDef="let stationOverallView">
+              <ng-container *ngIf="stationOverallView.specification[colIndex].done">
+                <mat-icon class="check-icon">check</mat-icon>
+              </ng-container>
+              <ng-container *ngIf="!stationOverallView.specification[colIndex].done">
+                <mat-icon class="close-icon">close</mat-icon>
+              </ng-container>
+            </td>
+          </ng-container>
         </ng-container>
-      </ng-container>
 
-      <!-- Technical Data columns-->
-      <ng-container *ngFor="let displayedColumns of technicalDataColumns; let colIndex = index">
-        <ng-container  matColumnDef="{{displayedColumns}}">
-          <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> {{displayedColumns}} </th>
-          <td class="td-center" mat-cell *matCellDef="let stationOverallView">
-            {{stationOverallView.technicalData[colIndex].value}}
-          </td>
+        <!--      Projection columns-->
+        <ng-container *ngFor="let displayedColumns of projectionColumns; let colIndex = index">
+          <ng-container  matColumnDef="{{displayedColumns}}">
+            <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> {{displayedColumns}} </th>
+            <td class="td-center" mat-cell *matCellDef="let stationOverallView">
+              <ng-container *ngIf="stationOverallView.projection[colIndex].done">
+                <mat-icon class="check-icon">check</mat-icon>
+              </ng-container>
+              <ng-container *ngIf="!stationOverallView.projection[colIndex].done">
+                <mat-icon class="close-icon">close</mat-icon>
+              </ng-container>
+            </td>
+          </ng-container>
         </ng-container>
-      </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="generalColumns"></tr>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
+        <!--      Control columns-->
+        <ng-container *ngFor="let displayedColumns of controlColumns; let colIndex = index">
+          <ng-container  matColumnDef="{{displayedColumns}}">
+            <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> {{displayedColumns}} </th>
+            <td class="td-center" mat-cell *matCellDef="let stationOverallView">
+              <ng-container *ngIf="stationOverallView.control[colIndex].done">
+                <mat-icon class="check-icon">check</mat-icon>
+              </ng-container>
+              <ng-container *ngIf="!stationOverallView.control[colIndex].done">
+                <mat-icon class="close-icon">close</mat-icon>
+              </ng-container>
+            </td>
+          </ng-container>
+        </ng-container>
+
+        <!-- Documentation columns-->
+        <ng-container *ngFor="let displayedColumns of documentationColumns; let colIndex = index">
+          <ng-container  matColumnDef="{{displayedColumns}}">
+            <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> {{displayedColumns}} </th>
+            <td class="td-center" mat-cell *matCellDef="let stationOverallView">
+              <ng-container *ngIf="stationOverallView.documentation[colIndex].done">
+                <mat-icon class="check-icon">check</mat-icon>
+              </ng-container>
+              <ng-container *ngIf="!stationOverallView.documentation[colIndex].done">
+                <mat-icon class="close-icon">close</mat-icon>
+              </ng-container>
+            </td>
+          </ng-container>
+        </ng-container>
+
+        <!-- Technical Data columns-->
+        <ng-container *ngFor="let displayedColumns of technicalDataColumns; let colIndex = index">
+          <ng-container  matColumnDef="{{displayedColumns}}">
+            <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> {{displayedColumns}} </th>
+            <td class="td-center" mat-cell *matCellDef="let stationOverallView">
+              {{stationOverallView.technicalData[colIndex].value}}
+            </td>
+          </ng-container>
+        </ng-container>
+
+        <tr class="general-header-row" mat-header-row *matHeaderRowDef="generalColumns"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
   </div>
-</div>
+</ng-container>
+
+<ng-container *ngIf="loggedUser.user.activeProject == 0">
+  <div [routerLink]="['/projectAdministration', false]" class="card-container-no-project" appProjectElevation [defaultElevation]="4" [raisedElevation]="16">
+    <div class="container-no-project">
+      <h1>Kein Projekt ausgewählt</h1>
+      <h3>hier klicken</h3>
+    </div>
+  </div>
+</ng-container>

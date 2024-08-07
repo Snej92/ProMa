@@ -17,6 +17,22 @@
   background-color: var(--frontend-alternate);
 }
 
+.transferType-1{
+  background-color: var(--frontend-fileTransfer-1)!important;
+}
+
+.transferType-2{
+  background-color: var(--frontend-fileTransfer-2)!important;
+}
+
+.transferType-1-eplan{
+  background-color: var(--frontend-fileTransfer-1-eplan)!important;
+}
+
+.transferType-2-eplan{
+  background-color: var(--frontend-fileTransfer-2-eplan)!important;
+}
+
 .th-center{
   text-align: center;
 }
@@ -35,4 +51,14 @@
 
 .mat-column-Dateiname{
 
+}
+
+.info-icon{
+  position: relative;
+  top: 7px;
+  left: 15px;
+}
+
+::ng-deep .custom-tooltip {
+  white-space: pre-line;
 }

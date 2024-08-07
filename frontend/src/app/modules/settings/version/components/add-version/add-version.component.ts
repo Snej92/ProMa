@@ -67,7 +67,7 @@ export class AddVersionComponent implements OnInit{
     const versionStationArray = this.editData.versionStation.map(station => this.builder.group({
       id: [station.id],
       stationName: [station.stationName, Validators.required],
-      done: [station.done, Validators.required]
+      done: [station.state, Validators.required]
     }));
 
     this.versionForm.setValue({

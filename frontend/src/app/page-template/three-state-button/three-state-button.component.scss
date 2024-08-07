@@ -11,7 +11,11 @@
 }
 
 .not-needed-state{
-  color: var(--frontend-accent);
+  color: var(--frontend-clear);
   position: relative;
   top: 2.5px;
+}
+
+.button{
+  background-color: transparent;
 }

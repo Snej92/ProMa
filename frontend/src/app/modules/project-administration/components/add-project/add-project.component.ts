@@ -32,7 +32,8 @@ export class AddProjectComponent implements OnInit{
     amountStations:this.builder.control(0),
     inProgressStations: this.builder.control(0),
     storedStations:this.builder.control(0),
-    notStoredStations:this.builder.control(0)
+    notStoredStations:this.builder.control(0),
+    template:this.builder.control('')
   })
 
   saveProject(){
@@ -63,6 +64,7 @@ export class AddProjectComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    console.log(this.data.projects)
     if(this.data.isEdit){
       this.onInitSub = this.store.select(getProjectById(this.data.id)).subscribe(data=>{
         this.editData=data;
@@ -75,6 +77,7 @@ export class AddProjectComponent implements OnInit{
           inProgressStations: this.editData.inProgressStations,
           storedStations: this.editData.storedStations,
           notStoredStations:this.editData.notStoredStations,
+          template: '',
         })
       })
       this.onInitSub.unsubscribe();

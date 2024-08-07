@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.sysprotec.restapi.model.Role;
 import org.sysprotec.restapi.model.User;
 import org.sysprotec.restapi.repository.UserRepository;
+import org.sysprotec.restapi.service.UserService;
 
 import java.util.List;
 
