@@ -22,8 +22,8 @@ export class ProjectAdministrationService {
     return this.http.get<projectViewModel>(this.API_URL + "/project")
   }
 
-  addProject(projectViewInput:projectViewModel){
-    return this.http.post(this.API_URL + "/project", projectViewInput);
+  addProject(projectViewInput:projectViewModel, template:string){
+    return this.http.post(this.API_URL + "/project/"+template, projectViewInput);
   }
 
   updateProject(projectViewInput:projectViewModel){

@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface TechnicalDataSettingRepository extends JpaRepository<TechnicalDataSetting, Long> {
-    List<TechnicalDataSetting> findAllByOrderByIdAsc();
+    List<TechnicalDataSetting> findAllByProjectIdOrderByIdAsc(Long projectId);
     TechnicalDataSetting findTopByOrderByIdDesc();
 }

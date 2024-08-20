@@ -7,25 +7,28 @@
     <mat-card-content>
       <mat-form-field>
         <mat-label>Name</mat-label>
-        <input matInput formControlName="name">
+        <input maxlength="27" matInput formControlName="name">
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Beschreibung</mat-label>
-        <input matInput formControlName="description">
+        <input maxlength="38" matInput formControlName="description">
       </mat-form-field>
 
-<!--      <mat-form-field class="mat-mdc-form-field-3">-->
-<!--        <mat-label>Template</mat-label>-->
-<!--        <mat-select formControlName="template">-->
-<!--          <mat-option value="Neu">Neu</mat-option>-->
-<!--          <ng-container *ngFor="let project of data.projects.projectViewList">-->
-<!--            <mat-option [value]="project.name">{{project.name}}</mat-option>-->
-<!--          </ng-container>-->
-<!--        </mat-select>-->
-<!--      </mat-form-field>-->
+      <ng-container *ngIf="!data.isEdit">
+        <mat-form-field class="mat-mdc-form-field-2">
+          <mat-label>Template</mat-label>
+          <mat-select formControlName="template">
+            <mat-option value="Neu">Neu</mat-option>
+            <ng-container *ngFor="let project of data.projects.projectViewList">
+              <mat-option [value]="project.name">{{project.name}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
 
     </mat-card-content>
+
 
     <mat-card-actions>
       <button type="submit" mat-raised-button color="accent"> {{data.button}} </button>

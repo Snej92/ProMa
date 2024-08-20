@@ -148,13 +148,19 @@ public class StationService {
                     //Add new Station to Version
                     List<Version> versionList = versionRepository.findVersionsByProjectIdOrderByVersionAsc(savedProject.getId());
                     for(Version version: versionList){
+                        int state = 1;
+                        boolean done = false;
+                        if(version.getVersion().equals("V1.0")){
+                            state = 2;
+                            done = true;
+                        }
                         VersionStation newVersionStation = VersionStation.builder()
-                                .state(1)
+                                .state(state)
                                 .stationName(stationDto.getName())
                                 .version(version)
                                 .build();
                         version.addVersionStation(newVersionStation);
-                        version.setDone(false);
+                        version.setDone(done);
                         versionRepository.save(version);
                         log.info("Version '" + version.getVersion() + "' added to Station '" + stationDto.getName() + "'");
                     }

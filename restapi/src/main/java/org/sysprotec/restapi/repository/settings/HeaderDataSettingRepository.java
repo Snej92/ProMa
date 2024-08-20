@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface HeaderDataSettingRepository extends JpaRepository<HeaderDataSetting, Long> {
-    List<HeaderDataSetting> findAllByOrderByIdAsc();
+    List<HeaderDataSetting> findAllByProjectIdOrderByIdAsc(Long projectId);
     HeaderDataSetting findTopByOrderByIdDesc();
 }

@@ -38,7 +38,7 @@ export class ProjectAdministrationEffects {
     this.action$.pipe(
       ofType(addProjectView),
       switchMap(action=>
-        this.service.addProject(action.projectViewInput).pipe(
+        this.service.addProject(action.projectViewInput, action.template).pipe(
           switchMap(data=> of(
             addProjectViewSuccess({projectViewInput:data as projectViewModel}),
             loadSpinner({isLoading:false}),

@@ -22,7 +22,7 @@ export const loadProjectView=createAction(LOAD_PROJECT_VIEW, props<{archive:bool
 export const loadProjectViewSuccess=createAction(LOAD_PROJECT_VIEW_SUCCESS, props<{projectViewList:projectViewModel[]}>());
 export const loadProjectViewFail=createAction(LOAD_PROJECT_VIEW_FAIL, props<{errorText:any}>());
 
-export const addProjectView = createAction(ADD_PROJECT, props<{projectViewInput:projectViewModel}>())
+export const addProjectView = createAction(ADD_PROJECT, props<{projectViewInput:projectViewModel, template:string}>())
 export const addProjectViewSuccess = createAction(ADD_PROJECT_SUCCESS, props<{projectViewInput:projectViewModel}>())
 
 export const updateProject=createAction(UPDATE_PROJECT, props<{projectViewInput:projectViewModel}>())

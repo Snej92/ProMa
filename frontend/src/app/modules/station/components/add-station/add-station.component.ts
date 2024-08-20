@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {stationViewModel} from "../../store/stationView.model";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
@@ -8,15 +8,20 @@ import {AppStateModel} from "../../../../core/store/appState.model";
 import {addStationView, updateStation} from "../../store/stationView.actions";
 import {getStationById} from "../../store/stationView.selectors";
 import {loadSpinner} from "../../../../core/store/app.action";
+import {user} from "../../../userAdministration/store/user-Administration.model";
+import {loadUser} from "../../../userAdministration/store/user-administration.actions";
+import {getUserInfo} from "../../../userAdministration/store/user-administration.selectors";
 
 @Component({
   selector: 'app-add-station',
   templateUrl: './add-station.component.html',
   styleUrl: './add-station.component.scss'
 })
-export class AddStationComponent implements OnInit{
+export class AddStationComponent implements OnInit, OnDestroy{
   private onInitSub!:Subscription;
   editData!:stationViewModel;
+  user!:user;
+  private subscriptions: Subscription[] = [];
 
   constructor(private dialogRef:MatDialogRef<AddStationComponent>,
               private builder:FormBuilder,
@@ -25,6 +30,14 @@ export class AddStationComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.store.dispatch(loadSpinner({isLoading:true}))
+    this.store.dispatch(loadUser())
+    this.subscriptions.push(
+      this.store.select(getUserInfo).pipe()
+        .subscribe(data =>{
+          this.user=data;
+        })
+    )
     if(this.data.isEdit){
       this.onInitSub = this.store.select(getStationById(this.data.id)).subscribe(data=>{
         this.editData=data;
@@ -139,5 +152,9 @@ export class AddStationComponent implements OnInit{
 
   closePopup(){
     this.dialogRef.close();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

@@ -4,160 +4,88 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="672b6c24-1ba4-45dc-9cab-421c2d00eb01" name="Changes" comment="release of version 0.8&#10;-added overall view">
+    <list default="true" id="8ad16df3-65d4-426c-996c-42082cc72aa4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/components/overall-view.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/components/overall-view.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/components/overall-view.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/components/overall-view.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/components/overall-view.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/components/overall-view.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/components/overview.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/components/overview.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/add-history/add-history.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/add-history/add-history.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/add-history/add-history.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/add-history/add-history.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/store/history.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/store/history.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-administration.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-administration.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/components/settings.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/components/settings.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/components/add-version/add-version.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/components/add-version/add-version.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/service/project-administration.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/service/project-administration.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/store/project-administration.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/store/project-administration.actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/store/project-administration.effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/store/project-administration.effects.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/components/version.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/components/version.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/components/version.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/components/version.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/components/version.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/components/version.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/store/version.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/store/version.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/components/add-user/add-user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/components/add-user/add-user.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/components/user-administration/user-administration.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/userAdministration/components/user-administration/user-administration.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/three-state-button/three-state-button.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/three-state-button/three-state-button.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/three-state-button/three-state-button.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/three-state-button/three-state-button.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/three-state-button/three-state-button.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/three-state-button/three-state-button.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/UserConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/UserConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/History.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/settings/VersionStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/settings/VersionStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/StationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/StationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/HistoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/HistoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/add-station/add-station.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/add-station/add-station.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/add-station/add-station.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/add-station/add-station.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/add-station/add-station.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/add-station/add-station.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/ProjectController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/ProjectRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/ProjectRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/settings/HeaderDataSettingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/settings/HeaderDataSettingRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/settings/TechnicalDataSettingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/settings/TechnicalDataSettingRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/ProjectService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/StationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/StationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/VersionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/VersionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/HeaderDataSettingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/HeaderDataSettingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/TechnicalDataSettingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/TechnicalDataSettingService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="TypeScript File" />
-        <option value="Interface" />
-        <option value="Enum" />
-        <option value="Class" />
-        <option value="Dockerfile" />
-        <option value="JavaScript File" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;Snej92&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Snej92"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Snej92/ProMa.git&quot;,
-    &quot;accountId&quot;: &quot;9f77aa54-3db8-4415-b771-0ddec89dadf3&quot;
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Snej92/ProMa",
+    "accountId": "9f77aa54-3db8-4415-b771-0ddec89dadf3"
   }
-}</component>
-  <component name="KubernetesApiProvider">{
-  &quot;isMigrated&quot;: true
-}</component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 0
-}</component>
-  <component name="ProjectId" id="2fHX8XOGd9DTxYRnbbDR0jeIyUS" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2kuu1DUUUvHpAG8CDLpSmVkjY6F" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.frontend/Dockerfile.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.restapi [package].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.RestapiApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/jensarth/IdeaProjects/ProMa/frontend/src/app/modules/overall-view/store&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.15026593&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/jensarth/IdeaProjects/ProMa/frontend/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.RestapiApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Coding/ProMa",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "D:\\Coding\\ProMa\\frontend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/frontend/src/app/modules/overall-view/store" />
-      <recent name="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\overview\station\store" />
-      <recent name="D:\Coding\ProMa" />
-      <recent name="D:\Coding\ProMa\restapi" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/frontend/src/app/page-template" />
-      <recent name="$PROJECT_DIR$/frontend/src/app/modules/overall-view/service" />
-      <recent name="$PROJECT_DIR$/frontend/src/app/modules/overall-view/components" />
-      <recent name="$PROJECT_DIR$/frontend/src/app/modules" />
-      <recent name="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="org.sysprotec.restapi.model.projections" />
-      <recent name="org.sysprotec.restapi.controller.overview" />
-      <recent name="org.sysprotec.restapi.controller.settings" />
-      <recent name="org.sysprotec.restapi.service.settings" />
-      <recent name="org.sysprotec.restapi.service.overview" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Spring Boot.RestapiApplication">
+}]]></component>
+  <component name="RunManager">
     <configuration name="RestapiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="restapi" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.sysprotec.restapi.RestapiApplication" />
@@ -165,362 +93,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
-      <deployment type="docker-compose.yml">
-        <settings />
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
-      <deployment type="dockerfile">
-        <settings />
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="frontend/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
-      <deployment type="dockerfile">
-        <settings>
-          <option name="sourceFilePath" value="frontend/Dockerfile" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
-        <item itemvalue="Docker.frontend/Dockerfile" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-322ed176" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.19072.14" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.19072.14" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="672b6c24-1ba4-45dc-9cab-421c2d00eb01" name="Changes" comment="" />
-      <created>1713458818886</created>
+      <changelist id="8ad16df3-65d4-426c-996c-42082cc72aa4" name="Changes" comment="" />
+      <created>1724145568050</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1713458818886</updated>
-      <workItem from="1713458819828" duration="3475000" />
-      <workItem from="1713509086619" duration="4023000" />
-      <workItem from="1714541602341" duration="624000" />
-      <workItem from="1714557320603" duration="12681000" />
-      <workItem from="1714714352763" duration="22190000" />
-      <workItem from="1714907575389" duration="2296000" />
-      <workItem from="1714910075312" duration="4917000" />
-      <workItem from="1714922299248" duration="223000" />
-      <workItem from="1714931189314" duration="3092000" />
-      <workItem from="1715272508505" duration="753000" />
-      <workItem from="1715327649556" duration="2599000" />
-      <workItem from="1715336684839" duration="1113000" />
-      <workItem from="1715436680617" duration="23000" />
-      <workItem from="1715523243129" duration="60000" />
-      <workItem from="1715617167613" duration="2381000" />
-      <workItem from="1715621474318" duration="2221000" />
-      <workItem from="1715789972280" duration="5898000" />
-      <workItem from="1715800172441" duration="58000" />
-      <workItem from="1715958523459" duration="7022000" />
-      <workItem from="1715966902752" duration="398000" />
-      <workItem from="1715967423971" duration="32000" />
-      <workItem from="1716220684841" duration="102000" />
-      <workItem from="1716313028842" duration="358000" />
-      <workItem from="1716396665536" duration="6856000" />
-      <workItem from="1716403895308" duration="95000" />
-      <workItem from="1716474405837" duration="134000" />
-      <workItem from="1716474622149" duration="2970000" />
-      <workItem from="1716487044594" duration="5188000" />
-      <workItem from="1716552725905" duration="86000" />
-      <workItem from="1716565142832" duration="12494000" />
-      <workItem from="1716578708033" duration="1284000" />
-      <workItem from="1716620651759" duration="2303000" />
-      <workItem from="1716623353224" duration="7728000" />
-      <workItem from="1716644837074" duration="5823000" />
-      <workItem from="1716652322524" duration="626000" />
-      <workItem from="1716661276088" duration="956000" />
-      <workItem from="1716701134079" duration="4007000" />
-      <workItem from="1716705709566" duration="1986000" />
-      <workItem from="1717168555415" duration="10000" />
-      <workItem from="1717498354427" duration="669000" />
-      <workItem from="1717500612573" duration="105000" />
-      <workItem from="1717783352285" duration="1507000" />
-      <workItem from="1717832994704" duration="6220000" />
-      <workItem from="1717851761810" duration="2427000" />
-      <workItem from="1717859465235" duration="1437000" />
-      <workItem from="1717919489846" duration="179000" />
-      <workItem from="1717925569791" duration="4149000" />
-      <workItem from="1717935828955" duration="279000" />
-      <workItem from="1718017030017" duration="9692000" />
-      <workItem from="1718085048251" duration="25935000" />
-      <workItem from="1718173220130" duration="20444000" />
-      <workItem from="1718198288838" duration="1595000" />
-      <workItem from="1718603107610" duration="387000" />
-      <workItem from="1718603849230" duration="562000" />
-      <workItem from="1718604433719" duration="8562000" />
-      <workItem from="1718693155230" duration="11422000" />
-      <workItem from="1718774995471" duration="5342000" />
-      <workItem from="1718886582070" duration="1129000" />
-      <workItem from="1719210909807" duration="7517000" />
-      <workItem from="1719378993740" duration="7179000" />
-      <workItem from="1719463790234" duration="14603000" />
-      <workItem from="1719810582292" duration="4475000" />
-      <workItem from="1719994901031" duration="15913000" />
-      <workItem from="1720069185005" duration="21745000" />
-      <workItem from="1720159652966" duration="15034000" />
-      <workItem from="1720427403668" duration="12191000" />
-      <workItem from="1720499459743" duration="17494000" />
-      <workItem from="1720588385458" duration="13869000" />
-      <workItem from="1720674905801" duration="3522000" />
-      <workItem from="1721634298498" duration="12021000" />
-      <workItem from="1721717560057" duration="17724000" />
-      <workItem from="1721739080023" duration="793000" />
-      <workItem from="1721799658586" duration="17859000" />
-      <workItem from="1721880406564" duration="18543000" />
-      <workItem from="1721969278691" duration="11804000" />
-      <workItem from="1721997829050" duration="4041000" />
-      <workItem from="1722039772277" duration="414000" />
-      <workItem from="1722194946076" duration="2074000" />
-      <workItem from="1722241925716" duration="808000" />
-      <workItem from="1722256225698" duration="636000" />
-      <workItem from="1722271748498" duration="41000" />
-      <workItem from="1722284425652" duration="5461000" />
-      <workItem from="1722320806013" duration="28000" />
-      <workItem from="1722368714935" duration="67000" />
-      <workItem from="1722369333882" duration="942000" />
-      <workItem from="1722409333456" duration="2263000" />
-      <workItem from="1722428375547" duration="410000" />
-      <workItem from="1722428841504" duration="7741000" />
-      <workItem from="1722491288804" duration="2864000" />
-      <workItem from="1722505396356" duration="3369000" />
-      <workItem from="1722526291257" duration="1044000" />
-      <workItem from="1722672210870" duration="615000" />
-      <workItem from="1722707502476" duration="3386000" />
-      <workItem from="1722789034380" duration="6182000" />
-      <workItem from="1722839662704" duration="28296000" />
-      <workItem from="1722922370996" duration="2589000" />
-      <workItem from="1722954852911" duration="12450000" />
-      <workItem from="1723011638519" duration="668000" />
-      <workItem from="1723014176999" duration="35191000" />
+      <updated>1724145568050</updated>
+      <workItem from="1724145572150" duration="12362000" />
     </task>
-    <task id="LOCAL-00001" summary="loading spinner">
-      <option name="closed" value="true" />
-      <created>1714726691441</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1714726691441</updated>
-    </task>
-    <task id="LOCAL-00002" summary="loading spinner">
-      <option name="closed" value="true" />
-      <created>1714729775508</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1714729775508</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Project administration get API">
-      <option name="closed" value="true" />
-      <created>1714892651298</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1714892651298</updated>
-    </task>
-    <task id="LOCAL-00004" summary="User Administration NGRX">
-      <option name="closed" value="true" />
-      <created>1714922471618</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1714922471618</updated>
-    </task>
-    <task id="LOCAL-00005" summary="User Administration NGRX">
-      <option name="closed" value="true" />
-      <created>1715523277101</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1715523277101</updated>
-    </task>
-    <task id="LOCAL-00006" summary="improvements to sidenav logged user and active project">
-      <option name="closed" value="true" />
-      <created>1715619537493</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1715619537493</updated>
-    </task>
-    <task id="LOCAL-00007" summary="updated sys-confirm and implemented it for user administration">
-      <option name="closed" value="true" />
-      <created>1715702931219</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1715702931219</updated>
-    </task>
-    <task id="LOCAL-00008" summary="adding projects">
-      <option name="closed" value="true" />
-      <created>1715800216860</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1715800216860</updated>
-    </task>
-    <task id="LOCAL-00009" summary=".">
-      <option name="closed" value="true" />
-      <created>1716220766060</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1716220766060</updated>
-    </task>
-    <task id="LOCAL-00010" summary="basic version backend and ngrx state management frontend">
-      <option name="closed" value="true" />
-      <created>1716403960480</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1716403960480</updated>
-    </task>
-    <task id="LOCAL-00011" summary="updated version table to have horizontal scrollbar">
-      <option name="closed" value="true" />
-      <created>1716492346566</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1716492346566</updated>
-    </task>
-    <task id="LOCAL-00012" summary="version done, backend and frontend (visuals will be updated in the future)">
-      <option name="closed" value="true" />
-      <created>1716634805184</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1716634805185</updated>
-    </task>
-    <task id="LOCAL-00013" summary="just to safe current state">
-      <option name="closed" value="true" />
-      <created>1716650575689</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1716650575689</updated>
-    </task>
-    <task id="LOCAL-00014" summary="finished &quot;version&quot;">
-      <option name="closed" value="true" />
-      <created>1716705125548</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1716705125548</updated>
-    </task>
-    <task id="LOCAL-00015" summary="updated all models to have bidirectional access and started implementing History">
-      <option name="closed" value="true" />
-      <created>1718110371823</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1718110371823</updated>
-    </task>
-    <task id="LOCAL-00016" summary="added history in general and for LOP updates in overview. (Not in settings)">
-      <option name="closed" value="true" />
-      <created>1718191351422</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1718191351423</updated>
-    </task>
-    <task id="LOCAL-00017" summary="history table scrollable with sticky head and return Desc sorted">
-      <option name="closed" value="true" />
-      <created>1718194991741</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1718194991741</updated>
-    </task>
-    <task id="LOCAL-00018" summary="started to implement all &quot;TaskSettings&quot;">
-      <option name="closed" value="true" />
-      <created>1719496399237</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1719496399237</updated>
-    </task>
-    <task id="LOCAL-00019" summary="release of version 0.0.8">
-      <option name="closed" value="true" />
-      <created>1721892704649</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1721892704649</updated>
-    </task>
-    <task id="LOCAL-00020" summary="release of version 0.7&#10;-version is now working and moved to settings&#10;-LOP moved to overview&#10;-small bug fixes">
-      <option name="closed" value="true" />
-      <created>1722797132468</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1722797132468</updated>
-    </task>
-    <task id="LOCAL-00021" summary="release of version 0.8&#10;-added overall view">
-      <option name="closed" value="true" />
-      <created>1723011681187</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1723011681187</updated>
-    </task>
-    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="loading spinner" />
-    <MESSAGE value="Project administration get API" />
-    <MESSAGE value="User Administration NGRX" />
-    <MESSAGE value="improvements to sidenav logged user and active project" />
-    <MESSAGE value="updated sys-confirm and implemented it for user administration" />
-    <MESSAGE value="adding projects" />
-    <MESSAGE value="." />
-    <MESSAGE value="basic version backend and ngrx state management frontend" />
-    <MESSAGE value="updated version table to have horizontal scrollbar" />
-    <MESSAGE value="version done, backend and frontend (visuals will be updated in the future)" />
-    <MESSAGE value="just to safe current state" />
-    <MESSAGE value="finished &quot;version&quot;" />
-    <MESSAGE value="updated all models to have bidirectional access and started implementing History" />
-    <MESSAGE value="added history in general and for LOP updates in overview. (Not in settings)" />
-    <MESSAGE value="history table scrollable with sticky head and return Desc sorted" />
-    <MESSAGE value="started to implement all &quot;TaskSettings&quot;" />
-    <MESSAGE value="release of version 0.0.8" />
-    <MESSAGE value="release of version 0.7&#10;-version is now working and moved to settings&#10;-LOP moved to overview&#10;-small bug fixes" />
-    <MESSAGE value="release of version 0.8&#10;-added overall view" />
-    <option name="LAST_COMMIT_MESSAGE" value="release of version 0.8&#10;-added overall view" />
   </component>
 </project>

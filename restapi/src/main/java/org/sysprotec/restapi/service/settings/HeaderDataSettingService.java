@@ -37,7 +37,7 @@ public class HeaderDataSettingService {
             String username = authentication.getName();
             User user = userRepository.findUserByUsernameIgnoreCase(username);
             if (user != null) {
-                return headerDataSettingRepository.findAllByOrderByIdAsc();
+                return headerDataSettingRepository.findAllByProjectIdOrderByIdAsc(user.getActiveProject());
             }
         }
         return null;

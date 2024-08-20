@@ -37,7 +37,7 @@ public class TechnicalDataSettingService {
             String username = authentication.getName();
             User user = userRepository.findUserByUsernameIgnoreCase(username);
             if (user != null) {
-                return technicalDataSettingRepository.findAllByOrderByIdAsc();
+                return technicalDataSettingRepository.findAllByProjectIdOrderByIdAsc(user.getActiveProject());
             }
         }
         return null;

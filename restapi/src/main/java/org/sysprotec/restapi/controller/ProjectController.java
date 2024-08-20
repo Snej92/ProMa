@@ -27,9 +27,11 @@ public class ProjectController {
         return projectService.getActiveProject();
     }
 
-    @PostMapping
-    public ProjectDto addProject(@RequestBody ProjectDto projectDto){
-        return projectService.addProject(projectDto);
+    @PostMapping("{template}")
+    public ProjectDto addProject(
+            @RequestBody ProjectDto projectDto,
+            @PathVariable String template){
+        return projectService.addProject(projectDto, template);
     }
 
     @PutMapping
