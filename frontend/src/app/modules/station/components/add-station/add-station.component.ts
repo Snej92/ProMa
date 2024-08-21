@@ -1,8 +1,8 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
-import {stationViewModel} from "../../store/stationView.model";
+import {filter, Subscription, take} from "rxjs";
+import {additionalHeaderDataModel, stationViewModel} from "../../store/stationView.model";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {FormBuilder, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../../core/store/appState.model";
 import {addStationView, updateStation} from "../../store/stationView.actions";
@@ -11,6 +11,12 @@ import {loadSpinner} from "../../../../core/store/app.action";
 import {user} from "../../../userAdministration/store/user-Administration.model";
 import {loadUser} from "../../../userAdministration/store/user-administration.actions";
 import {getUserInfo} from "../../../userAdministration/store/user-administration.selectors";
+import {loadSettingHeaderData} from "../../../settings/HeaderData-settings/store/headerDataSetting.actions";
+import {getSettingHeaderDataInfo} from "../../../settings/HeaderData-settings/store/headerDataSetting.selectors";
+import {
+  editHeaderDataSettingModel,
+  headerDataSetting
+} from "../../../settings/HeaderData-settings/store/headerDataSetting.model";
 
 @Component({
   selector: 'app-add-station',
@@ -21,7 +27,44 @@ export class AddStationComponent implements OnInit, OnDestroy{
   private onInitSub!:Subscription;
   editData!:stationViewModel;
   user!:user;
+  headerDataSettings : headerDataSetting = {
+    headerDataSettingList:[],
+    errorMessage:''
+  };
+  dynamicControls: string[] = [];
+  // additionalHeaderData : { [key: number]: editHeaderDataSettingModel } = {};
+  headerDataInput : additionalHeaderDataModel[] = [];
   private subscriptions: Subscription[] = [];
+
+  stationForm=this.builder.group({
+    id:this.builder.control(0),
+    name:this.builder.control('', Validators.required),
+    description:this.builder.control(''),
+    issuer:this.builder.control(''),
+    status:this.builder.control(''),
+    version:this.builder.control('V1.0'),
+    totalProgress:this.builder.control(0),
+    lopTotal:this.builder.control(0),
+    lopDone:this.builder.control(0),
+    lopToDo:this.builder.control(0),
+    lopProgress:this.builder.control(0),
+    documentationTotal:this.builder.control(0),
+    documentationDone:this.builder.control(0),
+    documentationToDo:this.builder.control(0),
+    documentationProgress:this.builder.control(0),
+    specificationTotal:this.builder.control(0),
+    specificationDone:this.builder.control(0),
+    specificationToDo:this.builder.control(0),
+    specificationProgress:this.builder.control(0),
+    controlTotal:this.builder.control(0),
+    controlDone:this.builder.control(0),
+    controlToDo:this.builder.control(0),
+    controlProgress:this.builder.control(0),
+    projectionTotal:this.builder.control(0),
+    projectionDone:this.builder.control(0),
+    projectionToDo:this.builder.control(0),
+    projectionProgress:this.builder.control(0),
+  }) as FormGroup;
 
   constructor(private dialogRef:MatDialogRef<AddStationComponent>,
               private builder:FormBuilder,
@@ -30,7 +73,9 @@ export class AddStationComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    this.store.dispatch(loadSpinner({isLoading:true}))
+    this.headerDataInput = [];
+    this.dynamicControls = [];
+    //User
     this.store.dispatch(loadUser())
     this.subscriptions.push(
       this.store.select(getUserInfo).pipe()
@@ -38,6 +83,17 @@ export class AddStationComponent implements OnInit, OnDestroy{
           this.user=data;
         })
     )
+
+    //HeaderData
+    this.store.dispatch(loadSettingHeaderData())
+    this.subscriptions.push(
+      this.store.select(getSettingHeaderDataInfo).pipe()
+        .subscribe(data=>{
+          this.headerDataSettings=data;
+          this.addAdditionalControls(this.headerDataSettings)
+        })
+    )
+
     if(this.data.isEdit){
       this.onInitSub = this.store.select(getStationById(this.data.id)).subscribe(data=>{
         this.editData=data;
@@ -75,35 +131,6 @@ export class AddStationComponent implements OnInit, OnDestroy{
     }
   }
 
-  stationForm=this.builder.group({
-    id:this.builder.control(0),
-    name:this.builder.control('', Validators.required),
-    description:this.builder.control(''),
-    issuer:this.builder.control(''),
-    status:this.builder.control(''),
-    version:this.builder.control('V1.0'),
-    totalProgress:this.builder.control(0),
-    lopTotal:this.builder.control(0),
-    lopDone:this.builder.control(0),
-    lopToDo:this.builder.control(0),
-    lopProgress:this.builder.control(0),
-    documentationTotal:this.builder.control(0),
-    documentationDone:this.builder.control(0),
-    documentationToDo:this.builder.control(0),
-    documentationProgress:this.builder.control(0),
-    specificationTotal:this.builder.control(0),
-    specificationDone:this.builder.control(0),
-    specificationToDo:this.builder.control(0),
-    specificationProgress:this.builder.control(0),
-    controlTotal:this.builder.control(0),
-    controlDone:this.builder.control(0),
-    controlToDo:this.builder.control(0),
-    controlProgress:this.builder.control(0),
-    projectionTotal:this.builder.control(0),
-    projectionDone:this.builder.control(0),
-    projectionToDo:this.builder.control(0),
-    projectionProgress:this.builder.control(0),
-  })
 
 
   saveStation() {
@@ -136,6 +163,10 @@ export class AddStationComponent implements OnInit, OnDestroy{
       projectionToDo:this.stationForm.value.projectionToDo as number,
       projectionProgress:this.stationForm.value.projectionProgress as number,
     }
+
+    this.iterateDynamicControls();
+
+
     if(this.data.isEdit){
       stationInput.id = this.stationForm.value.id as number
       console.log(stationInput)
@@ -145,13 +176,34 @@ export class AddStationComponent implements OnInit, OnDestroy{
     }else if(!this.data.isEdit && this.stationForm.valid){
       console.log(stationInput)
       this.store.dispatch(loadSpinner({isLoading:true}));
-      this.store.dispatch(addStationView({stationViewInput:stationInput}))
+      this.store.dispatch(addStationView({stationViewInput:stationInput,headerDataInput:this.headerDataInput}))
       this.closePopup();
     }
   }
 
   closePopup(){
     this.dialogRef.close();
+  }
+
+  addAdditionalControls(additionalHeaderData: headerDataSetting) {
+    if(this.dynamicControls.length <= 0){
+      for (const header of additionalHeaderData.headerDataSettingList){
+        this.stationForm.addControl(header.item, this.builder.control(''));
+        this.dynamicControls.push(header.item);
+      }
+    }
+  }
+
+  iterateDynamicControls(){
+    this.headerDataInput = [];
+    this.dynamicControls.forEach((controlName,index) => {
+      const control = this.stationForm.get(controlName);
+      console.log(`Index: ${index}, Control Name: ${controlName}, Value: ${control?.value}`);
+      this.headerDataInput.push({
+        item: controlName,
+        data: control?.value
+      });
+    })
   }
 
   ngOnDestroy(): void {

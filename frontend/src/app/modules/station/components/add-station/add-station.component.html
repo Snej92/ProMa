@@ -34,6 +34,24 @@
           </mat-select>
         </mat-form-field>
       </div>
+
+<!--      Additional Header data-->
+      <ng-container *ngIf="!data.isEdit && headerDataSettings.headerDataSettingList.length > 0">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Zusätzliche Kopfdaten</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="expansion-headerData">
+            <ng-container *ngFor="let headerData of headerDataSettings.headerDataSettingList">
+              <mat-form-field class="mat-mdc-form-field-2">
+                <mat-label>{{headerData.item}}</mat-label>
+                <input matInput [formControlName]="headerData.item">
+              </mat-form-field>
+            </ng-container>
+          </div>
+        </mat-expansion-panel>
+      </ng-container>
+
     </mat-card-content>
 
     <mat-card-actions>

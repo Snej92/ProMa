@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {stationViewModel} from "../store/stationView.model";
+import {additionalHeaderDataModel, stationViewModel, stationViewRequest} from "../store/stationView.model";
 import {environment} from "../../../../environments/environment";
 
 @Injectable({
@@ -16,8 +16,13 @@ export class StationService {
     return this.http.get<stationViewModel[]>(this.API_URL + "/station/all")
   }
 
-  addStation(stationViewInput:stationViewModel){
-    return this.http.post(this.API_URL + "/station", stationViewInput);
+  addStation(stationViewInput:stationViewModel, headerDataInput:additionalHeaderDataModel[]){
+    const stationRequest:stationViewRequest = {
+      stationDto:stationViewInput,
+      headerDataInput:headerDataInput
+    }
+    console.log(stationRequest)
+    return this.http.post(this.API_URL + "/station", stationRequest);
   }
 
   updateStation(stationViewInput:stationViewModel){

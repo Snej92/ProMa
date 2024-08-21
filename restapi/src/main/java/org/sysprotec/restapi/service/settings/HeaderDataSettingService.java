@@ -62,7 +62,7 @@ public class HeaderDataSettingService {
 
                     log.info("HeaderDataSetting Punkt: '" + headerDataSetting.getItem() + "' zu '" + saveProject.getName() + "' hinzugefügt");
                     HeaderDataSetting newHeaderDataSetting = headerDataSettingRepository.findTopByOrderByIdDesc();
-                    headerDataService.createHeaderDataForStations(newHeaderDataSetting);
+                    headerDataService.createHeaderDataForStations(newHeaderDataSetting, "");
 
                     return newHeaderDataSetting;
                 }

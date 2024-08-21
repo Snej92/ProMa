@@ -37,7 +37,7 @@ export class StationViewEffects {
     this.action$.pipe(
       ofType(addStationView),
       switchMap(action=>
-        this.service.addStation(action.stationViewInput).pipe(
+        this.service.addStation(action.stationViewInput, action.headerDataInput).pipe(
           switchMap(data=> of(
             addStationViewSuccess({stationViewInput:data as stationViewModel}),
             loadSpinner({isLoading:false}),

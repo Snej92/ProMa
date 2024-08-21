@@ -34,6 +34,7 @@ export class StationComponent implements OnInit, OnDestroy{
   openPopup(id:any, title:any, isEdit=false, button:any){
     this.dialog.open(AddStationComponent,{
       width:'30%',
+      maxHeight: '70vh',
       data:{
         id:id,
         title: title,

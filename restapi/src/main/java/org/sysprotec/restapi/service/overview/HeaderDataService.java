@@ -8,6 +8,7 @@ import org.sysprotec.restapi.model.Project;
 import org.sysprotec.restapi.model.Station;
 import org.sysprotec.restapi.model.User;
 import org.sysprotec.restapi.model.overview.HeaderData;
+import org.sysprotec.restapi.model.projections.HeaderDataInput;
 import org.sysprotec.restapi.model.settings.HeaderDataSetting;
 import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.StationRepository;
@@ -68,7 +69,7 @@ public class HeaderDataService {
     }
 
 
-    public void createHeaderDataForStations(HeaderDataSetting headerDataSetting) {
+    public void createHeaderDataForStations(HeaderDataSetting headerDataSetting, String data) {
         if(headerDataSetting != null){
             Optional<Project> optionalProject = projectRepository.findProjectById(headerDataSetting.getProject().getId());
             if(optionalProject.isPresent()) {
@@ -77,11 +78,11 @@ public class HeaderDataService {
                     if (stationRepository.findStationByNameAndHeaderDataHeaderDataSettingId(station.getName(), headerDataSetting.getId()).isEmpty()) {
                         HeaderData headerData = HeaderData.builder()
                                 .headerDataSetting(headerDataSetting)
-                                .data("")
+                                .data(data)
                                 .station(station)
                                 .build();
                         headerDataRepository.save(headerData);
-                        log.info("Added HeaderData HeaderData '" + headerData.getHeaderDataSetting().getItem() + "' to station '" + station.getName() + "'");
+                        log.info("Added HeaderData '" + headerData.getHeaderDataSetting().getItem() + "' to station '" + station.getName() + "'");
                     }
                 }
             }

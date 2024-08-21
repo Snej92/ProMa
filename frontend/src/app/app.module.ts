@@ -28,7 +28,7 @@ import { DashboardComponent } from './modules/dashboard/components/dashboard.com
 import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 import { ThemeToggleComponent } from './page-template/theme-toggle/theme-toggle.component';
-import {MatFormField, MatHint, MatLabel, MatSuffix} from "@angular/material/form-field";
+import {MatError, MatFormField, MatHint, MatLabel, MatSuffix} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatOption, MatSelect} from "@angular/material/select";
 import { SysSidenavComponent } from './page-template/sys-sidenav/sys-sidenav.component';
@@ -141,6 +141,7 @@ import { OverallViewComponent } from './modules/overall-view/components/overall-
 import {StationOverallViewEffects} from "./modules/overall-view/store/stationOverallView.effects";
 import { ThreeStateButtonComponent } from './page-template/three-state-button/three-state-button.component';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
+import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from "@angular/material/expansion";
 
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -314,6 +315,10 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatRadioGroup,
     MatRadioButton,
     TooltipComponent,
+    MatExpansionPanel,
+    MatExpansionPanelTitle,
+    MatExpansionPanelHeader,
+    MatError,
   ],
   providers: [
     {

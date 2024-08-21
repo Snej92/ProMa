@@ -10,4 +10,6 @@ export class SysButtonComponent {
   @Input() color = 'primary';
   @Input() tooltip = '';
   @Input() icon:string | undefined;
+  @Input() disabled: boolean = false;
+
 }

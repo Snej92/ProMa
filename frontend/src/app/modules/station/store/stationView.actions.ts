@@ -1,5 +1,5 @@
 import {createAction, props} from "@ngrx/store";
-import {stationViewModel} from "./stationView.model";
+import {additionalHeaderDataModel, stationViewModel} from "./stationView.model";
 
 export const LOAD_STATION_VIEW_SUCCESS='[station page] load station view success'
 export const LOAD_STATION_VIEW_FAIL='[station page] load station view fail'
@@ -19,7 +19,7 @@ export const loadStationView=createAction(LOAD_STATION_VIEW);
 export const loadStationViewSuccess=createAction(LOAD_STATION_VIEW_SUCCESS, props<{stationViewList:stationViewModel[]}>());
 export const loadStationViewFail=createAction(LOAD_STATION_VIEW_FAIL, props<{errorText:any}>());
 
-export const addStationView = createAction(ADD_STATION, props<{stationViewInput:stationViewModel}>())
+export const addStationView = createAction(ADD_STATION, props<{stationViewInput:stationViewModel, headerDataInput:additionalHeaderDataModel[]}>())
 export const addStationViewSuccess = createAction(ADD_STATION_SUCCESS, props<{stationViewInput:stationViewModel}>())
 
 export const updateStation=createAction(UPDATE_STATION, props<{stationViewInput:stationViewModel}>())

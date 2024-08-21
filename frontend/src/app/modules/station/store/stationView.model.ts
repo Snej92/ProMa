@@ -37,3 +37,15 @@ export interface stationView{
   stationViewList:stationViewModel[],
   errorMessage:string,
 }
+
+export interface stationViewRequest{
+  stationDto:stationViewModel,
+  headerDataInput:additionalHeaderDataModel[]
+}
+
+
+//Additional Header Data
+export interface additionalHeaderDataModel{
+  item:string,
+  data:string,
+}

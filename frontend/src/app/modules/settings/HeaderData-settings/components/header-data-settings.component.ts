@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {editHeaderDataSettingModel, headerDataSetting} from "../store/headerDataSetting.model";
 import {Subscription} from "rxjs";
 import {Store} from "@ngrx/store";
@@ -13,6 +13,7 @@ import {
 } from "../store/headerDataSetting.actions";
 import {AddHeaderDataComponent} from "./add-header-data/add-header-data.component";
 import {getSettingHeaderDataById, getSettingHeaderDataInfo} from "../store/headerDataSetting.selectors";
+import {NgModel} from "@angular/forms";
 
 @Component({
   selector: 'app-header-data-settings',
@@ -20,11 +21,13 @@ import {getSettingHeaderDataById, getSettingHeaderDataInfo} from "../store/heade
   styleUrl: './header-data-settings.component.scss'
 })
 export class HeaderDataSettingsComponent implements OnInit, OnDestroy{
-//Inits
+  //Inits
+  @ViewChild('input') input!: NgModel;
   headerDataSettings : headerDataSetting = {
     headerDataSettingList:[],
     errorMessage:''
   };
+  invalidInput = false;
   private subscriptions: Subscription[] = [];
   displayedColumns: string[] = ['Aktion','Kopfdaten'];
   editHeaderDataSettings: { [key: number]: editHeaderDataSettingModel } = {};
@@ -88,13 +91,15 @@ export class HeaderDataSettingsComponent implements OnInit, OnDestroy{
     }
   }
 
-  updateHeaderDataSetting(id:any){
-    if (this.editHeaderDataSettings[id]) {
-      this.editHeaderDataSettings[id].isEdit = !this.editHeaderDataSettings[id].isEdit;
-      this.store.dispatch(loadSpinner({isLoading:true}));
-      this.store.dispatch(updateSettingHeaderData({headerDataSettingInput:this.editHeaderDataSettings[id].headerDataSetting}));
-    } else{
-      console.error('Invalid ID:', id);
+  updateHeaderDataSetting(id:any, valid:boolean){
+    if(valid){
+      if (this.editHeaderDataSettings[id]) {
+        this.editHeaderDataSettings[id].isEdit = !this.editHeaderDataSettings[id].isEdit;
+        this.store.dispatch(loadSpinner({isLoading:true}));
+        this.store.dispatch(updateSettingHeaderData({headerDataSettingInput:this.editHeaderDataSettings[id].headerDataSetting}));
+      } else{
+        console.error('Invalid ID:', id);
+      }
     }
   }
 
@@ -124,6 +129,11 @@ export class HeaderDataSettingsComponent implements OnInit, OnDestroy{
           }, {} as { [key: number]: editHeaderDataSettingModel });
         })
     )
+  }
+
+  validateInput(value: string): void {
+    const regex = /^[A-Za-z0-9_äöü \-]*$/;
+    this.invalidInput = !regex.test(value);
   }
 
   ngOnDestroy(): void {
