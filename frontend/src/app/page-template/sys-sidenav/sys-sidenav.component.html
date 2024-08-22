@@ -19,14 +19,22 @@
     <span>
       <mat-divider class="divider-container ms-4" vertical="true"></mat-divider>
     </span>
-<!--    Projektverwaltung-->
-    <button mat-icon-button [matMenuTriggerFor]="menu2" class="ms-1">
-      <mat-icon>folder</mat-icon>
-    </button>
-    <mat-menu #menu2=matMenu>
-      <button mat-menu-item [routerLink]="['/projectAdministration', false]">Projektverwaltung</button>
-      <button mat-menu-item [routerLink]="['/projectAdministration', true]">Projektarchiv</button>
-    </mat-menu>
+<!--    Projektverwaltung Project role-->
+    <ng-container *ngIf="loggedUser.user.roles.projectRole">
+      <button mat-icon-button [matMenuTriggerFor]="menu2" class="ms-1">
+        <mat-icon>folder</mat-icon>
+      </button>
+      <mat-menu #menu2=matMenu>
+        <button mat-menu-item [routerLink]="['/projectAdministration', false]">Projektverwaltung</button>
+        <button mat-menu-item [routerLink]="['/projectAdministration', true]">Projektarchiv</button>
+      </mat-menu>
+    </ng-container>
+    <ng-container *ngIf="!loggedUser.user.roles.projectRole">
+      <button [routerLink]="['/projectAdministration', false]" mat-icon-button class="ms-1">
+        <mat-icon>folder</mat-icon>
+      </button>
+    </ng-container>
+
 
 <!--    Benutzerverwaltung-->
     <button mat-icon-button [matMenuTriggerFor]="menu" class="me-2">
@@ -47,11 +55,13 @@
   </span>
 </mat-toolbar>
 
-<mat-sidenav-container>
-  <mat-sidenav opened mode="side" [style.width]="sideNavWidth()">
-    <app-custom-sidenav [collapsed]="collapsed()"></app-custom-sidenav>
-  </mat-sidenav>
-  <mat-sidenav-content class="content" [style.margin-left]="sideNavWidth()">
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<ng-container *ngIf="loggedUser.user.id > 0">
+  <mat-sidenav-container>
+    <mat-sidenav opened mode="side" [style.width]="sideNavWidth()">
+      <app-custom-sidenav [loggedUser]="loggedUser" [collapsed]="collapsed()"></app-custom-sidenav>
+    </mat-sidenav>
+    <mat-sidenav-content class="content" [style.margin-left]="sideNavWidth()">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</ng-container>

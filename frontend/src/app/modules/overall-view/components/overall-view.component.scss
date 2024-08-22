@@ -144,6 +144,10 @@
   left: 15.5px;
 }
 
+.mat-spinner-color::ng-deep circle{
+  stroke: var(--frontend-progress-spinner) !important;
+}
+
 .card-container-no-project{
   width: 35%;
   border-radius: 12px;

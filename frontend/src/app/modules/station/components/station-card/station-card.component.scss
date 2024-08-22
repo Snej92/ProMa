@@ -118,3 +118,7 @@
 .station-progress{
   font-size: 11px;
 }
+
+.mat-spinner-color::ng-deep circle{
+  stroke: var(--frontend-progress-spinner) !important;
+}

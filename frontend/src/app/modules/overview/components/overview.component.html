@@ -20,7 +20,7 @@
           <mat-tab [label]="stationView.name">
             <ng-template matTabContent>
               <div [ngSwitch]="selectedOverview" class="mat-tab-group-content">
-                <app-station-overview *ngSwitchCase="1" [stationViewInput]="stationView" [stationId]="stationView.id"></app-station-overview>
+                <app-station-overview (selectedOverviewEmitted)="receiveSelectedOverview($event)" *ngSwitchCase="1" [stationViewInput]="stationView" [stationId]="stationView.id"></app-station-overview>
                 <app-header-data *ngSwitchCase="2" [stationId]="stationView.id"></app-header-data>
                 <app-specification *ngSwitchCase="3" [stationId]="stationView.id"></app-specification>
                 <app-projection *ngSwitchCase="4" [stationId]="stationView.id"></app-projection>

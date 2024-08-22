@@ -106,13 +106,12 @@ public class ProjectService {
                     .technicalDataSetting(technicalDataSettings)
                     .build();
 
-//            projectRepository.save(saveProject);
-//
-//            //Fetch saved Project so Lists are initialized
-//            saveProject = projectRepository.findProjectByNameIgnoreCase(projectDto.getName());
+            projectRepository.save(saveProject);
+
+            //Fetch saved Project so Lists are initialized
+            saveProject = projectRepository.findProjectByNameIgnoreCase(projectDto.getName());
 
 
-            //Todo Template
             if(!template.equals("Neu")){
                 Project templateProject = projectRepository.findProjectByNameIgnoreCase(template);
                 if(templateProject != null){
@@ -219,28 +218,32 @@ public class ProjectService {
     public ProjectDto updateProject(ProjectDto projectDto) {
         Optional<Project> optionalProject = projectRepository.findProjectById(projectDto.getId());
         if(optionalProject.isPresent()){
-            Project saveProject = optionalProject.get();
-            saveProject.setArchived(projectDto.getArchived());
-            saveProject.setName(projectDto.getName());
-            saveProject.setDescription(projectDto.getDescription());
-            saveProject.setAmountStations(projectDto.getAmountStations());
-            saveProject.setInProgressStations(projectDto.getInProgressStations());
-            saveProject.setStoredStations(projectDto.getStoredStations());
-            saveProject.setNotStoredStations(projectDto.getNotStoredStations());
+            if(projectRepository.findProjectByNameIgnoreCase(projectDto.getName()) == null){
+                Project saveProject = optionalProject.get();
+                saveProject.setArchived(projectDto.getArchived());
+                saveProject.setName(projectDto.getName());
+                saveProject.setDescription(projectDto.getDescription());
+                saveProject.setAmountStations(projectDto.getAmountStations());
+                saveProject.setInProgressStations(projectDto.getInProgressStations());
+                saveProject.setStoredStations(projectDto.getStoredStations());
+                saveProject.setNotStoredStations(projectDto.getNotStoredStations());
 
-            if(saveProject.getArchived()){
-                List<User> userList = userRepository.findUserByActiveProject(saveProject.getId());
-                for(User user : userList){
-                    user.setActiveProject(0L);
+                if(saveProject.getArchived()){
+                    List<User> userList = userRepository.findUserByActiveProject(saveProject.getId());
+                    for(User user : userList){
+                        user.setActiveProject(0L);
+                    }
                 }
-            }
 
-            projectRepository.save(saveProject);
-            return projectRepository.getProjectedById(projectDto.getId());
+                projectRepository.save(saveProject);
+                return projectRepository.getProjectedById(projectDto.getId());
+            } else {
+                log.error("Project with name '{}' already exist", projectDto.getName());
+            }
         }else {
             log.error("Project with ID{} does not exist", projectDto.getId());
-            return null;
         }
+        return null;
     }
 
     public void deleteProject(Long projectId) {

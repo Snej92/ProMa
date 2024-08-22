@@ -18,6 +18,7 @@ import org.sysprotec.restapi.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -37,73 +38,78 @@ public class KeycloakService {
 
 
     public ResponseEntity<User> createUser(User user){
+        Optional<User> checkUser = userRepository.findUserByUsernameIgnoreCaseOrAcronym(user.getUsername(), user.getAcronym());
+        if(checkUser.isEmpty()){
+            List<String> groups = new ArrayList<>();
+            //Important: Those roles have to exist in Keycloak Realm! Otherwise you get an error!
+            if(user.getRoles().getAdminRole()){
+                groups.add("Admin");
+            }
+            if(user.getRoles().getProjectRole()){
+                groups.add("Project");
+            }
+            if(user.getRoles().getUserRole()){
+                groups.add("User");
+            }
 
-        List<String> groups = new ArrayList<>();
-        //Important: Those roles have to exist in Keycloak Realm! Otherwise you get an error!
-        if(user.getRoles().getAdminRole()){
-            groups.add("Admin");
-        }
-        if(user.getRoles().getProjectRole()){
-            groups.add("Project");
-        }
-        if(user.getRoles().getUserRole()){
-            groups.add("User");
-        }
+            UserRepresentation userRepresentation = new UserRepresentation();
+            userRepresentation.setEnabled(true);
+            userRepresentation.setUsername(user.getUsername());
+            userRepresentation.setFirstName(user.getFirstname());
+            userRepresentation.setLastName(user.getLastname());
+            userRepresentation.setEmail(user.getEmail());
+            userRepresentation.setEmailVerified(true);
+            userRepresentation.setGroups(groups);
 
-        UserRepresentation userRepresentation = new UserRepresentation();
-        userRepresentation.setEnabled(true);
-        userRepresentation.setUsername(user.getUsername());
-        userRepresentation.setFirstName(user.getFirstname());
-        userRepresentation.setLastName(user.getLastname());
-        userRepresentation.setEmail(user.getEmail());
-        userRepresentation.setEmailVerified(true);
-        userRepresentation.setGroups(groups);
+            CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
+            credentialRepresentation.setValue(user.getPassword());
+            credentialRepresentation.setTemporary(false);
+            credentialRepresentation.setType(CredentialRepresentation.PASSWORD);
 
-        CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
-        credentialRepresentation.setValue(user.getPassword());
-        credentialRepresentation.setTemporary(false);
-        credentialRepresentation.setType(CredentialRepresentation.PASSWORD);
+            List<CredentialRepresentation> credentials = new ArrayList<>();
+            credentials.add(credentialRepresentation);
 
-        List<CredentialRepresentation> credentials = new ArrayList<>();
-        credentials.add(credentialRepresentation);
+            userRepresentation.setCredentials(credentials);
 
-        userRepresentation.setCredentials(credentials);
+            RealmResource realmResource = keycloak.realm(REALM_NAME);
+            UsersResource usersResource = realmResource.users();
 
-        RealmResource realmResource = keycloak.realm(REALM_NAME);
-        UsersResource usersResource = realmResource.users();
+            Response response = usersResource.create(userRepresentation);
 
-        Response response = usersResource.create(userRepresentation);
-
-        if(Objects.equals(201, response.getStatus())){
-            UserRepresentation keycloakUser = getUserByEmail(user.getEmail());
-            Role role = Role.builder()
-                    .userRole(user.getRoles().getUserRole())
-                    .projectRole(user.getRoles().getProjectRole())
-                    .adminRole(user.getRoles().getAdminRole())
-                    .build();
-            roleRepository.save(role);
-            User newUser = User.builder()
-                    .sub(keycloakUser.getId())
-                    .activeProject(0L)
-                    .firstname(user.getFirstname())
-                    .lastname(user.getLastname())
-                    .acronym(user.getAcronym())
-                    .username(user.getUsername())
-                    .phone(user.getPhone())
-                    .email(user.getEmail())
-                    .roles(role)
-                    .password(user.getPassword())
-                    .build();
-            userRepository.save(newUser);
-            log.info("Status: " + String.valueOf(response.getStatus()) +" - User " + user.getUsername() + " created");
+            if(Objects.equals(201, response.getStatus())){
+                UserRepresentation keycloakUser = getUserByEmail(user.getEmail());
+                Role role = Role.builder()
+                        .userRole(user.getRoles().getUserRole())
+                        .projectRole(user.getRoles().getProjectRole())
+                        .adminRole(user.getRoles().getAdminRole())
+                        .build();
+                roleRepository.save(role);
+                User newUser = User.builder()
+                        .sub(keycloakUser.getId())
+                        .activeProject(0L)
+                        .firstname(user.getFirstname())
+                        .lastname(user.getLastname())
+                        .acronym(user.getAcronym())
+                        .username(user.getUsername())
+                        .phone(user.getPhone())
+                        .email(user.getEmail())
+                        .roles(role)
+                        .password(user.getPassword())
+                        .build();
+                userRepository.save(newUser);
+                log.info("Status: " + String.valueOf(response.getStatus()) +" - User " + user.getUsername() + " created");
+                return new ResponseEntity<>(
+                        userRepository.findTopByOrderByIdDesc() ,
+                        HttpStatus.CREATED);
+            }
+            else{
+                log.warn("Status: " + String.valueOf(response.getStatus()) +" - User "+ user.getUsername() + " already exists");
+                return new ResponseEntity<>(
+                        HttpStatus.CONFLICT);
+            }
+        } else {
+            log.error("User with username '{}' or acronym '{}' already exist", user.getUsername(), user.getAcronym());
             return new ResponseEntity<>(
-                    userRepository.findTopByOrderByIdDesc() ,
-                    HttpStatus.CREATED);
-        }
-        else{
-            log.warn("Status: " + String.valueOf(response.getStatus()) +" - User "+ user.getUsername() + " already exists");
-            return new ResponseEntity<>(
-                    null,
                     HttpStatus.CONFLICT);
         }
     }

@@ -40,9 +40,10 @@ export class AddStationComponent implements OnInit, OnDestroy{
     id:this.builder.control(0),
     name:this.builder.control('', Validators.required),
     description:this.builder.control(''),
-    issuer:this.builder.control(''),
+    issuerAcronym:this.builder.control(''),
+    issuerName:this.builder.control(''),
     status:this.builder.control(''),
-    version:this.builder.control('V1.0'),
+    version:this.builder.control('1.0'),
     totalProgress:this.builder.control(0),
     lopTotal:this.builder.control(0),
     lopDone:this.builder.control(0),
@@ -101,7 +102,8 @@ export class AddStationComponent implements OnInit, OnDestroy{
           id:this.editData.id,
           name: this.editData.name,
           description: this.editData.description,
-          issuer:this.editData.issuer,
+          issuerAcronym:this.editData.issuerAcronym,
+          issuerName:this.editData.issuerName,
           status:this.editData.status,
           version:this.editData.version,
           totalProgress:this.editData.totalProgress,
@@ -138,7 +140,8 @@ export class AddStationComponent implements OnInit, OnDestroy{
       id:0,
       name:this.stationForm.value.name as string,
       description:this.stationForm.value.description as string,
-      issuer:this.stationForm.value.issuer as string,
+      issuerAcronym:this.stationForm.value.issuerAcronym as string,
+      issuerName:this.stationForm.value.issuerName as string,
       status:this.stationForm.value.status as string,
       version:this.stationForm.value.version as string,
       totalProgress:this.stationForm.value.totalProgress as number,
@@ -198,7 +201,7 @@ export class AddStationComponent implements OnInit, OnDestroy{
     this.headerDataInput = [];
     this.dynamicControls.forEach((controlName,index) => {
       const control = this.stationForm.get(controlName);
-      console.log(`Index: ${index}, Control Name: ${controlName}, Value: ${control?.value}`);
+      // console.log(`Index: ${index}, Control Name: ${controlName}, Value: ${control?.value}`);
       this.headerDataInput.push({
         item: controlName,
         data: control?.value

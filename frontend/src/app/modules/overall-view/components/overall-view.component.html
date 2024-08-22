@@ -66,9 +66,9 @@
           <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> Gesamtfortschritt </th>
           <td class="td-center" mat-cell *matCellDef="let stationOverallView">
             <span [ngClass]="stationOverallView.totalProgress >= 100 ? 'progress-text-align-100' : 'progress-text-align'">{{stationOverallView.totalProgress}}</span>
-            <mat-progress-spinner class="progress-spinner-align"
+            <mat-progress-spinner class="progress-spinner-align mat-spinner-color"
                                   value="{{stationOverallView.totalProgress}}"
-                                  mode="determinate" [diameter]="38" color="accent">
+                                  mode="determinate" [diameter]="38">
 
             </mat-progress-spinner>
           </td>
@@ -78,9 +78,9 @@
           <th class="th-center rotated-text" mat-header-cell *matHeaderCellDef> LOPfortschritt </th>
           <td class="td-center" mat-cell *matCellDef="let stationOverallView">
             <span [ngClass]="stationOverallView.lopProgress >= 100 ? 'progress-text-align-100' : 'progress-text-align'">{{stationOverallView.lopProgress}}</span>
-            <mat-progress-spinner class="progress-spinner-align-lop"
+            <mat-progress-spinner class="progress-spinner-align-lop mat-spinner-color"
                                   value="{{stationOverallView.lopProgress}}"
-                                  mode="determinate" [diameter]="38" color="accent">
+                                  mode="determinate" [diameter]="38">
 
             </mat-progress-spinner>
           </td>

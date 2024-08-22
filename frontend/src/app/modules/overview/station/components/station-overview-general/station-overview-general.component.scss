@@ -52,8 +52,12 @@
 
 .progress-spinner-align{
   position: relative;
-  top: -29px;
-  left: 123px;
+  top: -30px;
+  left: 172px;
+}
+
+.mat-spinner-color::ng-deep circle{
+  stroke: var(--frontend-progress-spinner) !important;
 }
 
 .station-status{

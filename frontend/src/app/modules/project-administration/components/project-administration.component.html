@@ -4,7 +4,7 @@
       Projektverwaltung
     </h1>
   </ng-container>
-  <ng-container *ngIf="archive">
+  <ng-container *ngIf="archive && loggedUser.user.roles.projectRole">
     <h1>
       Projektarchiv
     </h1>
@@ -21,13 +21,15 @@
                         [ngClass]="{'selected-card':projectViews.id===user.user.activeProject}"
                         [archive]="archive"/>
 
-      <mat-card class="card-container project-card ms-5 mt-4 mb-5 justify-content-center">
-        <div class="d-flex justify-content-center">
-          <button class="card-button" mat-raised-button color="accent" (click)="addProject()">Hinzufügen</button>
-        </div>
-      </mat-card>
+      <ng-container *ngIf="loggedUser.user.roles.projectRole">
+        <mat-card class="card-container project-card ms-5 mt-4 mb-5 justify-content-center">
+          <div class="d-flex justify-content-center">
+            <button class="card-button" mat-raised-button color="accent" (click)="addProject()">Hinzufügen</button>
+          </div>
+        </mat-card>
+      </ng-container>
     </ng-container>
-    <ng-container *ngIf="archive">
+    <ng-container *ngIf="archive  && loggedUser.user.roles.projectRole">
       <app-project-card class="project-card ms-5 mt-4 mb-5"
                         [loggedUser]="loggedUser"
                         *ngFor="let projectViews of projectView.projectViewList" [projectView]="projectViews"

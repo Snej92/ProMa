@@ -81,7 +81,7 @@ public class UserService {
     }
 
     public List<User> getAllUser() {
-        return userRepository.findAll();
+        return userRepository.findAllByOrderByIdAsc();
     }
 
     //Updates only the active Project!! - add more if needed

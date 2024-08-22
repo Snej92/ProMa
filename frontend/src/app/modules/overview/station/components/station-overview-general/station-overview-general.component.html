@@ -10,17 +10,17 @@
     </div>
 
     <div class="card-header-right">
-      <button class="align-menu-button" mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          Bearbeiten
-        </button>
-        <button mat-menu-item>
-          Löschen
-        </button>
-      </mat-menu>
+<!--      <button class="align-menu-button" mat-icon-button [matMenuTriggerFor]="menu">-->
+<!--        <mat-icon>more_vert</mat-icon>-->
+<!--      </button>-->
+<!--      <mat-menu #menu="matMenu">-->
+<!--        <button mat-menu-item>-->
+<!--          Bearbeiten-->
+<!--        </button>-->
+<!--        <button mat-menu-item>-->
+<!--          Löschen-->
+<!--        </button>-->
+<!--      </mat-menu>-->
     </div>
   </div>
 
@@ -55,12 +55,16 @@
   </div>
 
   <div class="ms-2">
-    <span class="properties-font">Bearbeiter: </span> <span class="ms-1">{{stationViewInput.stationViewOverview.issuer}}</span>
+    <span class="properties-font">Bearbeiter: </span> <span class="ms-1">{{stationViewInput.stationViewOverview.issuerName}}</span>
   </div>
 
   <div class="ms-2 mt-4">
-    <span class="properties-font">Projektfortschritt: </span>
+    <span class="properties-font">Projektierungsfortschritt: </span>
     <span [ngClass]="stationViewInput.stationViewOverview.totalProgress >= 100 ? 'progress-text-align-100' : 'progress-text-align'">{{stationViewInput.stationViewOverview.totalProgress}}</span>
-    <mat-progress-spinner class="progress-spinner-align" value="{{stationViewInput.stationViewOverview.totalProgress}}" mode="determinate" [diameter]="38" color="accent"></mat-progress-spinner>
+    <mat-progress-spinner class="progress-spinner-align mat-spinner-color"
+                          value="{{stationViewInput.stationViewOverview.totalProgress}}"
+                          mode="determinate" [diameter]="38">
+
+    </mat-progress-spinner>
   </div>
 </mat-card>

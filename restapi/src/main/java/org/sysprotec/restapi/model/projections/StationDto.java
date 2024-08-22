@@ -15,7 +15,8 @@ public class StationDto {
     private Long id;
     private String name;
     private String description;
-    private String issuer;
+    private String issuerAcronym;
+    private String issuerName;
     @Enumerated(EnumType.STRING)
     private StatusEPLAN status;
     private Integer totalProgress;
@@ -50,7 +51,8 @@ public class StationDto {
     public StationDto(Long id,
                       String name,
                       String description,
-                      String issuer,
+                      String issuerAcronym,
+                      String issuerName,
                       StatusEPLAN status,
                       Integer totalProgress,
                       String version,
@@ -77,7 +79,8 @@ public class StationDto {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.issuer = issuer;
+        this.issuerAcronym = issuerAcronym;
+        this.issuerName = issuerName;
         this.status = status;
         this.totalProgress = totalProgress;
         this.version = version;

@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Subscription} from "rxjs";
 import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../../core/store/appState.model";
@@ -21,6 +21,7 @@ export class StationOverviewComponent implements OnInit, OnDestroy{
   @Input() stationId!:number;
   @Input() stationViewInput!:stationViewModel;
   stationViewOverview!:stationViewOverview
+  @Output() selectedOverviewEmitted = new EventEmitter<number>();
 
   constructor(private store:Store<AppStateModel>,
               private dialog:MatDialog) {
@@ -57,6 +58,10 @@ export class StationOverviewComponent implements OnInit, OnDestroy{
         this.store.dispatch(loadStationViewOverview({id:this.stationId}))
       }
     })
+  }
+
+  sendSelectedOverview(id:number){
+    this.selectedOverviewEmitted.emit(id);
   }
 
 

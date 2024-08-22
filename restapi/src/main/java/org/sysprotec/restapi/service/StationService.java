@@ -25,7 +25,6 @@ import org.sysprotec.restapi.repository.settings.VersionStationRepository;
 import org.sysprotec.restapi.service.overview.HeaderDataService;
 import org.sysprotec.restapi.service.overview.TechnicalDataService;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -111,131 +110,142 @@ public class StationService {
                 String username = authentication.getName();
                 User user = userRepository.findUserByUsernameIgnoreCase(username);
                 if (user != null) {
-                    Optional<Project> optionalProject = projectRepository.findProjectById(user.getActiveProject());
-                    if (optionalProject.isPresent()) {
-                        Project savedProject = optionalProject.get();
-                        Station newStation = Station.builder()
-                                .name(stationDto.getName())
-                                .description(stationDto.getDescription())
-                                .issuer(stationDto.getIssuer())
-                                .status(stationDto.getStatus())
-                                .totalProgress(stationDto.getTotalProgress())
-                                .version(stationDto.getVersion())
-                                .lopTotal(stationDto.getLopTotal())
-                                .lopDone(stationDto.getLopDone())
-                                .lopToDo(stationDto.getLopToDo())
-                                .lopProgress(stationDto.getLopProgress())
-                                .documentationTotal(stationDto.getDocumentationTotal())
-                                .documentationDone(stationDto.getDocumentationDone())
-                                .documentationToDo(stationDto.getDocumentationToDo())
-                                .documentationProgress(stationDto.getDocumentationProgress())
-                                .specificationTotal(stationDto.getSpecificationTotal())
-                                .specificationDone(stationDto.getSpecificationDone())
-                                .specificationToDo(stationDto.getSpecificationToDo())
-                                .specificationProgress(stationDto.getSpecificationProgress())
-                                .controlTotal(stationDto.getControlTotal())
-                                .controlDone(stationDto.getControlDone())
-                                .controlToDo(stationDto.getControlToDo())
-                                .controlProgress(stationDto.getControlProgress())
-                                .projectionTotal(stationDto.getProjectionTotal())
-                                .projectionDone(stationDto.getProjectionDone())
-                                .projectionToDo(stationDto.getProjectionToDo())
-                                .projectionProgress(stationDto.getProjectionProgress())
-                                .project(savedProject)
-                                .build();
-                        savedProject.addStation(newStation);
-
-                        //Add new Station to Version
-                        List<Version> versionList = versionRepository.findVersionsByProjectIdOrderByVersionAsc(savedProject.getId());
-                        for(Version version: versionList){
-                            int state = 1;
-                            boolean done = false;
-                            if(version.getVersion().equals("V1.0")){
-                                state = 2;
-                                done = true;
-                            }
-                            VersionStation newVersionStation = VersionStation.builder()
-                                    .state(state)
-                                    .stationName(stationDto.getName())
-                                    .version(version)
+                    Optional<Station> station = stationRepository.findStationByNameIgnoreCaseAndProjectId(stationDto.getName(), user.getActiveProject());
+                    if(station.isEmpty()){
+                        Optional<Project> optionalProject = projectRepository.findProjectById(user.getActiveProject());
+                        if (optionalProject.isPresent()) {
+                            Project savedProject = optionalProject.get();
+                            Station newStation = Station.builder()
+                                    .name(stationDto.getName())
+                                    .description(stationDto.getDescription())
+                                    .issuerAcronym(stationDto.getIssuerAcronym())
+                                    .issuerName(stationDto.getIssuerName())
+                                    .status(stationDto.getStatus())
+                                    .totalProgress(stationDto.getTotalProgress())
+                                    .version(stationDto.getVersion())
+                                    .lopTotal(stationDto.getLopTotal())
+                                    .lopDone(stationDto.getLopDone())
+                                    .lopToDo(stationDto.getLopToDo())
+                                    .lopProgress(stationDto.getLopProgress())
+                                    .documentationTotal(stationDto.getDocumentationTotal())
+                                    .documentationDone(stationDto.getDocumentationDone())
+                                    .documentationToDo(stationDto.getDocumentationToDo())
+                                    .documentationProgress(stationDto.getDocumentationProgress())
+                                    .specificationTotal(stationDto.getSpecificationTotal())
+                                    .specificationDone(stationDto.getSpecificationDone())
+                                    .specificationToDo(stationDto.getSpecificationToDo())
+                                    .specificationProgress(stationDto.getSpecificationProgress())
+                                    .controlTotal(stationDto.getControlTotal())
+                                    .controlDone(stationDto.getControlDone())
+                                    .controlToDo(stationDto.getControlToDo())
+                                    .controlProgress(stationDto.getControlProgress())
+                                    .projectionTotal(stationDto.getProjectionTotal())
+                                    .projectionDone(stationDto.getProjectionDone())
+                                    .projectionToDo(stationDto.getProjectionToDo())
+                                    .projectionProgress(stationDto.getProjectionProgress())
+                                    .project(savedProject)
                                     .build();
-                            version.addVersionStation(newVersionStation);
-                            version.setDone(done);
-                            versionRepository.save(version);
-                            log.info("Version '" + version.getVersion() + "' added to Station '" + stationDto.getName() + "'");
-                        }
 
-                        //Add Header to Station
-                        List<HeaderDataSetting> headerDataSettingList = savedProject.getHeaderDataSetting();
-                        if(headerDataSettingList != null){
-                            for(HeaderDataSetting headerDataSetting: headerDataSettingList){
-                                String data = "";
-                                for(HeaderDataInput headerDataInputList : headerDataInput){
-                                    if(headerDataInputList.getItem().equals(headerDataSetting.getItem())){
-                                        data = headerDataInputList.getData();
-                                    }
+                            //Issuer Name
+                            Optional<User> optionalUser = userRepository.findUserByAcronym(stationDto.getIssuerAcronym());
+                            optionalUser.ifPresent(value -> newStation.setIssuerName(value.getFirstname() + " " + value.getLastname()));
+
+                            //add new Station to Project
+                            savedProject.addStation(newStation);
+
+                            //Add new Station to Version
+                            List<Version> versionList = versionRepository.findVersionsByProjectIdOrderByIdAsc(savedProject.getId());
+                            for(Version version: versionList){
+                                int state = 1;
+                                boolean done = false;
+                                if(version.getVersion().equals("V1.0")){
+                                    state = 2;
+                                    done = true;
                                 }
-                                headerDataService.createHeaderDataForStations(headerDataSetting, data);
+                                VersionStation newVersionStation = VersionStation.builder()
+                                        .state(state)
+                                        .stationName(stationDto.getName())
+                                        .version(version)
+                                        .build();
+                                version.addVersionStation(newVersionStation);
+                                version.setDone(done);
+                                versionRepository.save(version);
+                                log.info("Version '" + version.getVersion() + "' added to Station '" + stationDto.getName() + "'");
                             }
-                        }
 
-                        //Add Projection to Station
-                        List<TaskSetting> projectionSettingList = savedProject.getProjectionSetting();
-                        if(projectionSettingList != null){
-                            for(TaskSetting projectionSetting : projectionSettingList){
-                                createProjectionForStations(projectionSetting);
+                            //Add Header to Station
+                            List<HeaderDataSetting> headerDataSettingList = savedProject.getHeaderDataSetting();
+                            if(headerDataSettingList != null){
+                                for(HeaderDataSetting headerDataSetting: headerDataSettingList){
+                                    String data = "";
+                                    for(HeaderDataInput headerDataInputList : headerDataInput){
+                                        if(headerDataInputList.getItem().equals(headerDataSetting.getItem())){
+                                            data = headerDataInputList.getData();
+                                        }
+                                    }
+                                    headerDataService.createHeaderDataForStations(headerDataSetting, data);
+                                }
                             }
-                        }
 
-                        //Add Specification to Station
-                        List<TaskSetting> specificationSettingList = savedProject.getSpecificationSetting();
-                        if(specificationSettingList != null){
-                            for(TaskSetting specificationSetting : specificationSettingList){
-                                createSpecificationForStations(specificationSetting);
+                            //Add Projection to Station
+                            List<TaskSetting> projectionSettingList = savedProject.getProjectionSetting();
+                            if(projectionSettingList != null){
+                                for(TaskSetting projectionSetting : projectionSettingList){
+                                    createProjectionForStations(projectionSetting);
+                                }
                             }
-                        }
 
-                        //Add Technical Data to Station
-                        List<TechnicalDataSetting> technicalDataSettingList = savedProject.getTechnicalDataSetting();
-                        if(technicalDataSettingList != null){
-                            for(TechnicalDataSetting technicalData : technicalDataSettingList){
-                                technicalDataService.createTechnicalDataForStations(technicalData);
+                            //Add Specification to Station
+                            List<TaskSetting> specificationSettingList = savedProject.getSpecificationSetting();
+                            if(specificationSettingList != null){
+                                for(TaskSetting specificationSetting : specificationSettingList){
+                                    createSpecificationForStations(specificationSetting);
+                                }
                             }
-                        }
 
-                        //Add Control to Station
-                        List<TaskSetting> controlSettingList = savedProject.getControlSetting();
-                        if(controlSettingList != null){
-                            for(TaskSetting controlSetting : controlSettingList){
-                                createControlForStations(controlSetting);
+                            //Add Technical Data to Station
+                            List<TechnicalDataSetting> technicalDataSettingList = savedProject.getTechnicalDataSetting();
+                            if(technicalDataSettingList != null){
+                                for(TechnicalDataSetting technicalData : technicalDataSettingList){
+                                    technicalDataService.createTechnicalDataForStations(technicalData);
+                                }
                             }
-                        }
 
-                        //Add Documentation to Station
-                        List<TaskSetting> documentationSettingList = savedProject.getDocumentationSetting();
-                        if(documentationSettingList != null){
-                            for(TaskSetting documentationSetting : documentationSettingList){
-                                createDocumentationForStations(documentationSetting);
+                            //Add Control to Station
+                            List<TaskSetting> controlSettingList = savedProject.getControlSetting();
+                            if(controlSettingList != null){
+                                for(TaskSetting controlSetting : controlSettingList){
+                                    createControlForStations(controlSetting);
+                                }
                             }
+
+                            //Add Documentation to Station
+                            List<TaskSetting> documentationSettingList = savedProject.getDocumentationSetting();
+                            if(documentationSettingList != null){
+                                for(TaskSetting documentationSetting : documentationSettingList){
+                                    createDocumentationForStations(documentationSetting);
+                                }
+                            }
+
+                            projectRepository.save(savedProject);
+                            log.info("Station '" + stationDto.getName() + "' added to Project '" + savedProject.getName() + "'");
+
+                            projectService.updateStationAmount(projectRepository.findProjectById(user.getActiveProject()).get());
+
+                            updateStationDocumentationProgress(newStation);
+                            updateStationControlProgress(newStation);
+                            updateStationProjectionProgress(newStation);
+                            updateStationSpecificationProgress(newStation);
+                            updateStationLopProgress(newStation);
+
+                            updateTotalProgress(newStation);
+
+
+                            return stationRepository.findTopByOrderByIdDesc();
+                        } else{
+                            log.error("Station with name '{}' already exists in Database", stationDto.getName());
                         }
-
-                        projectRepository.save(savedProject);
-                        log.info("Station '" + stationDto.getName() + "' added to Project '" + savedProject.getName() + "'");
-
-                        projectService.updateStationAmount(projectRepository.findProjectById(user.getActiveProject()).get());
-
-                        updateStationDocumentationProgress(newStation);
-                        updateStationControlProgress(newStation);
-                        updateStationProjectionProgress(newStation);
-                        updateStationSpecificationProgress(newStation);
-                        updateStationLopProgress(newStation);
-
-                        updateTotalProgress(newStation);
-
-
-                        return stationRepository.findTopByOrderByIdDesc();
                     }
-
                 }
             }
         return null;
@@ -266,40 +276,50 @@ public class StationService {
     public StationDto updateStation(StationDto stationDto) {
         Optional<Station> optionalStation = stationRepository.findById(stationDto.getId());
         if (optionalStation.isPresent()) {
-            Station saveStation = optionalStation.get();
-            saveStation.setName(stationDto.getName());
-            saveStation.setDescription(stationDto.getDescription());
-            saveStation.setIssuer(stationDto.getIssuer());
-            saveStation.setStatus(stationDto.getStatus());
-            saveStation.setTotalProgress(stationDto.getTotalProgress());
-            saveStation.setVersion(stationDto.getVersion());
-            saveStation.setLopTotal(stationDto.getLopTotal());
-            saveStation.setLopDone(stationDto.getLopDone());
-            saveStation.setLopToDo(stationDto.getLopToDo());
-            saveStation.setLopProgress(stationDto.getLopProgress());
-            saveStation.setDocumentationTotal(stationDto.getDocumentationTotal());
-            saveStation.setDocumentationDone(stationDto.getDocumentationDone());
-            saveStation.setDocumentationToDo(stationDto.getDocumentationToDo());
-            saveStation.setDocumentationProgress(stationDto.getDocumentationProgress());
-            saveStation.setSpecificationTotal(stationDto.getSpecificationTotal());
-            saveStation.setSpecificationDone(stationDto.getSpecificationDone());
-            saveStation.setSpecificationToDo(stationDto.getSpecificationToDo());
-            saveStation.setSpecificationProgress(stationDto.getSpecificationProgress());
-            saveStation.setControlTotal(stationDto.getControlTotal());
-            saveStation.setControlDone(stationDto.getControlDone());
-            saveStation.setControlToDo(stationDto.getControlToDo());
-            saveStation.setControlProgress(stationDto.getControlProgress());
+            Optional<Station> station = stationRepository.findStationByNameIgnoreCaseAndProjectId(stationDto.getName(), optionalStation.get().getProject().getId());
+            if(station.isEmpty()){
+                Station saveStation = optionalStation.get();
+                saveStation.setName(stationDto.getName());
+                saveStation.setDescription(stationDto.getDescription());
+                saveStation.setIssuerAcronym(stationDto.getIssuerAcronym());
+                saveStation.setIssuerName(stationDto.getIssuerName());
+                saveStation.setStatus(stationDto.getStatus());
+                saveStation.setTotalProgress(stationDto.getTotalProgress());
+                saveStation.setVersion(stationDto.getVersion());
+                saveStation.setLopTotal(stationDto.getLopTotal());
+                saveStation.setLopDone(stationDto.getLopDone());
+                saveStation.setLopToDo(stationDto.getLopToDo());
+                saveStation.setLopProgress(stationDto.getLopProgress());
+                saveStation.setDocumentationTotal(stationDto.getDocumentationTotal());
+                saveStation.setDocumentationDone(stationDto.getDocumentationDone());
+                saveStation.setDocumentationToDo(stationDto.getDocumentationToDo());
+                saveStation.setDocumentationProgress(stationDto.getDocumentationProgress());
+                saveStation.setSpecificationTotal(stationDto.getSpecificationTotal());
+                saveStation.setSpecificationDone(stationDto.getSpecificationDone());
+                saveStation.setSpecificationToDo(stationDto.getSpecificationToDo());
+                saveStation.setSpecificationProgress(stationDto.getSpecificationProgress());
+                saveStation.setControlTotal(stationDto.getControlTotal());
+                saveStation.setControlDone(stationDto.getControlDone());
+                saveStation.setControlToDo(stationDto.getControlToDo());
+                saveStation.setControlProgress(stationDto.getControlProgress());
 
-            stationRepository.save(saveStation);
+                //Issuer Name
+                Optional<User> optionalUser = userRepository.findUserByAcronym(stationDto.getIssuerAcronym());
+                optionalUser.ifPresent(value -> saveStation.setIssuerName(value.getFirstname() + " " + value.getLastname()));
 
-            //update amount stations
-            projectService.updateStationAmount(projectRepository.findProjectByStationsId(stationDto.getId()));
+                stationRepository.save(saveStation);
 
-            return stationRepository.findProjectedById(stationDto.getId());
+                //update amount stations
+                projectService.updateStationAmount(projectRepository.findProjectByStationsId(stationDto.getId()));
+
+                return stationRepository.findProjectedById(stationDto.getId());
+            } else {
+                log.error("Station {} already exists in Database", stationDto.getName());
+            }
         } else {
             log.error("Station with ID{} does not exist", stationDto.getId());
-            return null;
         }
+        return null;
     }
 
     public StationView getStation(Long stationId) {

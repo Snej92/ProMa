@@ -56,6 +56,10 @@
   left: 79.5px;
 }
 
+.mat-spinner-color::ng-deep circle{
+  stroke: var(--frontend-progress-spinner) !important;
+}
+
 .status{
   color: white;
   background-color: #6a6a6a;

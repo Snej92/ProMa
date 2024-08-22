@@ -18,7 +18,7 @@
       <div class="d-flex justify-content-between">
         <mat-form-field class="mat-mdc-form-field-2">
           <mat-label>Bearbeiter</mat-label>
-          <mat-select formControlName="issuer">
+          <mat-select formControlName="issuerAcronym">
             <ng-container *ngFor="let user of user.userList">
               <mat-option [value]="user.acronym">{{user.firstname}} {{user.lastname}}</mat-option>
             </ng-container>

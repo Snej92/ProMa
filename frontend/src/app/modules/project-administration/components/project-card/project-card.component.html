@@ -14,29 +14,32 @@
       </div>
     </div>
 
-    <div class="card-header-right">
-      <button class="align-menu-button" mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="editProject(projectView?.id)">
-          Bearbeiten
+    <ng-container *ngIf="loggedUser.user.roles.projectRole">
+      <div class="card-header-right">
+        <button class="align-menu-button" mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
         </button>
-        <button mat-menu-item (click)="deleteProject(projectView?.id, projectView?.name)">
-          Löschen
-        </button>
-        <ng-container *ngIf="!archive">
-          <button mat-menu-item (click)="archiveProject(projectView?.id)">
-            Archivieren
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="editProject(projectView?.id)">
+            Bearbeiten
           </button>
-        </ng-container>
-        <ng-container *ngIf="archive">
-          <button mat-menu-item (click)="deArchiveProject(projectView?.id)">
-            Dearchivieren
+          <button mat-menu-item (click)="deleteProject(projectView?.id, projectView?.name)">
+            Löschen
           </button>
-        </ng-container>
-      </mat-menu>
-    </div>
+          <ng-container *ngIf="!archive">
+            <button mat-menu-item (click)="archiveProject(projectView?.id)">
+              Archivieren
+            </button>
+          </ng-container>
+          <ng-container *ngIf="archive">
+            <button mat-menu-item (click)="deArchiveProject(projectView?.id)">
+              Dearchivieren
+            </button>
+          </ng-container>
+        </mat-menu>
+      </div>
+    </ng-container>
+
   </div>
 
   <div (click)="selectProject(projectView?.id)">

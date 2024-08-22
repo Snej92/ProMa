@@ -12,16 +12,14 @@ import java.util.Optional;
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 
-    Optional<Project> findProjectById(Long id);
-    List<Project> findProjectsByArchived(Boolean archived);
-    List<ProjectView> findBy();
-    ProjectDto getProjectedById(Long id);
-    Project findTopByOrderByIdDesc();
-    ProjectDto findProjectedByNameIgnoreCase(String name);
-    Project findProjectByStationsId(Long id);
 
+    List<Project> findProjectsByArchived(Boolean archived);
+
+    Project findTopByOrderByIdDesc();
+    Project findProjectByStationsId(Long id);
     Project findProjectByNameIgnoreCase(String name);
 
+    Optional<Project> findProjectById(Long id);
     //find By other ID
     Optional<Project> findProjectByVersionsId(Long id);
     Optional<Project> findProjectByDocumentationSettingId(Long id);
@@ -30,4 +28,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     Optional<Project> findProjectBySpecificationSettingId(Long id);
     Optional<Project> findProjectByProjectionSettingId(Long id);
     Optional<Project> findProjectByTechnicalDataSettingId(Long id);
+
+    ProjectDto findProjectedByNameIgnoreCase(String name);
+    ProjectDto getProjectedById(Long id);
 }

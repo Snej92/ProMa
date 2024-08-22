@@ -14,7 +14,8 @@ public interface StationView {
     Integer getId();
     String getName();
     String getDescription();
-    String getIssuer();
+    String getIssuerAcronym();
+    String getIssuerName();
     String getStatus();
     String getVersion();
     Integer getTotalProgress();

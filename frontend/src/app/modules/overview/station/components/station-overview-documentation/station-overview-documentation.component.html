@@ -36,9 +36,9 @@
   <div class="ms-2">
     <span class="properties-font">Fortschritt: </span>
     <span [ngClass]="stationViewInput.stationViewOverview.documentationProgress >= 100 ? 'progress-text-align-100' : 'progress-text-align'">{{stationViewInput.stationViewOverview.documentationProgress}}</span>
-    <mat-progress-spinner class="progress-spinner-align"
+    <mat-progress-spinner class="progress-spinner-align mat-spinner-color"
                           value="{{stationViewInput.stationViewOverview.documentationProgress}}"
-                          mode="determinate" [diameter]="38" color="accent">
+                          mode="determinate" [diameter]="38">
 
     </mat-progress-spinner>
   </div>

@@ -21,8 +21,14 @@ export class OverviewComponent implements OnInit,OnDestroy{
   loggedUser!:loggedUser;
 
   selectedOverview!:number;
+  receivedSelectedOverview!:number;
 
   constructor(private store:Store<AppStateModel>) {
+  }
+
+  receiveSelectedOverview(value : number){
+    console.log("received value: " + value);
+    this.selectOverview(value);
   }
 
   selectOverview(input:number){

@@ -24,6 +24,7 @@ export class AddLopComponent implements OnInit{
   editData!:lopModel;
   startDate!: string;
   endDate!: string;
+  manualDateInput : boolean = false;
 
 
   ngOnInit(): void {
@@ -104,6 +105,18 @@ export class AddLopComponent implements OnInit{
     } else {
       this.startDate = '';
     }
+  }
+
+  onInputChangeStart(event: Event){
+    this.manualDateInput = true;
+    console.log("manual start date input");
+    this.startDate = (event.target as HTMLInputElement).value;
+  }
+
+  onInputChangeEnd(event: Event){
+    this.manualDateInput = true;
+    console.log("manual end date input");
+    this.endDate = (event.target as HTMLInputElement).value;
   }
 
   onLopEndDateChange(selectedDate: Date) {

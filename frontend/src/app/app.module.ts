@@ -1,11 +1,11 @@
-import {APP_INITIALIZER, NgModule, isDevMode, importProvidersFrom} from '@angular/core';
+import {APP_INITIALIZER, NgModule, isDevMode, importProvidersFrom, LOCALE_ID} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatToolbar } from "@angular/material/toolbar";
-import {NgOptimizedImage} from "@angular/common";
+import {NgOptimizedImage, registerLocaleData} from "@angular/common";
 import {MatButton, MatIconButton, MatMiniFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -78,7 +78,7 @@ import {
   MatDatepickerModule,
   MatDatepickerToggle
 } from "@angular/material/datepicker";
-import {MatNativeDateModule, provideNativeDateAdapter} from "@angular/material/core";
+import {MAT_DATE_LOCALE, MatNativeDateModule, provideNativeDateAdapter} from "@angular/material/core";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { HistoryComponent } from './modules/overview/history/components/history.component';
 import {HistoryEffects} from "./modules/overview/history/store/history.effects";
@@ -142,6 +142,7 @@ import {StationOverallViewEffects} from "./modules/overall-view/store/stationOve
 import { ThreeStateButtonComponent } from './page-template/three-state-button/three-state-button.component';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from "@angular/material/expansion";
+import localeDe from '@angular/common/locales/de';
 
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -159,6 +160,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
       }
     });
 }
+
+registerLocaleData(localeDe);
 
 @NgModule({
   declarations: [
@@ -327,6 +330,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
       multi: true,
       deps: [KeycloakService]
     },
+    { provide: LOCALE_ID, useValue: 'de-DE' },
     provideAnimationsAsync(),
     provideNativeDateAdapter(),
   ],

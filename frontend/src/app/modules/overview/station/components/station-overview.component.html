@@ -1,34 +1,53 @@
 <div class="station-overview-container">
   <div>
-    <div class="ms-2 mt-2 station-overview-general mat-elevation-z8">
-      <app-station-overview-general class="mat-elevation-z8" [stationViewInput]="stationViewOverview"></app-station-overview-general>
+    <div class="ms-2 mt-2 station-overview-general" appProjectElevation [defaultElevation]="6" [raisedElevation]="16">
+      <app-station-overview-general
+        [stationViewInput]="stationViewOverview"
+        (click)="sendSelectedOverview(2)">
+      </app-station-overview-general>
     </div>
     <div class="mt-3 d-flex justify-content-end" >
-      <button mat-raised-button color="accent" (click)="addHistory()">Datei übergeben</button>
+      <button mat-raised-button color="accent"
+              (click)="addHistory()">Datei übergeben
+      </button>
     </div>
   </div>
   <div class="ms-5 mt-2">
-    <div class="mat-elevation-z8 station-overview-documentation">
-      <app-station-overview-documentation [stationViewInput]="stationViewOverview" ></app-station-overview-documentation>
+    <div class="station-overview-documentation" appProjectElevation [defaultElevation]="6" [raisedElevation]="16">
+      <app-station-overview-documentation
+        [stationViewInput]="stationViewOverview"
+        (click)="sendSelectedOverview(6)">
+      </app-station-overview-documentation>
     </div>
-    <div class="mat-elevation-z8 station-overview-control mt-5">
-      <app-station-overview-control [stationViewInput]="stationViewOverview" ></app-station-overview-control>
-    </div>
-  </div>
-  <div class="ms-5 mt-2">
-    <div class="mat-elevation-z8 station-overview-specification">
-      <app-station-overview-specification [stationViewInput]="stationViewOverview" ></app-station-overview-specification>
-    </div>
-    <div class="mat-elevation-z8 station-overview-projection mt-5">
-      <app-station-overview-projection [stationViewInput]="stationViewOverview"></app-station-overview-projection>
+    <div class="station-overview-control mt-5" appProjectElevation [defaultElevation]="6" [raisedElevation]="16">
+      <app-station-overview-control
+        [stationViewInput]="stationViewOverview"
+        (click)="sendSelectedOverview(5)" >
+      </app-station-overview-control>
     </div>
   </div>
   <div class="ms-5 mt-2">
-    <div class="mat-elevation-z8 station-overview-lop">
-      <app-station-overview-lop [stationViewInput]="stationViewOverview" ></app-station-overview-lop>
+    <div class="station-overview-specification" appProjectElevation [defaultElevation]="6" [raisedElevation]="16">
+      <app-station-overview-specification
+        [stationViewInput]="stationViewOverview"
+        (click)="sendSelectedOverview(3)">
+      </app-station-overview-specification>
+    </div>
+    <div class="station-overview-projection mt-5" appProjectElevation [defaultElevation]="6" [raisedElevation]="16">
+      <app-station-overview-projection
+        [stationViewInput]="stationViewOverview"
+        (click)="sendSelectedOverview(4)">
+      </app-station-overview-projection>
+    </div>
+  </div>
+  <div class="ms-5 mt-2">
+    <div class="station-overview-lop" appProjectElevation [defaultElevation]="6" [raisedElevation]="16">
+      <app-station-overview-lop
+        [stationViewInput]="stationViewOverview"
+        (click)="sendSelectedOverview(8)">
+      </app-station-overview-lop>
     </div>
     <div>
-
     </div>
   </div>
 </div>

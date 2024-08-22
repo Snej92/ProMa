@@ -29,7 +29,8 @@ public class Station {
     private Long id;
     private String name;
     private String description;
-    private String issuer;
+    private String issuerAcronym;
+    private String issuerName;
     @Enumerated(EnumType.STRING)
     private StatusEPLAN status;
     private Integer totalProgress;

@@ -1,4 +1,4 @@
-import {Component, Input, signal} from '@angular/core';
+import {Component, Input, OnInit, signal} from '@angular/core';
 import {loggedUserModel} from "../../../core/logged-user/logged-user.state";
 import {loggedUser} from "../../../core/logged-user/logged-user.model";
 
@@ -13,7 +13,7 @@ export type MenuItem = {
   templateUrl: './custom-sidenav.component.html',
   styleUrl: './custom-sidenav.component.scss'
 })
-export class CustomSidenavComponent {
+export class CustomSidenavComponent implements OnInit{
 
   @Input() loggedUser!:loggedUser;
 
@@ -50,4 +50,34 @@ export class CustomSidenavComponent {
       route: "settings"
     }
   ])
+
+  ngOnInit(): void {
+    console.log("logged user sidenav: ")
+    console.log(this.loggedUser)
+    if(!this.loggedUser.user.roles.projectRole){
+      this.menuItems = signal<MenuItem[]>([
+        {
+          icon: "home",
+          label: "Dashboard",
+          route: "dashboard"
+        },
+        {
+          icon: "insert_chart",
+          label: "Gesamtübersicht",
+          route: "overall"
+        },
+        {
+          // icon: "fact_check",
+          icon: "checklist",
+          label: "Übersicht",
+          route: "overview"
+        },
+        {
+          icon: "dashboard_customize",
+          label: "Stationen",
+          route: "station"
+        }
+      ])
+    }
+  }
 }

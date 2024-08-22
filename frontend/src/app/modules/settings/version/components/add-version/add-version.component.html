@@ -8,20 +8,45 @@
       <div class="d-flex">
         <mat-form-field class="me-2">
           <mat-label>Datum</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="date" (dateChange)="onDateChange($event.value)" [placeholder]="date">
+          <input matInput
+                 [matDatepicker]="picker"
+                 formControlName="date"
+                 (dateChange)="onDateChange($event.value)"
+                 [placeholder]="date"
+                 (input)="onInputChange($event)">
+<!--                 pattern="^(0?[1-9]|[12][0-9]|3[01])[.\-\/](0?[1-9]|1[0-2])[.\-\/](19|20)\d{2}$"-->
+          <mat-error *ngIf="versionForm.controls['date'].hasError('pattern')">
+            was das denn?
+          </mat-error>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Version</mat-label>
-          <input matInput formControlName="version">
+          <input matInput
+                 formControlName="version"
+                 pattern="^[0-9.]*$">
+          <mat-error *ngIf="versionForm.controls['version'].hasError('pattern')">
+            Unerlaubte Zeichen
+          </mat-error>
+          <mat-error *ngIf="versionForm.controls['version'].hasError('required')">
+            Dieses Feld ist erforderlich
+          </mat-error>
         </mat-form-field>
       </div>
 
       <mat-form-field>
         <mat-label>Aufgabe</mat-label>
-        <input matInput formControlName="toDo">
+        <input matInput
+               formControlName="toDo"
+               pattern="^[A-Za-z0-9_öüä +*#´`'\-]*$">
+        <mat-error *ngIf="versionForm.controls['toDo'].hasError('pattern')">
+          Unerlaubte Zeichen
+        </mat-error>
+        <mat-error *ngIf="versionForm.controls['toDo'].hasError('required')">
+          Dieses Feld ist erforderlich
+        </mat-error>
       </mat-form-field>
 
     </mat-card-content>

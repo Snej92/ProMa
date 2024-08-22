@@ -68,7 +68,7 @@ export class SysSidenavComponent implements OnInit, OnDestroy{
     this.store.dispatch(loadLoggedUser());
     this.subscriptions.push(
     this.store.select(getLoggedUserInfo).subscribe(data =>{
-      this.loggedUser=data;
+      this.loggedUser= {...data};
       console.log("active project: " + this.loggedUser.user.activeProject)
       })
     );
