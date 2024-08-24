@@ -144,6 +144,8 @@ body { margin: 0;
   --frontend-fileTransfer-2-eplan: rgba(255, 82, 82, 0.6);
 }
 
+//Snackbar
+
 .pass-snackbar {
   position: relative;
   //padding-left: 0px;
@@ -184,6 +186,26 @@ body { margin: 0;
 
 .fail-snackbar .mat-mdc-button {
 
+}
+
+//Datepicker
+.tp-datepicker-input {
+  position: relative;
+}
+
+.tp-datepicker-wrapper {
+  position: absolute;
+  z-index: 100;
+  top: 32px;
+  left: 0;
+  transform-origin: left top;
+}
+
+mat-card.mat-card.tp-datepicker {
+  width: 296px;
+  height: 354px;
+  padding: 0;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.2), 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12)
 }
 
 /* Importing Bootstrap SCSS file. */

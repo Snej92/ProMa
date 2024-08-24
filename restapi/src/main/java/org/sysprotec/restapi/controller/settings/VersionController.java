@@ -1,6 +1,7 @@
 package org.sysprotec.restapi.controller.settings;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.sysprotec.restapi.model.settings.Version;
 import org.sysprotec.restapi.service.VersionService;
@@ -26,7 +27,7 @@ public class VersionController {
     }
 
     @PutMapping
-    public Version updateVersion(@RequestBody Version version){
+    public ResponseEntity<Version> updateVersion(@RequestBody Version version){
         return versionService.updateVersion(version);
     }
 

@@ -1,4 +1,4 @@
-import {APP_INITIALIZER, NgModule, isDevMode, importProvidersFrom, LOCALE_ID} from '@angular/core';
+import {APP_INITIALIZER, NgModule, isDevMode, LOCALE_ID} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { AppRoutingModule } from './app-routing.module';
@@ -78,7 +78,7 @@ import {
   MatDatepickerModule,
   MatDatepickerToggle
 } from "@angular/material/datepicker";
-import {MAT_DATE_LOCALE, MatNativeDateModule, provideNativeDateAdapter} from "@angular/material/core";
+import {MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule, provideNativeDateAdapter} from "@angular/material/core";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { HistoryComponent } from './modules/overview/history/components/history.component';
 import {HistoryEffects} from "./modules/overview/history/store/history.effects";
@@ -330,7 +330,6 @@ registerLocaleData(localeDe);
       multi: true,
       deps: [KeycloakService]
     },
-    { provide: LOCALE_ID, useValue: 'de-DE' },
     provideAnimationsAsync(),
     provideNativeDateAdapter(),
   ],

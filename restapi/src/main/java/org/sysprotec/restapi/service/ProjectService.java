@@ -202,7 +202,7 @@ public class ProjectService {
 
 //            Add start Version to Project
             Version startVersion = Version.builder()
-                    .version("V1.0")
+                    .version("1.0")
                     .toDo(versionTodo)
                     .done(true)
                     .date(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")))

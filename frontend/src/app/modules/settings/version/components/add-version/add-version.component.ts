@@ -8,20 +8,23 @@ import {addVersion, updateVersion} from "../../store/version.actions";
 import {getVersionById} from "../../store/version.selectors";
 import {loadSpinner} from "../../../../../core/store/app.action";
 import {DatePipe} from "@angular/common";
+import { format, parse } from "date-fns";
+import {matDatepickerAnimations} from "@angular/material/datepicker";
 
 @Component({
   selector: 'app-add-version',
   templateUrl: './add-version.component.html',
-  styleUrl: './add-version.component.scss'
+  styleUrl: './add-version.component.scss',
+  animations: [
+    matDatepickerAnimations.fadeInCalendar, matDatepickerAnimations.transformPanel
+  ]
 })
 export class AddVersionComponent implements OnInit{
 
   versionTitle='';
   editVersionId=0;
   editData!:versionModel;
-  date!: string;
-  datePipe = new DatePipe('de-DE');
-  manualDateInput : boolean = false;
+
 
   constructor(private dialog:MatDialogRef<AddVersionComponent>,
               private builder:FormBuilder,
@@ -29,9 +32,20 @@ export class AddVersionComponent implements OnInit{
               @Inject(MAT_DIALOG_DATA)public data:any) {
   }
 
+  //Datepicker
+  public showPicker = false;
+  public selectedDate = new Date();
+  private dateFormat = new RegExp(
+    /^(?:(?:31(\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/
+  );
+  //Datepicker
+
   versionForm=this.builder.group({
       id:this.builder.control(0),
-      date:this.builder.control(''),
+      date:this.builder.control('', [
+        Validators.required,
+        Validators.pattern(this.dateFormat)
+      ]),
       version:this.builder.control('', Validators.required),
       toDo:this.builder.control('', Validators.required),
       done:this.builder.control(false),
@@ -86,33 +100,46 @@ export class AddVersionComponent implements OnInit{
     this.versionForm.setControl('versionStation', this.builder.array(versionStationArray));
   }
 
-  onDateChange(selectedDate: Date) {
-    if(!this.manualDateInput){
-      if (selectedDate){
-        console.log("selectedDate: " + selectedDate)
-        const year = selectedDate.getFullYear();
-        const month = ('0' + (selectedDate.getMonth() + 1)).slice(-2); // Pad month with leading zero
-        const day = ('0' + selectedDate.getDate()).slice(-2); // Pad day with leading zero
-        // this.date = `${day}.${month}.${year}`;
-        this.date = this.datePipe.transform(selectedDate, 'dd.MM.yyyy')!;
-      } else {
-        this.date = '';
-      }
-      console.log("onDateChange: "+ this.date)
-    }
-    this.manualDateInput = false;
-  }
-
-  onInputChange(event: Event){
-    this.manualDateInput = true;
-    console.log("manual date input");
-    this.date = (event.target as HTMLInputElement).value;
-  }
-
   setDateToToday() {
     const today = new Date();
-    this.onDateChange(today);
+    this.setDateToInputField(today)
   }
+
+  //Datepicker
+  private parseDateInput(date: string, format: string) {
+    return parse(date, format, new Date());
+  }
+
+  public togglePicker($event: any): void {
+    $event.stopPropagation();
+    this.showPicker = !this.showPicker;
+
+    if (this.showPicker) {
+      this.setDateToPicker()
+    }
+  }
+
+  private setDateToPicker(): void {
+    const userInput = this.versionForm.get('date')?.value;
+
+    if (userInput) {
+      this.selectedDate = this.parseDateInput(userInput, "dd.MM.yyyy");
+    } else {
+      this.selectedDate = new Date()
+    }
+  }
+
+  public setDateToInputField(date: Date | null): void {
+    if(date){
+      this.selectedDate = date;
+      const constDate = format(date, "dd.MM.yyyy");
+      this.versionForm.get('date')?.patchValue(constDate);
+    } else {
+      this.selectedDate = new Date();
+    }
+    this.showPicker = false;
+  }
+  //Datepicker
 
   closePopup(){
     this.dialog.close()
@@ -122,7 +149,7 @@ export class AddVersionComponent implements OnInit{
     if(this.versionForm.valid){
       const versionInput:versionModel={
         id:0,
-        date:this.date,
+        date:this.versionForm.value.date as string,
         version:this.versionForm.value.version as string,
         toDo:this.versionForm.value.toDo as string,
         done:this.versionForm.value.done as boolean,

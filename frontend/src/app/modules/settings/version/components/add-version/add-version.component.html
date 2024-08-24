@@ -1,5 +1,5 @@
 <form [formGroup]="versionForm" (ngSubmit)="saveVersion()">
-  <mat-card>
+  <mat-card class="mat-card-version">
     <mat-card-header>
       <h1>{{versionTitle}}</h1>
     </mat-card-header>
@@ -9,18 +9,29 @@
         <mat-form-field class="me-2">
           <mat-label>Datum</mat-label>
           <input matInput
-                 [matDatepicker]="picker"
-                 formControlName="date"
-                 (dateChange)="onDateChange($event.value)"
-                 [placeholder]="date"
-                 (input)="onInputChange($event)">
-<!--                 pattern="^(0?[1-9]|[12][0-9]|3[01])[.\-\/](0?[1-9]|1[0-2])[.\-\/](19|20)\d{2}$"-->
-          <mat-error *ngIf="versionForm.controls['date'].hasError('pattern')">
-            was das denn?
-          </mat-error>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+                 formControlName="date" type="text"
+                 placeholder="Datum auswählen">
+          <button mat-icon-button
+                  color="accent"
+                  type="button"
+                  matSuffix
+                  (click)="togglePicker($event)">
+            <mat-icon>today</mat-icon>
+          </button>
         </mat-form-field>
+
+<!--        Datepicker-->
+        <div *ngIf="showPicker"
+             [@transformPanel]="'enter'"
+             class="tp-datepicker-wrapper">
+          <mat-card class="tp-datepicker mat-elevation-z10">
+            <mat-calendar [@fadeInCalendar]="'enter'"
+                          [selected]="selectedDate"
+                          [startAt]="selectedDate"
+                          (selectedChange)="setDateToInputField($event)">
+            </mat-calendar>
+          </mat-card>
+        </div>
 
         <mat-form-field>
           <mat-label>Version</mat-label>
@@ -55,5 +66,6 @@
         <button type="submit" mat-raised-button color="accent"> {{data.button}} </button>
         <button type="reset" mat-raised-button color="primary" (click)="closePopup()"> Abbrechen </button>
       </mat-card-actions>
+
   </mat-card>
 </form>

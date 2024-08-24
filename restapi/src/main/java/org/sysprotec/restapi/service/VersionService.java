@@ -2,6 +2,8 @@ package org.sysprotec.restapi.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,6 +19,7 @@ import org.sysprotec.restapi.repository.settings.VersionStationRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -119,16 +122,18 @@ public class VersionService {
         return null;
     }
 
-    public Version updateVersion(Version version) {
+    public ResponseEntity<Version> updateVersion(Version version) {
         Optional<Version> optionalVersion = versionRepository.findVersionById(version.getId());
         if(optionalVersion.isEmpty()){
             log.error("Version "+ version.getVersion() + " does not exist in database");
+            return new ResponseEntity<>(
+                    HttpStatus.CONFLICT);
         } else {
             Optional<Version> checkVersion = versionRepository.findVersionByVersionAndProjectId(
                     version.getVersion(),
                     optionalVersion.get().getProject().getId());
 
-            if(checkVersion.isEmpty()){
+            if(checkVersion.isEmpty() || Objects.equals(version.getVersion(), optionalVersion.get().getVersion())){
                 Version saveVersion = optionalVersion.get();
                 saveVersion.setVersion(version.getVersion());
                 saveVersion.setToDo(version.getToDo());
@@ -158,13 +163,19 @@ public class VersionService {
                 if(versionRepository.findVersionById(version.getId()).isPresent()){
                     Version returnVersion = versionRepository.findVersionById(version.getId()).get();
                     returnVersion.setVersionStation(versionStationRepository.findVersionStationsByVersionIdOrderByIdAsc(returnVersion.getId()));
-                    return returnVersion;
+                    return new ResponseEntity<>(
+                            returnVersion,
+                            HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<>(
+                            HttpStatus.INTERNAL_SERVER_ERROR);
                 }
             } else {
                 log.error("Version "+ version.getVersion() + " does already exist in this project");
+                return new ResponseEntity<>(
+                        HttpStatus.CONFLICT);
             }
         }
-        return null;
     }
 
     public void deleteVersion(Long versionId) {

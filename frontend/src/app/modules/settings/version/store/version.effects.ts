@@ -6,9 +6,9 @@ import {VersionService} from "../service/version.service";
 import {
   addVersion,
   addVersionSuccess, deleteVersion, deleteVersionSuccess,
-  LOAD_VERSION,
+  LOAD_VERSION, loadVersion,
   loadVersionFail,
-  loadVersionSuccess, loadVersionSuccess2,
+  loadVersionSuccess,
   updateVersion, updateVersionSuccess
 } from "./version.actions";
 import {versionModel} from "./version.model";
