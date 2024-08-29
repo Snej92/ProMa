@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16c64894-e2b1-46b9-9759-3e6da58dad35" name="Changes" comment="V0.13&#10;Vorbereitung fürs Dashboard und sehr viele bugfixes und QoL changes">
-      <change beforePath="$PROJECT_DIR$/restapi/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend.7z" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend.7z" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +118,7 @@
       <workItem from="1724649945373" duration="21474000" />
       <workItem from="1724733882232" duration="22430000" />
       <workItem from="1724821035634" duration="20945000" />
-      <workItem from="1724908294692" duration="13232000" />
+      <workItem from="1724908294692" duration="15735000" />
     </task>
     <task id="LOCAL-00001" summary="V0.13&#10;Vorbereitung fürs Dashboard und sehr viele bugfixes und QoL changes">
       <option name="closed" value="true" />
@@ -126,7 +128,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724928012217</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="V0.13&#10;Vorbereitung fürs Dashboard und sehr viele bugfixes und QoL changes">
+      <option name="closed" value="true" />
+      <created>1724928362978</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1724928362978</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
