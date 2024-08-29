@@ -24,7 +24,9 @@
           </ng-container>
           <ng-container *ngIf="editDocumentationSettings[documentation.id].isEdit">
             <mat-form-field class="alignment edit-mat-form-field-doku">
-              <input matInput [(ngModel)]="editDocumentationSettings[documentation.id].documentationSetting.item">
+              <input matInput
+                     [(ngModel)]="editDocumentationSettings[documentation.id].documentationSetting.item"
+                     maxlength="100">
             </mat-form-field>
           </ng-container>
         </td>

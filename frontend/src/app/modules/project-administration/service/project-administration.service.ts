@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {projectViewModel} from "../store/project-administration.model";
+import {projectFavViewModel} from "../store/project-administration.model";
 import {environment} from "../../../../environments/environment";
 
 @Injectable({
@@ -12,25 +12,33 @@ export class ProjectAdministrationService {
   constructor(private http:HttpClient) { }
 
 
-  getAllProjects(archive:boolean):Observable<projectViewModel[]>{
+  getAllProjects(archive:boolean):Observable<projectFavViewModel[]>{
     console.log('Fetch Projects')
-    return this.http.get<projectViewModel[]>(this.API_URL + "/project/all/"+archive)
+    return this.http.get<projectFavViewModel[]>(this.API_URL + "/project/all/"+archive)
   }
 
-  getProject():Observable<projectViewModel>{
+  getProject():Observable<projectFavViewModel>{
     console.log("Fetch active Project")
-    return this.http.get<projectViewModel>(this.API_URL + "/project")
+    return this.http.get<projectFavViewModel>(this.API_URL + "/project")
   }
 
-  addProject(projectViewInput:projectViewModel, template:string){
+  addProject(projectViewInput:projectFavViewModel, template:string){
     return this.http.post(this.API_URL + "/project/"+template, projectViewInput);
   }
 
-  updateProject(projectViewInput:projectViewModel){
+  updateProject(projectViewInput:projectFavViewModel){
     return this.http.put(this.API_URL + "/project", projectViewInput);
   }
 
   deleteProject(id:number){
     return this.http.delete(this.API_URL + "/project/"+id);
+  }
+
+  editProjectFavorite(projectId:number, remove:boolean){
+    return this.http.get(this.API_URL + "/project/favorite"+ projectId + "/" + remove)
+  }
+
+  getProjectFavorite():Observable<projectFavViewModel[]>{
+    return this.http.get<projectFavViewModel[]>(this.API_URL + "/project/favorite");
   }
 }

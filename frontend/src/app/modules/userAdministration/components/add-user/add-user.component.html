@@ -8,46 +8,97 @@
       <div class="d-flex justify-content-between">
         <mat-form-field>
           <mat-label>Nachname</mat-label>
-          <input matInput formControlName="lastname">
+          <input matInput
+                 formControlName="lastname"
+                 maxlength="25">
+          <mat-error *ngIf="userForm.controls['lastname'].hasError('pattern')">
+            Nicht erlaubte Zeichen
+          </mat-error>
+          <mat-error *ngIf="userForm.controls['lastname'].hasError('required')">
+            Dieses Feld ist erforderlich
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Vorname</mat-label>
-          <input matInput formControlName="firstname">
+          <input matInput
+                 formControlName="firstname"
+                 maxlength="25">
+          <mat-error *ngIf="userForm.controls['firstname'].hasError('pattern')">
+            Nicht erlaubte Zeichen
+          </mat-error>
+          <mat-error *ngIf="userForm.controls['firstname'].hasError('required')">
+            Dieses Feld ist erforderlich
+          </mat-error>
         </mat-form-field>
       </div>
 
       <div class="d-flex justify-content-between">
         <mat-form-field>
           <mat-label>Kürzel</mat-label>
-          <input maxlength="5" matInput formControlName="acronym">
+          <input maxlength="5"
+                 matInput
+                 formControlName="acronym">
+          <mat-error *ngIf="userForm.controls['acronym'].hasError('pattern')">
+            Nicht erlaubte Zeichen
+          </mat-error>
+          <mat-error *ngIf="userForm.controls['acronym'].hasError('required')">
+            Dieses Feld ist erforderlich
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>E-Mail</mat-label>
-          <input matInput formControlName="email">
+          <input matInput
+                 formControlName="email"
+                 maxlength="35">
+          <mat-error *ngIf="userForm.controls['email'].hasError('pattern')">
+            Korrekte E-Mail angeben
+          </mat-error>
+          <mat-error *ngIf="userForm.controls['email'].hasError('required')">
+            Dieses Feld ist erforderlich
+          </mat-error>
         </mat-form-field>
       </div>
 
       <div class="d-flex justify-content-between">
         <mat-form-field>
           <mat-label>Telefonnummer</mat-label>
-          <input matInput formControlName="phone">
+          <input matInput
+                 formControlName="phone"
+                 maxlength="30">
         </mat-form-field>
       </div>
 
       <div class="d-flex justify-content-between">
         <mat-form-field>
           <mat-label>Benutzername</mat-label>
-          <input matInput formControlName="username">
+          <input matInput
+                 formControlName="username"
+                 maxlength="30">
+          <mat-error *ngIf="userForm.controls['username'].hasError('pattern')">
+            Nicht erlaubte Zeichen
+          </mat-error>
+          <mat-error *ngIf="userForm.controls['username'].hasError('required')">
+            Dieses Feld ist erforderlich
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Passwort</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+          <input matInput
+                 [type]="hide ? 'password' : 'text'"
+                 formControlName="password"
+                 maxlength="30">
           <button type="button" mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" color="accent">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
+          <mat-error *ngIf="userForm.controls['password'].hasError('pattern')">
+            Nicht erlaubte Zeichen
+          </mat-error>
+          <mat-error *ngIf="userForm.controls['password'].hasError('required')">
+            Dieses Feld ist erforderlich
+          </mat-error>
         </mat-form-field>
       </div>
 
@@ -59,7 +110,7 @@
         <section class="mb-3">
           <mat-checkbox class="me-4" formControlName="adminRole">Admin</mat-checkbox>
           <mat-checkbox class="me-4" formControlName="projectRole">Projekte</mat-checkbox>
-          <mat-checkbox class="me-4" formControlName="userRole">Benutzer</mat-checkbox>
+<!--          <mat-checkbox class="me-4" formControlName="userRole">Benutzer</mat-checkbox>-->
         </section>
       </div>
 

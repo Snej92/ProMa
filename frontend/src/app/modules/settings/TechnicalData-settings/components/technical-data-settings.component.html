@@ -24,7 +24,8 @@
           </ng-container>
           <ng-container *ngIf="editTechnicalDataSettings[technicalData.id].isEdit">
             <mat-form-field class="alignment edit-mat-form-field-doku">
-              <input matInput [(ngModel)]="editTechnicalDataSettings[technicalData.id].technicalDataSetting.item">
+              <input matInput [(ngModel)]="editTechnicalDataSettings[technicalData.id].technicalDataSetting.item"
+                     maxlength="100">
             </mat-form-field>
           </ng-container>
         </td>
@@ -38,7 +39,8 @@
           </ng-container>
           <ng-container *ngIf="editTechnicalDataSettings[technicalData.id].isEdit">
             <mat-form-field class="alignment edit-mat-form-field-doku">
-              <input matInput [(ngModel)]="editTechnicalDataSettings[technicalData.id].technicalDataSetting.unit">
+              <input matInput [(ngModel)]="editTechnicalDataSettings[technicalData.id].technicalDataSetting.unit"
+                     maxlength="10">
             </mat-form-field>
           </ng-container>
         </td>

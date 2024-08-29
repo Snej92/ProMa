@@ -10,7 +10,7 @@
   height: 50px;
   position: sticky;
   top: 0;
-  //z-index: 10;
+  z-index: 10;
 }
 
 .mat-mdc-row:nth-child(even){
@@ -29,12 +29,17 @@
   text-align: center;
 }
 
+.td-center{
+  text-align: center;
+}
+
 .th-left{
   text-align: left;
 }
 
 .mat-column-Kontrolle{
   width: 40%!important;
+  z-index: 5;
 }
 
 .mat-column-Erledigt{

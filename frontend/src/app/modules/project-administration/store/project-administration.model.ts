@@ -9,7 +9,12 @@ export interface projectViewModel{
   notStoredStations:number,
 }
 
+export interface projectFavViewModel{
+  project:projectViewModel,
+  isFavorite:boolean
+}
+
 export interface projectView{
-  projectViewList:projectViewModel[],
+  projectViewList:projectFavViewModel[],
   errorMessage:string,
 }

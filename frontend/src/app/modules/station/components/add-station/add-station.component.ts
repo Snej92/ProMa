@@ -17,6 +17,7 @@ import {
   editHeaderDataSettingModel,
   headerDataSetting
 } from "../../../settings/HeaderData-settings/store/headerDataSetting.model";
+import {MatCheckboxChange} from "@angular/material/checkbox";
 
 @Component({
   selector: 'app-add-station',
@@ -32,7 +33,6 @@ export class AddStationComponent implements OnInit, OnDestroy{
     errorMessage:''
   };
   dynamicControls: string[] = [];
-  // additionalHeaderData : { [key: number]: editHeaderDataSettingModel } = {};
   headerDataInput : additionalHeaderDataModel[] = [];
   private subscriptions: Subscription[] = [];
 
@@ -40,9 +40,9 @@ export class AddStationComponent implements OnInit, OnDestroy{
     id:this.builder.control(0),
     name:this.builder.control('', Validators.required),
     description:this.builder.control(''),
-    issuerAcronym:this.builder.control(''),
-    issuerName:this.builder.control(''),
-    status:this.builder.control(''),
+    issuerAcronym:this.builder.control('', Validators.required),
+    issuerName:this.builder.control('', Validators.required),
+    status:this.builder.control('', Validators.required),
     version:this.builder.control('1.0'),
     totalProgress:this.builder.control(0),
     lopTotal:this.builder.control(0),
@@ -86,14 +86,18 @@ export class AddStationComponent implements OnInit, OnDestroy{
     )
 
     //HeaderData
-    this.store.dispatch(loadSettingHeaderData())
-    this.subscriptions.push(
-      this.store.select(getSettingHeaderDataInfo).pipe()
-        .subscribe(data=>{
-          this.headerDataSettings=data;
-          this.addAdditionalControls(this.headerDataSettings)
-        })
-    )
+    if(!this.data.isEdit){
+      this.store.dispatch(loadSettingHeaderData())
+      this.subscriptions.push(
+        this.store.select(getSettingHeaderDataInfo).pipe()
+          .subscribe(data=>{
+            this.headerDataSettings=data;
+            this.addAdditionalControls(this.headerDataSettings)
+          })
+      )
+    }
+
+    this.stationForm.get('issuerName')?.setValue('Select Eingabe');
 
     if(this.data.isEdit){
       this.onInitSub = this.store.select(getStationById(this.data.id)).subscribe(data=>{
@@ -133,8 +137,6 @@ export class AddStationComponent implements OnInit, OnDestroy{
     }
   }
 
-
-
   saveStation() {
     const stationInput : stationViewModel = {
       id:0,
@@ -168,7 +170,6 @@ export class AddStationComponent implements OnInit, OnDestroy{
     }
 
     this.iterateDynamicControls();
-
 
     if(this.data.isEdit){
       stationInput.id = this.stationForm.value.id as number
@@ -207,6 +208,14 @@ export class AddStationComponent implements OnInit, OnDestroy{
         data: control?.value
       });
     })
+  }
+
+  onManualInputChange(event: MatCheckboxChange){
+    if(!event.checked){
+      this.stationForm.get('issuerName')?.setValue('Select Eingabe');
+    } else {
+      this.stationForm.get('issuerName')?.setValue('');
+    }
   }
 
   ngOnDestroy(): void {

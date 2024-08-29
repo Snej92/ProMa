@@ -1,5 +1,5 @@
-import {Component, Input, Output} from '@angular/core';
-import {projectViewModel} from "../../store/project-administration.model";
+import {Component, Injector, Input, Output} from '@angular/core';
+import {projectFavViewModel, projectViewModel} from "../../store/project-administration.model";
 import {userModel, userRole} from "../../../userAdministration/store/user-Administration.model";
 import {loadSpinner} from "../../../../core/store/app.action";
 import {updateLoggedUser} from "../../../../core/logged-user/logged-user.actions";
@@ -12,11 +12,10 @@ import {SysConfirmationComponent} from "../../../../core/sys-confirmation/sys-co
 import {
   archiveProject, deArchiveProject,
   deleteProject,
-  loadProjectView,
-  updateProject
 } from "../../store/project-administration.actions";
 import {getProjectById} from "../../store/project-administration.selectors";
 import {Router} from "@angular/router";
+import {take} from "rxjs";
 
 @Component({
   selector: 'app-project-card',
@@ -28,12 +27,11 @@ export class ProjectCardComponent {
   @Input() loggedUser!: loggedUser;
   @Input() favorite : boolean = false;
   @Input() archive : boolean = false;
-  archivedProject!:projectViewModel;
+  archivedProject!:projectFavViewModel;
 
   constructor(private store:Store<AppStateModel>,
               private dialog:MatDialog,
-              private confirm:MatDialog,
-              private router: Router) {
+              private confirm:MatDialog) {
   }
 
   editProject(id:any){
@@ -108,28 +106,34 @@ export class ProjectCardComponent {
   }
 
   archiveProject(projectId:any){
-    this.store.select(getProjectById(projectId)).subscribe(data=>{
-      this.archivedProject={...data};
-    })
-    this.archivedProject.archived = true;
-    this.store.dispatch(loadSpinner({isLoading:true}));
-    this.store.dispatch(archiveProject({projectViewInput:this.archivedProject}));
-    this.reloadComponent();
+    this.store.select(getProjectById(projectId)).pipe(
+      take(1)
+    ).subscribe(data => {
+      this.archivedProject = {
+        ...data,
+        project: {
+          ...data.project,
+          archived: true
+        }
+      };
+      this.store.dispatch(loadSpinner({ isLoading: true }));
+      this.store.dispatch(archiveProject({ projectViewInput: this.archivedProject }));
+    });
   }
 
   deArchiveProject(projectId:any){
-    this.store.select(getProjectById(projectId)).subscribe(data=>{
-      this.archivedProject={...data};
-    })
-    this.archivedProject.archived = false;
-    this.store.dispatch(loadSpinner({isLoading:true}));
-    this.store.dispatch(deArchiveProject({projectViewInput:this.archivedProject}));
-    this.reloadComponent();
-  }
-
-  reloadComponent() {
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([this.router.url]);
+    this.store.select(getProjectById(projectId)).pipe(
+      take(1)
+    ).subscribe(data => {
+      this.archivedProject = {
+        ...data,
+        project: {
+          ...data.project,
+          archived: false
+        }
+      };
+      this.store.dispatch(loadSpinner({ isLoading: true }));
+      this.store.dispatch(archiveProject({ projectViewInput: this.archivedProject }));
     });
   }
 }

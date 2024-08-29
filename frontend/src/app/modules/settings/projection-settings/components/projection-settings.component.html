@@ -24,7 +24,9 @@
           </ng-container>
           <ng-container *ngIf="editProjectionSettings[projection.id].isEdit">
             <mat-form-field class="alignment edit-mat-form-field-doku">
-              <input matInput [(ngModel)]="editProjectionSettings[projection.id].projectionSetting.item">
+              <input matInput
+                     [(ngModel)]="editProjectionSettings[projection.id].projectionSetting.item"
+                     maxlength="100">
             </mat-form-field>
           </ng-container>
         </td>

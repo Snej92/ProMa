@@ -7,6 +7,8 @@ export interface controlModel {
   addition : string,
   done : boolean,
   commited : boolean,
+  issuerAcronym : string,
+  issuerName : string,
   taskSetting : controlSettingModel
 }
 

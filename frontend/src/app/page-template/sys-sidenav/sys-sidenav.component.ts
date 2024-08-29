@@ -17,7 +17,7 @@ import {loadActiveProjectView} from "../../core/active-project/active-project.ac
 import {getActiveProjectViewInfo} from "../../core/active-project/active-project.selector";
 import {Subscription} from "rxjs";
 import {environment} from "../../../environments/environment";
-import {activeProjectViewModel} from "../../core/active-project/active-project.state";
+import {activeFavProjectViewModel} from "../../core/active-project/active-project.state";
 import {loggedUserModel} from "../../core/logged-user/logged-user.state";
 
 @Component({
@@ -28,10 +28,7 @@ import {loggedUserModel} from "../../core/logged-user/logged-user.state";
 export class SysSidenavComponent implements OnInit, OnDestroy{
 
   private subscriptions: Subscription[] = [];
-  activeProjectView:activeProjectView={
-    projectView:activeProjectViewModel,
-    errorMessage:''
-  };
+  activeProjectView!:activeProjectView | null | undefined;
 
   loggedUser:loggedUser={
     user:loggedUserModel,
@@ -58,9 +55,6 @@ export class SysSidenavComponent implements OnInit, OnDestroy{
     this.subscriptions.push(
       this.store.select(getActiveProjectViewInfo).subscribe(data =>{
         this.activeProjectView=data;
-        if(this.activeProjectView.projectView.name == null){
-          this.activeProjectView.projectView.name = "Kein Projekt ausgewählt"
-        }
       })
     );
 

@@ -15,6 +15,7 @@ import org.sysprotec.restapi.model.projections.*;
 import org.sysprotec.restapi.model.settings.*;
 import org.sysprotec.restapi.model.types.StatusLOP;
 import org.sysprotec.restapi.repository.ProjectRepository;
+import org.sysprotec.restapi.repository.StationFavoriteRepository;
 import org.sysprotec.restapi.repository.StationRepository;
 import org.sysprotec.restapi.repository.UserRepository;
 import org.sysprotec.restapi.repository.overview.HeaderDataRepository;
@@ -25,6 +26,7 @@ import org.sysprotec.restapi.repository.settings.VersionStationRepository;
 import org.sysprotec.restapi.service.overview.HeaderDataService;
 import org.sysprotec.restapi.service.overview.TechnicalDataService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +46,8 @@ public class StationService {
     private final VersionStationRepository versionStationRepository;
     private final TechnicalDataRepository technicalDataRepository;
     private final HeaderDataRepository headerDataRepository;
+    private final UserService userService;
+    private final StationFavoriteRepository stationFavoriteRepository;
 
 
     public List<StationView> getAllStations() {
@@ -147,8 +151,10 @@ public class StationService {
                                     .build();
 
                             //Issuer Name
-                            Optional<User> optionalUser = userRepository.findUserByAcronym(stationDto.getIssuerAcronym());
-                            optionalUser.ifPresent(value -> newStation.setIssuerName(value.getFirstname() + " " + value.getLastname()));
+                            if(stationDto.getIssuerName().equals("Select Eingabe")){
+                                Optional<User> optionalUser = userRepository.findUserByAcronym(stationDto.getIssuerAcronym());
+                                optionalUser.ifPresent(value -> newStation.setIssuerName(value.getFirstname() + " " + value.getLastname()));
+                            }
 
                             //add new Station to Project
                             savedProject.addStation(newStation);
@@ -158,7 +164,7 @@ public class StationService {
                             for(Version version: versionList){
                                 int state = 1;
                                 boolean done = false;
-                                if(version.getVersion().equals("V1.0")){
+                                if(version.getVersion().equals("1.0")){
                                     state = 2;
                                     done = true;
                                 }
@@ -326,12 +332,61 @@ public class StationService {
         return stationRepository.getProjectedById(stationId);
     }
 
+    public void editFavorite(Long stationId, Boolean remove) {
+        User loggedUser = userService.getLoggedUser();
+        if(loggedUser != null){
+            if(!remove){
+                if(stationRepository.findById(stationId).isPresent()
+                        && stationFavoriteRepository.findByUserIdAndStationId(loggedUser.getId(), stationId).isEmpty()){
+                    StationFavorite stationFavorite = StationFavorite.builder()
+                            .userId(loggedUser.getId())
+                            .stationId(stationId)
+                            .build();
+                    loggedUser.addStationFavorite(stationFavorite);
+                    userRepository.save(loggedUser);
+                    log.info("station with id {} favored by {}", stationId, loggedUser.getUsername());
+                } else {
+                    log.error("station with id {} does not exist or is already favored by {}", stationId, loggedUser.getUsername());
+                }
+            } else {
+                Optional<StationFavorite> optionalStationFavorite = stationFavoriteRepository.findByUserIdAndStationId(loggedUser.getId(), stationId);
+                if(optionalStationFavorite.isPresent()){
+                    loggedUser.removeStationFavorite(optionalStationFavorite.get().getId());
+                    stationFavoriteRepository.delete(optionalStationFavorite.get());
+                    log.info("station with id {} removed as favorite by {}", stationId, loggedUser.getUsername());
+                } else {
+                    log.error("station with id {} is not favored by {}", stationId, loggedUser.getUsername());
+                }
+            }
+        } else {
+            log.error("No User logged in");
+        }
+    }
+
+    public List<StationView> getFavorites(){
+        User loggedUser = userService.getLoggedUser();
+        if(loggedUser != null){
+            List<StationFavorite> stationFavorite = loggedUser.getStationFavorite();
+            List<StationView> stationViews = new ArrayList<>();
+            if(stationFavorite != null && !stationFavorite.isEmpty()){
+                for(StationFavorite stationFavoriteItem : stationFavorite){
+                    StationView station = stationRepository.getProjectedById(stationFavoriteItem.getId());
+                    if(station != null){
+                        stationViews.add(station);
+                    }
+                }
+            }
+            return stationViews;
+        }
+        return null;
+    }
+
     //#######################Additional Functions##############################
 
 
     public void updateStationVersion(){
-        ProjectDto activeProject = projectService.getActiveProject();
-        List<Station> stationList = stationRepository.getStationsByProjectId(activeProject.getId());
+        ProjectFavView activeProject = projectService.getActiveProject();
+        List<Station> stationList = stationRepository.getStationsByProjectId(activeProject.getProject().getId());
         for(Station station : stationList){
             boolean versionOK = true;
             List<VersionStation> versionStationList = versionStationRepository.findVersionStationsByStationNameOrderByIdAsc(station.getName());
@@ -634,6 +689,8 @@ public class StationService {
                             .addition("")
                             .done(false)
                             .commited(false)
+                            .issuerAcronym("")
+                            .issuerName("")
                             .station(station)
                             .build();
                     taskRepository.save(task);
@@ -658,6 +715,8 @@ public class StationService {
                                 .addition("")
                                 .done(false)
                                 .commited(false)
+                                .issuerAcronym("")
+                                .issuerName("")
                                 .station(station)
                                 .build();
                         taskRepository.save(task);
@@ -682,6 +741,8 @@ public class StationService {
                             .addition("")
                             .done(false)
                             .commited(false)
+                            .issuerAcronym("")
+                            .issuerName("")
                             .station(station)
                             .build();
                     taskRepository.save(task);
@@ -705,6 +766,8 @@ public class StationService {
                             .addition("")
                             .done(false)
                             .commited(false)
+                            .issuerAcronym("")
+                            .issuerName("")
                             .station(station)
                             .build();
                     taskRepository.save(task);

@@ -7,18 +7,20 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.sysprotec.restapi.model.Project;
+import org.sysprotec.restapi.model.ProjectFavorite;
 import org.sysprotec.restapi.model.Station;
 import org.sysprotec.restapi.model.User;
-import org.sysprotec.restapi.model.overview.HeaderData;
-import org.sysprotec.restapi.model.projections.ProjectDto;
+import org.sysprotec.restapi.model.deserialization.ProjectViewImpl;
+import org.sysprotec.restapi.model.projections.ProjectFavView;
+import org.sysprotec.restapi.model.projections.ProjectView;
 import org.sysprotec.restapi.model.settings.HeaderDataSetting;
 import org.sysprotec.restapi.model.settings.TaskSetting;
 import org.sysprotec.restapi.model.settings.TechnicalDataSetting;
 import org.sysprotec.restapi.model.settings.Version;
 import org.sysprotec.restapi.model.types.StatusEPLAN;
+import org.sysprotec.restapi.repository.ProjectFavoriteRepository;
 import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.UserRepository;
-import org.sysprotec.restapi.repository.overview.HeaderDataRepository;
 import org.sysprotec.restapi.repository.settings.HeaderDataSettingRepository;
 import org.sysprotec.restapi.repository.settings.TaskSettingRepository;
 import org.sysprotec.restapi.repository.settings.TechnicalDataSettingRepository;
@@ -42,12 +44,36 @@ public class ProjectService {
     private final HeaderDataSettingRepository headerDataSettingRepository;
     private final TaskSettingRepository taskSettingRepository;
     private final TechnicalDataSettingRepository technicalDataSettingRepository;
+    private final ProjectFavoriteRepository projectFavoriteRepository;
 
-    public List<Project> getAllProjects(Boolean archive) {
-        return projectRepository.findProjectsByArchived(archive);
+    public List<ProjectFavView> getAllProjects(Boolean archive) {
+        User loggedUser = userService.getLoggedUser();
+        if(loggedUser != null){
+            List<ProjectView> projectViews = projectRepository.findProjectsProjectedByArchivedOrderById(archive);
+            List<ProjectFavView> projectFavViewList = new ArrayList<>();
+
+            for(ProjectView projectView : projectViews){
+                //check if favorite
+                Optional<ProjectFavorite> projectFavorite = projectFavoriteRepository.findByUserIdAndProjectId(loggedUser.getId(), projectView.getId());
+                boolean favorite = projectFavorite.isPresent();
+
+                ProjectFavView projectFavView = ProjectFavView.builder()
+                        .project(projectView)
+                        .isFavorite(favorite)
+                        .build();
+
+                projectFavViewList.add(projectFavView);
+            }
+
+            return projectFavViewList;
+
+        } else {
+            log.error("no user logged in");
+        }
+        return null;
     }
 
-    public ProjectDto getActiveProject() {
+    public ProjectFavView getActiveProject() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String username = authentication.getName();
@@ -58,7 +84,15 @@ public class ProjectService {
                     if(user.getActiveProject()!=0){
                         if(projectRepository.getProjectedById(user.getActiveProject()) != null){
                             log.info("send active project to frontend");
-                            return projectRepository.getProjectedById(user.getActiveProject());
+
+                            //check if favorite
+                            Optional<ProjectFavorite> projectFavorite = projectFavoriteRepository.findByUserIdAndProjectId(user.getId(), user.getActiveProject());
+                            boolean favorite = projectFavorite.isPresent();
+
+                            return  ProjectFavView.builder()
+                                    .project(projectRepository.getProjectedById(user.getActiveProject()))
+                                    .isFavorite(favorite)
+                                    .build();
                         } else {
                             log.info("active project not found, active project set to 0");
                             user.setActiveProject(0L);
@@ -66,21 +100,20 @@ public class ProjectService {
                         }
                     }
                 }
-                log.info("send dummy project to frontend");
-                return ProjectDto.builder()
-                        .name("Kein Projekt ausgewählt")
-                        .build();
             }
-            log.info("send dummy project to frontend");
-            return ProjectDto.builder()
-                    .name("Kein Projekt ausgewählt")
-                    .build();
         }
-        return null;
+        ProjectView projectView = ProjectViewImpl.builder()
+                .name("Kein Projekt ausgewählt")
+                .build();
+
+        return ProjectFavView.builder()
+                .project(projectView)
+                .isFavorite(false)
+                .build();
     }
 
-    public ProjectDto addProject(ProjectDto projectDto, String template) {
-        if(projectRepository.findProjectByNameIgnoreCase(projectDto.getName()) == null){
+    public ProjectFavView addProject(ProjectFavView projectFavView, String template) {
+        if(projectRepository.findProjectByNameIgnoreCase(projectFavView.getProject().getName()) == null){
             //Init Setting Lists
             List<HeaderDataSetting> headerDataSettings = new ArrayList<>();
             List<TaskSetting> specificationSettings = new ArrayList<>();
@@ -91,13 +124,13 @@ public class ProjectService {
             String versionTodo = "Projekt neu angelegt";
 
             Project saveProject = Project.builder()
-                    .archived(projectDto.getArchived())
-                    .name(projectDto.getName())
-                    .description(projectDto.getDescription())
-                    .amountStations(projectDto.getAmountStations())
-                    .inProgressStations(projectDto.getInProgressStations())
-                    .storedStations(projectDto.getStoredStations())
-                    .notStoredStations(projectDto.getNotStoredStations())
+                    .archived(projectFavView.getProject().getArchived())
+                    .name(projectFavView.getProject().getName())
+                    .description(projectFavView.getProject().getDescription())
+                    .amountStations(projectFavView.getProject().getAmountStations())
+                    .inProgressStations(projectFavView.getProject().getInProgressStations())
+                    .storedStations(projectFavView.getProject().getStoredStations())
+                    .notStoredStations(projectFavView.getProject().getNotStoredStations())
                     .headerDataSetting(headerDataSettings)
                     .specificationSetting(specificationSettings)
                     .projectionSetting(projectSettings)
@@ -109,7 +142,7 @@ public class ProjectService {
             projectRepository.save(saveProject);
 
             //Fetch saved Project so Lists are initialized
-            saveProject = projectRepository.findProjectByNameIgnoreCase(projectDto.getName());
+            saveProject = projectRepository.findProjectByNameIgnoreCase(projectFavView.getProject().getName());
 
 
             if(!template.equals("Neu")){
@@ -209,24 +242,28 @@ public class ProjectService {
                     .project(projectRepository.findTopByOrderByIdDesc())
                     .build();
             versionRepository.save(startVersion);
-            log.info("Project '" + projectDto.getName() + "' created");
-            return projectRepository.findProjectedByNameIgnoreCase(projectDto.getName());
+            log.info("Project '" + projectFavView.getProject().getName() + "' created");
+            return ProjectFavView.builder()
+                    .project(projectRepository.findProjectedByNameIgnoreCase(projectFavView.getProject().getName()))
+                    .isFavorite(false)
+                    .build();
         }
         return null;
     }
 
-    public ProjectDto updateProject(ProjectDto projectDto) {
-        Optional<Project> optionalProject = projectRepository.findProjectById(projectDto.getId());
+    public ProjectFavView updateProject(ProjectFavView projectFavView) {
+        Optional<Project> optionalProject = projectRepository.findProjectById(projectFavView.getProject().getId());
         if(optionalProject.isPresent()){
-            if(projectRepository.findProjectByNameIgnoreCase(projectDto.getName()) == null){
+            if(projectRepository.findProjectByNameIgnoreCase(projectFavView.getProject().getName()) == null
+                    || projectFavView.getProject().getName().equals(optionalProject.get().getName())){
                 Project saveProject = optionalProject.get();
-                saveProject.setArchived(projectDto.getArchived());
-                saveProject.setName(projectDto.getName());
-                saveProject.setDescription(projectDto.getDescription());
-                saveProject.setAmountStations(projectDto.getAmountStations());
-                saveProject.setInProgressStations(projectDto.getInProgressStations());
-                saveProject.setStoredStations(projectDto.getStoredStations());
-                saveProject.setNotStoredStations(projectDto.getNotStoredStations());
+                saveProject.setArchived(projectFavView.getProject().getArchived());
+                saveProject.setName(projectFavView.getProject().getName());
+                saveProject.setDescription(projectFavView.getProject().getDescription());
+                saveProject.setAmountStations(projectFavView.getProject().getAmountStations());
+                saveProject.setInProgressStations(projectFavView.getProject().getInProgressStations());
+                saveProject.setStoredStations(projectFavView.getProject().getStoredStations());
+                saveProject.setNotStoredStations(projectFavView.getProject().getNotStoredStations());
 
                 if(saveProject.getArchived()){
                     List<User> userList = userRepository.findUserByActiveProject(saveProject.getId());
@@ -236,12 +273,15 @@ public class ProjectService {
                 }
 
                 projectRepository.save(saveProject);
-                return projectRepository.getProjectedById(projectDto.getId());
+                return ProjectFavView.builder()
+                        .project(projectRepository.getProjectedById(projectFavView.getProject().getId()))
+                        .isFavorite(projectFavView.getIsFavorite())
+                        .build();
             } else {
-                log.error("Project with name '{}' already exist", projectDto.getName());
+                log.error("Project with name '{}' already exist", projectFavView.getProject().getName());
             }
         }else {
-            log.error("Project with ID{} does not exist", projectDto.getId());
+            log.error("Project with ID{} does not exist", projectFavView.getProject().getId());
         }
         return null;
     }
@@ -255,6 +295,59 @@ public class ProjectService {
             }
             projectRepository.delete(optionalProject.get());
         }else log.error("Project with ID " + projectId +" does not exist");
+    }
+
+    public void editFavorite(Long projectId, Boolean remove) {
+        User loggedUser = userService.getLoggedUser();
+        if(loggedUser != null){
+            if(!remove){
+                if(projectRepository.findProjectById(projectId).isPresent()
+                        && projectFavoriteRepository.findByUserIdAndProjectId(loggedUser.getId(), projectId).isEmpty()){
+                    ProjectFavorite projectFavorite = ProjectFavorite.builder()
+                            .userId(loggedUser.getId())
+                            .projectId(projectId)
+                            .build();
+                    loggedUser.addProjectFavorite(projectFavorite);
+                    userRepository.save(loggedUser);
+                    log.info("project with id {} favored by {}", projectId, loggedUser.getUsername());
+                } else {
+                    log.error("project with id {} does not exist or is already favored by {}", projectId, loggedUser.getUsername());
+                }
+            } else {
+                Optional<ProjectFavorite> optionalProjectFavorite = projectFavoriteRepository.findByUserIdAndProjectId(loggedUser.getId(), projectId);
+                if(optionalProjectFavorite.isPresent()){
+                    loggedUser.removeProjectFavorite(optionalProjectFavorite.get().getId());
+                    projectFavoriteRepository.delete(optionalProjectFavorite.get());
+                    log.info("project with id {} removed as favorite by {}", projectId, loggedUser.getUsername());
+                } else {
+                    log.error("project with id {} is not favored by {}", projectId, loggedUser.getUsername());
+                }
+            }
+        } else {
+            log.error("No User logged in");
+        }
+    }
+
+    public List<ProjectFavView> getFavorites(){
+        User loggedUser = userService.getLoggedUser();
+        if(loggedUser != null){
+            List<ProjectFavorite> projectFavorite = loggedUser.getProjectFavorite();
+            List<ProjectFavView> projectFavViews = new ArrayList<>();
+            if(projectFavorite != null && !projectFavorite.isEmpty()){
+                for(ProjectFavorite projectFavoriteItem : projectFavorite){
+                    ProjectView projectView = projectRepository.findProjectProjectedById(projectFavoriteItem.getId());
+                    if(projectView != null){
+                        ProjectFavView projectFavView = ProjectFavView.builder()
+                                .project(projectView)
+                                .isFavorite(true)
+                                .build();
+                        projectFavViews.add(projectFavView);
+                    }
+                }
+            }
+            return projectFavViews;
+        }
+        return null;
     }
 
 //    ########################## addition ##############################

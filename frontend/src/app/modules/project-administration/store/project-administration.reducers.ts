@@ -6,7 +6,7 @@ import {
   loadProjectViewFail,
   loadProjectViewSuccess, updateProjectSuccess
 } from "./project-administration.actions";
-import {projectViewModel} from "./project-administration.model";
+import {projectFavViewModel} from "./project-administration.model";
 
 
 const _projectReducer = createReducer(
@@ -47,7 +47,7 @@ const _projectReducer = createReducer(
     const projectViewOld={...action.projectViewOld};
     const projectViewNew={...action.projectViewNew};
     const updatedProject=state.projectViewList.map(projectView=>{
-      return projectViewOld.id===projectView.id?projectViewNew:projectView;
+      return projectViewOld.project.id===projectView.project.id?projectViewNew:projectView;
     });
     return{
       ...state,
@@ -57,8 +57,8 @@ const _projectReducer = createReducer(
 
 
   on(deleteProject, (state,action) => {
-    const updatedProject=state.projectViewList.filter((data:projectViewModel)=>{
-      return data.id!==action.id
+    const updatedProject=state.projectViewList.filter((data:projectFavViewModel)=>{
+      return data.project.id!==action.id
     });
     return{
       ...state,

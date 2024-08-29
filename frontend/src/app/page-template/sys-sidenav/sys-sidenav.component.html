@@ -7,9 +7,11 @@
     <span>
       <mat-divider class="divider-container" vertical="true"></mat-divider>
     </span>
-    <span class="alignment-project">
-      {{activeProjectView.projectView.name}}
+    <ng-container *ngIf="activeProjectView">
+      <span class="alignment-project">
+      {{activeProjectView.projectView.project.name}}
     </span>
+    </ng-container>
   </div>
   <!--  right side-->
   <span class="flex-container justify-content-between">

@@ -2,9 +2,7 @@ package org.sysprotec.restapi.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.sysprotec.restapi.model.Project;
-import org.sysprotec.restapi.model.projections.ProjectDto;
-import org.sysprotec.restapi.model.projections.ProjectView;
+import org.sysprotec.restapi.model.projections.ProjectFavView;
 import org.sysprotec.restapi.service.ProjectService;
 
 import java.util.List;
@@ -18,29 +16,40 @@ public class ProjectController {
 
 
     @GetMapping("/all/{archive}")
-    public List<Project> getAllProjects(@PathVariable Boolean archive){
+    public List<ProjectFavView> getAllProjects(@PathVariable Boolean archive){
         return projectService.getAllProjects(archive);
     }
 
     @GetMapping
-    public ProjectDto getActiveProject(){
+    public ProjectFavView getActiveProject(){
         return projectService.getActiveProject();
     }
 
     @PostMapping("{template}")
-    public ProjectDto addProject(
-            @RequestBody ProjectDto projectDto,
+    public ProjectFavView addProject(
+            @RequestBody ProjectFavView projectFavView,
             @PathVariable String template){
-        return projectService.addProject(projectDto, template);
+        return projectService.addProject(projectFavView, template);
     }
 
     @PutMapping
-    public ProjectDto updateProject(@RequestBody ProjectDto projectDto){
-        return projectService.updateProject(projectDto);
+    public ProjectFavView updateProject(@RequestBody ProjectFavView projectFavView){
+        return projectService.updateProject(projectFavView);
     }
 
     @DeleteMapping("{projectId}")
     public void deleteProject(@PathVariable Long projectId){
         projectService.deleteProject(projectId);
+    }
+
+    @GetMapping("favorite/{projectId}/{remove}")
+    public void editFavorite(@PathVariable Long projectId,
+                             @PathVariable Boolean remove){
+        projectService.editFavorite(projectId, remove);
+    }
+
+    @GetMapping("/favorite")
+    public List<ProjectFavView> getFavorites(){
+        return projectService.getFavorites();
     }
 }

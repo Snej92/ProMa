@@ -24,7 +24,9 @@
           </ng-container>
           <ng-container *ngIf="editControlSettings[control.id].isEdit">
             <mat-form-field class="alignment edit-mat-form-field-doku">
-              <input matInput [(ngModel)]="editControlSettings[control.id].controlSetting.item">
+              <input matInput
+                     [(ngModel)]="editControlSettings[control.id].controlSetting.item"
+                     maxlength="100">
             </mat-form-field>
           </ng-container>
         </td>

@@ -17,15 +17,6 @@
 
       <div class="d-flex justify-content-between">
         <mat-form-field class="mat-mdc-form-field-2">
-          <mat-label>Bearbeiter</mat-label>
-          <mat-select formControlName="issuerAcronym">
-            <ng-container *ngFor="let user of user.userList">
-              <mat-option [value]="user.acronym">{{user.firstname}} {{user.lastname}}</mat-option>
-            </ng-container>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field class="mat-mdc-form-field-2">
           <mat-label>Status</mat-label>
           <mat-select formControlName="status">
             <mat-option value="INARBEIT">in Arbeit</mat-option>
@@ -33,7 +24,43 @@
             <mat-option value="AUSGELAGERT">Ausgelagert</mat-option>
           </mat-select>
         </mat-form-field>
+
+        <ng-container *ngIf="!manualCheckboxRef.checked">
+          <mat-form-field class="mat-mdc-form-field-2">
+            <mat-label>Bearbeiter</mat-label>
+            <mat-select formControlName="issuerAcronym">
+              <ng-container *ngFor="let user of user.userList">
+                <mat-option [value]="user.acronym">{{user.firstname}} {{user.lastname}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
       </div>
+
+      <div class="d-flex justify-content-between mb-2">
+        <mat-checkbox #manualCheckboxRef
+                      (change)="onManualInputChange($event)">
+          Bearbeiter Manuell eingeben
+        </mat-checkbox>
+      </div>
+
+      <ng-container *ngIf="manualCheckboxRef.checked">
+        <div class="d-flex justify-content-between">
+          <mat-form-field class="mat-mdc-form-field-2">
+            <mat-label>Bearbeiter Kürzel</mat-label>
+            <input maxlength="3"
+                   matInput
+                   formControlName="issuerAcronym">
+          </mat-form-field>
+
+          <mat-form-field class="mat-mdc-form-field-2">
+            <mat-label>Bearbeiter Name</mat-label>
+            <input maxlength="30"
+                   matInput
+                   formControlName="issuerName">
+          </mat-form-field>
+        </div>
+      </ng-container>
 
 <!--      Additional Header data-->
       <ng-container *ngIf="!data.isEdit && headerDataSettings.headerDataSettingList.length > 0">

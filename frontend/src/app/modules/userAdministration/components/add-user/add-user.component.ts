@@ -8,6 +8,7 @@ import {loadSpinner} from "../../../../core/store/app.action";
 import {addUser, updateUser} from "../../store/user-administration.actions";
 import {getUserById} from "../../store/user-administration.selectors";
 import {Subscription} from "rxjs";
+import {global} from "../../../../core/store/app.model";
 
 
 @Component({
@@ -38,13 +39,13 @@ export class AddUserComponent implements OnInit{
     lastname:this.builder.control('', Validators.required),
     firstname:this.builder.control('', Validators.required),
     acronym: this.builder.control('', Validators.required),
-    email:this.builder.control('', Validators.required),
+    email:this.builder.control('', [Validators.required, Validators.pattern(global.emailRegex)]),
     phone:this.builder.control(''),
     username:this.builder.control('', Validators.required),
     password:this.builder.control('', Validators.required),
     adminRole:this.builder.control(false),
     projectRole:this.builder.control(false),
-    userRole:this.builder.control(false)
+    userRole:this.builder.control(true)
   })
 
   saveUser() {

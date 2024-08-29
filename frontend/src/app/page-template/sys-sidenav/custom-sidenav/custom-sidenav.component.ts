@@ -52,8 +52,6 @@ export class CustomSidenavComponent implements OnInit{
   ])
 
   ngOnInit(): void {
-    console.log("logged user sidenav: ")
-    console.log(this.loggedUser)
     if(!this.loggedUser.user.roles.projectRole){
       this.menuItems = signal<MenuItem[]>([
         {

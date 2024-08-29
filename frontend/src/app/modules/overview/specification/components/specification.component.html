@@ -58,9 +58,23 @@
             <mat-form-field class="alignment edit-mat-form-field-data">
               <input matInput #inputFieldDateDone [(ngModel)]="editSpecificationDateDone[specification.id].specification.dateDone"
                      (keydown.enter)="updateStationSpecificationDateDone(specification.id)"
-                     (blur)="updateStationSpecificationDateDone(specification.id)">
+                     (keydown.escape)="leaveEdit(specification.id)"
+                     (blur)="onBlur(picker, specification.id)"
+                     [matDatepicker]="picker"
+                     (dateChange)="onDateChange($event.value, specification.id)"
+                     [placeholder]="editSpecificationDateDone[specification.id].specification.dateDone"
+                     (input)="onInputChange($event)">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker (closed)="inputFieldDateDone.focus()"></mat-datepicker>
             </mat-form-field>
           </ng-container>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Benutzer">
+        <th class="th-center" mat-header-cell *matHeaderCellDef> Benutzer </th>
+        <td class="td-center" mat-cell *matCellDef="let specification">
+          <span [matTooltip]="specification?.issuerName"> {{specification?.issuerAcronym}} </span>
         </td>
       </ng-container>
 

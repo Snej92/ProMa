@@ -4,6 +4,7 @@ import {Subscription} from "rxjs";
 
 import {Store} from "@ngrx/store";
 import {AppStateModel} from "./core/store/appState.model";
+import {DateAdapter} from "@angular/material/core";
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,10 @@ export class AppComponent implements OnInit, OnDestroy{
   title = 'ProMa - SYSPROTEC';
 
   public constructor(private titleService: Title,
-                     private store:Store<AppStateModel>){}
+                     private store:Store<AppStateModel>,
+                     private dateAdapter: DateAdapter<Date>){
+    this.dateAdapter.setLocale('de');
+  }
 
   public setTitle(newTitle: string){
     this.titleService.setTitle(newTitle);

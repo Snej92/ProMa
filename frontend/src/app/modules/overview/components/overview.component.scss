@@ -2,6 +2,17 @@
   padding: 1.2%;
 }
 
+.mat-tab-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.mat-tab-body-content {
+  flex: 1;
+  overflow: auto;
+}
+
 .overview-container {
   margin-top: 4px;
   margin-left: 20px;

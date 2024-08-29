@@ -19,7 +19,7 @@
         <ng-container *ngFor="let stationView of stationView.stationViewList">
           <mat-tab [label]="stationView.name">
             <ng-template matTabContent>
-              <div [ngSwitch]="selectedOverview" class="mat-tab-group-content">
+              <div [ngSwitch]="selectedOverview" class="mat-tab-group-content mat-tab-body mat-tab-body-content">
                 <app-station-overview (selectedOverviewEmitted)="receiveSelectedOverview($event)" *ngSwitchCase="1" [stationViewInput]="stationView" [stationId]="stationView.id"></app-station-overview>
                 <app-header-data *ngSwitchCase="2" [stationId]="stationView.id"></app-header-data>
                 <app-specification *ngSwitchCase="3" [stationId]="stationView.id"></app-specification>

@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'overview', component: OverviewComponent, canActivate: [AuthGuard]},
   {path: 'version', component: VersionComponent, canActivate: [AuthGuard]},
   {path: 'station', component: StationComponent, canActivate: [AuthGuard]},
-  {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard], data:{roles:['project']}},
+  {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard], data:{roles:['project', 'admin']}},
   {path: 'overall', component: OverallViewComponent, canActivate: [AuthGuard]},
   {path: 'userAdministration', component: UserAdministrationComponent, canActivate: [AuthGuard], data:{roles:['admin']}},
   {path: 'projectAdministration/:archive', component: ProjectAdministrationComponent, canActivate: [AuthGuard]},

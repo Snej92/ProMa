@@ -25,24 +25,27 @@ public class HistoryService {
     private final UserService userService;
 
 
-    public void newEntryAuto(User user, Long StationId, String item){
-        if (stationRepository.findById(StationId).isPresent()){
-            Station station = stationRepository.findById(StationId).get();
-            History newHistory = History.builder()
-                    .date(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")))
-                    .item(item)
-                    .userAcronym(user.getAcronym())
-                    .filename("")
-                    .station(station)
-                    .fileTransfer(false)
-                    .transferType(0)
-                    .eplan(false)
-                    .build();
-            if(!newHistory.getItem().isBlank()){
-                historyRepository.save(newHistory);
-                log.info("New history saved");
-            } else {
-                log.warn("New history not saved cause item was blank");
+    public void newEntryAuto(Long StationId, String item){
+        User loggedUser = userService.getLoggedUser();
+        if(loggedUser != null){
+            if (stationRepository.findById(StationId).isPresent()){
+                Station station = stationRepository.findById(StationId).get();
+                History newHistory = History.builder()
+                        .date(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")))
+                        .item(item)
+                        .userAcronym(loggedUser.getAcronym())
+                        .filename("")
+                        .station(station)
+                        .fileTransfer(false)
+                        .transferType(0)
+                        .eplan(false)
+                        .build();
+                if(!newHistory.getItem().isBlank()){
+                    historyRepository.save(newHistory);
+                    log.info("New history saved");
+                } else {
+                    log.warn("New history not saved cause item was blank");
+                }
             }
         }
     }

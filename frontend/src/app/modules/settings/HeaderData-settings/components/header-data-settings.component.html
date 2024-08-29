@@ -46,11 +46,11 @@
                      [(ngModel)]="editHeaderDataSettings[headerData.id].headerDataSetting.item"
                      (ngModelChange)="validateInput($event)"
                      required
-                     pattern="^[A-Za-z0-9_äöü \-]*$"
+                     pattern="^[A-Za-z0-9_äöü /\-]*$"
                      #input="ngModel"
-              >
+                     maxlength="100">
               <mat-error *ngIf="invalidInput" class="custom-input-error">
-                Bitte nur Buchstaben (keine Umlaute) und Zahlen verwenden
+                Nicht erlaubte Zeichen verwendet. Erlaubt: A-Z, 0-9, äöü, \/-
               </mat-error>
               <mat-error *ngIf="input.hasError('required')" class="custom-input-error">
                 Dieses Feld ist erforderlich

@@ -60,7 +60,6 @@ public class HeaderDataService {
 
 
             historyService.newEntryAuto(
-                    user,
                     saveHeaderData.getStation().getId(),
                     historyText);
             return saveHeaderData;

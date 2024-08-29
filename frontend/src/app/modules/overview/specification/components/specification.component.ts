@@ -7,6 +7,9 @@ import {MatCheckboxChange} from "@angular/material/checkbox";
 import {editSpecificationModel, specification} from "../store/specification.model";
 import {loadStationSpecification, updateStationSpecification} from "../store/specification.actions";
 import {getSpecificationById, getSpecificationInfo} from "../store/specification.selectors";
+import {DatePipe} from "@angular/common";
+import {global} from "../../../../core/store/app.model";
+import {MatDatepicker} from "@angular/material/datepicker";
 
 @Component({
   selector: 'app-specification',
@@ -18,11 +21,14 @@ export class SpecificationComponent implements OnInit, OnDestroy{
   specification !: specification;
   editSpecification: { [key: number]: editSpecificationModel } = {};
   editSpecificationDateDone: { [key: number]: editSpecificationModel } = {};
-  displayedColumns: string[] = ['Vorgabe', 'Zusatz', 'Erledigt', 'Datum erledigt'];
+  displayedColumns: string[] = ['Vorgabe', 'Zusatz', 'Erledigt', 'Datum erledigt', 'Benutzer'];
   @Input() stationId!:number;
   @ViewChild('inputField', {static: false}) inputField!: ElementRef;
   @ViewChild('inputFieldDateDone', {static: false}) inputFieldDateDone!: ElementRef;
-
+  manualDateInput : boolean = false;
+  validDate : boolean = false;
+  date!: string;
+  datePipe = new DatePipe('de-DE');
 
   constructor(private store:Store<AppStateModel>) {
   }
@@ -93,10 +99,52 @@ export class SpecificationComponent implements OnInit, OnDestroy{
   }
 
   updateStationSpecificationDateDone(id:any){
-    console.log("update specification date done")
-    this.editSpecificationDateDone[id].isEdit = !this.editSpecificationDateDone[id].isEdit
-    this.store.dispatch(loadSpinner({isLoading:true}))
-    this.store.dispatch(updateStationSpecification({specificationInput:this.editSpecificationDateDone[id].specification}))
+    if(this.validDate){
+      console.log("update specification date done")
+      this.editSpecificationDateDone[id].isEdit = !this.editSpecificationDateDone[id].isEdit
+      this.editSpecificationDateDone[id].specification.dateDone = this.date;
+      this.store.dispatch(loadSpinner({isLoading:true}))
+      this.store.dispatch(updateStationSpecification({specificationInput:this.editSpecificationDateDone[id].specification}))
+    }
+  }
+
+  //Datepicker
+  onDateChange(selectedDate: Date, id:any) {
+    if(!this.manualDateInput){
+      if (selectedDate){
+        this.date = this.datePipe.transform(selectedDate, 'dd.MM.yyyy')!;
+        this.validDate = global.dateRegex.test(this.date);
+        this.updateStationSpecificationDateDone(id);
+      } else {
+        this.date = '';
+      }
+    }
+    this.manualDateInput = false;
+  }
+
+  onInputChange(event: Event){
+    this.manualDateInput = true;
+    console.log("manual date input");
+    this.date = (event.target as HTMLInputElement).value;
+    this.validDate = global.dateRegex.test(this.date);
+  }
+
+  onBlur(picker: MatDatepicker<any>, id:any){
+    setTimeout(() => {
+      if (!picker.opened) {
+        if(this.validDate){
+          this.updateStationSpecificationDateDone(id);
+        } else {
+          setTimeout(()=> {
+            this.inputFieldDateDone.nativeElement.focus();
+          }, 0);
+        }
+      }
+    }, 200);
+  }
+
+  leaveEdit(id:any){
+    this.editSpecificationDateDone[id].isEdit = false
   }
 
   ngOnDestroy(): void {

@@ -7,6 +7,9 @@ import {MatCheckboxChange} from "@angular/material/checkbox";
 import {control, editControlModel} from "../store/control.model";
 import {loadStationControl, updateStationControl} from "../store/control.actions";
 import {getControlById, getControlInfo} from "../store/control.selectors";
+import {global} from "../../../../core/store/app.model";
+import {DatePipe} from "@angular/common";
+import {MatDatepicker} from "@angular/material/datepicker";
 
 @Component({
   selector: 'app-control',
@@ -18,10 +21,14 @@ export class ControlComponent implements OnInit, OnDestroy{
   control !: control;
   editControl: { [key: number]: editControlModel } = {};
   editControlDateDone: { [key: number]: editControlModel } = {};
-  displayedColumns: string[] = ['Kontrolle', 'Zusatz', 'Erledigt', 'Datum erledigt'];
+  displayedColumns: string[] = ['Kontrolle', 'Zusatz', 'Erledigt', 'Datum erledigt', 'Benutzer'];
   @Input() stationId!:number;
   @ViewChild('inputField', {static: false}) inputField!: ElementRef;
   @ViewChild('inputFieldDateDone', {static: false}) inputFieldDateDone!: ElementRef;
+  manualDateInput : boolean = false;
+  validDate : boolean = false;
+  date!: string;
+  datePipe = new DatePipe('de-DE');
 
 
   constructor(private store:Store<AppStateModel>) {
@@ -56,6 +63,7 @@ export class ControlComponent implements OnInit, OnDestroy{
   setEdit(id:any){
     console.log("enable edit ID: "+ id);
     this.editControl[id].isEdit = !this.editControl[id].isEdit
+    this.date = this.editControl[id].control.dateDone
     setTimeout(()=> {
       this.inputField.nativeElement.focus();
     }, 0);
@@ -93,10 +101,52 @@ export class ControlComponent implements OnInit, OnDestroy{
   }
 
   updateStationControlDateDone(id:any){
-    console.log("update control date done")
-    this.editControlDateDone[id].isEdit = !this.editControlDateDone[id].isEdit
-    this.store.dispatch(loadSpinner({isLoading:true}))
-    this.store.dispatch(updateStationControl({controlInput:this.editControlDateDone[id].control}))
+    if(this.validDate){
+      console.log("update control date done")
+      this.editControlDateDone[id].isEdit = !this.editControlDateDone[id].isEdit
+      this.editControlDateDone[id].control.dateDone = this.date;
+      this.store.dispatch(loadSpinner({isLoading:true}))
+      this.store.dispatch(updateStationControl({controlInput:this.editControlDateDone[id].control}))
+    }
+  }
+
+  //Datepicker
+  onDateChange(selectedDate: Date, id:any) {
+    if(!this.manualDateInput){
+      if (selectedDate){
+        this.date = this.datePipe.transform(selectedDate, 'dd.MM.yyyy')!;
+        this.validDate = global.dateRegex.test(this.date);
+        this.updateStationControlDateDone(id);
+      } else {
+        this.date = '';
+      }
+    }
+    this.manualDateInput = false;
+  }
+
+  onInputChange(event: Event){
+    this.manualDateInput = true;
+    console.log("manual date input");
+    this.date = (event.target as HTMLInputElement).value;
+    this.validDate = global.dateRegex.test(this.date);
+  }
+
+  onBlur(picker: MatDatepicker<any>, id:any){
+    setTimeout(() => {
+      if (!picker.opened) {
+        if(this.validDate){
+          this.updateStationControlDateDone(id);
+        } else {
+          setTimeout(()=> {
+            this.inputFieldDateDone.nativeElement.focus();
+          }, 0);
+        }
+      }
+    }, 200);
+  }
+
+  leaveEdit(id:any){
+    this.editControlDateDone[id].isEdit = false
   }
 
   ngOnDestroy(): void {

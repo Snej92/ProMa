@@ -1,7 +1,7 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AppStateModel} from "../../../core/store/appState.model";
 import {Store} from "@ngrx/store";
-import {filter, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import {projectView} from "../store/project-administration.model";
 import {loadSpinner} from "../../../core/store/app.action";
 import {loadProjectView} from "../store/project-administration.actions";
@@ -10,7 +10,7 @@ import {loggedUser} from "../../../core/logged-user/logged-user.model";
 import {getLoggedUserInfo} from "../../../core/logged-user/logged-user.selectors";
 import {MatDialog} from "@angular/material/dialog";
 import {AddProjectComponent} from "./add-project/add-project.component";
-import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-project-administration',
@@ -33,7 +33,7 @@ export class ProjectAdministrationComponent implements OnInit, OnDestroy{
     this.openPopup(0, 'Projekt Hinzufügen', false, 'Hinzufügen', this.projectView)
   }
 
-  openPopup(id:any, title:any, isEdit=false, button:any, projects:projectView){
+  openPopup(id:any, title:any, isEdit=false, button:any, project:projectView){
     this.dialog.open(AddProjectComponent,{
       width:'30%',
       data:{
@@ -41,7 +41,7 @@ export class ProjectAdministrationComponent implements OnInit, OnDestroy{
         title: title,
         isEdit:isEdit,
         button:button,
-        projects:projects
+        project:project
       }
     })
   }
@@ -54,7 +54,6 @@ export class ProjectAdministrationComponent implements OnInit, OnDestroy{
   }
 
   reloadComponent(){
-    console.log("Archive: " + this.archive);
     this.store.dispatch(loadSpinner({isLoading:true}))
     this.store.dispatch(loadProjectView({archive:this.archive}))
     this.subscriptions.push(

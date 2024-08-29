@@ -2,6 +2,7 @@ package org.sysprotec.restapi.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.sysprotec.restapi.model.Project;
 import org.sysprotec.restapi.model.Station;
 import org.sysprotec.restapi.model.projections.HeaderDataInput;
 import org.sysprotec.restapi.model.projections.StationDto;
@@ -52,5 +53,16 @@ public class StationController {
     @PostMapping("/updateStationStatus")
     public void updateAllStationStatus(){
         stationService.updateAllStationStatus();
+    }
+
+    @GetMapping("favorite/{stationId}/{remove}")
+    public void editFavorite(@PathVariable Long stationId,
+                             @PathVariable Boolean remove){
+        stationService.editFavorite(stationId, remove);
+    }
+
+    @GetMapping("/favorite")
+    public List<StationView> getFavorites(){
+        return stationService.getFavorites();
     }
 }

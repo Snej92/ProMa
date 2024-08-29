@@ -50,6 +50,9 @@
   color: white;
   background-color: var(--frontend-primary);
   height: 50px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .mat-mdc-row:nth-child(even){

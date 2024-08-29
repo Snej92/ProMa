@@ -110,7 +110,7 @@ export class VersionComponent implements OnInit,OnDestroy{
       version:this.editVersion[versionId].version.version,
       versionStation: Object.values(this.editVersion[versionId].version.versionStation),
     }
-    // this.store.dispatch(loadSpinner({isLoading:true}));
+    this.store.dispatch(loadSpinner({isLoading:true}));
     this.store.dispatch(updateVersion({versionInput:updateVersionModel}));
   }
 

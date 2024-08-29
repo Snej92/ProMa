@@ -1,11 +1,11 @@
 package org.sysprotec.restapi.model.projections;
 
-import org.sysprotec.restapi.model.settings.TaskSetting;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.sysprotec.restapi.model.deserialization.ProjectViewImpl;
 
-import java.util.List;
-
+@JsonDeserialize(as = ProjectViewImpl.class)
 public interface ProjectView {
-    Integer getId();
+    Long getId();
     Boolean getArchived();
     String getName();
     String getDescription();
@@ -13,8 +13,4 @@ public interface ProjectView {
     Integer getInProgressStations();
     Integer getStoredStations();
     Integer getNotStoredStations();
-    List<TaskSetting> getDocumentationSetting();
-    List<TaskSetting> getControlSetting();
-    List<TaskSetting> getSpecificationSetting();
-    List<TaskSetting> getProjectionSetting();
 }

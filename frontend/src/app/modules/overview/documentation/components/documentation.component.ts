@@ -7,6 +7,9 @@ import {loadStationDocumentation, updateStationDocumentation} from "../store/doc
 import {getDocumentationById, getDocumentationInfo} from "../store/documentation.selectors";
 import {documentation, editDocumentationModel} from "../store/documentation.model";
 import {MatCheckboxChange} from "@angular/material/checkbox";
+import {DatePipe} from "@angular/common";
+import {global} from "../../../../core/store/app.model";
+import {MatDatepicker} from "@angular/material/datepicker";
 
 
 
@@ -21,12 +24,18 @@ export class DocumentationComponent implements OnInit, OnDestroy{
   editDocumentation: { [key: number]: editDocumentationModel } = {};
   editDocumentationDateDone: { [key: number]: editDocumentationModel } = {};
   editDocumentationDateCommited: { [key: number]: editDocumentationModel } = {};
-  displayedColumns: string[] = ['Doku', 'Zusatz', 'Erledigt', 'Datum erledigt', 'Übergeben', 'Datum übergeben'];
+  displayedColumns: string[] = ['Doku', 'Zusatz', 'Erledigt', 'Datum erledigt', 'Übergeben', 'Datum übergeben', 'Benutzer'];
   @Input() stationId!:number;
   @ViewChild('inputField', {static: false}) inputFieldAddition!: ElementRef;
   @ViewChild('inputFieldDateDone', {static: false}) inputFieldDateDone!: ElementRef;
   @ViewChild('inputFieldDateCommited', {static: false}) inputFieldDateCommited!: ElementRef;
-
+  manualDateInputDone : boolean = false;
+  manualDateInputCommited : boolean = false;
+  validDateDone : boolean = false;
+  validDateCommited : boolean = false;
+  dateDone!: string;
+  dateCommited!: string;
+  datePipe = new DatePipe('de-DE');
 
   constructor(private store:Store<AppStateModel>) {
   }
@@ -112,17 +121,102 @@ export class DocumentationComponent implements OnInit, OnDestroy{
   }
 
   updateStationDocumentationDateDone(id:any){
-    console.log("update documentation date done")
-    this.editDocumentationDateDone[id].isEdit = !this.editDocumentationDateDone[id].isEdit
-    this.store.dispatch(loadSpinner({isLoading:true}))
-    this.store.dispatch(updateStationDocumentation({documentationInput:this.editDocumentationDateDone[id].documentation}))
+    if(this.validDateDone){
+      console.log("update documentation date done")
+      this.editDocumentationDateDone[id].isEdit = !this.editDocumentationDateDone[id].isEdit
+      this.editDocumentationDateDone[id].documentation.dateDone = this.dateDone;
+      this.store.dispatch(loadSpinner({isLoading:true}))
+      this.store.dispatch(updateStationDocumentation({documentationInput:this.editDocumentationDateDone[id].documentation}))
+    }
   }
 
   updateStationDocumentationDateCommited(id:any){
-    console.log("update documentation date commited")
-    this.editDocumentationDateCommited[id].isEdit = !this.editDocumentationDateCommited[id].isEdit
-    this.store.dispatch(loadSpinner({isLoading:true}))
-    this.store.dispatch(updateStationDocumentation({documentationInput:this.editDocumentationDateCommited[id].documentation}))
+    if(this.validDateCommited){
+      console.log("update documentation date commited")
+      this.editDocumentationDateCommited[id].isEdit = !this.editDocumentationDateCommited[id].isEdit
+      this.editDocumentationDateCommited[id].documentation.dateCommited = this.dateCommited;
+      this.store.dispatch(loadSpinner({isLoading:true}))
+      this.store.dispatch(updateStationDocumentation({documentationInput:this.editDocumentationDateCommited[id].documentation}))
+    }
+  }
+
+  //Datepicker
+  //Done
+  onDateChangeDone(selectedDate: Date, id:any) {
+    if(!this.manualDateInputDone){
+      if (selectedDate){
+        this.dateDone = this.datePipe.transform(selectedDate, 'dd.MM.yyyy')!;
+        this.validDateDone = global.dateRegex.test(this.dateDone);
+        this.updateStationDocumentationDateDone(id);
+      } else {
+        this.dateDone = '';
+      }
+    }
+    this.manualDateInputDone = false;
+  }
+
+  onInputChangeDone(event: Event){
+    this.manualDateInputDone = true;
+    console.log("manual date input");
+    this.dateDone = (event.target as HTMLInputElement).value;
+    this.validDateDone = global.dateRegex.test(this.dateDone);
+  }
+
+  //Commited
+  onDateChangeCommited(selectedDate: Date, id:any) {
+    if(!this.manualDateInputCommited){
+      if (selectedDate){
+        this.dateCommited = this.datePipe.transform(selectedDate, 'dd.MM.yyyy')!;
+        this.validDateCommited = global.dateRegex.test(this.dateCommited);
+        this.updateStationDocumentationDateCommited(id);
+      } else {
+        this.dateCommited = '';
+      }
+    }
+    this.manualDateInputCommited = false;
+  }
+
+  onInputChangeCommited(event: Event){
+    this.manualDateInputCommited = true;
+    console.log("manual date input");
+    this.dateCommited = (event.target as HTMLInputElement).value;
+    this.validDateCommited = global.dateRegex.test(this.dateCommited);
+  }
+
+  onBlurCommited(picker: MatDatepicker<any>, id:any){
+    setTimeout(() => {
+      if (!picker.opened) {
+        if(this.validDateCommited){
+          this.updateStationDocumentationDateCommited(id);
+        } else {
+          setTimeout(()=> {
+            this.inputFieldDateCommited.nativeElement.focus();
+          }, 0);
+        }
+      }
+    }, 200);
+  }
+
+  onBlurDone(picker: MatDatepicker<any>, id:any){
+    setTimeout(() => {
+      if (!picker.opened) {
+        if(this.validDateDone){
+          this.updateStationDocumentationDateDone(id);
+        } else {
+          setTimeout(()=> {
+            this.inputFieldDateDone.nativeElement.focus();
+          }, 0);
+        }
+      }
+    }, 200);
+  }
+
+  leaveEditCommited(id:any){
+    this.editDocumentationDateCommited[id].isEdit = false
+  }
+
+  leaveEditDone(id:any){
+    this.editDocumentationDateDone[id].isEdit = false
   }
 
   ngOnDestroy(): void {

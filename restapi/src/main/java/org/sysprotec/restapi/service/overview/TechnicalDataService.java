@@ -60,7 +60,6 @@ public class TechnicalDataService {
 
 
             historyService.newEntryAuto(
-                    user,
                     saveTechnicalData.getStation().getId(),
                     historyText);
             return saveTechnicalData;

@@ -76,7 +76,6 @@ public class LopService {
             stationService.updateStationLopProgress(stationRepository.getStationByLopId(lop.getId()));
 
             historyService.newEntryAuto(
-                    user,
                     saveLop.getStation().getId(),
                     "Status von LOP: '" + saveLop.getItem() + "' von '" + saveLop.getStation().getName() + "' geändert auf: " + saveLop.getStatus());
             return saveLop;

@@ -45,7 +45,10 @@ public class DocumentationService {
         if(optionalTask.isEmpty()){
             log.error("Documentation with id "+ task.getId() + " does not exist in database");
         } else {
+            User loggedUser = userService.getLoggedUser();
             String historyText = "";
+            String acronym = "";
+            String name = "";
 
             TaskSetting taskSetting = optionalTask.get().getTaskSetting();
             Task saveTask = optionalTask.get();
@@ -58,6 +61,8 @@ public class DocumentationService {
                     historyText = "Doku '" + saveTask.getTaskSetting().getItem() + "' auf 'nicht erledigt' geändert";
                     log.info("Doku '" + saveTask.getTaskSetting().getItem() + "' auf 'nicht erledigt' geändert");
                 }
+                acronym = loggedUser.getAcronym();
+                name = loggedUser.getFirstname() + " " + loggedUser.getLastname();
             } else if(saveTask.getCommited() != task.getCommited()){
                 if(task.getCommited()){
                     historyText = "Doku '" + saveTask.getTaskSetting().getItem() + "' auf 'übergeben' geändert";
@@ -77,12 +82,12 @@ public class DocumentationService {
             saveTask.setAddition(task.getAddition());
             saveTask.setDone(task.getDone());
             saveTask.setCommited(task.getCommited());
-            User user = userService.getLoggedUser();
+            saveTask.setIssuerAcronym(acronym);
+            saveTask.setIssuerName(name);
 
             stationService.updateStationDocumentationProgress(stationRepository.getStationByDocumentationId(task.getId()));
 
             historyService.newEntryAuto(
-                    user,
                     saveTask.getStation().getId(),
                     historyText);
             return saveTask;

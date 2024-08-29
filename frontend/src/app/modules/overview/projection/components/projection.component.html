@@ -20,6 +20,8 @@
               <input matInput #inputField [(ngModel)]="editProjection[projection.id].projection.addition"
                      (keydown.enter)="updateStationProjection(projection.id)"
                      (blur)="updateStationProjection(projection.id)">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
           </ng-container>
         </td>
@@ -55,11 +57,25 @@
           </ng-container>
           <ng-container *ngIf="editProjectionDateDone[projection.id].isEdit">
             <mat-form-field class="alignment edit-mat-form-field-data">
-              <input matInput #inputFieldDateDone [(ngModel)]="editProjectionDateDone[projection.id].projection.dateDone"
+              <input matInput #inputFieldDateDone
                      (keydown.enter)="updateStationProjectionDateDone(projection.id)"
-                     (blur)="updateStationProjectionDateDone(projection.id)">
+                     (keydown.escape)="leaveEdit(projection.id)"
+                     (blur)="onBlur(picker, projection.id)"
+                     [matDatepicker]="picker"
+                     (dateChange)="onDateChange($event.value, projection.id)"
+                     [placeholder]="editProjectionDateDone[projection.id].projection.dateDone"
+                     (input)="onInputChange($event)">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker (closed)="inputFieldDateDone.focus()"></mat-datepicker>
             </mat-form-field>
           </ng-container>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Benutzer">
+        <th class="th-center" mat-header-cell *matHeaderCellDef> Benutzer </th>
+        <td class="td-center" mat-cell *matCellDef="let projection">
+          <span [matTooltip]="projection?.issuerName"> {{projection?.issuerAcronym}} </span>
         </td>
       </ng-container>
 
@@ -68,5 +84,3 @@
     </table>
   </div>
 </div>
-
-

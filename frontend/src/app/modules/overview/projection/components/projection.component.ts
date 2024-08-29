@@ -8,6 +8,9 @@ import {MatCheckboxChange} from "@angular/material/checkbox";
 import {editProjectionModel, projection} from "../store/projection.model";
 import {loadStationProjection, updateStationProjection} from "../store/projection.actions";
 import {getProjectionById, getProjectionInfo} from "../store/projection.selectors";
+import {DatePipe} from "@angular/common";
+import {global} from "../../../../core/store/app.model";
+import {MatDatepicker} from "@angular/material/datepicker";
 
 
 @Component({
@@ -20,10 +23,14 @@ export class ProjectionComponent implements OnInit, OnDestroy{
   projection !: projection;
   editProjection: { [key: number]: editProjectionModel } = {};
   editProjectionDateDone: { [key: number]: editProjectionModel } = {};
-  displayedColumns: string[] = ['Projektierung', 'Zusatz', 'Erledigt', 'Datum'];
+  displayedColumns: string[] = ['Projektierung', 'Zusatz', 'Erledigt', 'Datum', 'Benutzer'];
   @Input() stationId!:number;
   @ViewChild('inputField', {static: false}) inputField!: ElementRef;
   @ViewChild('inputFieldDateDone', {static: false}) inputFieldDateDone!: ElementRef;
+  manualDateInput : boolean = false;
+  validDate : boolean = false;
+  date!: string;
+  datePipe = new DatePipe('de-DE');
 
 
   constructor(private store:Store<AppStateModel>) {
@@ -90,17 +97,57 @@ export class ProjectionComponent implements OnInit, OnDestroy{
   updateStationProjection(id:any){
     console.log("update projection")
     this.editProjection[id].isEdit = !this.editProjection[id].isEdit
-    console.log(this.editProjection[id].projection);
     this.store.dispatch(loadSpinner({isLoading:true}))
     this.store.dispatch(updateStationProjection({projectionInput:this.editProjection[id].projection}))
   }
 
   updateStationProjectionDateDone(id:any){
-    console.log("update projection date done")
-    this.editProjectionDateDone[id].isEdit = !this.editProjectionDateDone[id].isEdit
-    console.log(this.editProjectionDateDone[id].projection);
-    this.store.dispatch(loadSpinner({isLoading:true}))
-    this.store.dispatch(updateStationProjection({projectionInput:this.editProjectionDateDone[id].projection}))
+    if(this.validDate){
+      console.log("update projection date done")
+      this.editProjectionDateDone[id].isEdit = !this.editProjectionDateDone[id].isEdit
+      this.editProjectionDateDone[id].projection.dateDone = this.date;
+      this.store.dispatch(loadSpinner({isLoading:true}))
+      this.store.dispatch(updateStationProjection({projectionInput:this.editProjectionDateDone[id].projection}))
+    }
+  }
+
+  //Datepicker
+  onDateChange(selectedDate: Date, id:any) {
+    if(!this.manualDateInput){
+      if (selectedDate){
+        this.date = this.datePipe.transform(selectedDate, 'dd.MM.yyyy')!;
+        this.validDate = global.dateRegex.test(this.date);
+        this.updateStationProjectionDateDone(id);
+      } else {
+        this.date = '';
+      }
+    }
+    this.manualDateInput = false;
+  }
+
+  onInputChange(event: Event){
+    this.manualDateInput = true;
+    console.log("manual date input");
+    this.date = (event.target as HTMLInputElement).value;
+    this.validDate = global.dateRegex.test(this.date);
+  }
+
+  onBlur(picker: MatDatepicker<any>, id:any){
+    setTimeout(() => {
+      if (!picker.opened) {
+        if(this.validDate){
+          this.updateStationProjectionDateDone(id);
+        } else {
+          setTimeout(()=> {
+            this.inputFieldDateDone.nativeElement.focus();
+          }, 0);
+        }
+      }
+    }, 200);
+  }
+
+  leaveEdit(id:any){
+    this.editProjectionDateDone[id].isEdit = false
   }
 
   ngOnDestroy(): void {

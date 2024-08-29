@@ -45,9 +45,16 @@
           </ng-container>
           <ng-container *ngIf="editDocumentationDateDone[documentation.id].isEdit">
             <mat-form-field class="alignment edit-mat-form-field-data">
-              <input matInput #inputFieldDateDone [(ngModel)]="editDocumentationDateDone[documentation.id].documentation.dateDone"
+              <input matInput #inputFieldDateDone
                      (keydown.enter)="updateStationDocumentationDateDone(documentation.id)"
-                     (blur)="updateStationDocumentationDateDone(documentation.id)">
+                     (keydown.escape)="leaveEditDone(documentation.id)"
+                     (blur)="onBlurDone(picker1, documentation.id)"
+                     [matDatepicker]="picker1"
+                     (dateChange)="onDateChangeDone($event.value, documentation.id)"
+                     [placeholder]="editDocumentationDateDone[documentation.id].documentation.dateDone"
+                     (input)="onInputChangeDone($event)">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1 (closed)="inputFieldDateDone.focus()"></mat-datepicker>
             </mat-form-field>
           </ng-container>
         </td>
@@ -73,11 +80,25 @@
           </ng-container>
           <ng-container *ngIf="editDocumentationDateCommited[documentation.id].isEdit">
             <mat-form-field class="alignment edit-mat-form-field-data">
-              <input matInput #inputFieldDateCommited [(ngModel)]="editDocumentationDateCommited[documentation.id].documentation.dateCommited"
+              <input matInput #inputFieldDateCommited
                      (keydown.enter)="updateStationDocumentationDateCommited(documentation.id)"
-                     (blur)="updateStationDocumentationDateCommited(documentation.id)">
+                     (keydown.escape)="leaveEditCommited(documentation.id)"
+                     (blur)="onBlurCommited(picker2, documentation.id)"
+                     [matDatepicker]="picker2"
+                     (dateChange)="onDateChangeCommited($event.value, documentation.id)"
+                     [placeholder]="editDocumentationDateCommited[documentation.id].documentation.dateCommited"
+                     (input)="onInputChangeCommited($event)">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2 (closed)="inputFieldDateCommited.focus()"></mat-datepicker>
             </mat-form-field>
           </ng-container>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Benutzer">
+        <th class="th-center" mat-header-cell *matHeaderCellDef> Benutzer </th>
+        <td class="td-center" mat-cell *matCellDef="let documentation">
+          <span [matTooltip]="documentation?.issuerName"> {{documentation?.issuerAcronym}} </span>
         </td>
       </ng-container>
 

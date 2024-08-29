@@ -29,6 +29,8 @@ public class Task {
     private String addition;
     private Boolean done;
     private Boolean commited;
+    private String issuerAcronym;
+    private String issuerName;
     @ManyToOne
     @JoinColumn(name= "task_setting_id")
     private TaskSetting taskSetting;
