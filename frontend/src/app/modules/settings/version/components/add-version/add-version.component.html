@@ -25,7 +25,7 @@
                  pattern="^[0-9.]*$"
                  maxlength="10">
           <mat-error *ngIf="versionForm.controls['version'].hasError('pattern')">
-            Nicht erlaubte Zeichen
+            Nur Ziffern und Punkte sind erlaubt (z.B. 1.0.0)
           </mat-error>
           <mat-error *ngIf="versionForm.controls['version'].hasError('required')">
             Dieses Feld ist erforderlich

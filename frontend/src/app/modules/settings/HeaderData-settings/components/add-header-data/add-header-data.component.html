@@ -9,7 +9,11 @@
       <mat-form-field>
         <mat-label>Kopfdaten</mat-label>
         <input matInput formControlName="item"
+               pattern="^[a-zA-Z0-9äöüÄÖÜ_-]*$"
                maxlength="100">
+        <mat-error *ngIf="headerDataSettingForm.controls['item'].hasError('pattern')">
+          Nur Zahlen, Buchstaben, Umlaute (ä, ö, ü), Bindestriche und Unterstriche sind erlaubt.
+        </mat-error>
       </mat-form-field>
     </mat-card-content>
 
