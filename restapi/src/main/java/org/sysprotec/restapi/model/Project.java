@@ -26,6 +26,8 @@ public class Project {
     @SequenceGenerator(name = "PROJECT_ID_GEN", sequenceName = "PROJECT_ID_SEQ", initialValue = 1, allocationSize = 1)
     private Long id;
     private Boolean archived;
+    private String color;
+    private String acronym;
     private String name;
     private String description;
     private Integer amountStations;
@@ -33,7 +35,7 @@ public class Project {
     private Integer storedStations;
     private Integer notStoredStations;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    private List<org.sysprotec.restapi.model.settings.Version> versions;
+    private List<Version> versions;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private List<Station> stations;
     //Settings

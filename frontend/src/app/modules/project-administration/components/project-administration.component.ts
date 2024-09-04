@@ -55,7 +55,7 @@ export class ProjectAdministrationComponent implements OnInit, OnDestroy{
 
   reloadComponent(){
     this.store.dispatch(loadSpinner({isLoading:true}))
-    this.store.dispatch(loadProjectView({archive:this.archive}))
+    this.store.dispatch(loadProjectView({archive:this.archive, all:false}))
     this.subscriptions.push(
       this.store.select(getProjectViewInfo).pipe()
         .subscribe(data =>{

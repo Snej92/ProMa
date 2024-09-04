@@ -15,6 +15,20 @@
         <input maxlength="38" matInput formControlName="description">
       </mat-form-field>
 
+      <div class="d-flex justify-content-between">
+        <mat-form-field class="mat-mdc-form-field-2">
+          <mat-label>Kürzel</mat-label>
+          <input maxlength="5" matInput formControlName="acronym">
+        </mat-form-field>
+
+        <mat-form-field class="mat-mdc-form-field-2">
+          <mat-label>Farbe</mat-label>
+          <input maxlength="7" matInput formControlName="color">
+          <mat-hint>Hex Format: #ffffff</mat-hint>
+        </mat-form-field>
+      </div>
+
+
       <ng-container *ngIf="!data.isEdit">
         <mat-form-field class="mat-mdc-form-field-2">
           <mat-label>Template</mat-label>

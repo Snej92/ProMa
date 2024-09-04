@@ -13,6 +13,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 
 
     List<ProjectView> findProjectsProjectedByArchivedOrderById(Boolean archived);
+    List<ProjectView> findAllProjectedByOrderByName();
 
     Project findTopByOrderByIdDesc();
     Project findProjectByStationsId(Long id);

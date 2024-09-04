@@ -17,7 +17,7 @@ import {
   updateProject,
   updateProjectSuccess
 } from "./project-administration.actions";
-import {projectFavViewModel, projectViewModel} from "./project-administration.model";
+import {projectFavViewModel} from "./project-administration.model";
 import {CoreService} from "../../../core/service/core.service";
 
 
@@ -33,7 +33,7 @@ export class ProjectAdministrationEffects {
     this.action$.pipe(
       ofType(loadProjectView),
       switchMap(action=>
-        this.service.getAllProjects(action.archive).pipe(
+        this.service.getAllProjects(action.archive, action.all).pipe(
           switchMap(data=> of(
             loadProjectViewSuccess({projectViewList:data}),
             loadSpinner({isLoading:false}),

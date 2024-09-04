@@ -12,9 +12,9 @@ export class ProjectAdministrationService {
   constructor(private http:HttpClient) { }
 
 
-  getAllProjects(archive:boolean):Observable<projectFavViewModel[]>{
+  getAllProjects(archive:boolean, all:boolean):Observable<projectFavViewModel[]>{
     console.log('Fetch Projects')
-    return this.http.get<projectFavViewModel[]>(this.API_URL + "/project/all/"+archive)
+    return this.http.get<projectFavViewModel[]>(this.API_URL + "/project/all/"+archive+"/"+all)
   }
 
   getProject():Observable<projectFavViewModel>{

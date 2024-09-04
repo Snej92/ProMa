@@ -21,7 +21,7 @@
     <span>
       <mat-divider class="divider-container ms-4" vertical="true"></mat-divider>
     </span>
-<!--    Projektverwaltung Project role-->
+<!--    Projektverwaltung-->
     <ng-container *ngIf="loggedUser.user.roles.projectRole">
       <button mat-icon-button [matMenuTriggerFor]="menu2" class="ms-1">
         <mat-icon>folder</mat-icon>
@@ -45,6 +45,7 @@
     <mat-menu #menu="matMenu">
       <ng-container *ngIf="loggedUser.user.roles.adminRole">
         <button mat-menu-item routerLink="/userAdministration"><span>Benutzerverwaltung</span></button>
+        <button mat-menu-item routerLink="/calender"><span>Projektkalender</span></button>
       </ng-container>
       <button mat-menu-item (click)="onLogout()"><span>Ausloggen</span></button>
     </mat-menu>

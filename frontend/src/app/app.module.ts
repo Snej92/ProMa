@@ -150,6 +150,8 @@ import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from "@angular/material/expansion";
 import localeDe from '@angular/common/locales/de';
 import {GermanDateAdapter} from "./core/GermanDateAdapter";
+import { CalenderComponent } from './modules/calender/components/calender.component';
+import {CalenderEffects} from "./modules/calender/store/calender.effects";
 
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -225,7 +227,8 @@ registerLocaleData(localeDe);
     AddLopComponent,
     StationOverviewProjectionComponent,
     OverallViewComponent,
-    ThreeStateButtonComponent
+    ThreeStateButtonComponent,
+    CalenderComponent
   ],
     imports: [
         AppRoutingModule,
@@ -256,7 +259,8 @@ registerLocaleData(localeDe);
             HeaderDataEffects,
             TechnicalDataEffects,
             StationViewOverviewEffects,
-            StationOverallViewEffects]),
+            StationOverallViewEffects,
+            CalenderEffects]),
 
 
         MatToolbar,

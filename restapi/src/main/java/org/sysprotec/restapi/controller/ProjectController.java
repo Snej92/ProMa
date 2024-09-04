@@ -15,9 +15,11 @@ public class ProjectController {
     private final ProjectService projectService;
 
 
-    @GetMapping("/all/{archive}")
-    public List<ProjectFavView> getAllProjects(@PathVariable Boolean archive){
-        return projectService.getAllProjects(archive);
+    @GetMapping("/all/{archive}/{all}")
+    public List<ProjectFavView> getAllProjects(
+            @PathVariable Boolean archive,
+            @PathVariable Boolean all){
+        return projectService.getAllProjects(archive, all);
     }
 
     @GetMapping

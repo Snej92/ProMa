@@ -107,6 +107,11 @@ $dark-theme: mat.define-dark-theme((
   --frontend-alternate: #303030;
   --frontend-clear: #ffffff;
   --frontend-progress-spinner: #ffffff;
+
+  --frontend-header-background-weekdays: #ffffff;
+  --frontend-header-background-day: #e63212;
+  --frontend-header-day: #ffffff;
+
   background-color: #202124;
   color: #ffffff;
 }
@@ -142,6 +147,10 @@ body { margin: 0;
   --frontend-fileTransfer-2: rgba(255, 82, 82, 0.2);
   --frontend-fileTransfer-1-eplan: rgba(76, 175, 80, 0.6);
   --frontend-fileTransfer-2-eplan: rgba(255, 82, 82, 0.6);
+
+  --frontend-header-background-weekdays: #4a4a4a;
+  --frontend-header-background-day: #4a4a4a;
+  --frontend-header-day: #ffffff;
 }
 
 //Snackbar

@@ -25,7 +25,7 @@ export const LOAD_PROJECT_VIEW_FAVORITE_FAIL='[project page] load project view f
 export const LOAD_PROJECT_VIEW_FAVORITE='[project page] get project view favorite'
 
 
-export const loadProjectView=createAction(LOAD_PROJECT_VIEW, props<{archive:boolean}>());
+export const loadProjectView=createAction(LOAD_PROJECT_VIEW, props<{archive:boolean, all:boolean}>());
 export const loadProjectViewSuccess=createAction(LOAD_PROJECT_VIEW_SUCCESS, props<{projectViewList:projectFavViewModel[]}>());
 export const loadProjectViewFail=createAction(LOAD_PROJECT_VIEW_FAIL, props<{errorText:any}>());
 

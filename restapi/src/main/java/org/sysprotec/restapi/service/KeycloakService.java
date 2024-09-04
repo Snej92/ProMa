@@ -10,8 +10,10 @@ import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.sysprotec.restapi.model.Assignment;
 import org.sysprotec.restapi.model.Role;
 import org.sysprotec.restapi.model.User;
+import org.sysprotec.restapi.repository.AssignmentRepository;
 import org.sysprotec.restapi.repository.RoleRepository;
 import org.sysprotec.restapi.repository.UserRepository;
 
@@ -29,11 +31,13 @@ public class KeycloakService {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final Keycloak keycloak;
+    private final AssignmentRepository assignmentRepository;
 
-    public KeycloakService(RoleRepository roleRepository, UserRepository userRepository, Keycloak keycloak) {
+    public KeycloakService(RoleRepository roleRepository, UserRepository userRepository, Keycloak keycloak, AssignmentRepository assignmentRepository) {
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
         this.keycloak = keycloak;
+        this.assignmentRepository = assignmentRepository;
     }
 
 
@@ -97,9 +101,24 @@ public class KeycloakService {
                         .password(user.getPassword())
                         .build();
                 userRepository.save(newUser);
+
                 log.info("Status: " + String.valueOf(response.getStatus()) +" - User " + user.getUsername() + " created");
+
+                User returnUser = userRepository.findUserBySub(newUser.getSub());
+
+                //update Assignments if needed
+                if(user.getId() != 0){
+                    Optional<List<Assignment>> optionalAssignmentList = assignmentRepository.findAssignmentsByUserId(user.getId());
+                    if(optionalAssignmentList.isPresent()){
+                        for(Assignment assignment : optionalAssignmentList.get()){
+                            assignment.setUserId(returnUser.getId());
+                            assignmentRepository.save(assignment);
+                            log.info("Assignment updated from userId: {} to userId {}", user.getId(), returnUser.getId());
+                        }
+                    }
+                }
                 return new ResponseEntity<>(
-                        userRepository.findTopByOrderByIdDesc() ,
+                        returnUser,
                         HttpStatus.CREATED);
             }
             else{
@@ -134,11 +153,16 @@ public class KeycloakService {
         return users.getFirst();
     }
 
-    public void deleteUser(String sub){
+    public void deleteUser(String sub, boolean update){
         User deleteUser = userRepository.findUserBySub(sub);
         if(deleteUser != null){
             userRepository.delete(deleteUser);
             getUserResource().delete(deleteUser.getSub());
+            //delete Assignments
+            if(!update){
+                Optional<List<Assignment>> optionalAssignmentList = assignmentRepository.findAssignmentsByUserId(deleteUser.getId());
+                optionalAssignmentList.ifPresent(assignmentRepository::deleteAll);
+            }
             log.info("User " + deleteUser.getUsername() + " deleted");
         }else log.error("User with id " + sub +" does not exist in DB");
     }

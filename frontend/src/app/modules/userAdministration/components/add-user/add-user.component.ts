@@ -57,7 +57,7 @@ export class AddUserComponent implements OnInit{
         userRole:this.userForm.value.userRole as boolean
       }
       const userInput: userModel = {
-        id: 0,
+        id: this.userForm.value.id as number,
         activeProject: this.userForm.value.activeProject as number,
         sub: this.userForm.value.sub as string,
         lastname: this.userForm.value.lastname as string,

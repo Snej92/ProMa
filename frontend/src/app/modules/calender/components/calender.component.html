@@ -1,0 +1,89 @@
+<div class="calender-settings-container">
+  <div>
+    <mat-form-field>
+      <mat-label>Projekte</mat-label>
+      <mat-select [(ngModel)]="selectedProject" (selectionChange)="changeProject()">
+        <mat-option value="-">Nichts (-)</mat-option>
+        <mat-option value="F">Freizeit (F)</mat-option>
+        <mat-option value="U">Urlaub (U)</mat-option>
+        <mat-option value="K">Krank (K)</mat-option>
+        <ng-container *ngFor="let project of projectView.projectViewList">
+          <mat-option [value]="project.project.id">{{project.project.name}} ({{project.project.acronym}})</mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div [formGroup]="calenderForm">
+    <mat-form-field>
+      <mat-label>Monat</mat-label>
+      <mat-select formControlName="month" (selectionChange)="changeCalender()">
+        <ng-container *ngFor="let month of selectedMonth">
+          <mat-option [value]="month.value">{{month.month}}</mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="ms-2">
+      <mat-label>Jahr</mat-label>
+      <input matInput formControlName="year"
+             #inputYear
+             (blur)="changeCalender()"
+             (keydown.enter)="removeFocus()">
+      <mat-error >
+        Jahreszahlen möglich ab 2024
+      </mat-error>
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="table-container mat-elevation-z8">
+  <mat-table [dataSource]="user.userList" #matTable>
+    <!-- User Column -->
+    <ng-container matColumnDef="user">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.firstname }} {{ user.lastname }} </mat-cell>
+    </ng-container>
+
+    <!-- Dynamically generated columns for each weekday -->
+    <ng-container *ngFor="let day of daysInMonthStr" [matColumnDef]="'weekday-' + day">
+      <!--      Weekday Header Row-->
+      <mat-header-cell class="mat-cell-center" *matHeaderCellDef
+        [ngClass]="{
+      'header-row-weekend':
+      getWeekday(parseInt(day, 10), parseInt(currentMonth, 10), currentYear) === 'So'
+      || getWeekday(parseInt(day, 10), parseInt(currentMonth, 10), currentYear) === 'Sa',
+      'header-row-weekdays':
+      getWeekday(parseInt(day, 10), parseInt(currentMonth, 10), currentYear)
+      !== 'So' && getWeekday(parseInt(day, 10), parseInt(currentMonth, 10), currentYear) !== 'Sa'}">
+        {{ getWeekday(parseInt(day, 10), parseInt(currentMonth, 10), currentYear) }}
+      </mat-header-cell>
+    </ng-container>
+
+    <!-- Dynamically generated columns for each day -->
+    <ng-container *ngFor="let day of daysInMonthStr" [matColumnDef]="'day-' + day">
+      <!--      Day Header Row-->
+      <mat-header-cell class="mat-cell-center" *matHeaderCellDef> {{day}}.{{currentMonth}} </mat-header-cell>
+      <mat-cell class="mat-cell-center editable-field"
+                (click)="updateAssignment(getAssignmentForUserAndDay(user.id, day))"
+                *matCellDef="let user">
+        <ng-container *ngIf="getAssignmentForUserAndDay(user.id, day) as assignment">
+          <div class="mat-cell-div" [ngStyle]="{'background-color': assignment.color}">
+            {{ assignment.projectAcronym  || "-"}}
+          </div>
+        </ng-container>
+        <ng-container *ngIf="!getAssignmentForUserAndDay(user.id, day)">
+          <div>N/A</div>
+        </ng-container>
+      </mat-cell>
+    </ng-container>
+
+
+    <!-- Header Row for Weekdays -->
+    <mat-header-row *matHeaderRowDef="weekdayColumns"></mat-header-row>
+    <!-- Header Row for Days -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <!-- Data Rows -->
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  </mat-table>
+</div>

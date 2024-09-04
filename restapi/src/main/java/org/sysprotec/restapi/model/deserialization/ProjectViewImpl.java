@@ -13,6 +13,8 @@ import org.sysprotec.restapi.model.projections.ProjectView;
 public class ProjectViewImpl implements ProjectView {
     private Long id;
     private Boolean archived;
+    private String color;
+    private String acronym;
     private String name;
     private String description;
     private Integer amountStations;

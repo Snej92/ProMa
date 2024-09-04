@@ -29,6 +29,7 @@ import {headerDataReducer} from "../../modules/overview/headerData/store/headerD
 import {technicalDataReducer} from "../../modules/overview/technicalData/store/technicalData.reducers";
 import {stationViewOverviewReducer} from "../../modules/overview/station/store/stationViewOverview.reducers";
 import {stationOverallViewReducer} from "../../modules/overall-view/store/stationOverallView.reducers";
+import {assignmentReducer} from "../../modules/calender/store/calender.reducers";
 
 
 export const AppState={
@@ -55,4 +56,5 @@ export const AppState={
   technicalData:technicalDataReducer,
   stationViewOverview:stationViewOverviewReducer,
   stationOverallView:stationOverallViewReducer,
+  assignment:assignmentReducer,
 }

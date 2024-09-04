@@ -6,10 +6,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.sysprotec.restapi.model.Project;
-import org.sysprotec.restapi.model.ProjectFavorite;
-import org.sysprotec.restapi.model.Station;
-import org.sysprotec.restapi.model.User;
+import org.sysprotec.restapi.model.*;
 import org.sysprotec.restapi.model.deserialization.ProjectViewImpl;
 import org.sysprotec.restapi.model.projections.ProjectFavView;
 import org.sysprotec.restapi.model.projections.ProjectView;
@@ -18,6 +15,7 @@ import org.sysprotec.restapi.model.settings.TaskSetting;
 import org.sysprotec.restapi.model.settings.TechnicalDataSetting;
 import org.sysprotec.restapi.model.settings.Version;
 import org.sysprotec.restapi.model.types.StatusEPLAN;
+import org.sysprotec.restapi.repository.AssignmentRepository;
 import org.sysprotec.restapi.repository.ProjectFavoriteRepository;
 import org.sysprotec.restapi.repository.ProjectRepository;
 import org.sysprotec.restapi.repository.UserRepository;
@@ -45,11 +43,18 @@ public class ProjectService {
     private final TaskSettingRepository taskSettingRepository;
     private final TechnicalDataSettingRepository technicalDataSettingRepository;
     private final ProjectFavoriteRepository projectFavoriteRepository;
+    private final AssignmentRepository assignmentRepository;
 
-    public List<ProjectFavView> getAllProjects(Boolean archive) {
+    public List<ProjectFavView> getAllProjects(Boolean archive, Boolean all) {
         User loggedUser = userService.getLoggedUser();
         if(loggedUser != null){
-            List<ProjectView> projectViews = projectRepository.findProjectsProjectedByArchivedOrderById(archive);
+            List<ProjectView> projectViews;
+            if(!all){
+                projectViews = projectRepository.findProjectsProjectedByArchivedOrderById(archive);
+            } else {
+                projectViews = projectRepository.findAllProjectedByOrderByName();
+            }
+
             List<ProjectFavView> projectFavViewList = new ArrayList<>();
 
             for(ProjectView projectView : projectViews){
@@ -125,6 +130,8 @@ public class ProjectService {
 
             Project saveProject = Project.builder()
                     .archived(projectFavView.getProject().getArchived())
+                    .color(projectFavView.getProject().getColor())
+                    .acronym(projectFavView.getProject().getAcronym())
                     .name(projectFavView.getProject().getName())
                     .description(projectFavView.getProject().getDescription())
                     .amountStations(projectFavView.getProject().getAmountStations())
@@ -258,6 +265,8 @@ public class ProjectService {
                     || projectFavView.getProject().getName().equals(optionalProject.get().getName())){
                 Project saveProject = optionalProject.get();
                 saveProject.setArchived(projectFavView.getProject().getArchived());
+                saveProject.setColor(projectFavView.getProject().getColor());
+                saveProject.setAcronym(projectFavView.getProject().getAcronym());
                 saveProject.setName(projectFavView.getProject().getName());
                 saveProject.setDescription(projectFavView.getProject().getDescription());
                 saveProject.setAmountStations(projectFavView.getProject().getAmountStations());
@@ -273,6 +282,17 @@ public class ProjectService {
                 }
 
                 projectRepository.save(saveProject);
+
+                //update Assignments
+                Optional<List<Assignment>> optionalAssignmentList = assignmentRepository.findAssignmentsByProjectId(saveProject.getId());
+                if(optionalAssignmentList.isPresent()){
+                    for(Assignment assignment : optionalAssignmentList.get()){
+                        assignment.setColor(saveProject.getColor());
+                        assignment.setProjectAcronym(saveProject.getAcronym());
+                        assignmentRepository.save(assignment);
+                    }
+                }
+
                 return ProjectFavView.builder()
                         .project(projectRepository.getProjectedById(projectFavView.getProject().getId()))
                         .isFavorite(projectFavView.getIsFavorite())

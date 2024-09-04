@@ -31,14 +31,14 @@ public class KeycloakController {
 //    @PreAuthorize("hasRole('client_admin')")
     @DeleteMapping("/keycloak/{sub}")
     public void deleteUser(@PathVariable String sub){
-        keycloakService.deleteUser(sub);
+        keycloakService.deleteUser(sub, false);
     }
 
     //todo: add ResponseEntity
 //    @PreAuthorize("hasRole('backend_admin')")
     @PutMapping("/keycloak")
     public ResponseEntity<User> updateUser(@RequestBody User user){
-        keycloakService.deleteUser(user.getSub());
+        keycloakService.deleteUser(user.getSub(), true);
         return keycloakService.createUser(user);
     }
 }

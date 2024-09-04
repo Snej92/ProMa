@@ -27,6 +27,8 @@ export class AddProjectComponent implements OnInit{
   projectForm=this.builder.group({
     id:this.builder.control(0),
     archived:this.builder.control(false),
+    color:this.builder.control(''),
+    acronym:this.builder.control('', Validators.required),
     name:this.builder.control('', Validators.required),
     description:this.builder.control(''),
     amountStations:this.builder.control(0),
@@ -42,6 +44,8 @@ export class AddProjectComponent implements OnInit{
       const project: projectViewModel = {
         id:0,
         archived:this.projectForm.value.archived as boolean,
+        color:this.projectForm.value.color as string,
+        acronym:this.projectForm.value.acronym as string,
         name:this.projectForm.value.name as string,
         description:this.projectForm.value.description as string,
         amountStations:this.projectForm.value.amountStations as number,
@@ -87,6 +91,8 @@ export class AddProjectComponent implements OnInit{
         this.projectForm.setValue({
           id: this.editData.project.id,
           archived: this.editData.project.archived,
+          color: this.editData.project.color,
+          acronym: this.editData.project.acronym,
           name: this.editData.project.name,
           description: this.editData.project.description,
           amountStations: this.editData.project.amountStations,
@@ -98,6 +104,5 @@ export class AddProjectComponent implements OnInit{
         })
       })
     }
-
   }
 }

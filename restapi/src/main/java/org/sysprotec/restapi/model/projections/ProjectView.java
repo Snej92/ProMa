@@ -7,6 +7,8 @@ import org.sysprotec.restapi.model.deserialization.ProjectViewImpl;
 public interface ProjectView {
     Long getId();
     Boolean getArchived();
+    String getColor();
+    String getAcronym();
     String getName();
     String getDescription();
     Integer getAmountStations();
