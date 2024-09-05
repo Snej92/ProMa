@@ -60,6 +60,24 @@ public class AssignmentService {
                         assignmentRepository.save(assignment);
                         log.info("Assignment added: {}", assignment);
                     }
+                } else if(optionalAssignmentList.get().size() < amountDays){
+                    log.info("{} has missing assignments", user.getUsername());
+                    for(int i = 1; i<=amountDays; i++){
+                        String day = String.format("%02d.%02d.%04d", i, month, year);
+                        Optional<Assignment> optionalAssignment = assignmentRepository.findAssignmentByUserIdAndDate(user.getId(), day);
+                        if(optionalAssignment.isEmpty()){
+                            Assignment assignment = Assignment.builder()
+                                    .projectId(0L)
+                                    .projectAcronym("")
+                                    .userId(user.getId())
+                                    .userAcronym(user.getAcronym())
+                                    .date(day)
+                                    .color("")
+                                    .build();
+                            assignmentRepository.save(assignment);
+                            log.info("Assignment added: {}", assignment);
+                        }
+                    }
                 }
             }
         }

@@ -67,7 +67,8 @@ export class CalenderComponent implements OnInit, OnDestroy{
   user!:user;
 
   displayedColumns: string[] = ['user'];
-  weekdayColumns: string[] = ['user'];
+  weekdayColumns: string[] = [];
+  weekNumberColumns: string [] = [];
 
   daysInMonth: number[] = [];
   daysInMonthStr: string[] = [];
@@ -78,8 +79,14 @@ export class CalenderComponent implements OnInit, OnDestroy{
   selectedProject:any;
   validProject:boolean = false;
 
+  todayDate:string="";
+
   ngOnInit(): void {
     const date = new Date();
+
+    this.todayDate = `${date.getDate().toString().padStart(2, '0')}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getFullYear()}`;
+    this.todayDate = `${date.getDate().toString().padStart(2, '0')}.${(date.getMonth() + 1).toString().padStart(2, '0')}`;
+    console.log("today: ", this.todayDate)
 
     this.calenderForm.setValue({
       month: date.getMonth() + 1,
@@ -221,11 +228,13 @@ export class CalenderComponent implements OnInit, OnDestroy{
     this.daysInMonthStr = this.daysInMonth.map(day => day.toString().padStart(2, '0'));
 
     this.displayedColumns = ['user'];
-    this.weekdayColumns = ['user'];
+    this.weekdayColumns = ['day'];
+    this.weekNumberColumns = ['weeknumber'];
 
     this.daysInMonthStr.forEach(day => {
       this.displayedColumns.push('day-' + day);
       this.weekdayColumns.push('weekday-' + day);
+      this.weekNumberColumns.push('week-' + day);
     });
   }
 
@@ -237,6 +246,23 @@ export class CalenderComponent implements OnInit, OnDestroy{
   getAssignmentForUserAndDay(userId: number, day:string): assignmentModel {
     const assignmentDate = `${day}.${this.currentMonth}.${this.currentYear}`;
     return this.assignmentsMap[userId]?.[assignmentDate] || '';
+  }
+
+  getWeekNumber(day: number, month: number, year: number): number {
+    const date = new Date(year, month - 1, day);
+    // ISO week starts on Monday
+    const thursday = new Date(date.getTime());
+    thursday.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
+    const firstJanuary = new Date(thursday.getFullYear(), 0, 1);
+    return Math.floor(((thursday.getTime() - firstJanuary.getTime()) / (86400000)) / 7) + 1;
+  }
+
+  isLastRow(index: number): boolean {
+    return index === this.user.userList.length - 1;
+  }
+
+  checkEvenOrOdd(number: number): string {
+    return number % 2 === 0 ? 'even' : 'odd';
   }
 
   ngOnDestroy(): void {

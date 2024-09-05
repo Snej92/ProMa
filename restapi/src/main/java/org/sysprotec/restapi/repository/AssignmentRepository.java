@@ -11,4 +11,6 @@ public interface AssignmentRepository extends JpaRepository<Assignment, Long> {
     Optional<List<Assignment>> findAssignmentsByDateContaining(String date);
     Optional<List<Assignment>> findAssignmentsByProjectId(Long id);
     Optional<List<Assignment>> findAssignmentsByUserId(Long id);
+
+    Optional<Assignment> findAssignmentByUserIdAndDate(Long id, String date);
 }

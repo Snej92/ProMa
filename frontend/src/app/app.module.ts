@@ -152,6 +152,7 @@ import localeDe from '@angular/common/locales/de';
 import {GermanDateAdapter} from "./core/GermanDateAdapter";
 import { CalenderComponent } from './modules/calender/components/calender.component';
 import {CalenderEffects} from "./modules/calender/store/calender.effects";
+import {ColorChromeModule} from "ngx-color/chrome";
 
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -334,6 +335,7 @@ registerLocaleData(localeDe);
         MatExpansionPanelHeader,
         MatError,
         MatAnchor,
+        ColorChromeModule
     ],
   providers: [
     {

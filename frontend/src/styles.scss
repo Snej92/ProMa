@@ -110,6 +110,7 @@ $dark-theme: mat.define-dark-theme((
 
   --frontend-header-background-weekdays: #ffffff;
   --frontend-header-background-day: #e63212;
+  --frontend-header-background-day-transparent: rgba(230,50,18, 0.5);
   --frontend-header-day: #ffffff;
 
   background-color: #202124;
@@ -150,7 +151,9 @@ body { margin: 0;
 
   --frontend-header-background-weekdays: #4a4a4a;
   --frontend-header-background-day: #4a4a4a;
+  --frontend-header-background-day-transparent: rgba(74,74,73, 0.85);
   --frontend-header-day: #ffffff;
+
 }
 
 //Snackbar

@@ -21,13 +21,35 @@
           <input maxlength="5" matInput formControlName="acronym">
         </mat-form-field>
 
+<!--        <mat-form-field class="mat-mdc-form-field-2">-->
+<!--          <mat-label>Farbe</mat-label>-->
+<!--          <input maxlength="7" matInput formControlName="color">-->
+<!--          <mat-hint>Hex Format: #ffffff</mat-hint>-->
+<!--        </mat-form-field>-->
+
+<!--        Color Picker-->
+
         <mat-form-field class="mat-mdc-form-field-2">
           <mat-label>Farbe</mat-label>
-          <input maxlength="7" matInput formControlName="color">
+          <input class="color-picker-input"
+                 maxlength="7"
+                 matInput
+                 formControlName="color">
+          <button mat-icon-button
+                  color="accent"
+                  type="button"
+                  matSuffix>
+            <mat-icon>palette</mat-icon>
+          </button>
           <mat-hint>Hex Format: #ffffff</mat-hint>
         </mat-form-field>
-      </div>
 
+<!--          <color-chrome-->
+<!--            [(color)]="color"-->
+<!--            (onChangeComplete)="onColorChange($event.color.hex)">-->
+<!--          </color-chrome>-->
+
+      </div>
 
       <ng-container *ngIf="!data.isEdit">
         <mat-form-field class="mat-mdc-form-field-2">

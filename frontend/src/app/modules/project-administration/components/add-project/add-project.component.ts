@@ -18,6 +18,8 @@ export class AddProjectComponent implements OnInit{
   editData!:projectFavViewModel;
   template!:string;
 
+  color: string = '#ffffff'; // Default color
+
   constructor(private dialogRef:MatDialogRef<AddProjectComponent>,
               private builder:FormBuilder,
               private store:Store<AppStateModel>,
@@ -88,6 +90,7 @@ export class AddProjectComponent implements OnInit{
             archived: false
           }
         };
+        this.color = data.project.color;
         this.projectForm.setValue({
           id: this.editData.project.id,
           archived: this.editData.project.archived,
@@ -104,5 +107,10 @@ export class AddProjectComponent implements OnInit{
         })
       })
     }
+  }
+
+  onColorChange(hexColor: string) {
+    this.color = hexColor;
+    this.projectForm.get('color')?.setValue(hexColor);
   }
 }
