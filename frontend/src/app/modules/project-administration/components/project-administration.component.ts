@@ -24,6 +24,7 @@ export class ProjectAdministrationComponent implements OnInit, OnDestroy{
   loggedUser!:loggedUser;
   archive!:boolean;
 
+
   constructor(private store:Store<AppStateModel>,
               private dialog:MatDialog,
               private activatedRoute: ActivatedRoute) {

@@ -62,6 +62,8 @@ export class CalenderComponent implements OnInit, OnDestroy{
     color:''
   }
 
+  monthTemp!:number;
+
   projectView!:projectView;
 
   user!:user;
@@ -72,9 +74,15 @@ export class CalenderComponent implements OnInit, OnDestroy{
 
   daysInMonth: number[] = [];
   daysInMonthStr: string[] = [];
+  dayMonthStr: { day: string, month: string }[] = [];
+
   currentMonth: string = "";
   currentYear: number= 0;
   currentMonthYear : string = "";
+
+  startMonth: string = "";
+  startYear: number= 0;
+  startMonthYear : string = "";
 
   selectedProject:any;
   validProject:boolean = false;
@@ -118,7 +126,7 @@ export class CalenderComponent implements OnInit, OnDestroy{
     )
 
     //Assignments
-    this.store.dispatch(loadAssignment({date:this.currentMonthYear}))
+    this.store.dispatch(loadAssignment({date:this.startMonthYear}))
     //AssignmentsMap
     this.store.select(getAssignment).subscribe(assignments => {
       assignments.forEach(assignment => {
@@ -129,6 +137,8 @@ export class CalenderComponent implements OnInit, OnDestroy{
         this.assignmentsMap[assignment.userId][dateKey] = assignment;
       });
     });
+
+    console.log(this.assignmentsMap)
   }
 
   changeProject(){
@@ -198,7 +208,7 @@ export class CalenderComponent implements OnInit, OnDestroy{
         this.generateDaysInMonthFromCurrentMonth(month - 1, year)
 
         //Assignments
-        this.store.dispatch(loadAssignment({date:this.currentMonthYear}))
+        this.store.dispatch(loadAssignment({date:this.startMonthYear}))
         //AssignmentsMap
         this.store.select(getAssignment).subscribe(assignments => {
           assignments.forEach(assignment => {
@@ -214,28 +224,53 @@ export class CalenderComponent implements OnInit, OnDestroy{
   }
 
   generateDaysInMonthFromCurrentMonth(month:number, year:number): void {
-    const correctMonth = month + 1;
-    this.currentMonth = correctMonth.toString().padStart(2, '0');
-    this.currentYear = year;
-    this.currentMonthYear = this.currentMonth + "." + this.currentYear;
-    console.log("monthYear: ", this.currentMonthYear)
-    const daysInCurrentMonth = new Date(year, month + 1, 0).getDate();
-
-    //Array with days as number
-    this.daysInMonth = Array.from({ length: daysInCurrentMonth }, (_, i) => i + 1);
-
-    // Array with days as string with leading 0 if not 2 digit
-    this.daysInMonthStr = this.daysInMonth.map(day => day.toString().padStart(2, '0'));
-
+    //Init
     this.displayedColumns = ['user'];
     this.weekdayColumns = ['day'];
     this.weekNumberColumns = ['weeknumber'];
+    this.dayMonthStr = []
 
-    this.daysInMonthStr.forEach(day => {
-      this.displayedColumns.push('day-' + day);
-      this.weekdayColumns.push('weekday-' + day);
-      this.weekNumberColumns.push('week-' + day);
-    });
+    this.monthTemp = month + 1;
+    this.startMonthYear = this.monthTemp.toString().padStart(2, '0') + "." + year;
+
+    for(let i = 1; i <= 3; i++){
+
+      const correctMonth = this.monthTemp;
+      this.currentMonth = correctMonth.toString().padStart(2, '0');
+      this.currentYear = year;
+      this.currentMonthYear = this.currentMonth + "." + this.currentYear;
+      console.log("monthYear: ", this.currentMonthYear)
+      const daysInCurrentMonth = new Date(year, correctMonth, 0).getDate();
+      console.log("daysInCurrentMonth: ", daysInCurrentMonth)
+
+      //Array with days as number
+      this.daysInMonth = Array.from({ length: daysInCurrentMonth }, (_, i) => i + 1);
+
+      // Array with days as string with leading 0 if not 2 digit
+      this.daysInMonthStr = this.daysInMonth.map(day => day.toString().padStart(2, '0'));
+
+      this.daysInMonth.forEach(day => {
+        this.dayMonthStr.push({
+          day: day.toString().padStart(2, '0'),
+          month: this.currentMonth
+        });
+      });
+
+
+      this.daysInMonthStr.forEach(day => {
+        this.displayedColumns.push('day-' + day + '.' + this.currentMonth);
+        this.weekdayColumns.push('weekday-' + day + '.' + this.currentMonth);
+        this.weekNumberColumns.push('week-' + day + '.' + this.currentMonth);
+      });
+
+      this.monthTemp ++;
+    }
+
+    console.log("displayColumns: ", this.displayedColumns)
+    console.log("weekdayColumns: ", this.weekdayColumns)
+    console.log("weekNumberColumns: ", this.weekNumberColumns)
+    console.log("dayMonthStr(neu): ", this.dayMonthStr)
+    console.log("daysInMonthStr: ", this.daysInMonthStr)
   }
 
   getWeekday(day: number, month: number, year: number): string {
@@ -243,8 +278,11 @@ export class CalenderComponent implements OnInit, OnDestroy{
     return date.toLocaleDateString('de-DE', { weekday: 'short' });
   }
 
-  getAssignmentForUserAndDay(userId: number, day:string): assignmentModel {
-    const assignmentDate = `${day}.${this.currentMonth}.${this.currentYear}`;
+  getAssignmentForUserAndDay(userId: number, day:string, month:string): assignmentModel {
+    // console.log("day: ", day)
+    // console.log("month: ", month)
+    const assignmentDate = `${day}.${month}.${this.currentYear}`;
+    // console.log("assignmentDate: ", assignmentDate)
     return this.assignmentsMap[userId]?.[assignmentDate] || '';
   }
 

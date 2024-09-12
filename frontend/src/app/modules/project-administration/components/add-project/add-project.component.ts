@@ -18,6 +18,7 @@ export class AddProjectComponent implements OnInit{
   editData!:projectFavViewModel;
   template!:string;
 
+  showPicker:boolean = false;
   color: string = '#ffffff'; // Default color
 
   constructor(private dialogRef:MatDialogRef<AddProjectComponent>,
@@ -107,6 +108,10 @@ export class AddProjectComponent implements OnInit{
         })
       })
     }
+  }
+
+  toggleColorPicker(){
+    this.showPicker = !this.showPicker;
   }
 
   onColorChange(hexColor: string) {

@@ -13,3 +13,11 @@
 .color-picker-input{
   position: relative;
 }
+
+.color-picker-container {
+  position: absolute;
+  z-index: 1000;
+  top: 37px;
+  right: 59px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}

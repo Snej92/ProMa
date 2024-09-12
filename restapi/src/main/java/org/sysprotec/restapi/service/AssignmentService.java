@@ -25,25 +25,30 @@ public class AssignmentService {
     private final ProjectRepository projectRepository;
 
 
-    public List<Assignment> getAssignment(String date) {
-        //Extract month and year as int from date
-        log.info("check Assignments for users");
+    public List<Assignment> getAssignment(String dateInput) {
+        //Inits
+        String date = dateInput;
+        Optional<List<Assignment>> assignments = Optional.empty();
 
-        String[] split = date.split("\\.");
-        int month = Integer.parseInt(split[0]);
-        int year = Integer.parseInt(split[1]);
-        log.info("Month: {} Year: {}" , month, year);
+        for(int j = 1; j <= 3; j++){
+            //Extract month and year as int from date
+            log.info("check Assignments for users");
 
-        YearMonth yearMonth = YearMonth.of(year, month);
-        int amountDays = yearMonth.lengthOfMonth();
-        log.info("Amount days: {}", amountDays);
+            String[] split = date.split("\\.");
+            int month = Integer.parseInt(split[0]);
+            int year = Integer.parseInt(split[1]);
+            log.info("Checking Month: {} Year: {}" , month, year);
 
-        //Check if for all users Assignments for selected date exist
-        //Date has to be in the following format: MM.YYYY
-        List<User> users = userRepository.findAll();
-        for(User user : users) {
-            Optional<List<Assignment>> optionalAssignmentList = assignmentRepository.findAssignmentsByUserIdAndDateContaining(user.getId(), date);
-            if(optionalAssignmentList.isPresent()){
+            YearMonth yearMonth = YearMonth.of(year, month);
+            int amountDays = yearMonth.lengthOfMonth();
+            log.info("Amount days: {}", amountDays);
+
+            //Check if for all users Assignments for selected date exist
+            //Date has to be in the following format: MM.YYYY
+            List<User> users = userRepository.findAll();
+            for(User user : users) {
+                Optional<List<Assignment>> optionalAssignmentList = assignmentRepository.findAssignmentsByUserIdAndDateContaining(user.getId(), date);
+                if(optionalAssignmentList.isPresent()){
                 if(optionalAssignmentList.get().isEmpty()){
                     //If empty, create assignment for each day of the selected month
                     log.info("No assignment found for user: {}", user.getUsername());
@@ -79,10 +84,28 @@ public class AssignmentService {
                         }
                     }
                 }
+                }
             }
+            if(assignmentRepository.findAssignmentsByDateContaining(date).isPresent()){
+                if(assignments.isPresent()){
+                    List<Assignment> currentAssignments = assignments.get();
+                    currentAssignments.addAll(assignmentRepository.findAssignmentsByDateContaining(date).get());
+                } else {
+                    assignments = Optional.of(assignmentRepository.findAssignmentsByDateContaining(date).get());
+                }
+            }
+
+            if(month != 12){
+                month++;
+            } else {
+                month = 1;
+                year++;
+            }
+            date = String.format("%02d.%04d", month, year);
         }
+
         //get All Assignments for date (MM.YYYY)
-        Optional<List<Assignment>> assignments = assignmentRepository.findAssignmentsByDateContaining(date);
+//        Optional<List<Assignment>> assignments = assignmentRepository.findAssignmentsByDateContaining(date);
         return assignments.orElse(null);
     }
 

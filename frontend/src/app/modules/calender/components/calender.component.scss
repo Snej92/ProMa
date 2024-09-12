@@ -6,14 +6,24 @@
   justify-content: space-between;
 }
 
+.mat-cell-custom-width{
+  min-width: 51px;
+  max-width: 51px;
+}
+
 .table-container{
-  overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-x: auto;
+  overflow-y: auto;
   max-height: 80vh;
 
   margin-left: 2%;
   margin-right: 2%;
   margin-top: 4px;
+}
+
+.mat-table{
+  table-layout: fixed;
+  width: 100%;
 }
 
 .today-content{
@@ -25,7 +35,7 @@
 .header-row-weekNumber-odd{
   color: var(--frontend-header-day)!important;
   background-color: var(--frontend-header-background-day-transparent)!important;
-  //height: 50px;
+  height: 50px;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -41,7 +51,7 @@
 .header-row-weekdays{
   color: var(--frontend-header-background-weekdays)!important;
   background-color: var(--frontend-alternate)!important;
-  //height: 50px;
+  height: 50px;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -52,7 +62,7 @@
 .header-row-weekend{
   color: white!important;
   background-color: var(--frontend-primary)!important;
-  //height: 50px;
+  height: 50px;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -97,10 +107,26 @@
   background-color: var(--frontend-alternate)!important;
   color: var(--frontend-header-background-weekdays)!important;
   position: sticky;
-  top: 0;
-  z-index: 10;
+  left: 0;
+  z-index: 20;
   font-size: 12px;
   user-select: none;
+}
+
+.mat-column-user{
+  min-width: 180px;
+  width: fit-content;
+  position: sticky;
+  left: 0;
+  z-index: 20;
+}
+
+.mat-cell-user{
+  font-size: 12px;
+  font-weight: 500;
+  position: sticky;
+  left: 0;
+  z-index: 20;
 }
 
 .mat-cell-div{
@@ -129,15 +155,6 @@
   align-items: center;
 }
 
-.mat-column-user{
-  min-width: 180px;
-  width: fit-content;
-}
-
-.mat-cell-user{
-  font-size: 12px;
-  font-weight: 500;
-}
 
 .editable-field {
   cursor: pointer;

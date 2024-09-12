@@ -34,20 +34,24 @@
           <input class="color-picker-input"
                  maxlength="7"
                  matInput
+                 (blur)="toggleColorPicker()"
                  formControlName="color">
           <button mat-icon-button
                   color="accent"
                   type="button"
+                  (click)="toggleColorPicker()"
                   matSuffix>
             <mat-icon>palette</mat-icon>
           </button>
           <mat-hint>Hex Format: #ffffff</mat-hint>
         </mat-form-field>
 
-<!--          <color-chrome-->
-<!--            [(color)]="color"-->
-<!--            (onChangeComplete)="onColorChange($event.color.hex)">-->
-<!--          </color-chrome>-->
+        <div *ngIf="showPicker" class="color-picker-container">
+          <color-chrome
+            [(color)]="color"
+            (onChangeComplete)="onColorChange($event.color.hex)">
+          </color-chrome>
+        </div>
 
       </div>
 

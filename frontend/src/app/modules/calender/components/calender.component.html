@@ -37,7 +37,7 @@
 </div>
 
 <div class="table-container mat-elevation-z8">
-  <mat-table [dataSource]="user.userList" #matTable>
+  <mat-table [dataSource]="user.userList" #matTable class="mat-table">
 
     <!-- User Column -->
     <ng-container matColumnDef="user">
@@ -49,58 +49,58 @@
 
 
     <!-- Dynamically generated columns for week numbers -->
-    <ng-container *ngFor="let day of daysInMonthStr" [matColumnDef]="'week-' + day">
-      <mat-header-cell class="mat-cell-center header-row-weekNumber-odd"
+    <ng-container *ngFor="let dayMonth of dayMonthStr" [matColumnDef]="'week-' + dayMonth.day + '.' + dayMonth.month">
+      <mat-header-cell class="mat-cell-center header-row-weekNumber-odd mat-cell-custom-width"
                        *matHeaderCellDef
-                       [ngClass]="{'today-frame-sides-top': todayDate === (day.toString().padStart(2, '0') + '.' + currentMonth.toString().padStart(2, '0')),
-                       'header-row-weekNumber-even': checkEvenOrOdd(getWeekNumber(parseInt(day, 10), parseInt(currentMonth, 10), currentYear)) ==='even'}">
-        {{ getWeekNumber(parseInt(day, 10), parseInt(currentMonth, 10), currentYear) }}
+                       [ngClass]="{'today-frame-sides-top': todayDate === (dayMonth.day.toString().padStart(2, '0') + '.' + dayMonth.month.toString().padStart(2, '0')),
+                       'header-row-weekNumber-even': checkEvenOrOdd(getWeekNumber(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear)) ==='even'}">
+        {{ getWeekNumber(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear) }}
       </mat-header-cell>
     </ng-container>
 
     <!-- Dynamically generated columns for each weekday -->
-    <ng-container *ngFor="let day of daysInMonthStr" [matColumnDef]="'weekday-' + day">
+    <ng-container *ngFor="let dayMonth of dayMonthStr" [matColumnDef]="'weekday-' + dayMonth.day + '.' + dayMonth.month">
       <!--      Weekday Header Row-->
-      <mat-header-cell class="mat-cell-center" *matHeaderCellDef
+      <mat-header-cell class="mat-cell-center mat-cell-custom-width" *matHeaderCellDef
         [ngClass]="{
-        'today-frame-sides': todayDate === (day.toString().padStart(2, '0') + '.' + currentMonth.toString().padStart(2, '0')),
+        'today-frame-sides': todayDate === (dayMonth.day.toString().padStart(2, '0') + '.' + dayMonth.month.toString().padStart(2, '0')),
       'header-row-weekend':
-      getWeekday(parseInt(day, 10), parseInt(currentMonth, 10), currentYear) === 'So'
-      || getWeekday(parseInt(day, 10), parseInt(currentMonth, 10), currentYear) === 'Sa',
+      getWeekday(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear) === 'So'
+      || getWeekday(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear) === 'Sa',
       'header-row-weekdays':
-      getWeekday(parseInt(day, 10), parseInt(currentMonth, 10), currentYear)
-      !== 'So' && getWeekday(parseInt(day, 10), parseInt(currentMonth, 10), currentYear) !== 'Sa'}" >
-        {{ getWeekday(parseInt(day, 10), parseInt(currentMonth, 10), currentYear) }}
+      getWeekday(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear)
+      !== 'So' && getWeekday(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear) !== 'Sa'}" >
+        {{ getWeekday(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear) }}
       </mat-header-cell>
     </ng-container>
 
     <!-- Dynamically generated columns for each day -->
-    <ng-container *ngFor="let day of daysInMonthStr" [matColumnDef]="'day-' + day">
+    <ng-container *ngFor="let dayMonth of dayMonthStr" [matColumnDef]="'day-' + dayMonth.day + '.' + dayMonth.month">
       <!--      Day Header Row-->
-      <mat-header-cell class="mat-cell-center header-row-day"
+      <mat-header-cell class="mat-cell-center header-row-day mat-cell-custom-width"
                        *matHeaderCellDef
-                       [ngClass]="{'today-frame-sides': todayDate === (day.toString().padStart(2, '0') + '.' + currentMonth.toString().padStart(2, '0'))}">
-        <ng-container *ngIf="todayDate === (day.toString().padStart(2, '0') + '.' + currentMonth.toString().padStart(2, '0')); else notToday">
+                       [ngClass]="{'today-frame-sides': todayDate === (dayMonth.day.toString().padStart(2, '0') + '.' + dayMonth.month.toString().padStart(2, '0'))}">
+        <ng-container *ngIf="todayDate === (dayMonth.day.toString().padStart(2, '0') + '.' + dayMonth.month.toString().padStart(2, '0')); else notToday">
           <!-- Display something special for today's date -->
-          <span class="today-content">{{day}}.{{currentMonth}}</span>
+          <span class="today-content">{{dayMonth.day}}.{{dayMonth.month}}</span>
         </ng-container>
         <ng-template #notToday>
           <!-- Default content -->
-          {{day}}.{{currentMonth}}
+          {{dayMonth.day}}.{{dayMonth.month}}
         </ng-template>
       </mat-header-cell>
       <!--      Day Cells-->
-      <mat-cell class="mat-cell-center editable-field"
-                [ngClass]="{'today-frame-sides': todayDate === (day.toString().padStart(2, '0') + '.' + currentMonth.toString().padStart(2, '0')),
-                'today-frame-sides-bottom': isLastRow(index) && todayDate === (day.toString().padStart(2, '0') + '.' + currentMonth.toString().padStart(2, '0'))}"
-                (click)="updateAssignment(getAssignmentForUserAndDay(user.id, day))"
+      <mat-cell class="mat-cell-center editable-field mat-cell-custom-width"
+                [ngClass]="{'today-frame-sides': todayDate === (dayMonth.day.toString().padStart(2, '0') + '.' + dayMonth.month.toString().padStart(2, '0')),
+                'today-frame-sides-bottom': isLastRow(index) && todayDate === (dayMonth.day.toString().padStart(2, '0') + '.' + dayMonth.month.toString().padStart(2, '0'))}"
+                (click)="updateAssignment(getAssignmentForUserAndDay(user.id, dayMonth.day, dayMonth.month))"
                 *matCellDef="let user, let index = index">
-        <ng-container *ngIf="getAssignmentForUserAndDay(user.id, day) as assignment">
+        <ng-container *ngIf="getAssignmentForUserAndDay(user.id, dayMonth.day, dayMonth.month) as assignment">
           <div class="mat-cell-div" [ngStyle]="{'background-color': assignment.color}">
             {{ assignment.projectAcronym  || "-"}}
           </div>
         </ng-container>
-        <ng-container *ngIf="!getAssignmentForUserAndDay(user.id, day)">
+        <ng-container *ngIf="!getAssignmentForUserAndDay(user.id, dayMonth.day, dayMonth.month)">
           <div>N/A</div>
         </ng-container>
       </mat-cell>
