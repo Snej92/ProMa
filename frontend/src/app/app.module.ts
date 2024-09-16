@@ -153,7 +153,6 @@ import {GermanDateAdapter} from "./core/GermanDateAdapter";
 import { CalenderComponent } from './modules/calender/components/calender.component';
 import {CalenderEffects} from "./modules/calender/store/calender.effects";
 import {ColorChromeModule} from "ngx-color/chrome";
-import { Calender2Component } from './modules/calender/calender2/calender2.component';
 
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -230,8 +229,7 @@ registerLocaleData(localeDe);
     StationOverviewProjectionComponent,
     OverallViewComponent,
     ThreeStateButtonComponent,
-    CalenderComponent,
-    Calender2Component
+    CalenderComponent
   ],
     imports: [
         AppRoutingModule,

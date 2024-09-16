@@ -37,44 +37,20 @@
 </div>
 
 <div class="table-container mat-elevation-z8">
-  <mat-table [dataSource]="user.userList" #matTable class="mat-table">
+  <table mat-table [dataSource]="user.userList">
+
 
     <!-- User Column -->
     <ng-container matColumnDef="user">
-      <mat-header-cell class="mat-header-cell-category" *matHeaderCellDef>
+      <mat-header-cell class="mat-sticky mat-header-cell-category" *matHeaderCellDef>
         Datum
       </mat-header-cell>
-      <mat-cell class="mat-cell-user" *matCellDef="let user"> {{ user.firstname }} {{ user.lastname }} </mat-cell>
+      <mat-cell class="mat-sticky" *matCellDef="let user">
+        {{ user.firstname }} {{ user.lastname }}
+      </mat-cell>
     </ng-container>
 
-
-    <!-- Dynamically generated columns for week numbers -->
-    <ng-container *ngFor="let dayMonth of dayMonthStr" [matColumnDef]="'week-' + dayMonth.day + '.' + dayMonth.month">
-      <mat-header-cell class="mat-cell-center header-row-weekNumber-odd mat-cell-custom-width"
-                       *matHeaderCellDef
-                       [ngClass]="{'today-frame-sides-top': todayDate === (dayMonth.day.toString().padStart(2, '0') + '.' + dayMonth.month.toString().padStart(2, '0')),
-                       'header-row-weekNumber-even': checkEvenOrOdd(getWeekNumber(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear)) ==='even'}">
-        {{ getWeekNumber(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear) }}
-      </mat-header-cell>
-    </ng-container>
-
-    <!-- Dynamically generated columns for each weekday -->
-    <ng-container *ngFor="let dayMonth of dayMonthStr" [matColumnDef]="'weekday-' + dayMonth.day + '.' + dayMonth.month">
-      <!--      Weekday Header Row-->
-      <mat-header-cell class="mat-cell-center mat-cell-custom-width" *matHeaderCellDef
-        [ngClass]="{
-        'today-frame-sides': todayDate === (dayMonth.day.toString().padStart(2, '0') + '.' + dayMonth.month.toString().padStart(2, '0')),
-      'header-row-weekend':
-      getWeekday(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear) === 'So'
-      || getWeekday(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear) === 'Sa',
-      'header-row-weekdays':
-      getWeekday(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear)
-      !== 'So' && getWeekday(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear) !== 'Sa'}" >
-        {{ getWeekday(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear) }}
-      </mat-header-cell>
-    </ng-container>
-
-    <!-- Dynamically generated columns for each day -->
+<!--     Dynamically generated columns for each day -->
     <ng-container *ngFor="let dayMonth of dayMonthStr" [matColumnDef]="'day-' + dayMonth.day + '.' + dayMonth.month">
       <!--      Day Header Row-->
       <mat-header-cell class="mat-cell-center header-row-day mat-cell-custom-width"
@@ -107,10 +83,37 @@
     </ng-container>
 
 
+    <!-- Dynamically generated columns for week numbers -->
+    <ng-container *ngFor="let dayMonth of dayMonthStr" [matColumnDef]="'week-' + dayMonth.day + '.' + dayMonth.month">
+      <mat-header-cell class="mat-cell-center header-row-weekNumber-odd mat-cell-custom-width"
+                       *matHeaderCellDef
+                       [ngClass]="{'today-frame-sides-top': todayDate === (dayMonth.day.toString().padStart(2, '0') + '.' + dayMonth.month.toString().padStart(2, '0')),
+                       'header-row-weekNumber-even': checkEvenOrOdd(getWeekNumber(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear)) ==='even'}">
+        {{ getWeekNumber(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear) }}
+      </mat-header-cell>
+    </ng-container>
+
+    <!-- Dynamically generated columns for each weekday -->
+    <ng-container *ngFor="let dayMonth of dayMonthStr" [matColumnDef]="'weekday-' + dayMonth.day + '.' + dayMonth.month">
+      <!--      Weekday Header Row-->
+      <mat-header-cell class="mat-cell-center mat-cell-custom-width" *matHeaderCellDef
+        [ngClass]="{
+        'today-frame-sides': todayDate === (dayMonth.day.toString().padStart(2, '0') + '.' + dayMonth.month.toString().padStart(2, '0')),
+      'header-row-weekend':
+      getWeekday(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear) === 'So'
+      || getWeekday(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear) === 'Sa',
+      'header-row-weekdays':
+      getWeekday(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear)
+      !== 'So' && getWeekday(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear) !== 'Sa'}" >
+        {{ getWeekday(parseInt(dayMonth.day, 10), parseInt(dayMonth.month, 10), currentYear) }}
+      </mat-header-cell>
+    </ng-container>
+
+
     <!-- Header Row for Week Numbers -->
     <mat-header-row *matHeaderRowDef="weekNumberColumns"></mat-header-row>
     <ng-container matColumnDef="weeknumber">
-      <mat-header-cell class="mat-header-cell-category" *matHeaderCellDef>
+      <mat-header-cell class="mat-header-cell-category mat-sticky" *matHeaderCellDef>
         Kalenderwoche
       </mat-header-cell>
     </ng-container>
@@ -118,7 +121,7 @@
     <!-- Header Row for Weekdays -->
     <mat-header-row *matHeaderRowDef="weekdayColumns"></mat-header-row>
     <ng-container matColumnDef="day">
-      <mat-header-cell class="mat-header-cell-category" *matHeaderCellDef>
+      <mat-header-cell class="mat-header-cell-category mat-sticky" *matHeaderCellDef>
         Tag
       </mat-header-cell>
     </ng-container>
@@ -129,5 +132,5 @@
     <!-- Data Rows -->
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
-  </mat-table>
+  </table>
 </div>
