@@ -29,7 +29,9 @@ export class CustomSidenavComponent implements OnInit{
       route: "dashboard"
     },
     {
-      icon: "insert_chart",
+      // icon: "insert_chart",
+      icon: "table",
+      // icon: "view_list",
       label: "Gesamtübersicht",
       route: "overall"
     },
@@ -40,7 +42,8 @@ export class CustomSidenavComponent implements OnInit{
       route: "overview"
     },
     {
-      icon: "dashboard_customize",
+      // icon: "dashboard_customize",
+      icon: "add_business",
       label: "Stationen",
       route: "station"
     },
@@ -60,7 +63,8 @@ export class CustomSidenavComponent implements OnInit{
           route: "dashboard"
         },
         {
-          icon: "insert_chart",
+          // icon: "insert_chart",
+          icon: "table",
           label: "Gesamtübersicht",
           route: "overall"
         },
@@ -71,7 +75,8 @@ export class CustomSidenavComponent implements OnInit{
           route: "overview"
         },
         {
-          icon: "dashboard_customize",
+          // icon: "dashboard_customize",
+          icon: "add_business",
           label: "Stationen",
           route: "station"
         }

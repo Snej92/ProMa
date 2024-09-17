@@ -15,7 +15,7 @@
       <mat-divider vertical="true"></mat-divider>
     </div>
     <div class="overview-content">
-      <mat-tab-group mat-stretch-tabs="false" animationDuration="0ms">
+      <mat-tab-group mat-stretch-tabs="false" animationDuration="0ms" [(selectedIndex)]="stationId">
         <ng-container *ngFor="let stationView of stationView.stationViewList">
           <mat-tab [label]="stationView.name">
             <ng-template matTabContent>

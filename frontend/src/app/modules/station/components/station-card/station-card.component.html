@@ -1,7 +1,7 @@
-<mat-card class="station-card-container">
+<mat-card class="station-card-container" (click)="navigateToStation(stationView.id)">
   <div class="d-flex justify-content-between ms-2 mt-2 me-2">
     <div class="card-header-left">
-      <button mat-raised-button matTooltip="Favorit" color="accent" class="button small-button">
+      <button mat-raised-button matTooltip="Favorit" color="accent" class="button small-button" (click)="$event.stopPropagation()">
         <i class="material-icons star-icon" [ngClass]="{'star-icon': favorite}">star</i>
       </button>
       <div class="card-header-text">
@@ -15,7 +15,7 @@
     </div>
 
     <div class="card-header-right">
-      <button class="align-menu-button" mat-icon-button [matMenuTriggerFor]="menu">
+      <button class="align-menu-button" mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">

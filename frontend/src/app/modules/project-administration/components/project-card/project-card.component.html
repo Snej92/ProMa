@@ -1,10 +1,10 @@
-<mat-card class="card-container">
+<mat-card class="card-container" (click)="selectProject(projectView?.id)">
   <div class="d-flex justify-content-between ms-2 mt-2 me-2">
     <div class="card-header-left">
-      <button mat-raised-button matTooltip="Favorit" color="accent" class="button small-button">
+      <button mat-raised-button matTooltip="Favorit" color="accent" class="button small-button" (click)="$event.stopPropagation()">
         <i class="material-icons star-icon" [ngClass]="{'star-icon': favorite}" >star</i>
       </button>
-      <div class="card-header-text">
+      <div class="card-header-text" >
         <div class="project-name">
           <h3>{{projectView?.name}}</h3>
         </div>
@@ -15,7 +15,7 @@
     </div>
 
     <ng-container *ngIf="loggedUser.user.roles.projectRole">
-      <div class="card-header-right">
+      <div class="card-header-right" (click)="$event.stopPropagation()">
         <button class="align-menu-button" mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>more_vert</mat-icon>
         </button>
@@ -42,7 +42,7 @@
 
   </div>
 
-  <div (click)="selectProject(projectView?.id)">
+  <div>
     <div class="card-media">
 
     </div>

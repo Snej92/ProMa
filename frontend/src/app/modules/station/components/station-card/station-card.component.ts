@@ -7,6 +7,7 @@ import {SysConfirmationComponent} from "../../../../core/sys-confirmation/sys-co
 import {loadSpinner} from "../../../../core/store/app.action";
 import {deleteStation} from "../../store/stationView.actions";
 import {AddStationComponent} from "../add-station/add-station.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-station-card',
@@ -54,7 +55,8 @@ export class StationCardComponent {
 
   constructor(private store:Store<AppStateModel>,
               private dialog:MatDialog,
-              private confirm:MatDialog) {
+              private confirm:MatDialog,
+              private router: Router) {
   }
 
   editStation(id:any){
@@ -84,6 +86,10 @@ export class StationCardComponent {
         this.store.dispatch(deleteStation({id:id}))
       }
     })
+  }
+
+  navigateToStation(stationId: number): void {
+    this.router.navigate(['/overview'], { queryParams: { id: stationId } });
   }
 
   openPopup(id:any, title:any, isEdit=false, button:any){

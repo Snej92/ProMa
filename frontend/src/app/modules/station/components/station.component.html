@@ -4,6 +4,7 @@
     <ng-container *ngIf="user.user.activeProject > 0">
       <div class="station-cards-container">
         <app-station-card class="station-card ms-5 mt-4 mb-1 mat-elevation-z6"
+                          appProjectElevation [defaultElevation]="4" [raisedElevation]="16"
                           *ngFor="let stationView of stationView.stationViewList" [stationView]="stationView"/>
 
         <mat-card class="card-container station-card ms-5 mt-4 mb-1 justify-content-center">
