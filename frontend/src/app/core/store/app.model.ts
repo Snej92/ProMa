@@ -4,5 +4,9 @@ export const global = {
   ),
   emailRegex : new RegExp(
     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-  )
+  ),
+  standardTextRegex : new RegExp(
+    /^[A-Za-z0-9_öüäÖÜÄ .,?!"§$%&=\\(){}\[\]+/*#´`'°\-]+$/
+  ),
+  version : "Version 0.16.1"
 }

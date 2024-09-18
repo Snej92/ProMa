@@ -19,6 +19,7 @@ import {Subscription} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {activeFavProjectViewModel} from "../../core/active-project/active-project.state";
 import {loggedUserModel} from "../../core/logged-user/logged-user.state";
+import {global} from "../../core/store/app.model";
 
 @Component({
   selector: 'app-sys-sidenav',
@@ -71,4 +72,6 @@ export class SysSidenavComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
+
+    protected readonly global = global;
 }

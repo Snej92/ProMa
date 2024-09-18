@@ -37,7 +37,7 @@
         <mat-label>Aufgabe</mat-label>
         <input matInput
                formControlName="toDo"
-               pattern="^[A-Za-z0-9_öüä +*#´`'\-°]*$">
+               [pattern]="global.standardTextRegex">
         <mat-error *ngIf="versionForm.controls['toDo'].hasError('pattern')">
           Nicht erlaubte Zeichen
         </mat-error>

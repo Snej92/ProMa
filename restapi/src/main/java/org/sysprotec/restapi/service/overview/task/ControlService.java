@@ -59,6 +59,9 @@ public class ControlService {
                 }
                 acronym = loggedUser.getAcronym();
                 name = loggedUser.getFirstname() + " " + loggedUser.getLastname();
+                saveTask.setIssuerAcronym(acronym);
+                saveTask.setIssuerName(name);
+
             } else if(saveTask.getCommited() != task.getCommited()){
                 if(task.getCommited()){
                     historyText = "Kontrolle '" + saveTask.getTaskSetting().getItem() + "' auf 'übergeben' geändert";
@@ -75,8 +78,6 @@ public class ControlService {
             saveTask.setAddition(task.getAddition());
             saveTask.setDone(task.getDone());
             saveTask.setCommited(task.getCommited());
-            saveTask.setIssuerAcronym(acronym);
-            saveTask.setIssuerName(name);
 
 
             stationService.updateStationControlProgress(stationRepository.getStationByControlId(task.getId()));

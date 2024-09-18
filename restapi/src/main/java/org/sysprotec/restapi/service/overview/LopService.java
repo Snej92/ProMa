@@ -71,7 +71,6 @@ public class LopService {
             saveLop.setAddition(lop.getAddition());
             saveLop.setEndDate(lop.getEndDate());
             saveLop.setStatus(lop.getStatus(), userService.getLoggedUser());
-            User user = userService.getLoggedUser();
 
             stationService.updateStationLopProgress(stationRepository.getStationByLopId(lop.getId()));
 

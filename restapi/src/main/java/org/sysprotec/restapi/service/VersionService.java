@@ -34,6 +34,7 @@ public class VersionService {
     private final VersionStationRepository versionStationRepository;
     private final StationService stationService;
     private final StationRepository stationRepository;
+    private final HistoryService historyService;
 
 
     public List<Version> getVersions() {
@@ -135,6 +136,42 @@ public class VersionService {
                     optionalVersion.get().getProject().getId());
 
             if(checkVersion.isEmpty() || Objects.equals(version.getVersion(), optionalVersion.get().getVersion())){
+
+                //History
+                String stationName = "";
+                String versionName;
+                String historyMessage;
+                int oldState = 0;
+                int newState = 0;
+                boolean stateChange = false;
+                //optionalVersion is before update
+                //version is received from frontend
+                for(VersionStation versionStationCheck : optionalVersion.get().getVersionStation()){
+                    int id = Math.toIntExact(versionStationCheck.getId());
+                    for(VersionStation versionStation : version.getVersionStation()){
+                        if(versionStation.getId() == id){
+                            if(!Objects.equals(versionStation.getState(), versionStationCheck.getState())){
+                                stateChange = true;
+                                newState = versionStation.getState();
+                                oldState = versionStationCheck.getState();
+                                stationName = versionStationCheck.getStationName();
+                                versionName = versionStationCheck.getVersion().getVersion();
+
+                                historyMessage = switch (newState) {
+                                    case 1 ->
+                                            "Station '" + stationName + "' Version '" + versionName + " status geändert zu 'offen'";
+                                    case 2 ->
+                                            "Station '" + stationName + "' Version '" + versionName + " status geändert zu 'erledigt'";
+                                    case 3 ->
+                                            "Station '" + stationName + "' Version '" + versionName + " status geändert zu 'nicht notwendig'";
+                                    default -> "version station update: ???";
+                                };
+                                log.info(historyMessage);
+                            }
+                        }
+                    }
+                }
+
                 Version saveVersion = optionalVersion.get();
                 saveVersion.setVersion(version.getVersion());
                 saveVersion.setToDo(version.getToDo());
@@ -158,12 +195,19 @@ public class VersionService {
                         }
                     }
                 }
+
+                //Todo check station and add history entry
+                if(stateChange){
+                    stationRepository.findStationByNameIgnoreCaseAndProjectId(stationName, optionalVersion.get().getProject().getId());
+                }
+
                 versionRepository.save(saveVersion);
                 log.info("Version '"+ version.getVersion() + "' updated");
                 stationService.updateStationVersion();
                 if(versionRepository.findVersionById(version.getId()).isPresent()){
                     Version returnVersion = versionRepository.findVersionById(version.getId()).get();
                     returnVersion.setVersionStation(versionStationRepository.findVersionStationsByVersionIdOrderByStationNameAsc(returnVersion.getId()));
+
                     return new ResponseEntity<>(
                             returnVersion,
                             HttpStatus.OK);

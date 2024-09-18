@@ -5,66 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16c64894-e2b1-46b9-9759-3e6da58dad35" name="Changes" comment="V0.16.0&#10;-routing from station -&gt; stationOverview, depending if you press the card, LOP or Version&#10;-versionStation now sorted by stationName&#10;-uploaded to server">
-      <change afterPath="$PROJECT_DIR$/frontend/frontend.7z" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/core/websocket/web-socket.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/core/websocket/web-socket.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/version-overview/version-overview.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/version-overview/version-overview.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/version-overview/version-overview.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/version-overview/version-overview.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/websocket/WebSocketConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/websocket/WebSocketHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/project/ProjectGet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/components/overview.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/components/overview.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/components/overview.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/components/overview.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/service/project-administration.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/service/project-administration.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/components/control-settings.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/components/control-settings.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/store/controlSetting.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/store/controlSetting.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/store/controlSetting.effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/store/controlSetting.effects.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/store/controlSetting.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/store/controlSetting.reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/components/version.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/components/version.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/custom-sidenav/custom-sidenav.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/custom-sidenav/custom-sidenav.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend.7z" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend.7z" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/store/app.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/store/app.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/version-overview/version-overview.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/version-overview/version-overview.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/version-overview/version-overview.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/version-overview/version-overview.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/components/add-version/add-version.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/components/add-version/add-version.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/components/add-version/add-version.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/components/add-version/add-version.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/components/version.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/components/version.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/components/version.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/version/components/version.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/authentication/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/authentication/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/ProjectController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/StationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/StationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/project/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/ProjectFavorite.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/project/ProjectFavorite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/Station.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/Station.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/settings/HeaderDataSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/settings/HeaderDataSetting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/settings/TaskSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/settings/TaskSetting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/settings/TechnicalDataSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/settings/TechnicalDataSetting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/settings/Version.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/settings/Version.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/ProjectFavoriteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/ProjectFavoriteRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/ProjectRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/ProjectRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/settings/VersionStationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/settings/VersionStationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/AssignmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/AssignmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/ProjectService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/StationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/StationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/VersionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/VersionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/HeaderDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/HeaderDataService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/TechnicalDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/TechnicalDataService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/LopService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/LopService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/task/ControlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/task/ControlService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/task/DocumentationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/task/DocumentationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/task/ProjectionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/task/ProjectionService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/task/SpecificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/overview/task/SpecificationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/HeaderDataSettingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/HeaderDataSettingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/TechnicalDataSettingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/TechnicalDataSettingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/task/ControlSettingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/task/ControlSettingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/task/DocumentationSettingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/task/DocumentationSettingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/task/ProjectionSettingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/task/ProjectionSettingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/task/SpecificationSettingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/settings/task/SpecificationSettingService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +147,7 @@
       <workItem from="1726119709582" duration="16885000" />
       <workItem from="1726466223540" duration="15381000" />
       <workItem from="1726548631982" duration="16977000" />
-      <workItem from="1726635104085" duration="14521000" />
+      <workItem from="1726635104085" duration="25443000" />
     </task>
     <task id="LOCAL-00001" summary="V0.13&#10;Vorbereitung fürs Dashboard und sehr viele bugfixes und QoL changes">
       <option name="closed" value="true" />
@@ -264,7 +221,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726571988649</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="V0.16.0&#10;-routing from station -&gt; stationOverview, depending if you press the card, LOP or Version&#10;-versionStation now sorted by stationName&#10;-uploaded to server">
+      <option name="closed" value="true" />
+      <created>1726650470881</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1726650470881</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

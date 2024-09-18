@@ -53,6 +53,8 @@ export class AddVersionComponent implements OnInit{
       const subscription = this.store.select(getVersionById(this.editVersionId)).subscribe(data=>{
         this.editData=data;
         this.populateForm()
+        console.log("editData: ")
+        console.log(this.editData)
       })
       subscription.unsubscribe();
     } else{
@@ -63,7 +65,7 @@ export class AddVersionComponent implements OnInit{
   initializeForm() {
     this.versionForm = this.builder.group({
       id: this.builder.control(0),
-      date: this.builder.control('', []),
+      date: this.builder.control(''),
       version: this.builder.control('', Validators.required),
       toDo: this.builder.control('', Validators.required),
       done: this.builder.control(false),
@@ -72,6 +74,9 @@ export class AddVersionComponent implements OnInit{
   }
 
   populateForm() {
+
+    const dateValue = this.editData.date ? new Date(this.editData.date) : null;
+
     // Create a FormArray from the editData.versionStation array
     const versionStationArray = this.editData.versionStation.map(station => this.builder.group({
       id: [station.id],
@@ -89,6 +94,7 @@ export class AddVersionComponent implements OnInit{
     });
 
     this.date = this.versionForm.get('date')?.value || "";
+    this.validDate = global.dateRegex.test(this.date);
 
     // @ts-ignore
     this.versionForm.setControl('versionStation', this.builder.array(versionStationArray));
@@ -149,4 +155,6 @@ export class AddVersionComponent implements OnInit{
       this.closePopup();
     }
   }
+
+  protected readonly global = global;
 }

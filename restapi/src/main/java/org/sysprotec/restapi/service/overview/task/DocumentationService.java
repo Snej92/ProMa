@@ -61,6 +61,8 @@ public class DocumentationService {
                 }
                 acronym = loggedUser.getAcronym();
                 name = loggedUser.getFirstname() + " " + loggedUser.getLastname();
+                saveTask.setIssuerAcronym(acronym);
+                saveTask.setIssuerName(name);
             } else if(saveTask.getCommited() != task.getCommited()){
                 if(task.getCommited()){
                     historyText = "Doku '" + saveTask.getTaskSetting().getItem() + "' auf 'übergeben' geändert";
@@ -80,8 +82,7 @@ public class DocumentationService {
             saveTask.setAddition(task.getAddition());
             saveTask.setDone(task.getDone());
             saveTask.setCommited(task.getCommited());
-            saveTask.setIssuerAcronym(acronym);
-            saveTask.setIssuerName(name);
+
 
             stationService.updateStationDocumentationProgress(stationRepository.getStationByDocumentationId(task.getId()));
 
