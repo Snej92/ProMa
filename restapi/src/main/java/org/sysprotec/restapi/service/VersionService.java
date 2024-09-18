@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.sysprotec.restapi.model.*;
+import org.sysprotec.restapi.model.project.Project;
 import org.sysprotec.restapi.model.settings.Version;
 import org.sysprotec.restapi.model.settings.VersionStation;
 import org.sysprotec.restapi.repository.ProjectRepository;
@@ -45,7 +46,7 @@ public class VersionService {
                 if(user.getActiveProject() != null && user.getActiveProject()>0){
                     versions = versionRepository.findVersionsByProjectIdOrderByIdAsc(user.getActiveProject());
                     for(Version version : versions){
-                        List<VersionStation> versionStation = versionStationRepository.findVersionStationsByVersionIdOrderByIdAsc(version.getId());
+                        List<VersionStation> versionStation = versionStationRepository.findVersionStationsByVersionIdOrderByStationNameAsc(version.getId());
                         version.setVersionStation(versionStation);
                     }
                     return versions;
@@ -162,7 +163,7 @@ public class VersionService {
                 stationService.updateStationVersion();
                 if(versionRepository.findVersionById(version.getId()).isPresent()){
                     Version returnVersion = versionRepository.findVersionById(version.getId()).get();
-                    returnVersion.setVersionStation(versionStationRepository.findVersionStationsByVersionIdOrderByIdAsc(returnVersion.getId()));
+                    returnVersion.setVersionStation(versionStationRepository.findVersionStationsByVersionIdOrderByStationNameAsc(returnVersion.getId()));
                     return new ResponseEntity<>(
                             returnVersion,
                             HttpStatus.OK);

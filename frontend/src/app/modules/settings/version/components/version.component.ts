@@ -75,9 +75,9 @@ export class VersionComponent implements OnInit,OnDestroy{
           for(let val of this.version.versionList){
             this.extraColumns = [];
             this.displayedColumns = ['Aktion', 'Datum', 'Version', 'Aufgabe', 'Status'];
-            for(let test of val.versionStation){
-              this.extraColumns.push(test.stationName);
-              this.displayedColumns.push(test.stationName);
+            for(let val2 of val.versionStation){
+              this.extraColumns.push(val2.stationName);
+              this.displayedColumns.push(val2.stationName);
             }
           }
         })

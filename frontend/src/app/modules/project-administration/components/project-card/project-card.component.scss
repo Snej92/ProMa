@@ -4,6 +4,7 @@
   background-color: var(--frontend-nav-button);
   border-color: var(--frontend-nav-button-border);
   border-width: 2px;
+  user-select: none;
 }
 
 .align-menu-button{

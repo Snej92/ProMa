@@ -1,22 +1,24 @@
 import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
-import {catchError, of, switchMap} from "rxjs";
+import {catchError, map, of, switchMap} from "rxjs";
 import {loadSpinner, showAlert} from "../../../../core/store/app.action";
 import {
   addSettingControl,
   addSettingControlSuccess, deleteSettingControl, deleteSettingControlSuccess,
   LOAD_SETTING_CONTROL,
   loadSettingControlFail,
-  loadSettingControlSuccess, updateSettingControl, updateSettingControlSuccess
+  loadSettingControlSuccess, updateSettingControl, updateSettingControlSuccess, updateSettingControlWebsocket
 } from "./controlSetting.actions";
 import {controlSettingModel} from "./controlSetting.model";
 import {ControlSettingsService} from "../service/control-settings.service";
+import {WebSocketService} from "../../../../core/websocket/web-socket.service";
 
 
 @Injectable()
 export class ControlSettingEffects {
   constructor(private action$:Actions,
-              private service:ControlSettingsService) {
+              private service:ControlSettingsService,
+              private webSocketService:WebSocketService) {
 
   }
 
@@ -82,4 +84,11 @@ export class ControlSettingEffects {
       )
     )
   );
+
+  // Effect to listen for real-time WebSocket updates
+  // listenForControlSettingsUpdates$ = createEffect(() =>
+  //   this.webSocketService.getControlSettingsUpdates().pipe(
+  //     map((controlSettingList) => updateSettingControlWebsocket({ controlSettingList }))
+  //   )
+  // );
 }

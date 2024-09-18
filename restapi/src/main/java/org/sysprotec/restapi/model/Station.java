@@ -10,9 +10,9 @@ import org.sysprotec.restapi.model.overview.HeaderData;
 import org.sysprotec.restapi.model.overview.Lop;
 import org.sysprotec.restapi.model.overview.Task;
 import org.sysprotec.restapi.model.overview.TechnicalData;
+import org.sysprotec.restapi.model.project.Project;
 import org.sysprotec.restapi.model.types.StatusEPLAN;
 
-import java.util.Iterator;
 import java.util.List;
 
 @Entity

@@ -1,0 +1,60 @@
+.table-container{
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 74vh;
+}
+
+.mat-mdc-header-row{
+  color: white;
+  background-color: var(--frontend-primary);
+  height: 50px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.mat-mdc-row:nth-child(even){
+  background-color: var(--frontend-alternate);
+}
+
+.th-center{
+  text-align: center;
+}
+
+.td-center{
+  text-align: center;
+}
+
+.th-Aktion{
+  padding-left: 35px;
+}
+
+.mat-column-Aktion{
+  min-width: 120px;
+  max-width: 120px;
+}
+
+.alignment{
+  position: relative;
+  top: 9px;
+}
+
+.mat-column-Datum{
+
+}
+
+.mat-column-Version{
+
+}
+
+.mat-column-status{
+
+}
+
+.mat-column-Aufgabe{
+  text-align: start;
+}
+
+.mat-column-Station{
+
+}

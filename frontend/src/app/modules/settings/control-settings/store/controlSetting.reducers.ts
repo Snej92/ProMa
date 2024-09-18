@@ -5,7 +5,7 @@ import {
   loadSettingControl,
   loadSettingControlFail,
   loadSettingControlSuccess,
-  updateSettingControlSuccess
+  updateSettingControlSuccess, updateSettingControlWebsocket
 } from "./controlSetting.actions";
 import {controlSettingModel} from "./controlSetting.model";
 import {controlSettingState} from "./controlSetting.state";
@@ -63,6 +63,15 @@ const _controlSettingReducer = createReducer(
     return{
       ...state,
       controlSettingList:[...state.controlSettingList,control]
+    };
+  }),
+
+  //Websocket
+  on(updateSettingControlWebsocket, (state,action) => {
+    return{
+      ...state,
+      controlSettingList:[...action.controlSettingList],
+      errorMessage:''
     };
   }),
 

@@ -24,7 +24,6 @@ export class OverviewComponent implements OnInit,OnDestroy{
   stationId: number = 0;
 
   selectedOverview!:number;
-  receivedSelectedOverview!:number;
 
   constructor(private store:Store<AppStateModel>,
               private route: ActivatedRoute) {
@@ -43,17 +42,24 @@ export class OverviewComponent implements OnInit,OnDestroy{
   ngOnInit(): void {
 
     this.route.queryParamMap.subscribe(params => {
-      const idParam = params.get('id');
+      const idParamString = params.get('id');
+      const selectedOverviewString = params.get('selectedOverview');
+      console.log("selectedOverviewString: ", selectedOverviewString)
 
-      if(idParam === null){
+      if(idParamString === null){
         console.log('ID is null')
         this.selectedOverview = Number(localStorage.getItem('selectedOverview')) || 1; // Default to 1 if no value is found
       } else {
         // @ts-ignore
         this.stationId = +params.get('id');
-        this.stationId -= 1;
         console.log('ID is: ', this.stationId)
-        this.selectedOverview = 1;
+        if(selectedOverviewString === null){
+          this.selectedOverview = Number(localStorage.getItem('selectedOverview')) || 1; // Default to 1 if no value is found
+        } else {
+          // @ts-ignore
+          this.selectedOverview = +params.get('selectedOverview');
+          localStorage.setItem('selectedOverview', String(this.selectedOverview));
+        }
       }
     })
 

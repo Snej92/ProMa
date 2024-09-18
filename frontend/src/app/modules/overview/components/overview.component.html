@@ -10,30 +10,36 @@
       <app-sys-nav-button (click)="selectOverview(7)"  text="Technische Daten" [selected]="selectedOverview==7"></app-sys-nav-button>
       <app-sys-nav-button (click)="selectOverview(8)"  text="LOP" [selected]="selectedOverview==8"></app-sys-nav-button>
       <app-sys-nav-button (click)="selectOverview(9)"  text="Historie" [selected]="selectedOverview==9"></app-sys-nav-button>
+      <app-sys-nav-button (click)="selectOverview(10)"  text="Version" [selected]="selectedOverview==10"></app-sys-nav-button>
     </div>
     <div class="overview-divider">
       <mat-divider vertical="true"></mat-divider>
     </div>
     <div class="overview-content">
-      <mat-tab-group mat-stretch-tabs="false" animationDuration="0ms" [(selectedIndex)]="stationId">
-        <ng-container *ngFor="let stationView of stationView.stationViewList">
-          <mat-tab [label]="stationView.name">
-            <ng-template matTabContent>
-              <div [ngSwitch]="selectedOverview" class="mat-tab-group-content mat-tab-body mat-tab-body-content">
-                <app-station-overview (selectedOverviewEmitted)="receiveSelectedOverview($event)" *ngSwitchCase="1" [stationViewInput]="stationView" [stationId]="stationView.id"></app-station-overview>
-                <app-header-data *ngSwitchCase="2" [stationId]="stationView.id"></app-header-data>
-                <app-specification *ngSwitchCase="3" [stationId]="stationView.id"></app-specification>
-                <app-projection *ngSwitchCase="4" [stationId]="stationView.id"></app-projection>
-                <app-control *ngSwitchCase="5" [stationId]="stationView.id"></app-control>
-                <app-documentation *ngSwitchCase="6" [stationId]="stationView.id"></app-documentation>
-                <app-technical-data *ngSwitchCase="7" [stationId]="stationView.id"></app-technical-data>
-                <app-lop *ngSwitchCase="8" [stationId]="stationView.id"></app-lop>
-                <app-history *ngSwitchCase="9" [stationId]="stationView.id"></app-history>
-              </div>
-            </ng-template>
-          </mat-tab>
-        </ng-container>
-      </mat-tab-group>
+      <ng-container *ngIf="selectedOverview >= 1 && selectedOverview <= 9">
+        <mat-tab-group mat-stretch-tabs="false" animationDuration="0ms" [(selectedIndex)]="stationId">
+          <ng-container *ngFor="let stationView of stationView.stationViewList">
+            <mat-tab [label]="stationView.name">
+              <ng-template matTabContent>
+                <div [ngSwitch]="selectedOverview" class="mat-tab-group-content mat-tab-body mat-tab-body-content">
+                  <app-station-overview (selectedOverviewEmitted)="receiveSelectedOverview($event)" *ngSwitchCase="1" [stationViewInput]="stationView" [stationId]="stationView.id"></app-station-overview>
+                  <app-header-data *ngSwitchCase="2" [stationId]="stationView.id"></app-header-data>
+                  <app-specification *ngSwitchCase="3" [stationId]="stationView.id"></app-specification>
+                  <app-projection *ngSwitchCase="4" [stationId]="stationView.id"></app-projection>
+                  <app-control *ngSwitchCase="5" [stationId]="stationView.id"></app-control>
+                  <app-documentation *ngSwitchCase="6" [stationId]="stationView.id"></app-documentation>
+                  <app-technical-data *ngSwitchCase="7" [stationId]="stationView.id"></app-technical-data>
+                  <app-lop *ngSwitchCase="8" [stationId]="stationView.id"></app-lop>
+                  <app-history *ngSwitchCase="9" [stationId]="stationView.id"></app-history>
+                </div>
+              </ng-template>
+            </mat-tab>
+          </ng-container>
+        </mat-tab-group>
+      </ng-container>
+      <ng-container *ngIf="selectedOverview == 10" >
+        <app-version-overview class="mat-tab-group-content mat-tab-body mat-tab-body-content"></app-version-overview>
+      </ng-container>
     </div>
   </div>
 </ng-container>

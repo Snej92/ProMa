@@ -108,6 +108,7 @@ export class ControlSettingsComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.store.dispatch(loadSpinner({isLoading:true}));
     this.store.dispatch(loadSettingControl())
+
     this.subscriptions.push(
       this.store.select(getSettingControlInfo).pipe()
         .subscribe(data=>{

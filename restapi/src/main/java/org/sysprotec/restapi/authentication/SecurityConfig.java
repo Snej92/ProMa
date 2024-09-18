@@ -34,7 +34,9 @@ public class SecurityConfig {
                                 "/swagger-resources/**",
                                 "/swagger-resources",
                                 "/v3/api-docs/**",
-                                "/proxy/**").permitAll()
+                                "/proxy/**",
+                                "/ws-endpoint/**",
+                                "/socket.io/**").permitAll()
                         .anyRequest().authenticated());
         http
                 .oauth2ResourceServer(configurer

@@ -2,6 +2,7 @@ package org.sysprotec.restapi.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.sysprotec.restapi.model.project.ProjectGet;
 import org.sysprotec.restapi.model.projections.ProjectFavView;
 import org.sysprotec.restapi.service.ProjectService;
 
@@ -15,11 +16,10 @@ public class ProjectController {
     private final ProjectService projectService;
 
 
-    @GetMapping("/all/{archive}/{all}")
+    @PostMapping("/all")
     public List<ProjectFavView> getAllProjects(
-            @PathVariable Boolean archive,
-            @PathVariable Boolean all){
-        return projectService.getAllProjects(archive, all);
+            @RequestBody ProjectGet projectGet){
+        return projectService.getAllProjects(projectGet.getArchived(), projectGet.getAll());
     }
 
     @GetMapping

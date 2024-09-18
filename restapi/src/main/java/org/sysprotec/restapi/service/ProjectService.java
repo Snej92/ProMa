@@ -8,6 +8,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.sysprotec.restapi.model.*;
 import org.sysprotec.restapi.model.deserialization.ProjectViewImpl;
+import org.sysprotec.restapi.model.project.Project;
+import org.sysprotec.restapi.model.project.ProjectFavorite;
 import org.sysprotec.restapi.model.projections.ProjectFavView;
 import org.sysprotec.restapi.model.projections.ProjectView;
 import org.sysprotec.restapi.model.settings.HeaderDataSetting;

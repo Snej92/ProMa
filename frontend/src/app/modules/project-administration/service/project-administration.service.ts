@@ -14,7 +14,11 @@ export class ProjectAdministrationService {
 
   getAllProjects(archive:boolean, all:boolean):Observable<projectFavViewModel[]>{
     console.log('Fetch Projects')
-    return this.http.get<projectFavViewModel[]>(this.API_URL + "/project/all/"+archive+"/"+all)
+    const projectGet = {
+      archived : archive,
+      all : all
+    }
+    return this.http.post<projectFavViewModel[]>(this.API_URL + "/project/all" ,projectGet);
   }
 
   getProject():Observable<projectFavViewModel>{

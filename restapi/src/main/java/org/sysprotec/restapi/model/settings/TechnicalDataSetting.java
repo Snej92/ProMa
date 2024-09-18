@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.sysprotec.restapi.model.Project;
+import org.sysprotec.restapi.model.project.Project;
 import org.sysprotec.restapi.model.overview.TechnicalData;
 
 import java.util.List;

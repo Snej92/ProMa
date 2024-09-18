@@ -8,7 +8,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.sysprotec.restapi.model.Project;
+import org.sysprotec.restapi.config.websocket.WebSocketHandler;
+import org.sysprotec.restapi.model.project.Project;
 import org.sysprotec.restapi.model.Station;
 import org.sysprotec.restapi.model.User;
 import org.sysprotec.restapi.model.overview.Task;
@@ -18,7 +19,6 @@ import org.sysprotec.restapi.repository.UserRepository;
 import org.sysprotec.restapi.repository.overview.TaskRepository;
 import org.sysprotec.restapi.repository.settings.TaskSettingRepository;
 import org.sysprotec.restapi.service.StationService;
-import org.sysprotec.restapi.service.overview.task.ControlService;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +32,8 @@ public class ControlSettingService {
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
     private final StationService stationService;
+
+    private final WebSocketHandler webSocketHandler;
 
     public List<TaskSetting> getControlSetting() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -84,11 +86,12 @@ public class ControlSettingService {
             saveTaskSetting.setItem(taskSetting.getItem());
 
             //Update Progress
-            for(Station station : taskSetting.getProject().getStations()){
+            for(Station station : optionalTaskSetting.get().getProject().getStations()){
                 stationService.updateStationControlProgress(station);
             }
 
             log.info("Control with id " + taskSetting.getId() + " updated");
+            webSocketHandler.broadcastMessage("control-settings-update");
         }
     }
 

@@ -30,7 +30,7 @@ export class CustomSidenavComponent implements OnInit{
     },
     {
       // icon: "insert_chart",
-      icon: "table",
+      icon: "table_view",
       // icon: "view_list",
       label: "Gesamtübersicht",
       route: "overall"
@@ -64,7 +64,7 @@ export class CustomSidenavComponent implements OnInit{
         },
         {
           // icon: "insert_chart",
-          icon: "table",
+          icon: "table_view",
           label: "Gesamtübersicht",
           route: "overall"
         },

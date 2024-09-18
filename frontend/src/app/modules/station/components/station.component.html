@@ -5,7 +5,9 @@
       <div class="station-cards-container">
         <app-station-card class="station-card ms-5 mt-4 mb-1 mat-elevation-z6"
                           appProjectElevation [defaultElevation]="4" [raisedElevation]="16"
-                          *ngFor="let stationView of stationView.stationViewList" [stationView]="stationView"/>
+                          *ngFor="let stationView of stationView.stationViewList; let i = index"
+                          [stationView]="stationView"
+                          [currentIndex]="i"/>
 
         <mat-card class="card-container station-card ms-5 mt-4 mb-1 justify-content-center">
           <div class="d-flex justify-content-center">

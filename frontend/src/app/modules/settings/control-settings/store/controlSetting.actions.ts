@@ -1,6 +1,7 @@
 import {createAction, props} from "@ngrx/store";
 import {controlSettingModel} from "./controlSetting.model";
 
+//Normal state actions
 export const LOAD_SETTING_CONTROL_SUCCESS='[control settings page] load control success'
 export const LOAD_SETTING_CONTROL_FAIL='[control settings page] load control fail'
 export const LOAD_SETTING_CONTROL='[control settings page] get control'
@@ -24,3 +25,9 @@ export const updateSettingControlSuccess=createAction(UPDATE_SETTING_CONTROL_SUC
 
 export const deleteSettingControl=createAction(DELETE_SETTING_CONTROL, props<{id:number}>())
 export const deleteSettingControlSuccess=createAction(DELETE_SETTING_CONTROL_SUCCESS, props<{id:number}>())
+
+
+//Websocket
+export const UPDATE_SETTING_CONTROL_WEBSOCKET = '[websocket control settings] update control'
+
+export const updateSettingControlWebsocket = createAction(UPDATE_SETTING_CONTROL_WEBSOCKET, props<{controlSettingList:controlSettingModel[]}>())

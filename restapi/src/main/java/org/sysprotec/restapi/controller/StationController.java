@@ -2,9 +2,7 @@ package org.sysprotec.restapi.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.sysprotec.restapi.model.Project;
 import org.sysprotec.restapi.model.Station;
-import org.sysprotec.restapi.model.projections.HeaderDataInput;
 import org.sysprotec.restapi.model.projections.StationDto;
 import org.sysprotec.restapi.model.projections.StationRequest;
 import org.sysprotec.restapi.model.projections.StationView;

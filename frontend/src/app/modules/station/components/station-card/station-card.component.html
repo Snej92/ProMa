@@ -1,4 +1,5 @@
-<mat-card class="station-card-container" (click)="navigateToStation(stationView.id)">
+<mat-card class="station-card-container"
+          (click)="navigateToStation(currentIndex, 1)">
   <div class="d-flex justify-content-between ms-2 mt-2 me-2">
     <div class="card-header-left">
       <button mat-raised-button matTooltip="Favorit" color="accent" class="button small-button" (click)="$event.stopPropagation()">
@@ -39,9 +40,19 @@
           }">
         {{stationView.status}}
       </h5>
-      <h5 class="station-version station-info-text">{{stationView.version}}</h5>
-      <h5 class="station-issuer station-info-text" [matTooltip]="stationView.issuerName">{{stationView.issuerAcronym}}</h5>
-      <h5 class="station-lop station-info-text" [ngClass]="{'station-status-eingelagert': stationView.lopToDo==0}">
+      <h5 class="station-version station-info-text"
+          matRipple
+          (click)="navigateToStation(currentIndex, 10)">
+        {{stationView.version}}
+      </h5>
+      <h5 class="station-issuer station-info-text"
+          [matTooltip]="stationView.issuerName">
+        {{stationView.issuerAcronym}}
+      </h5>
+      <h5 class="station-lop station-info-text"
+          matRipple
+          [ngClass]="{'station-status-eingelagert': stationView.lopToDo==0}"
+          (click)="navigateToStation(currentIndex, 8)">
         LOP: {{stationView.lopToDo}}
       </h5>
       <div class="station-progress station-info-text">

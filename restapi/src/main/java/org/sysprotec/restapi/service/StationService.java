@@ -11,6 +11,7 @@ import org.sysprotec.restapi.model.overview.HeaderData;
 import org.sysprotec.restapi.model.overview.Lop;
 import org.sysprotec.restapi.model.overview.Task;
 import org.sysprotec.restapi.model.overview.TechnicalData;
+import org.sysprotec.restapi.model.project.Project;
 import org.sysprotec.restapi.model.projections.*;
 import org.sysprotec.restapi.model.settings.*;
 import org.sysprotec.restapi.model.types.StatusLOP;
@@ -283,7 +284,7 @@ public class StationService {
         Optional<Station> optionalStation = stationRepository.findById(stationDto.getId());
         if (optionalStation.isPresent()) {
             Optional<Station> station = stationRepository.findStationByNameIgnoreCaseAndProjectId(stationDto.getName(), optionalStation.get().getProject().getId());
-            if(station.isEmpty()){
+            if(station.isEmpty() || stationDto.getName().equals(optionalStation.get().getName())){
                 Station saveStation = optionalStation.get();
                 saveStation.setName(stationDto.getName());
                 saveStation.setDescription(stationDto.getDescription());

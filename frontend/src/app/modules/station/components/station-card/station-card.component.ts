@@ -52,6 +52,7 @@ export class StationCardComponent {
   };
 
   @Input() favorite : boolean = false;
+  @Input() currentIndex : number = 0;
 
   constructor(private store:Store<AppStateModel>,
               private dialog:MatDialog,
@@ -88,8 +89,13 @@ export class StationCardComponent {
     })
   }
 
-  navigateToStation(stationId: number): void {
-    this.router.navigate(['/overview'], { queryParams: { id: stationId } });
+  navigateToStation(stationId: number, selectedOverview: number): void {
+    this.router.navigate(['/overview'], {
+      queryParams: {
+        id: stationId,
+        selectedOverview: selectedOverview
+      }
+    });
   }
 
   openPopup(id:any, title:any, isEdit=false, button:any){

@@ -11,7 +11,6 @@ import {loadStationView} from "../store/stationView.actions";
 import {getStationViewInfo} from "../store/stationView.selectors";
 import {activeProjectView} from "../../../core/active-project/active-project.model";
 import {AddStationComponent} from "./add-station/add-station.component";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-station',

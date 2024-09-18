@@ -4,6 +4,7 @@
   background-color: var(--frontend-nav-button);
   border-color: var(--frontend-nav-button-border);
   border-width: 2px;
+  user-select: none;
 }
 
 .align-menu-button{
@@ -84,6 +85,7 @@
   align-content: center;
   padding: 7px;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .station-status-ausgelagert{
@@ -105,6 +107,7 @@
   align-content: center;
   padding: 7px;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .station-issuer{
