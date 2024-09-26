@@ -8,8 +8,7 @@ import {getStationOverallViewInfo} from "../store/stationOverallView.selectors";
 import {loadStationOverallView} from "../store/stationOverallView.actions";
 import {getLoggedUserInfo} from "../../../core/logged-user/logged-user.selectors";
 import {loggedUser} from "../../../core/logged-user/logged-user.model";
-import {FormControl} from "@angular/forms";
-import {MatOption, MatSelectChange} from "@angular/material/select";
+import {MatOption} from "@angular/material/select";
 
 @Component({
   selector: 'app-overall-view',
@@ -30,19 +29,32 @@ export class OverallViewComponent implements OnInit, OnDestroy{
   controlColumns: String[] = [];
   technicalDataColumns: String[] = [];
 
+  //Filter for columns
   showHeaderData : boolean = true;
   showSpecification : boolean = true;
   showProjection : boolean = true;
   showDocumentation : boolean = true;
   showControl : boolean = true;
   showTechnicalData : boolean = true;
-
+  //selected
   selectedHeaderData: String[] = [];
   selectedSpecification: String[] = [];
   selectedProjection: String[] = [];
   selectedControl: String[] = [];
   selectedDocumentation: String[] = [];
   selectedTechnicalData: String[] = [];
+
+  //Filter for rows options
+  stationNames : String[] = [];
+  issuerNames : String[] = [];
+  status : String [] = ["AUSGELAGERT", "EINGELAGERT", "INARBEIT"];
+  versions : String [] = []
+  //selected
+  selectedStationNames : String[] = [];
+  selectedIssuerNames : String[] = [];
+  selectedStatus : String [] = [];
+  selectedVersions : String [] = []
+
 
   constructor(private store:Store<AppStateModel>) {
   }
@@ -76,7 +88,26 @@ export class OverallViewComponent implements OnInit, OnDestroy{
           this.documentationColumns = [];
           this.technicalDataColumns = [];
 
+          this.stationNames = [];
+          this.issuerNames = [];
+          this.versions = [];
+
           this.displayedColumns = ['Station', 'Bearbeiter', 'Status', 'Version', 'Gesamtfortschritt', 'LOPfortschritt'];
+
+          for(let station of this.stationOverallView.stationOverallViewList){
+            if(!this.stationNames.includes(station.name)){
+              this.stationNames.push(station.name)
+            }
+
+            if(!this.issuerNames.includes(station.issuerName + " " + "(" +station.issuerAcronym +")")){
+              this.issuerNames.push(station.issuerName + " " + "(" +station.issuerAcronym +")")
+            }
+
+            if(!this.versions.includes(station.version)){
+              this.versions.push(station.version)
+            }
+          }
+
           //HeaderData
           if(this.stationOverallView?.stationOverallViewList?.at(0)?.headerData !== undefined){
             const headerData = this.stationOverallView?.stationOverallViewList?.at(0)?.headerData!; // Assertion that it's not undefined
@@ -166,6 +197,13 @@ export class OverallViewComponent implements OnInit, OnDestroy{
   }
 
   initSelects(){
+    //Rows
+    this.initSelectedStationNames()
+    this.initSelectedIssuerNames()
+    this.initSelectedStatus()
+    this.initSelectedVersion()
+
+    //Columns
     this.initSelectedHeaderData()
     this.initSelectedProjection()
     this.initSelectedSpecification()
@@ -174,6 +212,225 @@ export class OverallViewComponent implements OnInit, OnDestroy{
     this.initSelectedTechnicalData()
   }
 
+  //Rows Filter
+  //region Selected Station
+  initSelectedStationNames(){
+    const selectedStationNames = localStorage.getItem('selectedStationNames')
+    if(selectedStationNames){
+      try{
+        this.selectedStationNames = JSON.parse(selectedStationNames);
+      } catch(e){
+        console.info('Error parsing JSON from localStorage for selectedStationNames')
+        this.selectedStationNames = [];
+      }
+    }
+  }
+
+  onChangeSelectStationNames(event: any){
+    if(event.value.includes('all')){
+      if(this.isAllStationNamesSelected()){
+        return;
+      }
+      this.selectedStationNames = this.selectedStationNames.filter(item => item !== 'all');
+      this.updateLocalStorageSelectedStationNames();
+      return;
+    }
+    this.updateLocalStorageSelectedStationNames();
+  }
+
+  toggleSelectAllStationNames(allSelected: MatOption){
+    allSelected.select()
+    if(this.isAllStationNamesSelected()){
+      this.selectedStationNames = [];
+      this.updateLocalStorageSelectedStationNames();
+    } else {
+      allSelected.select()
+      this.selectedStationNames = this.stationNames.slice();
+      this.selectedStationNames.push('all')
+      this.updateLocalStorageSelectedStationNames();
+    }
+  }
+
+  isAllStationNamesSelected(){
+    return this.selectedStationNames.length > this.stationNames.length;
+  }
+
+  updateLocalStorageSelectedStationNames(){
+    console.log(this.selectedStationNames);
+
+    const selectedStationNamesString = JSON.stringify(this.selectedStationNames);
+    localStorage.setItem('selectedStationNames',selectedStationNamesString)
+  }
+
+  isStationNamesColumnSelected(column: String): boolean {
+    return this.selectedStationNames.includes(column);
+  }
+  //endregion
+
+  //region Selected Issuer
+  initSelectedIssuerNames(){
+    const selectedIssuerNames = localStorage.getItem('selectedIssuerNames')
+    if(selectedIssuerNames){
+      try{
+        this.selectedIssuerNames = JSON.parse(selectedIssuerNames);
+      } catch(e){
+        console.info('Error parsing JSON from localStorage for selectedIssuerNames')
+        this.selectedIssuerNames = [];
+      }
+    }
+  }
+
+  onChangeSelectIssuerNames(event: any){
+    if(event.value.includes('all')){
+      if(this.isAllIssuerNamesSelected()){
+        return;
+      }
+      this.selectedIssuerNames = this.selectedIssuerNames.filter(item => item !== 'all');
+      this.updateLocalStorageSelectedIssuerNames();
+      return;
+    }
+    this.updateLocalStorageSelectedIssuerNames();
+  }
+
+  toggleSelectAllIssuerNames(allSelected: MatOption){
+    allSelected.select()
+    if(this.isAllIssuerNamesSelected()){
+      this.selectedIssuerNames = [];
+      this.updateLocalStorageSelectedIssuerNames();
+    } else {
+      allSelected.select()
+      this.selectedIssuerNames = this.issuerNames.slice();
+      this.selectedIssuerNames.push('all')
+      this.updateLocalStorageSelectedIssuerNames();
+    }
+  }
+
+  isAllIssuerNamesSelected(){
+    return this.selectedIssuerNames.length > this.issuerNames.length;
+  }
+
+  updateLocalStorageSelectedIssuerNames(){
+    console.log(this.selectedIssuerNames);
+
+    const selectedIssuerNamesString = JSON.stringify(this.selectedIssuerNames);
+    localStorage.setItem('selectedIssuerNames',selectedIssuerNamesString)
+  }
+
+  isIssuerNamesColumnSelected(column: String): boolean {
+    return this.selectedIssuerNames.includes(column);
+  }
+  //endregion
+
+  //region Selected Status
+  initSelectedStatus(){
+    const selectedStatus = localStorage.getItem('selectedStatus')
+    if(selectedStatus){
+      try{
+        this.selectedStatus = JSON.parse(selectedStatus);
+      } catch(e){
+        console.info('Error parsing JSON from localStorage for selectedStatus')
+        this.selectedStatus = [];
+      }
+    }
+  }
+
+  onChangeSelectStatus(event: any){
+    if(event.value.includes('all')){
+      if(this.isAllStatusSelected()){
+        return;
+      }
+      this.selectedStatus = this.selectedStatus.filter(item => item !== 'all');
+      this.updateLocalStorageSelectedStatus();
+      return;
+    }
+    this.updateLocalStorageSelectedStatus();
+  }
+
+  toggleSelectAllStatus(allSelected: MatOption){
+    allSelected.select()
+    if(this.isAllStatusSelected()){
+      this.selectedStatus = [];
+      this.updateLocalStorageSelectedStatus();
+    } else {
+      allSelected.select()
+      this.selectedStatus = this.status.slice();
+      this.selectedStatus.push('all')
+      this.updateLocalStorageSelectedStatus();
+    }
+  }
+
+  isAllStatusSelected(){
+    return this.selectedStatus.length > this.status.length;
+  }
+
+  updateLocalStorageSelectedStatus(){
+    console.log(this.selectedStatus);
+
+    const selectedStatusString = JSON.stringify(this.selectedStatus);
+    localStorage.setItem('selectedStatus',selectedStatusString)
+  }
+
+  isStatusColumnSelected(column: String): boolean {
+    return this.selectedStatus.includes(column);
+  }
+  //endregion
+
+  //region Selected Version
+  initSelectedVersion(){
+    const selectedVersion = localStorage.getItem('selectedVersion')
+    if(selectedVersion){
+      try{
+        this.selectedVersions = JSON.parse(selectedVersion);
+      } catch(e){
+        console.info('Error parsing JSON from localStorage for selectedVersion')
+        this.selectedVersions = [];
+      }
+    }
+  }
+
+  onChangeSelectVersion(event: any){
+    if(event.value.includes('all')){
+      if(this.isAllVersionsSelected()){
+        return;
+      }
+      this.selectedVersions = this.selectedVersions.filter(item => item !== 'all');
+      this.updateLocalStorageSelectedVersion();
+      return;
+    }
+    this.updateLocalStorageSelectedVersion();
+  }
+
+  toggleSelectAllVersions(allSelected: MatOption){
+    allSelected.select()
+    if(this.isAllVersionsSelected()){
+      this.selectedVersions = [];
+      this.updateLocalStorageSelectedVersion();
+    } else {
+      allSelected.select()
+      this.selectedVersions = this.versions.slice();
+      this.selectedVersions.push('all')
+      this.updateLocalStorageSelectedVersion();
+    }
+  }
+
+  isAllVersionsSelected(){
+    return this.selectedVersions.length > this.versions.length;
+  }
+
+  updateLocalStorageSelectedVersion(){
+    console.log(this.selectedVersions);
+
+    const selectedVersionString = JSON.stringify(this.selectedVersions);
+    localStorage.setItem('selectedVersion',selectedVersionString)
+  }
+
+  isVersionColumnSelected(column: String): boolean {
+    return this.selectedVersions.includes(column);
+  }
+  //endregion
+
+
+  //Columns Filter
   //region Selected Header Data
   initSelectedHeaderData(){
     const selectedHeaderData = localStorage.getItem('selectedHeaderData')

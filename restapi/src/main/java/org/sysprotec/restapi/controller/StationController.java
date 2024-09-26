@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import org.sysprotec.restapi.model.Station;
 import org.sysprotec.restapi.model.projections.StationFavView;
 import org.sysprotec.restapi.model.projections.StationRequest;
+import org.sysprotec.restapi.model.search.filter.StationFilter;
 import org.sysprotec.restapi.service.StationService;
 
 import java.util.List;
@@ -25,6 +26,11 @@ public class StationController {
     @GetMapping("/overall")
     public List<Station> getStationOverallView(){
         return stationService.getStationOverallView();
+    }
+
+    @PostMapping("/overall")
+    public List<Station> getStationOverallViewFiltered(@RequestBody StationFilter stationFilter){
+        return stationService.getStationOverallViewFiltered(stationFilter);
     }
 
     @GetMapping("{stationId}")

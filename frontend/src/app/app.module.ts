@@ -147,7 +147,12 @@ import { OverallViewComponent } from './modules/overall-view/components/overall-
 import {StationOverallViewEffects} from "./modules/overall-view/store/stationOverallView.effects";
 import { ThreeStateButtonComponent } from './page-template/three-state-button/three-state-button.component';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
-import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from "@angular/material/expansion";
+import {
+  MatAccordion,
+  MatExpansionPanel,
+  MatExpansionPanelHeader,
+  MatExpansionPanelTitle
+} from "@angular/material/expansion";
 import localeDe from '@angular/common/locales/de';
 import {GermanDateAdapter} from "./core/GermanDateAdapter";
 import { CalenderComponent } from './modules/calender/components/calender.component';
@@ -344,7 +349,8 @@ registerLocaleData(localeDe);
     MatError,
     MatAnchor,
     ColorChromeModule,
-    MatRipple
+    MatRipple,
+    MatAccordion
   ],
   providers: [
     {

@@ -2,6 +2,7 @@ package org.sysprotec.restapi.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +15,7 @@ import org.sysprotec.restapi.model.overview.TechnicalData;
 import org.sysprotec.restapi.model.project.Project;
 import org.sysprotec.restapi.model.project.ProjectFavorite;
 import org.sysprotec.restapi.model.projections.*;
+import org.sysprotec.restapi.model.search.filter.StationFilter;
 import org.sysprotec.restapi.model.settings.*;
 import org.sysprotec.restapi.model.types.StatusLOP;
 import org.sysprotec.restapi.repository.ProjectRepository;
@@ -27,6 +29,7 @@ import org.sysprotec.restapi.repository.overview.TaskRepository;
 import org.sysprotec.restapi.repository.settings.VersionStationRepository;
 import org.sysprotec.restapi.service.overview.HeaderDataService;
 import org.sysprotec.restapi.service.overview.TechnicalDataService;
+import org.sysprotec.restapi.specification.StationSpecification;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,6 +125,24 @@ public class StationService {
                     return stationList;
                 }
             }
+        }
+        return null;
+    }
+
+    //Todo
+    public List<Station> getStationOverallViewFiltered(StationFilter stationFilter) {
+        User loggedUser = userService.getLoggedUser();
+        if(loggedUser != null){
+
+            //Sort direction
+            Sort.Direction sortDirection = Sort.Direction.ASC;
+
+            //Sort object
+            Sort sort = Sort.by(sortDirection, "name");
+
+            return stationRepository.findAll(StationSpecification.filterByNameAndIssuerNameAndStatusAndVersionContaining(
+                    stationFilter.getName(), stationFilter.getIssuerName(), stationFilter.getStatus(), stationFilter.getVersion(), loggedUser.getActiveProject()
+            ), sort);
         }
         return null;
     }

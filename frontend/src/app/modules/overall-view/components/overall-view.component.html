@@ -1,118 +1,199 @@
 <ng-container *ngIf="loggedUser.user.activeProject > 0">
   <div class="overall-view-container">
-
 <!--    Filter-->
     <div>
-      <span class="me-3">
-        <ng-container *ngIf="selectedHeaderData">
-          <mat-form-field >
-            <mat-label>Kopfdaten</mat-label>
-            <mat-select [(ngModel)]="selectedHeaderData"
-                        (selectionChange)="onChangeSelectHeaderData($event)"
-                        multiple>
-              <mat-option #allSelected (click)="toggleSelectAllHeaderData(allSelected)" value="all">
-                {{isAllHeaderDataSelected() ? 'Alles abwählen' : 'Alles auswählen'}}
-              </mat-option>
-              <mat-option *ngFor="let headerData of headerDataColumns" [value]="headerData">
-                {{headerData}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </ng-container>
-      </span>
+        <mat-expansion-panel class="mb-4">
+          <mat-expansion-panel-header>
+            <mat-panel-title>Filter</mat-panel-title>
+          </mat-expansion-panel-header>
+<!--          Zeilen-->
+          <div>
+            <span class="me-3">
+              <ng-container *ngIf="selectedStationNames">
+                <mat-form-field >
+                  <mat-label>Station</mat-label>
+                  <mat-select [(ngModel)]="selectedStationNames"
+                              (selectionChange)="onChangeSelectStationNames($event)"
+                              multiple>
+                    <mat-option #allSelected (click)="toggleSelectAllStationNames(allSelected)" value="all">
+                      {{isAllStationNamesSelected() ? 'Alles abwählen' : 'Alles auswählen'}}
+                    </mat-option>
+                    <mat-option *ngFor="let stationName of stationNames" [value]="stationName">
+                      {{stationName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </ng-container>
+            </span>
 
-      <span class="me-3">
-        <ng-container *ngIf="selectedSpecification">
-          <mat-form-field >
-            <mat-label>Vorgaben</mat-label>
-            <mat-select [(ngModel)]="selectedSpecification"
-                        (selectionChange)="onChangeSelectSpecification($event)"
-                        multiple>
-              <mat-option #allSelected (click)="toggleSelectAllSpecification(allSelected)" value="all">
-                {{isAllSpecificationSelected() ? 'Alles abwählen' : 'Alles auswählen'}}
-              </mat-option>
-              <mat-option *ngFor="let specification of specificationColumns" [value]="specification">
-                {{specification}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </ng-container>
-      </span>
+            <span class="me-3">
+              <ng-container *ngIf="selectedIssuerNames">
+                <mat-form-field >
+                  <mat-label>Bearbeiter</mat-label>
+                  <mat-select [(ngModel)]="selectedIssuerNames"
+                              (selectionChange)="onChangeSelectIssuerNames($event)"
+                              multiple>
+                    <mat-option #allSelected (click)="toggleSelectAllIssuerNames(allSelected)" value="all">
+                      {{isAllIssuerNamesSelected() ? 'Alles abwählen' : 'Alles auswählen'}}
+                    </mat-option>
+                    <mat-option *ngFor="let issuerName of issuerNames" [value]="issuerName">
+                      {{issuerName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </ng-container>
+            </span>
 
-      <span class="me-3">
-        <ng-container *ngIf="selectedProjection">
-        <mat-form-field >
-          <mat-label>Projektierung</mat-label>
-          <mat-select [(ngModel)]="selectedProjection"
-                      (selectionChange)="onChangeSelectProjection($event)"
-                      multiple>
-            <mat-option #allSelected (click)="toggleSelectAllProjection(allSelected)" value="all">
-              {{isAllProjectionSelected() ? 'Alles abwählen' : 'Alles auswählen'}}
-            </mat-option>
-            <mat-option *ngFor="let projection of projectionColumns" [value]="projection">
-              {{projection}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </ng-container>
-      </span>
+            <span class="me-3">
+              <ng-container *ngIf="selectedStatus">
+                <mat-form-field >
+                  <mat-label>Status</mat-label>
+                  <mat-select [(ngModel)]="selectedStatus"
+                              (selectionChange)="onChangeSelectStatus($event)"
+                              multiple>
+                    <mat-option #allSelected (click)="toggleSelectAllStatus(allSelected)" value="all">
+                      {{isAllStatusSelected() ? 'Alles abwählen' : 'Alles auswählen'}}
+                    </mat-option>
+                    <mat-option *ngFor="let status of status" [value]="status">
+                      {{status}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </ng-container>
+            </span>
 
-      <span class="me-3">
-        <ng-container *ngIf="selectedControl">
-          <mat-form-field >
-            <mat-label>Kontrolle</mat-label>
-            <mat-select [(ngModel)]="selectedControl"
-                        (selectionChange)="onChangeSelectControl($event)"
-                        multiple>
-              <mat-option #allSelected (click)="toggleSelectAllControl(allSelected)" value="all">
-                {{isAllControlSelected() ? 'Alles abwählen' : 'Alles auswählen'}}
-              </mat-option>
-              <mat-option *ngFor="let control of controlColumns" [value]="control">
-                {{control}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </ng-container>
-      </span>
+            <span class="me-3">
+              <ng-container *ngIf="selectedVersions">
+                <mat-form-field >
+                  <mat-label>Version</mat-label>
+                  <mat-select [(ngModel)]="selectedVersions"
+                              (selectionChange)="onChangeSelectVersion($event)"
+                              multiple>
+                    <mat-option #allSelected (click)="toggleSelectAllVersions(allSelected)" value="all">
+                      {{isAllVersionsSelected() ? 'Alles abwählen' : 'Alles auswählen'}}
+                    </mat-option>
+                    <mat-option *ngFor="let version of versions" [value]="version">
+                      {{version}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </ng-container>
+            </span>
+          </div>
+<!--          Spalten-->
+          <div>
+            <span class="me-3">
+              <ng-container *ngIf="selectedHeaderData">
+                <mat-form-field >
+                  <mat-label>Kopfdaten</mat-label>
+                  <mat-select [(ngModel)]="selectedHeaderData"
+                              (selectionChange)="onChangeSelectHeaderData($event)"
+                              multiple>
+                    <mat-option #allSelected (click)="toggleSelectAllHeaderData(allSelected)" value="all">
+                      {{isAllHeaderDataSelected() ? 'Alles abwählen' : 'Alles auswählen'}}
+                    </mat-option>
+                    <mat-option *ngFor="let headerData of headerDataColumns" [value]="headerData">
+                      {{headerData}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </ng-container>
+            </span>
 
-      <span class="me-3">
-        <ng-container *ngIf="selectedDocumentation">
-          <mat-form-field >
-            <mat-label>Dokumentation</mat-label>
-            <mat-select [(ngModel)]="selectedDocumentation"
-                        (selectionChange)="onChangeSelectDocumentation($event)"
-                        multiple>
-              <mat-option #allSelected (click)="toggleSelectAllDocumentation(allSelected)" value="all">
-                {{isAllDocumentationSelected() ? 'Alles abwählen' : 'Alles auswählen'}}
-              </mat-option>
-              <mat-option *ngFor="let documentation of documentationColumns" [value]="documentation">
-                {{documentation}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </ng-container>
-      </span>
+            <span class="me-3">
+              <ng-container *ngIf="selectedSpecification">
+                <mat-form-field >
+                  <mat-label>Vorgaben</mat-label>
+                  <mat-select [(ngModel)]="selectedSpecification"
+                              (selectionChange)="onChangeSelectSpecification($event)"
+                              multiple>
+                    <mat-option #allSelected (click)="toggleSelectAllSpecification(allSelected)" value="all">
+                      {{isAllSpecificationSelected() ? 'Alles abwählen' : 'Alles auswählen'}}
+                    </mat-option>
+                    <mat-option *ngFor="let specification of specificationColumns" [value]="specification">
+                      {{specification}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </ng-container>
+            </span>
 
-      <span class="me-3">
-        <ng-container *ngIf="selectedTechnicalData">
-          <mat-form-field >
-            <mat-label>Technische Daten</mat-label>
-            <mat-select [(ngModel)]="selectedTechnicalData"
-                        (selectionChange)="onChangeSelectTechnicalData($event)"
-                        multiple>
-              <mat-option #allSelected (click)="toggleSelectAllTechnicalData(allSelected)" value="all">
-                {{isAllTechnicalDataSelected() ? 'Alles abwählen' : 'Alles auswählen'}}
-              </mat-option>
-              <mat-option *ngFor="let technicalData of technicalDataColumns" [value]="technicalData">
-                {{technicalData}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </ng-container>
-      </span>
+            <span class="me-3">
+              <ng-container *ngIf="selectedProjection">
+              <mat-form-field >
+                <mat-label>Projektierung</mat-label>
+                <mat-select [(ngModel)]="selectedProjection"
+                            (selectionChange)="onChangeSelectProjection($event)"
+                            multiple>
+                  <mat-option #allSelected (click)="toggleSelectAllProjection(allSelected)" value="all">
+                    {{isAllProjectionSelected() ? 'Alles abwählen' : 'Alles auswählen'}}
+                  </mat-option>
+                  <mat-option *ngFor="let projection of projectionColumns" [value]="projection">
+                    {{projection}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-container>
+            </span>
 
+            <span class="me-3">
+              <ng-container *ngIf="selectedControl">
+                <mat-form-field >
+                  <mat-label>Kontrolle</mat-label>
+                  <mat-select [(ngModel)]="selectedControl"
+                              (selectionChange)="onChangeSelectControl($event)"
+                              multiple>
+                    <mat-option #allSelected (click)="toggleSelectAllControl(allSelected)" value="all">
+                      {{isAllControlSelected() ? 'Alles abwählen' : 'Alles auswählen'}}
+                    </mat-option>
+                    <mat-option *ngFor="let control of controlColumns" [value]="control">
+                      {{control}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </ng-container>
+            </span>
+
+            <span class="me-3">
+              <ng-container *ngIf="selectedDocumentation">
+                <mat-form-field >
+                  <mat-label>Dokumentation</mat-label>
+                  <mat-select [(ngModel)]="selectedDocumentation"
+                              (selectionChange)="onChangeSelectDocumentation($event)"
+                              multiple>
+                    <mat-option #allSelected (click)="toggleSelectAllDocumentation(allSelected)" value="all">
+                      {{isAllDocumentationSelected() ? 'Alles abwählen' : 'Alles auswählen'}}
+                    </mat-option>
+                    <mat-option *ngFor="let documentation of documentationColumns" [value]="documentation">
+                      {{documentation}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </ng-container>
+            </span>
+
+            <span class="me-3">
+              <ng-container *ngIf="selectedTechnicalData">
+                <mat-form-field >
+                  <mat-label>Technische Daten</mat-label>
+                  <mat-select [(ngModel)]="selectedTechnicalData"
+                              (selectionChange)="onChangeSelectTechnicalData($event)"
+                              multiple>
+                    <mat-option #allSelected (click)="toggleSelectAllTechnicalData(allSelected)" value="all">
+                      {{isAllTechnicalDataSelected() ? 'Alles abwählen' : 'Alles auswählen'}}
+                    </mat-option>
+                    <mat-option *ngFor="let technicalData of technicalDataColumns" [value]="technicalData">
+                      {{technicalData}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </ng-container>
+            </span>
+          </div>
+        </mat-expansion-panel>
     </div>
 
+<!--    Table-->
     <div class="table-container mat-elevation-z8">
       <table mat-table [dataSource]="stationOverallView.stationOverallViewList">
 
@@ -467,6 +548,7 @@
     </div>
   </div>
 </ng-container>
+
 
 <ng-container *ngIf="loggedUser.user.activeProject == 0">
   <div [routerLink]="['/projectAdministration', false]" class="card-container-no-project" appProjectElevation [defaultElevation]="4" [raisedElevation]="16">
