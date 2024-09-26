@@ -1,15 +1,19 @@
-<mat-card class="card-container" (click)="selectProject(projectView?.id)">
+<mat-card class="card-container" (click)="selectProject(projectFavView?.project?.id)">
   <div class="d-flex justify-content-between ms-2 mt-2 me-2">
     <div class="card-header-left">
-      <button mat-raised-button matTooltip="Favorit" color="accent" class="button small-button" (click)="$event.stopPropagation()">
-        <i class="material-icons star-icon" [ngClass]="{'star-icon': favorite}" >star</i>
+      <button mat-raised-button
+              matTooltip="Favorit"
+              color="accent"
+              class="button small-button"
+              (click)="editFavorite($event, projectFavView?.project?.id, projectFavView?.isFavorite)">
+        <i class="material-icons star-icon" [ngClass]="{'star-icon': projectFavView?.isFavorite}" >star</i>
       </button>
       <div class="card-header-text" >
         <div class="project-name">
-          <h3>{{projectView?.name}}</h3>
+          <h3>{{projectFavView?.project?.name}}</h3>
         </div>
         <div class="project-description">
-          <h5>{{projectView?.description}}</h5>
+          <h5>{{projectFavView?.project?.description}}</h5>
         </div>
       </div>
     </div>
@@ -20,19 +24,19 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="editProject(projectView?.id)">
+          <button mat-menu-item (click)="editProject(projectFavView?.project?.id)">
             Bearbeiten
           </button>
-          <button mat-menu-item (click)="deleteProject(projectView?.id, projectView?.name)">
+          <button mat-menu-item (click)="deleteProject(projectFavView?.project?.id, projectFavView?.project?.name)">
             Löschen
           </button>
           <ng-container *ngIf="!archive">
-            <button mat-menu-item (click)="archiveProject(projectView?.id)">
+            <button mat-menu-item (click)="archiveProject(projectFavView?.project?.id)">
               Archivieren
             </button>
           </ng-container>
           <ng-container *ngIf="archive">
-            <button mat-menu-item (click)="deArchiveProject(projectView?.id)">
+            <button mat-menu-item (click)="deArchiveProject(projectFavView?.project?.id)">
               Dearchivieren
             </button>
           </ng-container>
@@ -48,7 +52,7 @@
     </div>
 
     <div class="card-info1 d-flex justify-content-center">
-      <h5>Anzahl Stationen: {{projectView?.amountStations}}</h5>
+      <h5>Anzahl Stationen: {{projectFavView?.project?.amountStations}}</h5>
     </div>
 
     <div class="card-info2 d-flex justify-content-center">
@@ -58,9 +62,9 @@
     </div>
 
     <div class="card-info3 d-flex justify-content-center">
-      <h5 class="card-info-text">{{projectView?.inProgressStations}}</h5>
-      <h5 class="card-info-text">{{projectView?.storedStations}}</h5>
-      <h5 class="card-info-text">{{projectView?.notStoredStations}}</h5>
+      <h5 class="card-info-text">{{projectFavView?.project?.inProgressStations}}</h5>
+      <h5 class="card-info-text">{{projectFavView?.project?.storedStations}}</h5>
+      <h5 class="card-info-text">{{projectFavView?.project?.notStoredStations}}</h5>
     </div>
   </div>
 

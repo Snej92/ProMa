@@ -18,19 +18,24 @@
     <div class="overview-content">
       <ng-container *ngIf="selectedOverview >= 1 && selectedOverview <= 9">
         <mat-tab-group mat-stretch-tabs="false" animationDuration="0ms" [(selectedIndex)]="stationId">
-          <ng-container *ngFor="let stationView of stationView.stationViewList">
-            <mat-tab [label]="stationView.name">
+          <ng-container *ngFor="let stationFavView of stationFavView.stationViewList">
+            <mat-tab [label]="stationFavView.station.name">
               <ng-template matTabContent>
                 <div [ngSwitch]="selectedOverview" class="mat-tab-group-content mat-tab-body mat-tab-body-content">
-                  <app-station-overview (selectedOverviewEmitted)="receiveSelectedOverview($event)" *ngSwitchCase="1" [stationViewInput]="stationView" [stationId]="stationView.id"></app-station-overview>
-                  <app-header-data *ngSwitchCase="2" [stationId]="stationView.id"></app-header-data>
-                  <app-specification *ngSwitchCase="3" [stationId]="stationView.id"></app-specification>
-                  <app-projection *ngSwitchCase="4" [stationId]="stationView.id"></app-projection>
-                  <app-control *ngSwitchCase="5" [stationId]="stationView.id"></app-control>
-                  <app-documentation *ngSwitchCase="6" [stationId]="stationView.id"></app-documentation>
-                  <app-technical-data *ngSwitchCase="7" [stationId]="stationView.id"></app-technical-data>
-                  <app-lop *ngSwitchCase="8" [stationId]="stationView.id"></app-lop>
-                  <app-history *ngSwitchCase="9" [stationId]="stationView.id"></app-history>
+                  <app-station-overview
+                    (selectedOverviewEmitted)="receiveSelectedOverview($event)"
+                    *ngSwitchCase="1"
+                    [stationFavViewInput]="stationFavView"
+                    [stationId]="stationFavView.station.id">
+                  </app-station-overview>
+                  <app-header-data *ngSwitchCase="2" [stationId]="stationFavView.station.id"></app-header-data>
+                  <app-specification *ngSwitchCase="3" [stationId]="stationFavView.station.id"></app-specification>
+                  <app-projection *ngSwitchCase="4" [stationId]="stationFavView.station.id"></app-projection>
+                  <app-control *ngSwitchCase="5" [stationId]="stationFavView.station.id"></app-control>
+                  <app-documentation *ngSwitchCase="6" [stationId]="stationFavView.station.id"></app-documentation>
+                  <app-technical-data *ngSwitchCase="7" [stationId]="stationFavView.station.id"></app-technical-data>
+                  <app-lop *ngSwitchCase="8" [stationId]="stationFavView.station.id"></app-lop>
+                  <app-history *ngSwitchCase="9" [stationId]="stationFavView.station.id"></app-history>
                 </div>
               </ng-template>
             </mat-tab>

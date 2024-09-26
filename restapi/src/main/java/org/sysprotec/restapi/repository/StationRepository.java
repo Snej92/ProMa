@@ -3,7 +3,6 @@ package org.sysprotec.restapi.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.sysprotec.restapi.model.Station;
-import org.sysprotec.restapi.model.projections.StationDto;
 import org.sysprotec.restapi.model.projections.StationView;
 
 import java.util.List;
@@ -13,9 +12,8 @@ import java.util.Optional;
 public interface StationRepository extends JpaRepository<Station, Long> {
 
     StationView getProjectedById(Long id);
+    StationView getProjectedByNameIgnoreCaseAndProjectId(String name, Long id);
 
-    StationDto findTopByOrderByIdDesc();
-    StationDto findProjectedById(Long id);
     Station getStationByDocumentationId(Long id);
     Station getStationByControlId(Long id);
     Station getStationBySpecificationId(Long id);

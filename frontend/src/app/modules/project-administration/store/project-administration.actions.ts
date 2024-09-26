@@ -1,5 +1,5 @@
 import {createAction, props} from "@ngrx/store";
-import {projectFavViewModel, projectViewModel} from "./project-administration.model";
+import {projectFavViewModel} from "./project-administration.model";
 
 
 export const LOAD_PROJECT_VIEW_SUCCESS='[project page] load project view success'
@@ -24,6 +24,8 @@ export const LOAD_PROJECT_VIEW_FAVORITE_SUCCESS='[project page] load project vie
 export const LOAD_PROJECT_VIEW_FAVORITE_FAIL='[project page] load project view favorite fail'
 export const LOAD_PROJECT_VIEW_FAVORITE='[project page] get project view favorite'
 
+export const UPDATE_PROJECT_FAVORITE_SUCCESS='[dashboard page] update project favorite success'
+
 
 export const loadProjectView=createAction(LOAD_PROJECT_VIEW, props<{archive:boolean, all:boolean}>());
 export const loadProjectViewSuccess=createAction(LOAD_PROJECT_VIEW_SUCCESS, props<{projectViewList:projectFavViewModel[]}>());
@@ -44,6 +46,4 @@ export const deArchiveProjectSuccess = createAction(DE_ARCHIVE_PROJECT_SUCCESS, 
 export const deleteProject=createAction(DELETE_PROJECT, props<{id:number}>())
 export const deleteProjectSuccess=createAction(DELETE_PROJECT_SUCCESS, props<{id:number}>())
 
-export const loadProjectViewFavorite=createAction(LOAD_PROJECT_VIEW);
-export const loadProjectViewFavoriteSuccess=createAction(LOAD_PROJECT_VIEW_SUCCESS, props<{projectViewList:projectFavViewModel[]}>());
-export const loadProjectViewFavoriteFail=createAction(LOAD_PROJECT_VIEW_FAIL, props<{errorText:any}>());
+export const updateProjectFavoriteSuccess=createAction(UPDATE_PROJECT_FAVORITE_SUCCESS, props<{projectId:number, remove:boolean}>())

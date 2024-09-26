@@ -155,6 +155,7 @@ import {CalenderEffects} from "./modules/calender/store/calender.effects";
 import {ColorChromeModule} from "ngx-color/chrome";
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { VersionOverviewComponent } from './modules/overview/version-overview/version-overview.component';
+import {ProjectFavoriteEffects} from "./modules/dashboard/project/store/project-favorite.effects";
 
 const config: SocketIoConfig = { url: 'http://localhost:7081/ws-endpoint', options: {} };
 
@@ -267,7 +268,8 @@ registerLocaleData(localeDe);
       TechnicalDataEffects,
       StationViewOverviewEffects,
       StationOverallViewEffects,
-      CalenderEffects]),
+      CalenderEffects,
+      ProjectFavoriteEffects]),
 
 
     MatToolbar,

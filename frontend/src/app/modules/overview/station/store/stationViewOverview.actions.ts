@@ -1,5 +1,5 @@
 import {createAction, props} from "@ngrx/store";
-import {stationViewModel} from "../../../station/store/stationView.model";
+import {stationFavViewModel, stationViewModel} from "../../../station/store/stationView.model";
 
 
 export const LOAD_STATION_VIEW_OVERVIEW_SUCCESS='[station overview page] load station view overview success'
@@ -12,8 +12,5 @@ export const UPDATE_STATION_VIEW_OVERVIEW_SUCCESS='[station overview page] updat
 
 
 export const loadStationViewOverview=createAction(LOAD_STATION_VIEW_OVERVIEW, props<{id:number}>());
-export const loadStationViewOverviewSuccess=createAction(LOAD_STATION_VIEW_OVERVIEW_SUCCESS, props<{stationViewOverview:stationViewModel}>());
+export const loadStationViewOverviewSuccess=createAction(LOAD_STATION_VIEW_OVERVIEW_SUCCESS, props<{stationViewOverview:stationFavViewModel}>());
 export const loadStationViewOverviewFail=createAction(LOAD_STATION_VIEW_OVERVIEW_FAIL, props<{errorText:any}>());
-
-export const updateStationViewOverview=createAction(UPDATE_STATION_VIEW_OVERVIEW, props<{stationViewOverview:stationViewModel}>())
-export const updateStationViewOverviewSuccess=createAction(UPDATE_STATION_VIEW_OVERVIEW_SUCCESS, props<{stationViewOverviewNew:stationViewModel, stationViewOverviewOld:stationViewModel}>())

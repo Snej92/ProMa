@@ -7,10 +7,10 @@
       </button>
       <div class="card-header-text">
         <div class="project-name">
-          <h3>{{stationView.name}}</h3>
+          <h3>{{stationFavView.station.name}}</h3>
         </div>
         <div class="project-description">
-          <h5>{{stationView.description}}</h5>
+          <h5>{{stationFavView.station.description}}</h5>
         </div>
       </div>
     </div>
@@ -20,10 +20,10 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="editStation(stationView.id)">
+        <button mat-menu-item (click)="editStation(stationFavView.station.id)">
           Bearbeiten
         </button>
-        <button mat-menu-item (click)="deleteStation(stationView.id, stationView.name)">
+        <button mat-menu-item (click)="deleteStation(stationFavView.station.id, stationFavView.station.name)">
           Löschen
         </button>
       </mat-menu>
@@ -34,35 +34,35 @@
     <div class="station-info d-flex justify-content-between ms-2 mt-3 me-3">
       <h5 class="station-status station-info-text"
       [ngClass]="{
-          'station-status-ausgelagert': stationView.status=='AUSGELAGERT',
-          'station-status-inarbeit': stationView.status=='INARBEIT',
-          'station-status-eingelagert': stationView.status=='EINGELAGERT'
+          'station-status-ausgelagert': stationFavView.station.status=='AUSGELAGERT',
+          'station-status-inarbeit': stationFavView.station.status=='INARBEIT',
+          'station-status-eingelagert': stationFavView.station.status=='EINGELAGERT'
           }">
-        {{stationView.status}}
+        {{stationFavView.station.status}}
       </h5>
       <h5 class="station-version station-info-text"
           matRipple
           (click)="navigateToStation(currentIndex, 10)">
-        {{stationView.version}}
+        {{stationFavView.station.version}}
       </h5>
       <h5 class="station-issuer station-info-text"
-          [matTooltip]="stationView.issuerName">
-        {{stationView.issuerAcronym}}
+          [matTooltip]="stationFavView.station.issuerName">
+        {{stationFavView.station.issuerAcronym}}
       </h5>
       <h5 class="station-lop station-info-text"
           matRipple
-          [ngClass]="{'station-status-eingelagert': stationView.lopToDo==0}"
+          [ngClass]="{'station-status-eingelagert': stationFavView.station.lopToDo==0}"
           (click)="navigateToStation(currentIndex, 8)">
-        LOP: {{stationView.lopToDo}}
+        LOP: {{stationFavView.station.lopToDo}}
       </h5>
       <div class="station-progress station-info-text">
         <mat-progress-spinner
           style="position:relative; top:2px"
-          value="{{stationView.totalProgress}}"
+          value="{{stationFavView.station.totalProgress}}"
           mode="determinate" [diameter]="33"
           class="mat-spinner-color">
         </mat-progress-spinner>
-        <div style="position:relative; top:-23px">{{stationView.totalProgress}}</div>
+        <div style="position:relative; top:-23px">{{stationFavView.station.totalProgress}}</div>
       </div>
     </div>
   </div>

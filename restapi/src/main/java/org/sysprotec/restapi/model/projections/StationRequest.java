@@ -12,6 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StationRequest {
-    private StationDto stationDto;
+    private StationFavView stationFavView;
     private List<HeaderDataInput> headerDataInput;
 }

@@ -12,6 +12,7 @@ import org.sysprotec.restapi.model.overview.Lop;
 import org.sysprotec.restapi.model.overview.Task;
 import org.sysprotec.restapi.model.overview.TechnicalData;
 import org.sysprotec.restapi.model.project.Project;
+import org.sysprotec.restapi.model.project.ProjectFavorite;
 import org.sysprotec.restapi.model.projections.*;
 import org.sysprotec.restapi.model.settings.*;
 import org.sysprotec.restapi.model.types.StatusLOP;
@@ -51,15 +52,31 @@ public class StationService {
     private final StationFavoriteRepository stationFavoriteRepository;
 
 
-    public List<StationView> getAllStations() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (!(authentication instanceof AnonymousAuthenticationToken)) {
-            String username = authentication.getName();
-            User user = userRepository.findUserByUsernameIgnoreCase(username);
-            if (user != null) {
-                if(stationRepository.getProjectedByProjectIdOrderByNameAsc(user.getActiveProject()).isPresent()){
-                    return stationRepository.getProjectedByProjectIdOrderByNameAsc(user.getActiveProject()).get();
+    public List<StationFavView> getAllStations() {
+        User loggedUser = userService.getLoggedUser();
+        if(loggedUser != null){
+            if(stationRepository.getProjectedByProjectIdOrderByNameAsc(loggedUser.getActiveProject()).isPresent()){
+
+                //Fetch Stations
+                List<StationView> stationViews = stationRepository.getProjectedByProjectIdOrderByNameAsc(loggedUser.getActiveProject()).get();
+
+                //create empty Station Favorite List (basically the same as stationViews but with isFavorite)
+                List<StationFavView> stationFavViewList = new ArrayList<>();
+
+                for(StationView stationView : stationViews){
+                    //check if favorite
+                    Optional<StationFavorite> stationFavorite = stationFavoriteRepository.findByUserIdAndStationId(loggedUser.getId(), stationView.getId());
+                    boolean favorite = stationFavorite.isPresent();
+
+                    StationFavView stationFavView = StationFavView.builder()
+                            .station(stationView)
+                            .isFavorite(favorite)
+                            .build();
+
+                    stationFavViewList.add(stationFavView);
                 }
+
+                return stationFavViewList;
             }
         }
         return null;
@@ -99,6 +116,7 @@ public class StationService {
                         //Technical Data
                         List<TechnicalData> technicalDataList = technicalDataRepository.findAllByStationIdOrderByIdAsc(station.getId());
                         station.setTechnicalData(technicalDataList);
+
                     }
 
                     return stationList;
@@ -109,51 +127,51 @@ public class StationService {
     }
 
 
-    public StationDto addStation(StationDto stationDto, List<HeaderDataInput> headerDataInput) {
+    public StationFavView addStation(StationFavView stationFavView, List<HeaderDataInput> headerDataInput) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             if (!(authentication instanceof AnonymousAuthenticationToken)) {
                 String username = authentication.getName();
                 User user = userRepository.findUserByUsernameIgnoreCase(username);
                 if (user != null) {
-                    Optional<Station> station = stationRepository.findStationByNameIgnoreCaseAndProjectId(stationDto.getName(), user.getActiveProject());
+                    Optional<Station> station = stationRepository.findStationByNameIgnoreCaseAndProjectId(stationFavView.getStation().getName(), user.getActiveProject());
                     if(station.isEmpty()){
                         Optional<Project> optionalProject = projectRepository.findProjectById(user.getActiveProject());
                         if (optionalProject.isPresent()) {
                             Project savedProject = optionalProject.get();
                             Station newStation = Station.builder()
-                                    .name(stationDto.getName())
-                                    .description(stationDto.getDescription())
-                                    .issuerAcronym(stationDto.getIssuerAcronym())
-                                    .issuerName(stationDto.getIssuerName())
-                                    .status(stationDto.getStatus())
-                                    .totalProgress(stationDto.getTotalProgress())
-                                    .version(stationDto.getVersion())
-                                    .lopTotal(stationDto.getLopTotal())
-                                    .lopDone(stationDto.getLopDone())
-                                    .lopToDo(stationDto.getLopToDo())
-                                    .lopProgress(stationDto.getLopProgress())
-                                    .documentationTotal(stationDto.getDocumentationTotal())
-                                    .documentationDone(stationDto.getDocumentationDone())
-                                    .documentationToDo(stationDto.getDocumentationToDo())
-                                    .documentationProgress(stationDto.getDocumentationProgress())
-                                    .specificationTotal(stationDto.getSpecificationTotal())
-                                    .specificationDone(stationDto.getSpecificationDone())
-                                    .specificationToDo(stationDto.getSpecificationToDo())
-                                    .specificationProgress(stationDto.getSpecificationProgress())
-                                    .controlTotal(stationDto.getControlTotal())
-                                    .controlDone(stationDto.getControlDone())
-                                    .controlToDo(stationDto.getControlToDo())
-                                    .controlProgress(stationDto.getControlProgress())
-                                    .projectionTotal(stationDto.getProjectionTotal())
-                                    .projectionDone(stationDto.getProjectionDone())
-                                    .projectionToDo(stationDto.getProjectionToDo())
-                                    .projectionProgress(stationDto.getProjectionProgress())
+                                    .name(stationFavView.getStation().getName())
+                                    .description(stationFavView.getStation().getDescription())
+                                    .issuerAcronym(stationFavView.getStation().getIssuerAcronym())
+                                    .issuerName(stationFavView.getStation().getIssuerName())
+                                    .status(stationFavView.getStation().getStatus())
+                                    .totalProgress(stationFavView.getStation().getTotalProgress())
+                                    .version(stationFavView.getStation().getVersion())
+                                    .lopTotal(stationFavView.getStation().getLopTotal())
+                                    .lopDone(stationFavView.getStation().getLopDone())
+                                    .lopToDo(stationFavView.getStation().getLopToDo())
+                                    .lopProgress(stationFavView.getStation().getLopProgress())
+                                    .documentationTotal(stationFavView.getStation().getDocumentationTotal())
+                                    .documentationDone(stationFavView.getStation().getDocumentationDone())
+                                    .documentationToDo(stationFavView.getStation().getDocumentationToDo())
+                                    .documentationProgress(stationFavView.getStation().getDocumentationProgress())
+                                    .specificationTotal(stationFavView.getStation().getSpecificationTotal())
+                                    .specificationDone(stationFavView.getStation().getSpecificationDone())
+                                    .specificationToDo(stationFavView.getStation().getSpecificationToDo())
+                                    .specificationProgress(stationFavView.getStation().getSpecificationProgress())
+                                    .controlTotal(stationFavView.getStation().getControlTotal())
+                                    .controlDone(stationFavView.getStation().getControlDone())
+                                    .controlToDo(stationFavView.getStation().getControlToDo())
+                                    .controlProgress(stationFavView.getStation().getControlProgress())
+                                    .projectionTotal(stationFavView.getStation().getProjectionTotal())
+                                    .projectionDone(stationFavView.getStation().getProjectionDone())
+                                    .projectionToDo(stationFavView.getStation().getProjectionToDo())
+                                    .projectionProgress(stationFavView.getStation().getProjectionProgress())
                                     .project(savedProject)
                                     .build();
 
                             //Issuer Name
-                            if(stationDto.getIssuerName().equals("Select Eingabe")){
-                                Optional<User> optionalUser = userRepository.findUserByAcronym(stationDto.getIssuerAcronym());
+                            if(stationFavView.getStation().getIssuerName().equals("Select Eingabe")){
+                                Optional<User> optionalUser = userRepository.findUserByAcronym(stationFavView.getStation().getIssuerAcronym());
                                 optionalUser.ifPresent(value -> newStation.setIssuerName(value.getFirstname() + " " + value.getLastname()));
                             }
 
@@ -171,13 +189,13 @@ public class StationService {
                                 }
                                 VersionStation newVersionStation = VersionStation.builder()
                                         .state(state)
-                                        .stationName(stationDto.getName())
+                                        .stationName(stationFavView.getStation().getName())
                                         .version(version)
                                         .build();
                                 version.addVersionStation(newVersionStation);
                                 version.setDone(done);
                                 versionRepository.save(version);
-                                log.info("Version '" + version.getVersion() + "' added to Station '" + stationDto.getName() + "'");
+                                log.info("Version '" + version.getVersion() + "' added to Station '" + stationFavView.getStation().getName() + "'");
                             }
 
                             //Add Header to Station
@@ -235,7 +253,7 @@ public class StationService {
                             }
 
                             projectRepository.save(savedProject);
-                            log.info("Station '" + stationDto.getName() + "' added to Project '" + savedProject.getName() + "'");
+                            log.info("Station '" + stationFavView.getStation().getName() + "' added to Project '" + savedProject.getName() + "'");
 
                             projectService.updateStationAmount(projectRepository.findProjectById(user.getActiveProject()).get());
 
@@ -247,10 +265,12 @@ public class StationService {
 
                             updateTotalProgress(newStation);
 
-
-                            return stationRepository.findTopByOrderByIdDesc();
+                            return StationFavView.builder()
+                                    .station(stationRepository.getProjectedByNameIgnoreCaseAndProjectId(newStation.getName(), savedProject.getId()))
+                                    .isFavorite(false)
+                                    .build();
                         } else{
-                            log.error("Station with name '{}' already exists in Database", stationDto.getName());
+                            log.error("Station with name '{}' already exists in Database", stationFavView.getStation().getName());
                         }
                     }
                 }
@@ -280,57 +300,69 @@ public class StationService {
         }
     }
 
-    public StationDto updateStation(StationDto stationDto) {
-        Optional<Station> optionalStation = stationRepository.findById(stationDto.getId());
+    public StationFavView updateStation(StationFavView stationFavView) {
+        Optional<Station> optionalStation = stationRepository.findById(stationFavView.getStation().getId());
         if (optionalStation.isPresent()) {
-            Optional<Station> station = stationRepository.findStationByNameIgnoreCaseAndProjectId(stationDto.getName(), optionalStation.get().getProject().getId());
-            if(station.isEmpty() || stationDto.getName().equals(optionalStation.get().getName())){
+            Optional<Station> station = stationRepository.findStationByNameIgnoreCaseAndProjectId(stationFavView.getStation().getName(), optionalStation.get().getProject().getId());
+            if(station.isEmpty() || stationFavView.getStation().getName().equals(optionalStation.get().getName())){
                 Station saveStation = optionalStation.get();
-                saveStation.setName(stationDto.getName());
-                saveStation.setDescription(stationDto.getDescription());
-                saveStation.setIssuerAcronym(stationDto.getIssuerAcronym());
-                saveStation.setIssuerName(stationDto.getIssuerName());
-                saveStation.setStatus(stationDto.getStatus());
-                saveStation.setTotalProgress(stationDto.getTotalProgress());
-                saveStation.setVersion(stationDto.getVersion());
-                saveStation.setLopTotal(stationDto.getLopTotal());
-                saveStation.setLopDone(stationDto.getLopDone());
-                saveStation.setLopToDo(stationDto.getLopToDo());
-                saveStation.setLopProgress(stationDto.getLopProgress());
-                saveStation.setDocumentationTotal(stationDto.getDocumentationTotal());
-                saveStation.setDocumentationDone(stationDto.getDocumentationDone());
-                saveStation.setDocumentationToDo(stationDto.getDocumentationToDo());
-                saveStation.setDocumentationProgress(stationDto.getDocumentationProgress());
-                saveStation.setSpecificationTotal(stationDto.getSpecificationTotal());
-                saveStation.setSpecificationDone(stationDto.getSpecificationDone());
-                saveStation.setSpecificationToDo(stationDto.getSpecificationToDo());
-                saveStation.setSpecificationProgress(stationDto.getSpecificationProgress());
-                saveStation.setControlTotal(stationDto.getControlTotal());
-                saveStation.setControlDone(stationDto.getControlDone());
-                saveStation.setControlToDo(stationDto.getControlToDo());
-                saveStation.setControlProgress(stationDto.getControlProgress());
+                saveStation.setName(stationFavView.getStation().getName());
+                saveStation.setDescription(stationFavView.getStation().getDescription());
+                saveStation.setIssuerAcronym(stationFavView.getStation().getIssuerAcronym());
+                saveStation.setIssuerName(stationFavView.getStation().getIssuerName());
+                saveStation.setStatus(stationFavView.getStation().getStatus());
+                saveStation.setTotalProgress(stationFavView.getStation().getTotalProgress());
+                saveStation.setVersion(stationFavView.getStation().getVersion());
+                saveStation.setLopTotal(stationFavView.getStation().getLopTotal());
+                saveStation.setLopDone(stationFavView.getStation().getLopDone());
+                saveStation.setLopToDo(stationFavView.getStation().getLopToDo());
+                saveStation.setLopProgress(stationFavView.getStation().getLopProgress());
+                saveStation.setDocumentationTotal(stationFavView.getStation().getDocumentationTotal());
+                saveStation.setDocumentationDone(stationFavView.getStation().getDocumentationDone());
+                saveStation.setDocumentationToDo(stationFavView.getStation().getDocumentationToDo());
+                saveStation.setDocumentationProgress(stationFavView.getStation().getDocumentationProgress());
+                saveStation.setSpecificationTotal(stationFavView.getStation().getSpecificationTotal());
+                saveStation.setSpecificationDone(stationFavView.getStation().getSpecificationDone());
+                saveStation.setSpecificationToDo(stationFavView.getStation().getSpecificationToDo());
+                saveStation.setSpecificationProgress(stationFavView.getStation().getSpecificationProgress());
+                saveStation.setControlTotal(stationFavView.getStation().getControlTotal());
+                saveStation.setControlDone(stationFavView.getStation().getControlDone());
+                saveStation.setControlToDo(stationFavView.getStation().getControlToDo());
+                saveStation.setControlProgress(stationFavView.getStation().getControlProgress());
 
                 //Issuer Name
-                Optional<User> optionalUser = userRepository.findUserByAcronym(stationDto.getIssuerAcronym());
+                Optional<User> optionalUser = userRepository.findUserByAcronym(stationFavView.getStation().getIssuerAcronym());
                 optionalUser.ifPresent(value -> saveStation.setIssuerName(value.getFirstname() + " " + value.getLastname()));
 
                 stationRepository.save(saveStation);
 
                 //update amount stations
-                projectService.updateStationAmount(projectRepository.findProjectByStationsId(stationDto.getId()));
+                projectService.updateStationAmount(projectRepository.findProjectByStationsId(stationFavView.getStation().getId()));
 
-                return stationRepository.findProjectedById(stationDto.getId());
+                return StationFavView.builder()
+                        .station(stationRepository.getProjectedById(stationFavView.getStation().getId()))
+                        .isFavorite(stationFavView.getIsFavorite())
+                        .build();
+
             } else {
-                log.error("Station {} already exists in Database", stationDto.getName());
+                log.error("Station {} already exists in Database", stationFavView.getStation().getName());
             }
         } else {
-            log.error("Station with ID{} does not exist", stationDto.getId());
+            log.error("Station with ID{} does not exist", stationFavView.getStation().getId());
         }
         return null;
     }
 
-    public StationView getStation(Long stationId) {
-        return stationRepository.getProjectedById(stationId);
+    public StationFavView getStation(Long stationId) {
+        User loggedUser = userService.getLoggedUser();
+        if(loggedUser != null) {
+            Boolean isFavorite = stationFavoriteRepository.findByUserIdAndStationId(loggedUser.getId(), stationId).isPresent();
+            return StationFavView.builder()
+                    .station(stationRepository.getProjectedById(stationId))
+                    .isFavorite(isFavorite)
+                    .build();
+        }
+        return null;
     }
 
     public void editFavorite(Long stationId, Boolean remove) {
@@ -364,20 +396,24 @@ public class StationService {
         }
     }
 
-    public List<StationView> getFavorites(){
+    public List<StationFavView> getFavorites(){
         User loggedUser = userService.getLoggedUser();
         if(loggedUser != null){
             List<StationFavorite> stationFavorite = loggedUser.getStationFavorite();
-            List<StationView> stationViews = new ArrayList<>();
+            List<StationFavView> stationFavViews = new ArrayList<>();
             if(stationFavorite != null && !stationFavorite.isEmpty()){
                 for(StationFavorite stationFavoriteItem : stationFavorite){
-                    StationView station = stationRepository.getProjectedById(stationFavoriteItem.getId());
+                    StationView station = stationRepository.getProjectedById(stationFavoriteItem.getStationId());
                     if(station != null){
-                        stationViews.add(station);
+                        StationFavView stationFavView = StationFavView.builder()
+                                .station(station)
+                                .isFavorite(true)
+                                .build();
+                        stationFavViews.add(stationFavView);
                     }
                 }
             }
-            return stationViews;
+            return stationFavViews;
         }
         return null;
     }

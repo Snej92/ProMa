@@ -8,13 +8,33 @@
 }
 
 .project-card{
-  border-radius: 12px
+  border-radius: 12px;
 }
 
 .selected-card {
   box-shadow: 0 8px 8px 8px rgba(0, 0, 0, .2), 0 8px 8px 0 rgba(0, 0, 0, .14), 0 8px 8px 0 rgba(0, 0, 0, .12) !important;
   transform: translate3d(0, 0, 0);
   transition: background .4s cubic-bezier(.25, .8, .25, 1), box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
+}
+
+.selected-card-red {
+  box-shadow: 0 8px 8px 8px rgba(230, 50, 18, .2), 0 8px 8px 0 rgba(230, 50, 18, .14), 0 8px 8px 0 rgba(230, 50, 18, .12) !important;
+  transform: translate3d(0, 0, 0);
+  transition: background .4s cubic-bezier(.5, .8, .5, 1), box-shadow 280ms cubic-bezier(.8, 0, .4, 1);
+}
+
+.selected-card-red:before{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  //border: 1px solid #e63212;
+  border: 2px solid rgba(230, 50, 18, 0.5);
+  pointer-events: none;
+  box-sizing: border-box;
+  border-radius: 12px;
 }
 
 .card-container{
@@ -33,5 +53,6 @@
 .header{
   display: flex;
   justify-content: center;
-  color: var(--frontend-accent)
+  margin-top: 24px;
+  color: var(--frontend-font)
 }

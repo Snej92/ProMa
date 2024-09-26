@@ -1,5 +1,5 @@
 import {createReducer, on} from "@ngrx/store";
-import {stationViewModelState, stationViewOverviewState} from "./stationViewOverview.state";
+import {stationFavViewModelState, stationViewModelState, stationViewOverviewState} from "./stationViewOverview.state";
 import {
   loadStationViewOverview,
   loadStationViewOverviewFail,
@@ -29,7 +29,7 @@ const _stationViewOverviewReducer = createReducer(
     console.log(action.errorText)
     return{
       ...state,
-      stationViewOverview:stationViewModelState,
+      stationViewOverview:stationFavViewModelState,
       errorMessage:action.errorText.message
     };
   }),

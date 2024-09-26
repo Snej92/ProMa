@@ -1,6 +1,6 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {filter, Subscription, take} from "rxjs";
-import {additionalHeaderDataModel, stationViewModel} from "../../store/stationView.model";
+import {additionalHeaderDataModel, stationFavViewModel, stationViewModel} from "../../store/stationView.model";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
@@ -14,7 +14,6 @@ import {getUserInfo} from "../../../userAdministration/store/user-administration
 import {loadSettingHeaderData} from "../../../settings/HeaderData-settings/store/headerDataSetting.actions";
 import {getSettingHeaderDataInfo} from "../../../settings/HeaderData-settings/store/headerDataSetting.selectors";
 import {
-  editHeaderDataSettingModel,
   headerDataSetting
 } from "../../../settings/HeaderData-settings/store/headerDataSetting.model";
 import {MatCheckboxChange} from "@angular/material/checkbox";
@@ -26,7 +25,7 @@ import {MatCheckboxChange} from "@angular/material/checkbox";
 })
 export class AddStationComponent implements OnInit, OnDestroy{
   private onInitSub!:Subscription;
-  editData!:stationViewModel;
+  editData!:stationFavViewModel;
   user!:user;
   headerDataSettings : headerDataSetting = {
     headerDataSettingList:[],
@@ -65,6 +64,7 @@ export class AddStationComponent implements OnInit, OnDestroy{
     projectionDone:this.builder.control(0),
     projectionToDo:this.builder.control(0),
     projectionProgress:this.builder.control(0),
+    isFavorite:this.builder.control(false)
   }) as FormGroup;
 
   constructor(private dialogRef:MatDialogRef<AddStationComponent>,
@@ -103,34 +103,35 @@ export class AddStationComponent implements OnInit, OnDestroy{
       this.onInitSub = this.store.select(getStationById(this.data.id)).subscribe(data=>{
         this.editData=data;
         this.stationForm.setValue({
-          id:this.editData.id,
-          name: this.editData.name,
-          description: this.editData.description,
-          issuerAcronym:this.editData.issuerAcronym,
-          issuerName:this.editData.issuerName,
-          status:this.editData.status,
-          version:this.editData.version,
-          totalProgress:this.editData.totalProgress,
-          lopTotal:this.editData.lopTotal,
-          lopDone:this.editData.lopDone,
-          lopToDo:this.editData.lopToDo,
-          lopProgress:this.editData.lopProgress,
-          documentationTotal:this.editData.documentationTotal,
-          documentationDone:this.editData.documentationDone,
-          documentationToDo:this.editData.documentationToDo,
-          documentationProgress:this.editData.documentationProgress,
-          specificationTotal:this.editData.specificationTotal,
-          specificationDone:this.editData.specificationDone,
-          specificationToDo:this.editData.specificationToDo,
-          specificationProgress:this.editData.specificationProgress,
-          controlTotal:this.editData.controlTotal,
-          controlDone:this.editData.controlDone,
-          controlToDo:this.editData.controlToDo,
-          controlProgress:this.editData.controlProgress,
-          projectionTotal:this.editData.projectionTotal,
-          projectionDone:this.editData.projectionDone,
-          projectionToDo:this.editData.projectionToDo,
-          projectionProgress:this.editData.projectionProgress
+          id:this.editData.station.id,
+          name: this.editData.station.name,
+          description: this.editData.station.description,
+          issuerAcronym:this.editData.station.issuerAcronym,
+          issuerName:this.editData.station.issuerName,
+          status:this.editData.station.status,
+          version:this.editData.station.version,
+          totalProgress:this.editData.station.totalProgress,
+          lopTotal:this.editData.station.lopTotal,
+          lopDone:this.editData.station.lopDone,
+          lopToDo:this.editData.station.lopToDo,
+          lopProgress:this.editData.station.lopProgress,
+          documentationTotal:this.editData.station.documentationTotal,
+          documentationDone:this.editData.station.documentationDone,
+          documentationToDo:this.editData.station.documentationToDo,
+          documentationProgress:this.editData.station.documentationProgress,
+          specificationTotal:this.editData.station.specificationTotal,
+          specificationDone:this.editData.station.specificationDone,
+          specificationToDo:this.editData.station.specificationToDo,
+          specificationProgress:this.editData.station.specificationProgress,
+          controlTotal:this.editData.station.controlTotal,
+          controlDone:this.editData.station.controlDone,
+          controlToDo:this.editData.station.controlToDo,
+          controlProgress:this.editData.station.controlProgress,
+          projectionTotal:this.editData.station.projectionTotal,
+          projectionDone:this.editData.station.projectionDone,
+          projectionToDo:this.editData.station.projectionToDo,
+          projectionProgress:this.editData.station.projectionProgress,
+          isFavorite:this.editData.isFavorite
         })
       })
       this.onInitSub.unsubscribe();
@@ -138,7 +139,7 @@ export class AddStationComponent implements OnInit, OnDestroy{
   }
 
   saveStation() {
-    const stationInput : stationViewModel = {
+    const station : stationViewModel = {
       id:0,
       name:this.stationForm.value.name as string,
       description:this.stationForm.value.description as string,
@@ -169,10 +170,15 @@ export class AddStationComponent implements OnInit, OnDestroy{
       projectionProgress:this.stationForm.value.projectionProgress as number,
     }
 
+    const stationInput : stationFavViewModel = {
+      station:station,
+      isFavorite: this.stationForm.value.isFavorite as boolean
+    }
+
     this.iterateDynamicControls();
 
     if(this.data.isEdit){
-      stationInput.id = this.stationForm.value.id as number
+      station.id = this.stationForm.value.id as number
       console.log(stationInput)
       this.store.dispatch(loadSpinner({isLoading:true}));
       this.store.dispatch(updateStation({stationViewInput:stationInput}))

@@ -25,11 +25,11 @@
   </div>
 
   <div class="ms-2 mt-2">
-    <span class="properties-font">Stationsname: </span> <span class="ms-1">{{stationViewInput.stationViewOverview.name}}</span>
+    <span class="properties-font">Stationsname: </span> <span class="ms-1">{{stationViewInput.stationViewOverview.station.name}}</span>
   </div>
 
   <div class="ms-2">
-    <span class="properties-font">Beschreibung: </span> <span class="ms-1">{{stationViewInput.stationViewOverview.description}}</span>
+    <span class="properties-font">Beschreibung: </span> <span class="ms-1">{{stationViewInput.stationViewOverview.station.description}}</span>
   </div>
 
   <div class="ms-2 mt-4">
@@ -37,7 +37,7 @@
       Version:
     </span>
     <span class="ms-1">
-      {{stationViewInput.stationViewOverview.version}}
+      {{stationViewInput.stationViewOverview.station.version}}
     </span>
   </div>
 
@@ -46,23 +46,23 @@
       Status:
     </span>
     <span class="ms-1 station-status" [ngClass]="{
-          'station-status-ausgelagert': stationViewInput.stationViewOverview.status=='AUSGELAGERT',
-          'station-status-inarbeit': stationViewInput.stationViewOverview.status=='INARBEIT',
-          'station-status-eingelagert': stationViewInput.stationViewOverview.status=='EINGELAGERT'
+          'station-status-ausgelagert': stationViewInput.stationViewOverview.station.status=='AUSGELAGERT',
+          'station-status-inarbeit': stationViewInput.stationViewOverview.station.status=='INARBEIT',
+          'station-status-eingelagert': stationViewInput.stationViewOverview.station.status=='EINGELAGERT'
           }">
-      {{stationViewInput.stationViewOverview.status}}
+      {{stationViewInput.stationViewOverview.station.status}}
     </span>
   </div>
 
   <div class="ms-2">
-    <span class="properties-font">Bearbeiter: </span> <span class="ms-1">{{stationViewInput.stationViewOverview.issuerName}}</span>
+    <span class="properties-font">Bearbeiter: </span> <span class="ms-1">{{stationViewInput.stationViewOverview.station.issuerName}}</span>
   </div>
 
   <div class="ms-2 mt-4">
     <span class="properties-font">Projektierungsfortschritt: </span>
-    <span [ngClass]="stationViewInput.stationViewOverview.totalProgress >= 100 ? 'progress-text-align-100' : 'progress-text-align'">{{stationViewInput.stationViewOverview.totalProgress}}</span>
+    <span [ngClass]="stationViewInput.stationViewOverview.station.totalProgress >= 100 ? 'progress-text-align-100' : 'progress-text-align'">{{stationViewInput.stationViewOverview.station.totalProgress}}</span>
     <mat-progress-spinner class="progress-spinner-align mat-spinner-color"
-                          value="{{stationViewInput.stationViewOverview.totalProgress}}"
+                          value="{{stationViewInput.stationViewOverview.station.totalProgress}}"
                           mode="determinate" [diameter]="38">
 
     </mat-progress-spinner>

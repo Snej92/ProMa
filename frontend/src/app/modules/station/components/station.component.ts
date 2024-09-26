@@ -20,7 +20,7 @@ import {AddStationComponent} from "./add-station/add-station.component";
 export class StationComponent implements OnInit, OnDestroy{
   private subscriptions: Subscription[] = [];
   activeProjectView!:activeProjectView;
-  stationView!:stationView;
+  stationFavView!:stationView;
   loggedUser!:loggedUser;
 
   constructor(private store:Store<AppStateModel>,
@@ -56,7 +56,7 @@ export class StationComponent implements OnInit, OnDestroy{
     this.subscriptions.push(
       this.store.select(getStationViewInfo).pipe()
         .subscribe(data =>{
-          this.stationView=data;
+          this.stationFavView=data;
         })
     )
   }

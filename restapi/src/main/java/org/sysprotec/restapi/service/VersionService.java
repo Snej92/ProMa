@@ -140,7 +140,7 @@ public class VersionService {
                 //History
                 String stationName = "";
                 String versionName;
-                String historyMessage;
+                String historyMessage = "";
                 int oldState = 0;
                 int newState = 0;
                 boolean stateChange = false;
@@ -166,7 +166,6 @@ public class VersionService {
                                             "Station '" + stationName + "' Version '" + versionName + " status geändert zu 'nicht notwendig'";
                                     default -> "version station update: ???";
                                 };
-                                log.info(historyMessage);
                             }
                         }
                     }
@@ -196,9 +195,16 @@ public class VersionService {
                     }
                 }
 
-                //Todo check station and add history entry
+                //History entry when state Change
                 if(stateChange){
-                    stationRepository.findStationByNameIgnoreCaseAndProjectId(stationName, optionalVersion.get().getProject().getId());
+                    Optional<Station> optionalStation = stationRepository.findStationByNameIgnoreCaseAndProjectId(
+                            stationName,
+                            optionalVersion.get().getProject().getId()
+                    );
+
+                    if(optionalStation.isPresent()){
+                        historyService.newEntryAuto(optionalStation.get().getId(), historyMessage);
+                    }
                 }
 
                 versionRepository.save(saveVersion);

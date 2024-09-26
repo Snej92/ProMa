@@ -113,6 +113,8 @@ $dark-theme: mat.define-dark-theme((
   --frontend-header-background-day-transparent: rgba(230,50,18, 0.5);
   --frontend-header-day: #ffffff;
 
+  --frontend-font: #ffffff;
+
   background-color: #202124;
   color: #ffffff;
 }
@@ -154,6 +156,7 @@ body { margin: 0;
   --frontend-header-background-day-transparent: rgba(74,74,73, 0.85);
   --frontend-header-day: #ffffff;
 
+  --frontend-font: #4a4a4a;
 }
 
 //Snackbar
@@ -198,6 +201,15 @@ body { margin: 0;
 
 .fail-snackbar .mat-mdc-button {
 
+}
+
+.hover-card {
+  @include mat.elevation-transition();
+  @include mat.elevation(4);
+
+  &:hover {
+    @include mat.elevation(16);
+  }
 }
 
 /* Importing Bootstrap SCSS file. */

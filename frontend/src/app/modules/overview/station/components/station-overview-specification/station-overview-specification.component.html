@@ -11,11 +11,11 @@
   </div>
 
   <div class="ms-2 mt-2">
-    <span class="properties-font">Gesamtanzahl: </span> <span class="ms-1">{{stationViewInput.stationViewOverview.specificationTotal}}</span>
+    <span class="properties-font">Gesamtanzahl: </span> <span class="ms-1">{{stationViewInput.stationViewOverview.station.specificationTotal}}</span>
   </div>
 
   <div class="ms-2">
-    <span class="properties-font">Erledigt: </span> <span class="ms-1">{{stationViewInput.stationViewOverview.specificationDone}}</span>
+    <span class="properties-font">Erledigt: </span> <span class="ms-1">{{stationViewInput.stationViewOverview.station.specificationDone}}</span>
   </div>
 
   <div class="ms-2 mt-4 mb-4">
@@ -23,11 +23,11 @@
       Status:
     </span>
     <span class="ms-1 status"
-          [ngClass]="stationViewInput.stationViewOverview.specificationTotal==stationViewInput.stationViewOverview.specificationDone ? 'status-done' : 'status-not-done'">
-      <span *ngIf="stationViewInput.stationViewOverview.specificationTotal==stationViewInput.stationViewOverview.specificationDone">
+          [ngClass]="stationViewInput.stationViewOverview.station.specificationTotal==stationViewInput.stationViewOverview.station.specificationDone ? 'status-done' : 'status-not-done'">
+      <span *ngIf="stationViewInput.stationViewOverview.station.specificationTotal==stationViewInput.stationViewOverview.station.specificationDone">
         vollständig
       </span>
-      <span *ngIf="stationViewInput.stationViewOverview.specificationTotal!=stationViewInput.stationViewOverview.specificationDone">
+      <span *ngIf="stationViewInput.stationViewOverview.station.specificationTotal!=stationViewInput.stationViewOverview.station.specificationDone">
         unvollständig
       </span>
     </span>
@@ -35,9 +35,9 @@
 
   <div class="ms-2">
     <span class="properties-font">Fortschritt: </span>
-    <span [ngClass]="stationViewInput.stationViewOverview.specificationProgress >= 100 ? 'progress-text-align-100' : 'progress-text-align'">{{stationViewInput.stationViewOverview.specificationProgress}}</span>
+    <span [ngClass]="stationViewInput.stationViewOverview.station.specificationProgress >= 100 ? 'progress-text-align-100' : 'progress-text-align'">{{stationViewInput.stationViewOverview.station.specificationProgress}}</span>
     <mat-progress-spinner class="progress-spinner-align mat-spinner-color"
-                          value="{{stationViewInput.stationViewOverview.specificationProgress}}"
+                          value="{{stationViewInput.stationViewOverview.station.specificationProgress}}"
                           mode="determinate" [diameter]="38">
 
     </mat-progress-spinner>

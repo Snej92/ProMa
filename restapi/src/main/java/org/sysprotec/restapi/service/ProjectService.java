@@ -311,10 +311,15 @@ public class ProjectService {
     public void deleteProject(Long projectId) {
         Optional<Project> optionalProject = projectRepository.findProjectById(projectId);
         if(optionalProject.isPresent()){
+            //Set User active Project to 0
             List<User> userList = userRepository.findUserByActiveProject(projectId);
             for(User user : userList){
                 user.setActiveProject(0L);
             }
+
+            //Remove all favorites
+            Optional<List<ProjectFavorite>> optionalProjectFavorites = projectFavoriteRepository.findByProjectId(projectId);
+            optionalProjectFavorites.ifPresent(projectFavoriteRepository::deleteAll);
             projectRepository.delete(optionalProject.get());
         }else log.error("Project with ID " + projectId +" does not exist");
     }
@@ -357,7 +362,7 @@ public class ProjectService {
             List<ProjectFavView> projectFavViews = new ArrayList<>();
             if(projectFavorite != null && !projectFavorite.isEmpty()){
                 for(ProjectFavorite projectFavoriteItem : projectFavorite){
-                    ProjectView projectView = projectRepository.findProjectProjectedById(projectFavoriteItem.getId());
+                    ProjectView projectView = projectRepository.findProjectProjectedById(projectFavoriteItem.getProjectId());
                     if(projectView != null){
                         ProjectFavView projectFavView = ProjectFavView.builder()
                                 .project(projectView)

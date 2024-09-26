@@ -1,4 +1,4 @@
-import {stationViewModel} from "../../../station/store/stationView.model";
+import {stationFavViewModel, stationViewModel} from "../../../station/store/stationView.model";
 import {stationViewOverview} from "./stationViewOverview.model";
 
 export const stationViewModelState:stationViewModel={
@@ -37,8 +37,13 @@ export const stationViewModelState:stationViewModel={
   projectionProgress:0,
 }
 
+export const stationFavViewModelState:stationFavViewModel={
+  station:stationViewModelState,
+  isFavorite:false
+}
+
 export const stationViewOverviewState:stationViewOverview={
-  stationViewOverview:stationViewModelState,
+  stationViewOverview:stationFavViewModelState,
   errorMessage:''
 }
 

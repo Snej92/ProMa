@@ -1,7 +1,7 @@
 .table-container{
   overflow-x: auto;
   overflow-y: auto;
-  max-height: 74vh;
+  max-height: 80vh;
 }
 
 .mat-mdc-header-row{
@@ -44,16 +44,26 @@
 }
 
 .mat-column-Version{
-
-}
-
-.mat-column-status{
-
+  position: sticky;
+  min-width: 9vh;
+  max-width: 9vh;
+  z-index: 8;
+  left: 0;
 }
 
 .mat-column-Aufgabe{
   text-align: start;
   min-width: 45vh;
+  max-width: 45vh;
+  position: sticky;
+  z-index: 8;
+  left: 9vh;
+}
+
+.mat-column-Status{
+  position: sticky;
+  z-index: 8;
+  left: 54vh;
 }
 
 .mat-column-Station{

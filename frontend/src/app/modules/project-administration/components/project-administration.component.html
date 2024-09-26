@@ -11,15 +11,17 @@
   </ng-container>
 </div>
 
+<!--appProjectElevation [defaultElevation]="4" [raisedElevation]="16"-->
+
 <div class="project-cards-container">
   <ng-container *ngIf="projectView">
     <ng-container *ngIf="loggedUser as user">
       <ng-container *ngIf="!archive">
-        <app-project-card appProjectElevation [defaultElevation]="4" [raisedElevation]="16"
-                          class="project-card ms-5 mt-4 mb-5"
+        <app-project-card class="project-card ms-5 mt-4 mb-5 hover-card"
                           [loggedUser]="loggedUser"
-                          *ngFor="let projectViews of projectView.projectViewList" [projectView]="projectViews.project"
-                          [ngClass]="{'selected-card':projectViews.project.id===user.user.activeProject}"
+                          *ngFor="let projectViews of projectView.projectViewList"
+                          [projectFavView]="projectViews"
+                          [ngClass]="{'selected-card-red':projectViews.project.id===user.user.activeProject}"
                           [archive]="archive"/>
 
         <ng-container *ngIf="loggedUser.user.roles.projectRole">
@@ -33,8 +35,9 @@
       <ng-container *ngIf="archive  && loggedUser.user.roles.projectRole">
         <app-project-card class="project-card ms-5 mt-4 mb-5"
                           [loggedUser]="loggedUser"
-                          *ngFor="let projectViews of projectView.projectViewList" [projectView]="projectViews.project"
-                          [ngClass]="{'selected-card':projectViews.project.id===user.user.activeProject}"
+                          *ngFor="let projectViews of projectView.projectViewList"
+                          [projectFavView]="projectViews"
+                          [ngClass]="{'selected-card-red':projectViews.project.id===user.user.activeProject}"
                           [archive]="archive"/>
       </ng-container>
     </ng-container>

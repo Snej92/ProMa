@@ -1,3 +1,8 @@
+.station-container{
+  overflow-y: auto;
+  max-height: 93vh;
+}
+
 .station-cards-container{
   display: flex;
   flex-wrap: wrap;

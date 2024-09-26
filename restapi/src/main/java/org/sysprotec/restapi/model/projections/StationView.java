@@ -1,22 +1,18 @@
 package org.sysprotec.restapi.model.projections;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.OneToMany;
-import org.sysprotec.restapi.model.History;
-import org.sysprotec.restapi.model.overview.HeaderData;
-import org.sysprotec.restapi.model.overview.Lop;
-import org.sysprotec.restapi.model.overview.Task;
-import org.sysprotec.restapi.model.overview.TechnicalData;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.sysprotec.restapi.model.deserialization.StationViewImpl;
+import org.sysprotec.restapi.model.types.StatusEPLAN;
 
-import java.util.List;
 
+@JsonDeserialize(as = StationViewImpl.class)
 public interface StationView {
-    Integer getId();
+    Long getId();
     String getName();
     String getDescription();
     String getIssuerAcronym();
     String getIssuerName();
-    String getStatus();
+    StatusEPLAN getStatus();
     String getVersion();
     Integer getTotalProgress();
     //Progress

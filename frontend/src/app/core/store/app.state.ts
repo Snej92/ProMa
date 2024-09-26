@@ -30,6 +30,7 @@ import {technicalDataReducer} from "../../modules/overview/technicalData/store/t
 import {stationViewOverviewReducer} from "../../modules/overview/station/store/stationViewOverview.reducers";
 import {stationOverallViewReducer} from "../../modules/overall-view/store/stationOverallView.reducers";
 import {assignmentReducer} from "../../modules/calender/store/calender.reducers";
+import {projectFavoriteViewReducer} from "../../modules/dashboard/project/store/project-favorite.reducers";
 
 
 export const AppState={
@@ -57,4 +58,5 @@ export const AppState={
   stationViewOverview:stationViewOverviewReducer,
   stationOverallView:stationOverallViewReducer,
   assignment:assignmentReducer,
+  projectFavoriteView:projectFavoriteViewReducer,
 }

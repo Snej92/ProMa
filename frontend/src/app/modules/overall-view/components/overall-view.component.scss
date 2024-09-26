@@ -1,36 +1,57 @@
 .overall-view-container {
-  margin-top: 4px;
+  margin-top: 28px;
   margin-left: 20px;
   margin-right: 2%;
 }
 
 .table-container{
+  table-layout: fixed;
   overflow-x: auto;
   overflow-y: auto;
-  max-height: 82vh;
+  max-height: 79vh;
 }
+
 
 .mat-mdc-header-row{
   color: white;
   background-color: var(--frontend-primary);
   height: 40px;
+  min-height: 40px;
+  max-height: 40px;
   position: sticky;
-  top: 40px;
+  top: 50px;
   z-index: 10;
-  font-size: 10px;
+  font-size: 0.6rem;
+  padding-top: 0;
 }
 
 .general-header-row {
-  height: 40px;
+  height: 50px!important;
+  min-height: 50px!important;
+  max-height: 50px!important;
   position: sticky;
   top: 0;
-  z-index: 11;
-  font-size: 10px;
+  z-index: 10;
+  font-size: 0.6rem;
+  padding-bottom: 0;
 }
 
-
 .mat-mdc-row{
-  font-size: 10px;
+  font-size: 0.6rem;
+
+  user-select: none;
+
+  height: 20px!important;
+  max-height: 20px!important;
+  min-height: 20px!important;
+  padding: 0!important;
+}
+
+.test-height {
+  height: 20px!important;
+  max-height: 20px!important;
+  min-height: 20px!important;
+  padding: 0!important;
 }
 
 .header-allgemein{
@@ -72,14 +93,46 @@
   background-color: var(--frontend-alternate);
 }
 
+.mat-column-Station{
+  width: 70px;
+  min-width: 70px;
+  max-width: 70px;
+  padding: 0;
+}
+
+.mat-column-Bearbeiter{
+  width: 60px;
+  min-width: 60px;
+  max-width: 60px;
+  padding: 0;
+}
+
+.mat-column-Status{
+  width: 80px;
+  min-width: 80px;
+  max-width: 80px;
+  padding: 0;
+}
+
+.mat-column-Version{
+  width: 60px;
+  min-width: 60px;
+  max-width: 60px;
+  padding: 0;
+}
+
 .mat-column-Gesamtfortschritt{
-  min-width: 120px;
-  max-width: 120px;
+  width: 90px;
+  min-width: 90px;
+  max-width: 90px;
+  padding: 0;
 }
 
 .mat-column-LOPfortschritt{
-  min-width: 100px;
-  max-width: 100px;
+  width: 70px;
+  min-width: 70px;
+  max-width: 70px;
+  padding: 0;
 }
 
 
@@ -149,19 +202,57 @@
   stroke: var(--frontend-progress-spinner) !important;
 }
 
-.card-container-no-project{
-  width: 35%;
-  border-radius: 12px;
-  background-color: var(--frontend-nav-button);
-  border-color: var(--frontend-nav-button-border);
-  border-width: 2px;
-  margin-left: 32%;
+
+//Hide Headers and Columns
+
+.visibility-button{
+  width: 20px;
+  height: 20px;
+  font-size: 1.3rem;
 }
 
-.container-no-project {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 15px;
-  margin-top: 5%;
+.align-header{
+  position: relative;
+  top: 12px
+}
+
+.align-header-hidden{
+  max-width: 100px;
+  min-width: 100px;
+  position: relative;
+  top: 12px
+}
+
+.hide-header{
+  padding-right: 10px;
+  padding-left: 0;
+}
+
+.hide-column{
+  color: transparent;
+  min-width: 0;
+  max-width: 0;
+  padding: 0;
+}
+
+.hide-single-column{
+  color: transparent;
+  min-width: 0;
+  max-width: 0;
+  padding: 0;
+}
+
+//Filter
+.mat-mdc-select{
+  font-size: 0.7rem;
+}
+
+.mat-mdc-option{
+  font-size: 0.7rem;
+}
+
+.mat-mdc-form-field{
+  height: 70px;
+  min-height: 70px;
+  max-height: 70px;
 }

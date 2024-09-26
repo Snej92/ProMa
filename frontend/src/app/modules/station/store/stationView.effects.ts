@@ -10,7 +10,7 @@ import {
   loadStationViewFail,
   loadStationViewSuccess, updateStation, updateStationSuccess
 } from "./stationView.actions";
-import {stationViewModel} from "./stationView.model";
+import {stationFavViewModel, stationViewModel} from "./stationView.model";
 
 @Injectable()
 export class StationViewEffects {
@@ -39,7 +39,7 @@ export class StationViewEffects {
       switchMap(action=>
         this.service.addStation(action.stationViewInput, action.headerDataInput).pipe(
           switchMap(data=> of(
-            addStationViewSuccess({stationViewInput:data as stationViewModel}),
+            addStationViewSuccess({stationViewInput:data as stationFavViewModel}),
             loadSpinner({isLoading:false}),
             showAlert({message: 'Station Erfolgreich hinzugefügt', actionResult:'pass'})
           )),
@@ -55,7 +55,7 @@ export class StationViewEffects {
       switchMap(action =>
         this.service.updateStation(action.stationViewInput).pipe(
           switchMap(data=> of(
-            updateStationSuccess({stationViewNew:data as stationViewModel, stationViewOld:action.stationViewInput}),
+            updateStationSuccess({stationViewNew:data as stationFavViewModel, stationViewOld:action.stationViewInput}),
             loadSpinner({isLoading:false}),
             showAlert({message: 'Station erfolgreich aktualisiert', actionResult:'pass'})
           )),

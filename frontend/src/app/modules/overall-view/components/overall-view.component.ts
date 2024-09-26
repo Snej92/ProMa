@@ -6,9 +6,10 @@ import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../core/store/appState.model";
 import {getStationOverallViewInfo} from "../store/stationOverallView.selectors";
 import {loadStationOverallView} from "../store/stationOverallView.actions";
-import {headerData} from "../../overview/headerData/store/headerData.model";
 import {getLoggedUserInfo} from "../../../core/logged-user/logged-user.selectors";
 import {loggedUser} from "../../../core/logged-user/logged-user.model";
+import {FormControl} from "@angular/forms";
+import {MatOption, MatSelectChange} from "@angular/material/select";
 
 @Component({
   selector: 'app-overall-view',
@@ -29,10 +30,31 @@ export class OverallViewComponent implements OnInit, OnDestroy{
   controlColumns: String[] = [];
   technicalDataColumns: String[] = [];
 
+  showHeaderData : boolean = true;
+  showSpecification : boolean = true;
+  showProjection : boolean = true;
+  showDocumentation : boolean = true;
+  showControl : boolean = true;
+  showTechnicalData : boolean = true;
+
+  selectedHeaderData: String[] = [];
+  selectedSpecification: String[] = [];
+  selectedProjection: String[] = [];
+  selectedControl: String[] = [];
+  selectedDocumentation: String[] = [];
+  selectedTechnicalData: String[] = [];
+
   constructor(private store:Store<AppStateModel>) {
   }
 
   ngOnInit(): void {
+    this.showHeaderData = localStorage.getItem('showHeaderData') === 'true';
+    this.showSpecification = localStorage.getItem('showSpecification') === 'true';
+    this.showProjection = localStorage.getItem('showProjection') === 'true';
+    this.showDocumentation = localStorage.getItem('showDocumentation') === 'true';
+    this.showControl = localStorage.getItem('showControl') === 'true';
+    this.showTechnicalData = localStorage.getItem('showTechnicalData') === 'true';
+
     this.store.dispatch(loadSpinner({isLoading:true}))
     this.subscriptions.push(
       this.store.select(getLoggedUserInfo).pipe()
@@ -45,47 +67,440 @@ export class OverallViewComponent implements OnInit, OnDestroy{
       this.store.select(getStationOverallViewInfo).pipe()
         .subscribe(data =>{
           this.stationOverallView=data;
+
+          //Init Column Headers
           this.headerDataColumns = [];
+          this.specificationColumns = [];
+          this.projectionColumns = [];
+          this.controlColumns = [];
+          this.documentationColumns = [];
+          this.technicalDataColumns = [];
+
           this.displayedColumns = ['Station', 'Bearbeiter', 'Status', 'Version', 'Gesamtfortschritt', 'LOPfortschritt'];
-          for(let val of this.stationOverallView.stationOverallViewList){
-            this.headerDataColumns = [];
-            this.specificationColumns = [];
-            this.projectionColumns = [];
-            this.controlColumns = [];
-            this.documentationColumns = [];
-            this.technicalDataColumns = [];
-            this.displayedColumns = ['Station', 'Bearbeiter', 'Status', 'Version', 'Gesamtfortschritt', 'LOPfortschritt'];
-            for(let header of val.headerData){
+          //HeaderData
+          if(this.stationOverallView?.stationOverallViewList?.at(0)?.headerData !== undefined){
+            const headerData = this.stationOverallView?.stationOverallViewList?.at(0)?.headerData!; // Assertion that it's not undefined
+            for (let header of headerData) {
               this.headerDataColumns.push(header.headerDataSetting.item);
               this.displayedColumns.push(header.headerDataSetting.item);
             }
-            for(let specification of val.specification){
-              this.specificationColumns.push(specification.taskSetting.item);
-              this.displayedColumns.push(specification.taskSetting.item);
+          }
+          //Specification
+          if(this.stationOverallView?.stationOverallViewList?.at(0)?.specification !== undefined){
+            const specification = this.stationOverallView?.stationOverallViewList?.at(0)?.specification!; // Assertion that it's not undefined
+            for (let specificationItem of specification) {
+              this.specificationColumns.push(specificationItem.taskSetting.item);
+              this.displayedColumns.push(specificationItem.taskSetting.item);
             }
-            for(let projection of val.projection){
-              this.projectionColumns.push(projection.taskSetting.item);
-              this.displayedColumns.push(projection.taskSetting.item);
+          }
+
+          //Projection
+          if(this.stationOverallView?.stationOverallViewList?.at(0)?.projection !== undefined){
+            const projection = this.stationOverallView?.stationOverallViewList?.at(0)?.projection!; // Assertion that it's not undefined
+            for (let projectionItem of projection) {
+              this.projectionColumns.push(projectionItem.taskSetting.item);
+              this.displayedColumns.push(projectionItem.taskSetting.item);
             }
-            for(let control of val.control){
-              this.controlColumns.push(control.taskSetting.item);
-              this.displayedColumns.push(control.taskSetting.item);
+          }
+
+          //Control
+          if(this.stationOverallView?.stationOverallViewList?.at(0)?.control !== undefined){
+            const control = this.stationOverallView?.stationOverallViewList?.at(0)?.control!; // Assertion that it's not undefined
+            for (let controlItem of control) {
+              this.controlColumns.push(controlItem.taskSetting.item);
+              this.displayedColumns.push(controlItem.taskSetting.item);
             }
-            for(let documentation of val.documentation){
-              this.documentationColumns.push(documentation.taskSetting.item);
-              this.displayedColumns.push(documentation.taskSetting.item);
+          }
+
+          //Documentation
+          if(this.stationOverallView?.stationOverallViewList?.at(0)?.documentation !== undefined){
+            const documentation = this.stationOverallView?.stationOverallViewList?.at(0)?.documentation!; // Assertion that it's not undefined
+            for (let documentationItem of documentation) {
+              this.documentationColumns.push(documentationItem.taskSetting.item);
+              this.displayedColumns.push(documentationItem.taskSetting.item);
             }
-            for(let technicalData of val.technicalData){
-              this.technicalDataColumns.push(technicalData.technicalDataSetting.item);
-              this.displayedColumns.push(technicalData.technicalDataSetting.item);
+          }
+
+          //Technical Data
+          if(this.stationOverallView?.stationOverallViewList?.at(0)?.technicalData !== undefined){
+            const technicalData = this.stationOverallView?.stationOverallViewList?.at(0)?.technicalData!; // Assertion that it's not undefined
+            for (let technicalDataItem of technicalData) {
+              this.technicalDataColumns.push(technicalDataItem.technicalDataSetting.item);
+              this.displayedColumns.push(technicalDataItem.technicalDataSetting.item);
             }
           }
         })
     )
+
+    this.initSelects();
   }
+
+  toggleHeaderDataVisibility(){
+    this.showHeaderData = !this.showHeaderData;
+    localStorage.setItem('showHeaderData', this.showHeaderData.toString())
+  }
+
+  toggleSpecificationVisibility(){
+    this.showSpecification = !this.showSpecification;
+    localStorage.setItem('showSpecification', this.showSpecification.toString())
+  }
+
+  toggleProjectionVisibility(){
+    this.showProjection = !this.showProjection;
+    localStorage.setItem('showProjection', this.showProjection.toString())
+  }
+
+  toggleControlVisibility(){
+    this.showControl = !this.showControl;
+    localStorage.setItem('showControl', this.showControl.toString())
+  }
+
+  toggleDocumentationVisibility(){
+    this.showDocumentation = !this.showDocumentation;
+    localStorage.setItem('showDocumentation', this.showDocumentation.toString())
+  }
+
+  toggleTechnicalDataVisibility(){
+    this.showTechnicalData = !this.showTechnicalData;
+    localStorage.setItem('showTechnicalData', this.showTechnicalData.toString())
+  }
+
+  initSelects(){
+    this.initSelectedHeaderData()
+    this.initSelectedProjection()
+    this.initSelectedSpecification()
+    this.initSelectedControl()
+    this.initSelectedDocumentation()
+    this.initSelectedTechnicalData()
+  }
+
+  //region Selected Header Data
+  initSelectedHeaderData(){
+    const selectedHeaderData = localStorage.getItem('selectedHeaderData')
+    if(selectedHeaderData){
+      try{
+        this.selectedHeaderData = JSON.parse(selectedHeaderData);
+      } catch(e){
+        console.info('Error parsing JSON from localStorage for selectedHeaderData')
+        this.selectedHeaderData = [];
+      }
+    }
+  }
+
+  onChangeSelectHeaderData(event: any){
+    if(event.value.includes('all')){
+      if(this.isAllHeaderDataSelected()){
+        return;
+      }
+      this.selectedHeaderData = this.selectedHeaderData.filter(item => item !== 'all');
+      this.updateLocalStorageSelectedHeaderData();
+      return;
+    }
+    this.updateLocalStorageSelectedHeaderData();
+  }
+
+  toggleSelectAllHeaderData(allSelected: MatOption){
+    allSelected.select()
+    if(this.isAllHeaderDataSelected()){
+      this.selectedHeaderData = [];
+      this.updateLocalStorageSelectedHeaderData();
+    } else {
+      allSelected.select()
+      this.selectedHeaderData = this.headerDataColumns.slice();
+      this.selectedHeaderData.push('all')
+      this.updateLocalStorageSelectedHeaderData();
+    }
+  }
+
+  isAllHeaderDataSelected(){
+    return this.selectedHeaderData.length > this.headerDataColumns.length;
+  }
+
+  updateLocalStorageSelectedHeaderData(){
+    console.log(this.selectedHeaderData);
+
+    const selectedHeaderDataString = JSON.stringify(this.selectedHeaderData);
+    localStorage.setItem('selectedHeaderData',selectedHeaderDataString)
+  }
+
+  isHeaderDataColumnSelected(column: String): boolean {
+    return this.selectedHeaderData.includes(column);
+  }
+  //endregion
+
+  //region Selected Specification
+  initSelectedSpecification(){
+    const selectedSpecification = localStorage.getItem('selectedSpecification')
+    if(selectedSpecification){
+      try{
+        this.selectedSpecification = JSON.parse(selectedSpecification);
+      } catch(e){
+        console.info('Error parsing JSON from localStorage for selectedSpecification')
+        this.selectedSpecification = [];
+      }
+    }
+  }
+
+  onChangeSelectSpecification(event: any){
+    if(event.value.includes('all')){
+      if(this.isAllSpecificationSelected()){
+        return;
+      }
+      this.selectedSpecification = this.selectedSpecification.filter(item => item !== 'all');
+      this.updateLocalStorageSelectedSpecification();
+      return;
+    }
+    this.updateLocalStorageSelectedSpecification();
+  }
+
+  toggleSelectAllSpecification(allSelected: MatOption){
+    allSelected.select()
+    if(this.isAllSpecificationSelected()){
+      this.selectedSpecification = [];
+      this.updateLocalStorageSelectedSpecification();
+    } else {
+      allSelected.select()
+      this.selectedSpecification = this.specificationColumns.slice();
+      this.selectedSpecification.push('all')
+      this.updateLocalStorageSelectedSpecification();
+    }
+  }
+
+  isAllSpecificationSelected(){
+    return this.selectedSpecification.length > this.specificationColumns.length;
+  }
+
+  updateLocalStorageSelectedSpecification(){
+    console.log(this.selectedSpecification);
+
+    const selectedSpecificationString = JSON.stringify(this.selectedSpecification);
+    localStorage.setItem('selectedSpecification',selectedSpecificationString)
+  }
+
+  isSpecificationColumnSelected(column: String): boolean {
+    return this.selectedSpecification.includes(column);
+  }
+  //endregion
+
+  //region Selected Projection
+  initSelectedProjection(){
+    const selectedProjection = localStorage.getItem('selectedProjection')
+    if(selectedProjection){
+      try{
+        this.selectedProjection = JSON.parse(selectedProjection);
+      } catch(e){
+        console.info('Error parsing JSON from localStorage for selectedProjection')
+        this.selectedProjection = [];
+      }
+    }
+  }
+
+  onChangeSelectProjection(event: any){
+    if(event.value.includes('all')){
+      if(this.isAllProjectionSelected()){
+        return;
+      }
+      this.selectedProjection = this.selectedProjection.filter(item => item !== 'all');
+      this.updateLocalStorageSelectedProjection();
+      return;
+    }
+    this.updateLocalStorageSelectedProjection();
+  }
+
+  toggleSelectAllProjection(allSelected: MatOption){
+    allSelected.select()
+    if(this.isAllProjectionSelected()){
+      this.selectedProjection = [];
+      this.updateLocalStorageSelectedProjection();
+    } else {
+      allSelected.select()
+      this.selectedProjection = this.projectionColumns.slice();
+      this.selectedProjection.push('all')
+      this.updateLocalStorageSelectedProjection();
+    }
+  }
+
+  isAllProjectionSelected(){
+    return this.selectedProjection.length > this.projectionColumns.length;
+  }
+
+  updateLocalStorageSelectedProjection(){
+    console.log(this.selectedProjection);
+
+    const selectedProjectionString = JSON.stringify(this.selectedProjection);
+    localStorage.setItem('selectedProjection',selectedProjectionString)
+  }
+
+  isProjectionColumnSelected(column: String): boolean {
+    return this.selectedProjection.includes(column);
+  }
+  //endregion
+
+  //region Selected Control
+  initSelectedControl(){
+    const selectedControl = localStorage.getItem('selectedControl')
+    if(selectedControl){
+      try{
+        this.selectedControl = JSON.parse(selectedControl);
+      } catch(e){
+        console.info('Error parsing JSON from localStorage for selectedControl')
+        this.selectedControl = [];
+      }
+    }
+  }
+
+  onChangeSelectControl(event: any){
+    if(event.value.includes('all')){
+      if(this.isAllControlSelected()){
+        return;
+      }
+      this.selectedControl = this.selectedControl.filter(item => item !== 'all');
+      this.updateLocalStorageSelectedControl();
+      return;
+    }
+    this.updateLocalStorageSelectedControl();
+  }
+
+  toggleSelectAllControl(allSelected: MatOption){
+    allSelected.select()
+    if(this.isAllControlSelected()){
+      this.selectedControl = [];
+      this.updateLocalStorageSelectedControl();
+    } else {
+      allSelected.select()
+      this.selectedControl = this.controlColumns.slice();
+      this.selectedControl.push('all')
+      this.updateLocalStorageSelectedControl();
+    }
+  }
+
+  isAllControlSelected(){
+    return this.selectedControl.length > this.controlColumns.length;
+  }
+
+  updateLocalStorageSelectedControl(){
+    console.log(this.selectedControl);
+
+    const selectedControlString = JSON.stringify(this.selectedControl);
+    localStorage.setItem('selectedControl',selectedControlString)
+  }
+
+  isControlColumnSelected(column: String): boolean {
+    return this.selectedControl.includes(column);
+  }
+  //endregion
+
+  //region Selected Documentation
+  initSelectedDocumentation(){
+    const selectedDocumentation = localStorage.getItem('selectedDocumentation')
+    if(selectedDocumentation){
+      try{
+        this.selectedDocumentation = JSON.parse(selectedDocumentation);
+      } catch(e){
+        console.info('Error parsing JSON from localStorage for selectedDocumentation')
+        this.selectedDocumentation = [];
+      }
+    }
+  }
+
+  onChangeSelectDocumentation(event: any){
+    if(event.value.includes('all')){
+      if(this.isAllDocumentationSelected()){
+        return;
+      }
+      this.selectedDocumentation = this.selectedDocumentation.filter(item => item !== 'all');
+      this.updateLocalStorageSelectedDocumentation();
+      return;
+    }
+    this.updateLocalStorageSelectedDocumentation();
+  }
+
+  toggleSelectAllDocumentation(allSelected: MatOption){
+    allSelected.select()
+    if(this.isAllDocumentationSelected()){
+      this.selectedDocumentation = [];
+      this.updateLocalStorageSelectedDocumentation();
+    } else {
+      allSelected.select()
+      this.selectedDocumentation = this.documentationColumns.slice();
+      this.selectedDocumentation.push('all')
+      this.updateLocalStorageSelectedDocumentation();
+    }
+  }
+
+  isAllDocumentationSelected(){
+    return this.selectedDocumentation.length > this.documentationColumns.length;
+  }
+
+  updateLocalStorageSelectedDocumentation(){
+    console.log(this.selectedDocumentation);
+
+    const selectedDocumentationString = JSON.stringify(this.selectedDocumentation);
+    localStorage.setItem('selectedDocumentation',selectedDocumentationString)
+  }
+
+  isDocumentationColumnSelected(column: String): boolean {
+    return this.selectedDocumentation.includes(column);
+  }
+  //endregion
+
+  //region Selected TechnicalData
+  initSelectedTechnicalData(){
+    const selectedTechnicalData = localStorage.getItem('selectedTechnicalData')
+    if(selectedTechnicalData){
+      try{
+        this.selectedTechnicalData = JSON.parse(selectedTechnicalData);
+      } catch(e){
+        console.info('Error parsing JSON from localStorage for selectedTechnicalData')
+        this.selectedTechnicalData = [];
+      }
+    }
+  }
+
+  onChangeSelectTechnicalData(event: any){
+    if(event.value.includes('all')){
+      if(this.isAllTechnicalDataSelected()){
+        return;
+      }
+      this.selectedTechnicalData = this.selectedTechnicalData.filter(item => item !== 'all');
+      this.updateLocalStorageSelectedTechnicalData();
+      return;
+    }
+    this.updateLocalStorageSelectedTechnicalData();
+  }
+
+  toggleSelectAllTechnicalData(allSelected: MatOption){
+    allSelected.select()
+    if(this.isAllTechnicalDataSelected()){
+      this.selectedTechnicalData = [];
+      this.updateLocalStorageSelectedTechnicalData();
+    } else {
+      allSelected.select()
+      this.selectedTechnicalData = this.technicalDataColumns.slice();
+      this.selectedTechnicalData.push('all')
+      this.updateLocalStorageSelectedTechnicalData();
+    }
+  }
+
+  isAllTechnicalDataSelected(){
+    return this.selectedTechnicalData.length > this.technicalDataColumns.length;
+  }
+
+  updateLocalStorageSelectedTechnicalData(){
+    console.log(this.selectedTechnicalData);
+
+    const selectedTechnicalDataString = JSON.stringify(this.selectedTechnicalData);
+    localStorage.setItem('selectedTechnicalData',selectedTechnicalDataString)
+  }
+
+  isTechnicalDataColumnSelected(column: String): boolean {
+    return this.selectedTechnicalData.includes(column);
+  }
+  //endregion
 
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
+
 }

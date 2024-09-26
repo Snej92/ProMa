@@ -5,7 +5,7 @@ import {AppStateModel} from "../../../../core/store/appState.model";
 import {loadStationViewOverview} from "../store/stationViewOverview.actions";
 import {getStationViewOverviewInfo} from "../store/stationViewOverview.selectors";
 import {loadSpinner} from "../../../../core/store/app.action";
-import {stationViewModel} from "../../../station/store/stationView.model";
+import {stationFavViewModel, stationViewModel} from "../../../station/store/stationView.model";
 import {stationViewOverview} from "../store/stationViewOverview.model";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {AddHistoryComponent} from "../../history/components/add-history/add-history.component";
@@ -19,7 +19,7 @@ export class StationOverviewComponent implements OnInit, OnDestroy{
 
   private subscriptions: Subscription[] = [];
   @Input() stationId!:number;
-  @Input() stationViewInput!:stationViewModel;
+  @Input() stationFavViewInput!:stationFavViewModel;
   stationViewOverview!:stationViewOverview
   @Output() selectedOverviewEmitted = new EventEmitter<number>();
 

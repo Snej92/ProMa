@@ -1,6 +1,6 @@
 <div class="station-overview-container">
   <div>
-    <div class="ms-2 mt-2 station-overview-general" appProjectElevation [defaultElevation]="6" [raisedElevation]="16">
+    <div class="ms-2 mt-2 station-overview-general hover-card">
       <app-station-overview-general
         [stationViewInput]="stationViewOverview"
         (click)="sendSelectedOverview(2)">
@@ -13,13 +13,13 @@
     </div>
   </div>
   <div class="ms-5 mt-2">
-    <div class="station-overview-documentation" appProjectElevation [defaultElevation]="6" [raisedElevation]="16">
+    <div class="station-overview-documentation hover-card">
       <app-station-overview-documentation
         [stationViewInput]="stationViewOverview"
         (click)="sendSelectedOverview(6)">
       </app-station-overview-documentation>
     </div>
-    <div class="station-overview-control mt-5" appProjectElevation [defaultElevation]="6" [raisedElevation]="16">
+    <div class="station-overview-control mt-5 hover-card">
       <app-station-overview-control
         [stationViewInput]="stationViewOverview"
         (click)="sendSelectedOverview(5)" >
@@ -27,13 +27,13 @@
     </div>
   </div>
   <div class="ms-5 mt-2">
-    <div class="station-overview-specification" appProjectElevation [defaultElevation]="6" [raisedElevation]="16">
+    <div class="station-overview-specification hover-card">
       <app-station-overview-specification
         [stationViewInput]="stationViewOverview"
         (click)="sendSelectedOverview(3)">
       </app-station-overview-specification>
     </div>
-    <div class="station-overview-projection mt-5" appProjectElevation [defaultElevation]="6" [raisedElevation]="16">
+    <div class="station-overview-projection mt-5 hover-card">
       <app-station-overview-projection
         [stationViewInput]="stationViewOverview"
         (click)="sendSelectedOverview(4)">
@@ -41,7 +41,7 @@
     </div>
   </div>
   <div class="ms-5 mt-2">
-    <div class="station-overview-lop" appProjectElevation [defaultElevation]="6" [raisedElevation]="16">
+    <div class="station-overview-lop hover-card">
       <app-station-overview-lop
         [stationViewInput]="stationViewOverview"
         (click)="sendSelectedOverview(8)">

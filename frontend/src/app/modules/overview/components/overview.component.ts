@@ -18,7 +18,7 @@ import {ActivatedRoute} from "@angular/router";
 export class OverviewComponent implements OnInit,OnDestroy{
 
   private subscriptions: Subscription[] = [];
-  stationView!:stationView;
+  stationFavView!:stationView;
   loggedUser!:loggedUser;
 
   stationId: number = 0;
@@ -76,7 +76,7 @@ export class OverviewComponent implements OnInit,OnDestroy{
     this.subscriptions.push(
       this.store.select(getStationViewInfo).pipe()
         .subscribe(data =>{
-          this.stationView=data;
+          this.stationFavView=data;
         })
     )
   }

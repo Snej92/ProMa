@@ -1,3 +1,4 @@
+
 export interface stationViewModel{
   id:number,
   name:string,
@@ -34,16 +35,20 @@ export interface stationViewModel{
   projectionProgress:number,
 }
 
-export interface stationView{
-  stationViewList:stationViewModel[],
-  errorMessage:string,
-}
-
 export interface stationViewRequest{
-  stationDto:stationViewModel,
+  stationFavView:stationFavViewModel,
   headerDataInput:additionalHeaderDataModel[]
 }
 
+export interface stationFavViewModel{
+  station:stationViewModel,
+  isFavorite:boolean
+}
+
+export interface stationView{
+  stationViewList:stationFavViewModel[],
+  errorMessage:string,
+}
 
 //Additional Header Data
 export interface additionalHeaderDataModel{

@@ -5,9 +5,10 @@ import {
   deleteStation,
   loadStationView,
   loadStationViewFail,
-  loadStationViewSuccess, updateStationSuccess
+  loadStationViewSuccess, updateStationFavoriteSuccess, updateStationSuccess
 } from "./stationView.actions";
-import {stationViewModel} from "./stationView.model";
+import {stationFavViewModel, stationViewModel} from "./stationView.model";
+import {updateProjectFavoriteSuccess} from "../../project-administration/store/project-administration.actions";
 
 const _stationReducer = createReducer(
   stationViewState,
@@ -47,7 +48,7 @@ const _stationReducer = createReducer(
     const stationViewOld={...action.stationViewOld};
     const stationViewNew={...action.stationViewNew};
     const updatedStation=state.stationViewList.map(stationView=>{
-      return stationViewOld.id===stationView.id?stationViewNew:stationView;
+      return stationViewOld.station.id===stationView.station.id?stationViewNew:stationView;
     });
     return{
       ...state,
@@ -57,12 +58,26 @@ const _stationReducer = createReducer(
 
 
   on(deleteStation, (state,action) => {
-    const updatedStation=state.stationViewList.filter((data:stationViewModel)=>{
-      return data.id!==action.id
+    const updatedStation=state.stationViewList.filter((data:stationFavViewModel)=>{
+      return data.station.id!==action.id
     });
     return{
       ...state,
       stationViewList:updatedStation
+    };
+  }),
+
+  on(updateStationFavoriteSuccess, (state, action) => {
+    return{
+      ...state,
+      stationViewList: state.stationViewList.map(stationFavViewModel =>
+        stationFavViewModel.station.id === action.stationId
+          ? {
+            ...stationFavViewModel,
+            isFavorite: !action.remove
+          }
+          : stationFavViewModel
+      ),
     };
   }),
 );

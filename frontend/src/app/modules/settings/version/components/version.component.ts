@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {editVersion, editVersionTemp, versionModel, versions, versionStationModel} from "../store/version.model";
 import {Store} from "@ngrx/store";
 import {getVersionById, getVersionInfo} from "../store/version.selectors";
@@ -18,13 +18,12 @@ import {state} from "@angular/animations";
   templateUrl: './version.component.html',
   styleUrl: './version.component.scss'
 })
-export class VersionComponent implements OnInit,OnDestroy{
+export class VersionComponent implements OnInit, OnDestroy {
 
   constructor(private store:Store<AppStateModel>,
               private dialog:MatDialog,
               private confirm:MatDialog) {
   }
-
 
   private subscriptions: Subscription[] = [];
   displayedColumns: String[] = ['Aktion', 'Datum', 'Version', 'Aufgabe', 'Status'];
@@ -149,4 +148,5 @@ export class VersionComponent implements OnInit,OnDestroy{
   }
 
   protected readonly state = state;
+
 }

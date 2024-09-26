@@ -1,6 +1,6 @@
-import {stationViewModel} from "../../../station/store/stationView.model";
+import {stationFavViewModel} from "../../../station/store/stationView.model";
 
 export interface stationViewOverview{
-  stationViewOverview:stationViewModel,
+  stationViewOverview:stationFavViewModel,
   errorMessage:string,
 }

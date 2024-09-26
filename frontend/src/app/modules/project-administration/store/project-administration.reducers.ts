@@ -4,7 +4,7 @@ import {
   addProjectViewSuccess, deleteProject,
   loadProjectView,
   loadProjectViewFail,
-  loadProjectViewSuccess, updateProjectSuccess
+  loadProjectViewSuccess, updateProjectFavoriteSuccess, updateProjectSuccess
 } from "./project-administration.actions";
 import {projectFavViewModel} from "./project-administration.model";
 
@@ -63,6 +63,20 @@ const _projectReducer = createReducer(
     return{
       ...state,
       projectViewList:updatedProject
+    };
+  }),
+
+  on(updateProjectFavoriteSuccess, (state, action) => {
+    return{
+      ...state,
+      projectViewList: state.projectViewList.map(projectFavViewModel =>
+        projectFavViewModel.project.id === action.projectId
+          ? {
+            ...projectFavViewModel,
+            isFavorite: !action.remove
+          }
+          : projectFavViewModel
+      ),
     };
   }),
 );

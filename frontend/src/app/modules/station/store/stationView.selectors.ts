@@ -1,5 +1,6 @@
 import {createFeatureSelector, createSelector} from "@ngrx/store";
-import {stationView, stationViewModel} from "./stationView.model";
+import {stationFavViewModel, stationView} from "./stationView.model";
+
 
 const getStationViewState=createFeatureSelector<stationView>('stationView')
 
@@ -12,5 +13,5 @@ export const getStationViewInfo=createSelector(getStationViewState,(state)=>{
 });
 
 export const getStationById=(stationId:number)=>createSelector(getStationViewState,(state)=>{
-  return state.stationViewList.find((stationView:stationViewModel)=>stationView.id===stationId) as stationViewModel;
+  return state.stationViewList.find((stationView:stationFavViewModel)=>stationView.station.id===stationId) as stationFavViewModel;
 });

@@ -10,12 +10,12 @@ import {MatDialog} from "@angular/material/dialog";
 import {AddProjectComponent} from "../add-project/add-project.component";
 import {SysConfirmationComponent} from "../../../../core/sys-confirmation/sys-confirmation.component";
 import {
-  archiveProject, deArchiveProject,
+  archiveProject,
   deleteProject,
 } from "../../store/project-administration.actions";
 import {getProjectById} from "../../store/project-administration.selectors";
-import {Router} from "@angular/router";
 import {take} from "rxjs";
+import {updateProjectFavorite} from "../../../dashboard/project/store/project-favorite.actions";
 
 @Component({
   selector: 'app-project-card',
@@ -23,7 +23,7 @@ import {take} from "rxjs";
   styleUrl: './project-card.component.scss'
 })
 export class ProjectCardComponent {
-  @Input() projectView: projectViewModel | undefined;
+  @Input() projectFavView: projectFavViewModel | undefined;
   @Input() loggedUser!: loggedUser;
   @Input() favorite : boolean = false;
   @Input() archive : boolean = false;
@@ -135,5 +135,17 @@ export class ProjectCardComponent {
       this.store.dispatch(loadSpinner({ isLoading: true }));
       this.store.dispatch(archiveProject({ projectViewInput: this.archivedProject }));
     });
+  }
+
+  editFavorite(event: MouseEvent, id:any, isFavorite:any){
+    event.stopPropagation();
+
+    console.log("add " + id + " to favorites");
+    this.store.dispatch(loadSpinner({ isLoading: true }));
+    if(isFavorite){
+      this.store.dispatch(updateProjectFavorite({projectId:id, remove:true}))
+    } else {
+      this.store.dispatch(updateProjectFavorite({projectId:id, remove:false}))
+    }
   }
 }

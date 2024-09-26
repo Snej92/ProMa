@@ -3,9 +3,8 @@ package org.sysprotec.restapi.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.sysprotec.restapi.model.Station;
-import org.sysprotec.restapi.model.projections.StationDto;
+import org.sysprotec.restapi.model.projections.StationFavView;
 import org.sysprotec.restapi.model.projections.StationRequest;
-import org.sysprotec.restapi.model.projections.StationView;
 import org.sysprotec.restapi.service.StationService;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public class StationController {
 
     //todo: add ResponseEntity
     @GetMapping("/all")
-    public List<StationView> getAllStations(){
+    public List<StationFavView> getAllStations(){
         return stationService.getAllStations();
     }
 
@@ -29,18 +28,18 @@ public class StationController {
     }
 
     @GetMapping("{stationId}")
-    public StationView getStation(@PathVariable Long stationId){
+    public StationFavView getStation(@PathVariable Long stationId){
         return stationService.getStation(stationId);
     }
 
     @PostMapping
-    public StationDto addStation(@RequestBody StationRequest stationRequest){
-        return stationService.addStation(stationRequest.getStationDto(), stationRequest.getHeaderDataInput());
+    public StationFavView addStation(@RequestBody StationRequest stationRequest){
+        return stationService.addStation(stationRequest.getStationFavView(), stationRequest.getHeaderDataInput());
     }
 
     @PutMapping
-    public StationDto updateStation(@RequestBody StationDto stationDto){
-        return stationService.updateStation(stationDto);
+    public StationFavView updateStation(@RequestBody StationFavView stationFavView){
+        return stationService.updateStation(stationFavView);
     }
 
     @DeleteMapping("{stationId}")
@@ -60,7 +59,7 @@ public class StationController {
     }
 
     @GetMapping("/favorite")
-    public List<StationView> getFavorites(){
+    public List<StationFavView> getFavorites(){
         return stationService.getFavorites();
     }
 }

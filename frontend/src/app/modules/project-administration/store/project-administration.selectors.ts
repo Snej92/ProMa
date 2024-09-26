@@ -15,13 +15,3 @@ export const getProjectViewInfo=createSelector(getProjectViewState,(state)=>{
 export const getProjectById=(projectId:number)=>createSelector(getProjectViewState,(state)=>{
   return state.projectViewList.find((projectView:projectFavViewModel)=>projectView.project.id===projectId) as projectFavViewModel;
 });
-
-// export const getProjectById = (projectId: number) => createSelector(
-//   getProjectViewState,
-//   (state) => {
-//     const foundProjectFavViewModel = state.projectViewList.find((projectFavView: projectFavViewModel) =>
-//       projectFavView.project.id === projectId
-//     );
-//     return foundProjectFavViewModel as projectFavViewModel;
-//   }
-// );

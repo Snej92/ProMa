@@ -37,12 +37,4 @@ export class ProjectAdministrationService {
   deleteProject(id:number){
     return this.http.delete(this.API_URL + "/project/"+id);
   }
-
-  editProjectFavorite(projectId:number, remove:boolean){
-    return this.http.get(this.API_URL + "/project/favorite"+ projectId + "/" + remove)
-  }
-
-  getProjectFavorite():Observable<projectFavViewModel[]>{
-    return this.http.get<projectFavViewModel[]>(this.API_URL + "/project/favorite");
-  }
 }
