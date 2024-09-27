@@ -161,6 +161,7 @@ import {ColorChromeModule} from "ngx-color/chrome";
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { VersionOverviewComponent } from './modules/overview/version-overview/version-overview.component';
 import {ProjectFavoriteEffects} from "./modules/dashboard/project/store/project-favorite.effects";
+import {MatSlider, MatSliderRangeThumb} from "@angular/material/slider";
 
 const config: SocketIoConfig = { url: 'http://localhost:7081/ws-endpoint', options: {} };
 
@@ -350,7 +351,9 @@ registerLocaleData(localeDe);
     MatAnchor,
     ColorChromeModule,
     MatRipple,
-    MatAccordion
+    MatAccordion,
+    MatSlider,
+    MatSliderRangeThumb
   ],
   providers: [
     {

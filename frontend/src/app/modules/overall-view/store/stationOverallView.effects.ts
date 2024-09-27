@@ -3,7 +3,7 @@ import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {catchError, of, switchMap} from "rxjs";
 import {loadSpinner, showAlert} from "../../../core/store/app.action";
 import {
-  LOAD_STATION_OVERALL_VIEW,
+  LOAD_STATION_OVERALL_VIEW, loadStationOverallView,
   loadStationOverallViewFail,
   loadStationOverallViewSuccess,
 } from "./stationOverallView.actions";
@@ -17,9 +17,9 @@ export class StationOverallViewEffects {
 
   _getStationOverallView=createEffect(()=>
     this.action$.pipe(
-      ofType(LOAD_STATION_OVERALL_VIEW),
+      ofType(loadStationOverallView),
       switchMap(action=>
-        this.service.getStationOverallView().pipe(
+        this.service.getStationOverallView(action.stationOverallViewFilter).pipe(
           switchMap(data=> of(
             loadStationOverallViewSuccess({stationOverallViewList:data}),
             loadSpinner({isLoading:false})

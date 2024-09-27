@@ -8,6 +8,8 @@ import {loadSpinner} from "../../../../core/store/app.action";
 import {deleteStation} from "../../store/stationView.actions";
 import {AddStationComponent} from "../add-station/add-station.component";
 import {Router} from "@angular/router";
+import {updateProjectFavorite} from "../../../dashboard/project/store/project-favorite.actions";
+import {updateStationFavorite} from "../../../dashboard/station/store/station-favorite.actions";
 
 @Component({
   selector: 'app-station-card',
@@ -110,5 +112,17 @@ export class StationCardComponent {
         button:button
       }
     })
+  }
+
+  editFavorite(event: MouseEvent, id:any, isFavorite:any){
+    event.stopPropagation();
+
+    console.log("add " + id + " to favorites");
+    this.store.dispatch(loadSpinner({ isLoading: true }));
+    if(isFavorite){
+      this.store.dispatch(updateStationFavorite({stationId:id, remove:true}))
+    } else {
+      this.store.dispatch(updateStationFavorite({stationId:id, remove:false}))
+    }
   }
 }

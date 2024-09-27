@@ -129,7 +129,6 @@ public class StationService {
         return null;
     }
 
-    //Todo
     public List<Station> getStationOverallViewFiltered(StationFilter stationFilter) {
         User loggedUser = userService.getLoggedUser();
         if(loggedUser != null){
@@ -140,9 +139,40 @@ public class StationService {
             //Sort object
             Sort sort = Sort.by(sortDirection, "name");
 
-            return stationRepository.findAll(StationSpecification.filterByNameAndIssuerNameAndStatusAndVersionContaining(
-                    stationFilter.getName(), stationFilter.getIssuerName(), stationFilter.getStatus(), stationFilter.getVersion(), loggedUser.getActiveProject()
+            List<Station> stationList = stationRepository.findAll(StationSpecification.filterByNameAndIssuerNameAndStatusAndVersionContaining(
+                    stationFilter.getName(), stationFilter.getIssuerName(), stationFilter.getStatus(), stationFilter.getVersion(), loggedUser.getActiveProject(),
+                    stationFilter.getMinTotalProgress(), stationFilter.getMaxTotalProgress(), stationFilter.getMinLopProgress(), stationFilter.getMaxLopProgress()
             ), sort);
+
+            //Sort everything
+            for(Station station : stationList){
+                //Header Data
+                List<HeaderData> headerDataList = headerDataRepository.findAllByStationIdOrderByIdAsc(station.getId());
+                station.setHeaderData(headerDataList);
+
+                //Projection
+                List<Task> projectionList = taskRepository.findAllByTaskSettingTypeAndStationIdOrderByIdAsc("projection", station.getId());
+                station.setProjection(projectionList);
+
+                //Specification
+                List<Task> specificationList = taskRepository.findAllByTaskSettingTypeAndStationIdOrderByIdAsc("specification", station.getId());
+                station.setSpecification(specificationList);
+
+                //Documentation
+                List<Task> documentationList = taskRepository.findAllByTaskSettingTypeAndStationIdOrderByIdAsc("doku", station.getId());
+                station.setDocumentation(documentationList);
+
+                //Control
+                List<Task> controlList = taskRepository.findAllByTaskSettingTypeAndStationIdOrderByIdAsc("control", station.getId());
+                station.setControl(controlList);
+
+                //Technical Data
+                List<TechnicalData> technicalDataList = technicalDataRepository.findAllByStationIdOrderByIdAsc(station.getId());
+                station.setTechnicalData(technicalDataList);
+
+            }
+
+            return stationList;
         }
         return null;
     }

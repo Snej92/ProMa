@@ -60,28 +60,69 @@
 
 .header-headerData{
   background-color: orange!important;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.header-headerData:hover{
+  cursor: pointer;
+  background-color: darkorange!important;
 }
 
 .header-specification{
   background-color: var(--frontend-success)!important;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.header-specification:hover{
+  cursor: pointer;
+  background-color: var(--frontend-success-hovered)!important;
 }
 
 .header-projection{
   background-color: dodgerblue!important;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.header-projection:hover{
+  cursor: pointer;
+  background-color: rgba(26, 132, 235)!important;
 }
 
 .header-control{
   background-color: rebeccapurple!important;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.header-control:hover{
+  cursor: pointer;
+  background-color: rgba(89, 43, 135)!important;
 }
 
 .header-docu{
   background-color: rosybrown!important;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.header-docu:hover{
+  cursor: pointer;
+  background-color: rgba(168, 125, 125)!important;
 }
 
 .header-technicalData{
   background-color: mediumvioletred!important;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
 }
 
+.header-technicalData:hover{
+  cursor: pointer;
+  background-color: rgba(181, 14, 119)!important;
+}
 
 .rotated-text {
   //transform: rotate(-90deg);
@@ -209,18 +250,17 @@
   width: 20px;
   height: 20px;
   font-size: 1.3rem;
+
+  margin-left: 10px;
 }
 
 .align-header{
-  position: relative;
-  top: 12px
+  margin-left: 6px;
 }
 
 .align-header-hidden{
   max-width: 100px;
   min-width: 100px;
-  position: relative;
-  top: 12px
 }
 
 .hide-header{
@@ -255,4 +295,20 @@
   height: 70px;
   min-height: 70px;
   max-height: 70px;
+}
+
+.filter-button{
+  position: relative;
+  bottom: 8px;
+}
+
+.info-icon{
+  margin-left: 6px;
+
+  position: relative;
+  top: 6px;
+
+  height: 20px;
+  width: 20px;
+  font-size: 20px;
 }

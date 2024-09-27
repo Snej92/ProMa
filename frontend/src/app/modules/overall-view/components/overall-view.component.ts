@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
-import {stationOverallView} from "../store/stationOverallView.model";
+import {Subscription, take} from "rxjs";
+import {stationOverallView, stationOverallViewFilter} from "../store/stationOverallView.model";
 import {loadSpinner} from "../../../core/store/app.action";
 import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../core/store/appState.model";
@@ -49,11 +49,28 @@ export class OverallViewComponent implements OnInit, OnDestroy{
   issuerNames : String[] = [];
   status : String [] = ["AUSGELAGERT", "EINGELAGERT", "INARBEIT"];
   versions : String [] = []
+
   //selected
   selectedStationNames : String[] = [];
   selectedIssuerNames : String[] = [];
   selectedStatus : String [] = [];
   selectedVersions : String [] = []
+  selectedMinTotalProgress : number = 0;
+  selectedMaxTotalProgress : number = 100;
+  selectedMinLopProgress : number = 0;
+  selectedMaxLopProgress : number = 100;
+
+  stationOverallViewFilter : stationOverallViewFilter = {
+    name: [],
+    issuerName: [],
+    status: [],
+    version : [],
+
+    minTotalProgress : 0,
+    maxTotalProgress : 100,
+    minLopProgress : 0,
+    maxLopProgress : 100
+  };
 
 
   constructor(private store:Store<AppStateModel>) {
@@ -67,6 +84,13 @@ export class OverallViewComponent implements OnInit, OnDestroy{
     this.showControl = localStorage.getItem('showControl') === 'true';
     this.showTechnicalData = localStorage.getItem('showTechnicalData') === 'true';
 
+    this.loadStationOverallView();
+
+    this.initSelects();
+  }
+
+  //region loadStationOverallView
+  loadStationOverallView(){
     this.store.dispatch(loadSpinner({isLoading:true}))
     this.subscriptions.push(
       this.store.select(getLoggedUserInfo).pipe()
@@ -74,96 +98,158 @@ export class OverallViewComponent implements OnInit, OnDestroy{
           this.loggedUser=data;
         })
     )
-    this.store.dispatch(loadStationOverallView())
+    this.store.dispatch(loadStationOverallView({stationOverallViewFilter:this.stationOverallViewFilter}))
     this.subscriptions.push(
       this.store.select(getStationOverallViewInfo).pipe()
         .subscribe(data =>{
           this.stationOverallView=data;
 
-          //Init Column Headers
-          this.headerDataColumns = [];
-          this.specificationColumns = [];
-          this.projectionColumns = [];
-          this.controlColumns = [];
-          this.documentationColumns = [];
-          this.technicalDataColumns = [];
+          this.initFilter();
+          this.initTableColumns();
+          this.initProgress();
 
-          this.stationNames = [];
-          this.issuerNames = [];
-          this.versions = [];
-
-          this.displayedColumns = ['Station', 'Bearbeiter', 'Status', 'Version', 'Gesamtfortschritt', 'LOPfortschritt'];
-
-          for(let station of this.stationOverallView.stationOverallViewList){
-            if(!this.stationNames.includes(station.name)){
-              this.stationNames.push(station.name)
-            }
-
-            if(!this.issuerNames.includes(station.issuerName + " " + "(" +station.issuerAcronym +")")){
-              this.issuerNames.push(station.issuerName + " " + "(" +station.issuerAcronym +")")
-            }
-
-            if(!this.versions.includes(station.version)){
-              this.versions.push(station.version)
-            }
-          }
-
-          //HeaderData
-          if(this.stationOverallView?.stationOverallViewList?.at(0)?.headerData !== undefined){
-            const headerData = this.stationOverallView?.stationOverallViewList?.at(0)?.headerData!; // Assertion that it's not undefined
-            for (let header of headerData) {
-              this.headerDataColumns.push(header.headerDataSetting.item);
-              this.displayedColumns.push(header.headerDataSetting.item);
-            }
-          }
-          //Specification
-          if(this.stationOverallView?.stationOverallViewList?.at(0)?.specification !== undefined){
-            const specification = this.stationOverallView?.stationOverallViewList?.at(0)?.specification!; // Assertion that it's not undefined
-            for (let specificationItem of specification) {
-              this.specificationColumns.push(specificationItem.taskSetting.item);
-              this.displayedColumns.push(specificationItem.taskSetting.item);
-            }
-          }
-
-          //Projection
-          if(this.stationOverallView?.stationOverallViewList?.at(0)?.projection !== undefined){
-            const projection = this.stationOverallView?.stationOverallViewList?.at(0)?.projection!; // Assertion that it's not undefined
-            for (let projectionItem of projection) {
-              this.projectionColumns.push(projectionItem.taskSetting.item);
-              this.displayedColumns.push(projectionItem.taskSetting.item);
-            }
-          }
-
-          //Control
-          if(this.stationOverallView?.stationOverallViewList?.at(0)?.control !== undefined){
-            const control = this.stationOverallView?.stationOverallViewList?.at(0)?.control!; // Assertion that it's not undefined
-            for (let controlItem of control) {
-              this.controlColumns.push(controlItem.taskSetting.item);
-              this.displayedColumns.push(controlItem.taskSetting.item);
-            }
-          }
-
-          //Documentation
-          if(this.stationOverallView?.stationOverallViewList?.at(0)?.documentation !== undefined){
-            const documentation = this.stationOverallView?.stationOverallViewList?.at(0)?.documentation!; // Assertion that it's not undefined
-            for (let documentationItem of documentation) {
-              this.documentationColumns.push(documentationItem.taskSetting.item);
-              this.displayedColumns.push(documentationItem.taskSetting.item);
-            }
-          }
-
-          //Technical Data
-          if(this.stationOverallView?.stationOverallViewList?.at(0)?.technicalData !== undefined){
-            const technicalData = this.stationOverallView?.stationOverallViewList?.at(0)?.technicalData!; // Assertion that it's not undefined
-            for (let technicalDataItem of technicalData) {
-              this.technicalDataColumns.push(technicalDataItem.technicalDataSetting.item);
-              this.displayedColumns.push(technicalDataItem.technicalDataSetting.item);
-            }
+          if(this.stationOverallView?.stationOverallViewList?.length){
+            this.subscriptions.forEach(sub => sub.unsubscribe());
           }
         })
     )
+  }
+  //endregion
 
-    this.initSelects();
+  initFilter(){
+    this.stationNames = [];
+    this.issuerNames = [];
+    this.versions = [];
+
+    for(let station of this.stationOverallView.stationOverallViewList){
+      if(!this.stationNames.includes(station.name)){
+        this.stationNames.push(station.name)
+      }
+
+      if(!this.issuerNames.includes(station.issuerName)){
+        this.issuerNames.push(station.issuerName)
+      }
+
+      if(!this.versions.includes(station.version)){
+        this.versions.push(station.version)
+      }
+    }
+  }
+
+  initTableColumns(){
+    //Init Column Headers
+    this.headerDataColumns = [];
+    this.specificationColumns = [];
+    this.projectionColumns = [];
+    this.controlColumns = [];
+    this.documentationColumns = [];
+    this.technicalDataColumns = [];
+
+    this.displayedColumns = ['Station', 'Bearbeiter', 'Status', 'Version', 'Gesamtfortschritt', 'LOPfortschritt'];
+
+    //HeaderData
+    if(this.stationOverallView?.stationOverallViewList?.at(0)?.headerData !== undefined){
+      const headerData = this.stationOverallView?.stationOverallViewList?.at(0)?.headerData!; // Assertion that it's not undefined
+      for (let header of headerData) {
+        this.headerDataColumns.push(header.headerDataSetting.item);
+        this.displayedColumns.push(header.headerDataSetting.item);
+      }
+    }
+    //Specification
+    if(this.stationOverallView?.stationOverallViewList?.at(0)?.specification !== undefined){
+      const specification = this.stationOverallView?.stationOverallViewList?.at(0)?.specification!; // Assertion that it's not undefined
+      for (let specificationItem of specification) {
+        this.specificationColumns.push(specificationItem.taskSetting.item);
+        this.displayedColumns.push(specificationItem.taskSetting.item);
+      }
+    }
+
+    //Projection
+    if(this.stationOverallView?.stationOverallViewList?.at(0)?.projection !== undefined){
+      const projection = this.stationOverallView?.stationOverallViewList?.at(0)?.projection!; // Assertion that it's not undefined
+      for (let projectionItem of projection) {
+        this.projectionColumns.push(projectionItem.taskSetting.item);
+        this.displayedColumns.push(projectionItem.taskSetting.item);
+      }
+    }
+
+    //Control
+    if(this.stationOverallView?.stationOverallViewList?.at(0)?.control !== undefined){
+      const control = this.stationOverallView?.stationOverallViewList?.at(0)?.control!; // Assertion that it's not undefined
+      for (let controlItem of control) {
+        this.controlColumns.push(controlItem.taskSetting.item);
+        this.displayedColumns.push(controlItem.taskSetting.item);
+      }
+    }
+
+    //Documentation
+    if(this.stationOverallView?.stationOverallViewList?.at(0)?.documentation !== undefined){
+      const documentation = this.stationOverallView?.stationOverallViewList?.at(0)?.documentation!; // Assertion that it's not undefined
+      for (let documentationItem of documentation) {
+        this.documentationColumns.push(documentationItem.taskSetting.item);
+        this.displayedColumns.push(documentationItem.taskSetting.item);
+      }
+    }
+
+    //Technical Data
+    if(this.stationOverallView?.stationOverallViewList?.at(0)?.technicalData !== undefined){
+      const technicalData = this.stationOverallView?.stationOverallViewList?.at(0)?.technicalData!; // Assertion that it's not undefined
+      for (let technicalDataItem of technicalData) {
+        this.technicalDataColumns.push(technicalDataItem.technicalDataSetting.item);
+        this.displayedColumns.push(technicalDataItem.technicalDataSetting.item);
+      }
+    }
+  }
+
+  applyFilter(){
+    this.stationOverallViewFilter = {
+      name: [],
+      issuerName: [],
+      status: [],
+      version : [],
+
+      minTotalProgress : 0,
+      maxTotalProgress : 100,
+      minLopProgress : 0,
+      maxLopProgress : 100
+    };
+
+    this.stationOverallViewFilter.name = [...this.selectedStationNames];
+    this.stationOverallViewFilter.issuerName = [...this.selectedIssuerNames];
+    this.stationOverallViewFilter.status = [...this.selectedStatus];
+    this.stationOverallViewFilter.version = [...this.selectedVersions];
+
+    this.stationOverallViewFilter.minTotalProgress = this.selectedMinTotalProgress;
+    this.stationOverallViewFilter.maxTotalProgress = this.selectedMaxTotalProgress;
+    this.stationOverallViewFilter.minLopProgress = this.selectedMinLopProgress;
+    this.stationOverallViewFilter.maxLopProgress = this.selectedMaxLopProgress;
+
+    this.stationOverallViewFilter.name = this.stationOverallViewFilter.name.filter(item => item !== "all");
+    this.stationOverallViewFilter.issuerName = this.stationOverallViewFilter.issuerName.filter(item => item !== "all");
+    this.stationOverallViewFilter.status = this.stationOverallViewFilter.status.filter(item => item !== "all");
+    this.stationOverallViewFilter.version = this.stationOverallViewFilter.version.filter(item => item !== "all");
+
+    console.log(this.stationOverallViewFilter)
+
+    this.getFilteredStationOverallView();
+  }
+
+  getFilteredStationOverallView(){
+    this.store.dispatch(loadSpinner({isLoading:true}))
+    this.subscriptions.push(
+      this.store.select(getLoggedUserInfo).pipe()
+        .subscribe(data =>{
+          this.loggedUser=data;
+        })
+    )
+    this.store.dispatch(loadStationOverallView({stationOverallViewFilter:this.stationOverallViewFilter}))
+    this.subscriptions.push(
+      this.store.select(getStationOverallViewInfo).pipe()
+        .subscribe(data => {
+          this.stationOverallView = data;
+        }
+        )
+    );
   }
 
   toggleHeaderDataVisibility(){
@@ -211,6 +297,7 @@ export class OverallViewComponent implements OnInit, OnDestroy{
     this.initSelectedDocumentation()
     this.initSelectedTechnicalData()
   }
+
 
   //Rows Filter
   //region Selected Station
@@ -429,6 +516,20 @@ export class OverallViewComponent implements OnInit, OnDestroy{
   }
   //endregion
 
+
+  initProgress(){
+    const storedMinTotalProgress = localStorage.getItem('minTotalProgress');
+    this.selectedMinTotalProgress = storedMinTotalProgress ? parseFloat(storedMinTotalProgress) : 0;
+
+    const storedMaxTotalProgress = localStorage.getItem('maxTotalProgress');
+    this.selectedMaxTotalProgress = storedMaxTotalProgress ? parseFloat(storedMaxTotalProgress) : 100;
+
+    const storedMinLopProgress = localStorage.getItem('minLopProgress');
+    this.selectedMinLopProgress = storedMinLopProgress ? parseFloat(storedMinLopProgress) : 0;
+
+    const storedMaxLopProgress = localStorage.getItem('maxLopProgress');
+    this.selectedMaxLopProgress = storedMaxLopProgress ? parseFloat(storedMaxLopProgress) : 100;
+  }
 
   //Columns Filter
   //region Selected Header Data
@@ -757,6 +858,12 @@ export class OverallViewComponent implements OnInit, OnDestroy{
 
 
   ngOnDestroy(): void {
+
+    localStorage.setItem('minTotalProgress', this.selectedMinTotalProgress.toString())
+    localStorage.setItem('maxTotalProgress', this.selectedMaxTotalProgress.toString())
+    localStorage.setItem('minLopProgress', this.selectedMinLopProgress.toString())
+    localStorage.setItem('maxLopProgress', this.selectedMaxLopProgress.toString())
+
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 

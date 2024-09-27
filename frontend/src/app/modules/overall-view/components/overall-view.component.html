@@ -4,9 +4,19 @@
     <div>
         <mat-expansion-panel class="mb-4">
           <mat-expansion-panel-header>
-            <mat-panel-title>Filter</mat-panel-title>
+            <mat-panel-title>
+              Filter
+            </mat-panel-title>
           </mat-expansion-panel-header>
 <!--          Zeilen-->
+          <h5>Allgemein:
+            <mat-icon matTooltip="Filter anwenden muss nur bei 'Allgemein' gedrückt werden. 'Spalten' aktualisieren sich direkt beim aus - oder anwählen"
+                      matTooltipClass="custom-tooltip"
+                      class="info-icon">
+              info
+            </mat-icon>
+          </h5>
+
           <div>
             <span class="me-3">
               <ng-container *ngIf="selectedStationNames">
@@ -79,8 +89,33 @@
                 </mat-form-field>
               </ng-container>
             </span>
+
+            <span class="me-3">
+                <label>Gesamtfortschritt: </label>
+                <mat-slider discrete>
+                <input [(value)]="selectedMinTotalProgress" matSliderStartThumb>
+                <input [(value)]="selectedMaxTotalProgress" matSliderEndThumb>
+              </mat-slider>
+            </span>
+
+            <span class="me-3">
+                <label>LOPfortschritt: </label>
+                <mat-slider discrete>
+                <input [(value)]="selectedMinLopProgress" matSliderStartThumb>
+                <input [(value)]="selectedMaxLopProgress" matSliderEndThumb>
+              </mat-slider>
+            </span>
+
+            <button mat-raised-button
+                    color="accent"
+                    class="filter-button"
+                    (click)="applyFilter()">
+              Filter anwenden
+            </button>
+
           </div>
 <!--          Spalten-->
+          <h5>Spalten: </h5>
           <div>
             <span class="me-3">
               <ng-container *ngIf="selectedHeaderData">
@@ -207,11 +242,10 @@
           <th class="th-center header-headerData"
               [ngClass]="{'hide-header' : !showHeaderData}"
               mat-header-cell
+              (click)="toggleHeaderDataVisibility()"
               *matHeaderCellDef [colSpan]="headerDataColumns.length">
             <div class="d-flex justify-content-center">
-              <button mat-icon-button (click)="toggleHeaderDataVisibility()">
                 <mat-icon class="visibility-button">{{ showHeaderData ? 'visibility' : 'visibility_off' }}</mat-icon>
-              </button>
               <span class="align-header">
                 Kopfdaten
               </span>
@@ -224,11 +258,10 @@
               [ngClass]="{'hide-header' : !showSpecification}"
               mat-header-cell
               *matHeaderCellDef
+              (click)="toggleSpecificationVisibility()"
               [colSpan]="specificationColumns.length">
             <div class="d-flex justify-content-center">
-              <button mat-icon-button (click)="toggleSpecificationVisibility()">
-                <mat-icon class="visibility-button">{{ showSpecification ? 'visibility' : 'visibility_off' }}</mat-icon>
-              </button>
+              <mat-icon class="visibility-button">{{ showSpecification ? 'visibility' : 'visibility_off' }}</mat-icon>
               <span class="align-header">
                 Vorgaben
               </span>
@@ -241,11 +274,10 @@
               [ngClass]="{'hide-header' : !showProjection}"
               mat-header-cell
               *matHeaderCellDef
+              (click)="toggleProjectionVisibility()"
               [colSpan]="projectionColumns.length">
             <div class="d-flex justify-content-center">
-              <button mat-icon-button (click)="toggleProjectionVisibility()">
-                <mat-icon class="visibility-button">{{ showProjection ? 'visibility' : 'visibility_off' }}</mat-icon>
-              </button>
+              <mat-icon class="visibility-button">{{ showProjection ? 'visibility' : 'visibility_off' }}</mat-icon>
               <span class="align-header">
                 Projektierung
               </span>
@@ -258,11 +290,10 @@
               [ngClass]="{'hide-header' : !showControl}"
               mat-header-cell
               *matHeaderCellDef
+              (click)="toggleControlVisibility()"
               [colSpan]="controlColumns.length">
             <div class="d-flex justify-content-center">
-              <button mat-icon-button (click)="toggleControlVisibility()">
-                <mat-icon class="visibility-button">{{ showControl ? 'visibility' : 'visibility_off' }}</mat-icon>
-              </button>
+              <mat-icon class="visibility-button">{{ showControl ? 'visibility' : 'visibility_off' }}</mat-icon>
               <span class="align-header">
                 Kontrolle
               </span>
@@ -275,11 +306,10 @@
               [ngClass]="{'hide-header' : !showDocumentation}"
               mat-header-cell
               *matHeaderCellDef
+              (click)="toggleDocumentationVisibility()"
               [colSpan]="documentationColumns.length">
             <div class="d-flex justify-content-center">
-              <button mat-icon-button (click)="toggleDocumentationVisibility()">
-                <mat-icon class="visibility-button">{{ showDocumentation ? 'visibility' : 'visibility_off' }}</mat-icon>
-              </button>
+              <mat-icon class="visibility-button">{{ showDocumentation ? 'visibility' : 'visibility_off' }}</mat-icon>
               <span class="align-header">
                 Dokumentation
               </span>
@@ -292,11 +322,10 @@
               [ngClass]="{'hide-header' : !showTechnicalData}"
               mat-header-cell
               *matHeaderCellDef
+              (click)="toggleTechnicalDataVisibility()"
               [colSpan]="technicalDataColumns.length">
             <div class="d-flex justify-content-center">
-              <button mat-icon-button (click)="toggleTechnicalDataVisibility()">
-                <mat-icon class="visibility-button">{{ showTechnicalData ? 'visibility' : 'visibility_off' }}</mat-icon>
-              </button>
+              <mat-icon class="visibility-button">{{ showTechnicalData ? 'visibility' : 'visibility_off' }}</mat-icon>
               <span [ngClass]="{'align-header' : showTechnicalData, 'align-header-hidden' : !showTechnicalData}">
                 Technische Daten
               </span>

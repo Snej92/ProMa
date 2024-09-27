@@ -52,3 +52,15 @@ export interface stationOverallView{
   stationOverallViewList:stationOverallViewModel[],
   errorMessage:string,
 }
+
+//Filter
+export interface stationOverallViewFilter{
+  name : String [],
+  issuerName : String [],
+  status : String [],
+  version : String []
+  minTotalProgress : number,
+  maxTotalProgress : number,
+  minLopProgress : number,
+  maxLopProgress : number
+}

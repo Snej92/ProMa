@@ -2,7 +2,12 @@
           (click)="navigateToStation(currentIndex, 1)">
   <div class="d-flex justify-content-between ms-2 mt-2 me-2">
     <div class="card-header-left">
-      <button mat-raised-button matTooltip="Favorit" color="accent" class="button small-button" (click)="$event.stopPropagation()">
+      <button mat-raised-button
+              matTooltip="Favorit"
+              color="accent"
+              class="button
+              small-button"
+              (click)="editFavorite($event, stationFavView?.station?.id, stationFavView?.isFavorite)">
         <i class="material-icons star-icon" [ngClass]="{'star-icon': favorite}">star</i>
       </button>
       <div class="card-header-text">

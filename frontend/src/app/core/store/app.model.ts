@@ -8,5 +8,5 @@ export const global = {
   standardTextRegex : new RegExp(
     /^[A-Za-z0-9_öüäÖÜÄ .,?!"§$%&=\\(){}\[\]+/*#´`'°\-]+$/
   ),
-  version : "Version 0.17.0"
+  version : "Version 0.17.1"
 }
