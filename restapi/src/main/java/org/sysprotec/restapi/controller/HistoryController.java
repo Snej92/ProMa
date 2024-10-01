@@ -24,4 +24,9 @@ public class HistoryController {
                                      @PathVariable Long stationId){
         return historyService.addHistory(history, stationId);
     }
+
+    @PutMapping()
+    public History updateStationHistory(@RequestBody History history){
+        return historyService.updateHistory(history);
+    }
 }

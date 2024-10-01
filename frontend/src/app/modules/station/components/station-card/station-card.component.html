@@ -1,5 +1,5 @@
 <mat-card class="station-card-container"
-          (click)="navigateToStation(currentIndex, 1)">
+          (click)="navigateToStation(currentIndex, 1, dashboard)">
   <div class="d-flex justify-content-between ms-2 mt-2 me-2">
     <div class="card-header-left">
       <button mat-raised-button
@@ -7,8 +7,8 @@
               color="accent"
               class="button
               small-button"
-              (click)="editFavorite($event, stationFavView?.station?.id, stationFavView?.isFavorite)">
-        <i class="material-icons star-icon" [ngClass]="{'star-icon': favorite}">star</i>
+              (click)="editFavorite($event, stationFavView.station.id, stationFavView.isFavorite)">
+        <i class="material-icons star-icon" [ngClass]="{'star-icon': stationFavView.isFavorite}">star</i>
       </button>
       <div class="card-header-text">
         <div class="project-name">
@@ -47,7 +47,7 @@
       </h5>
       <h5 class="station-version station-info-text"
           matRipple
-          (click)="navigateToStation(currentIndex, 10)">
+          (click)="navigateToStation(currentIndex, 10, dashboard)">
         {{stationFavView.station.version}}
       </h5>
       <h5 class="station-issuer station-info-text"
@@ -57,7 +57,7 @@
       <h5 class="station-lop station-info-text"
           matRipple
           [ngClass]="{'station-status-eingelagert': stationFavView.station.lopToDo==0}"
-          (click)="navigateToStation(currentIndex, 8)">
+          (click)="navigateToStation(currentIndex, 8, dashboard)">
         LOP: {{stationFavView.station.lopToDo}}
       </h5>
       <div class="station-progress station-info-text">

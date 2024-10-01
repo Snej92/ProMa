@@ -455,10 +455,42 @@ public class StationService {
             if(stationFavorite != null && !stationFavorite.isEmpty()){
                 for(StationFavorite stationFavoriteItem : stationFavorite){
                     StationView station = stationRepository.getProjectedById(stationFavoriteItem.getStationId());
-                    if(station != null){
+                    if(station != null ){
+                        if(stationRepository.getStationByIdAndProjectId(station.getId(), loggedUser.getActiveProject()).isPresent()){
+                            StationFavView stationFavView = StationFavView.builder()
+                                    .station(station)
+                                    .isFavorite(true)
+                                    .build();
+                            stationFavViews.add(stationFavView);
+                        }
+                    }
+                }
+            }
+            return stationFavViews;
+        }
+        return null;
+    }
+
+    public List<StationFavView> getAssignedStation(){
+        User loggedUser = userService.getLoggedUser();
+        if(loggedUser != null){
+            Optional<List<StationView>> optionalStationViews = stationRepository.getProjectedByIssuerNameAndProjectId(
+                    loggedUser.getFirstname() + " " + loggedUser.getLastname(), loggedUser.getActiveProject());
+            List<StationFavView> stationFavViews = new ArrayList<>();
+            if(optionalStationViews.isPresent()){
+                for(StationView stationView : optionalStationViews.get()){
+                    Optional<StationFavorite> optionalStationFavorite = stationFavoriteRepository.findByUserIdAndStationId(
+                            loggedUser.getId(), stationView.getId());
+                    if(optionalStationFavorite.isPresent()){
                         StationFavView stationFavView = StationFavView.builder()
-                                .station(station)
+                                .station(stationView)
                                 .isFavorite(true)
+                                .build();
+                        stationFavViews.add(stationFavView);
+                    } else {
+                        StationFavView stationFavView = StationFavView.builder()
+                                .station(stationView)
+                                .isFavorite(false)
                                 .build();
                         stationFavViews.add(stationFavView);
                     }

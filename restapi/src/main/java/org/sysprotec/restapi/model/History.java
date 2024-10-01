@@ -31,6 +31,18 @@ public class History {
     //2=übergeben
     private Integer transferType;
     private Boolean eplan;
+    private Boolean eplanCopy;
+
+    //updated History Entry
+    private Boolean updated;
+    private String updateDate;
+    private String updateItem;
+    private String updateUserAcronym;
+    private String updateFilename;
+    private Boolean updateFileTransfer;
+    private Integer updateTransferType;
+    private Boolean updateEplan;
+    private Boolean updateEplanCopy;
     @ManyToOne
     @JoinColumn(name = "station_id")
     private Station station;

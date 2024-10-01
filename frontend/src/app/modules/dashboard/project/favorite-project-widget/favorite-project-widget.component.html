@@ -1,0 +1,11 @@
+<app-dashboard-widget [title]="'Gespeicherte Projekte'">
+  <div class="project-cards-container">
+    <app-project-card class="project-card hover-card"
+                      [loggedUser]="loggedUser"
+                      *ngFor="let projectViews of projectFavoriteView.projectViewList"
+                      [projectFavView]="projectViews"
+                      [ngClass]="{'selected-card-red':projectViews.project.id===loggedUser.user.activeProject}"
+                      [dashboard]="true"
+                      [archive]="false"/>
+  </div>
+</app-dashboard-widget>

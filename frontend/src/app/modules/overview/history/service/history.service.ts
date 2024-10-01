@@ -20,4 +20,8 @@ export class HistoryService {
   addHistory(historyInput:historyModel, stationId:number){
     return this.http.post(this.API_URL + "/history/station/"+stationId, historyInput);
   }
+
+  updateHistory(historyInput:historyModel){
+    return this.http.put(this.API_URL + "/history/station", historyInput);
+  }
 }

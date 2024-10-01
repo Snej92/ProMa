@@ -5,7 +5,9 @@ import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../../../core/store/appState.model";
 import {historyModel} from "../../store/history.model";
 import {loadSpinner} from "../../../../../core/store/app.action";
-import {addStationHistory} from "../../store/history.actions";
+import {addStationHistory, updateStationHistory} from "../../store/history.actions";
+import {getHistoryById} from "../../store/history.selectors";
+
 
 @Component({
   selector: 'app-add-history',
@@ -17,6 +19,7 @@ export class AddHistoryComponent implements OnInit{
 
   historyForm!: FormGroup;
   dialogResult:boolean = false;
+  editData!: historyModel;
 
   constructor(private dialogRef:MatDialogRef<AddHistoryComponent>,
               private builder:FormBuilder,
@@ -31,16 +34,58 @@ export class AddHistoryComponent implements OnInit{
       filename:this.builder.control(''),
       fileTransfer:this.builder.control(false),
       transferType:this.builder.control(0, this.transferTypeValidator),
-      eplan:this.builder.control(false)
+      eplan:this.builder.control(false),
+      eplanCopy:this.builder.control(false),
     })
-
-    console.log(this.historyForm.get('transferType')?.value);
   }
 
   ngOnInit(): void {
     this.historyForm.get('transferType')?.disable();
     this.historyForm.get('eplan')?.disable();
+    this.historyForm.get('eplanCopy')?.disable();
     this.dialogResult = false;
+    if(this.data.isEdit){
+      const subscription = this.store.select(getHistoryById(this.data.id)).subscribe(data =>{
+        this.editData = data;
+        if(!this.editData.updated){
+          this.historyForm.setValue({
+            id:this.data.id,
+            date:this.editData.date,
+            item:this.editData.item,
+            userAcronym:this.editData.userAcronym,
+            filename:this.editData.filename,
+            fileTransfer:this.editData.fileTransfer,
+            transferType:this.editData.transferType,
+            eplan:this.editData.eplan,
+            eplanCopy:this.editData.eplanCopy
+          })
+        } else {
+          this.historyForm.setValue({
+            id:this.data.id,
+            date:this.editData.updateDate,
+            item:this.editData.updateItem,
+            userAcronym:this.editData.updateUserAcronym,
+            filename:this.editData.updateFilename,
+            fileTransfer:this.editData.updateFileTransfer,
+            transferType:this.editData.updateTransferType,
+            eplan:this.editData.updateEplan,
+            eplanCopy:this.editData.updateEplanCopy
+          })
+        }
+
+        if(this.editData.fileTransfer){
+          this.historyForm.get('transferType')?.enable();
+          this.historyForm.get('eplan')?.enable();
+          this.historyForm.get('transferType')?.setValidators(Validators.required);
+          this.historyForm.get('filename')?.setValidators(Validators.required);
+        }
+        if(this.editData.eplan){
+          this.historyForm.get('eplanCopy')?.enable();
+          this.historyForm.get('eplanCopy')?.setValidators(Validators.required);
+        }
+      })
+      subscription.unsubscribe();
+    }
   }
 
   initTransferType(){
@@ -55,8 +100,18 @@ export class AddHistoryComponent implements OnInit{
       this.historyForm.get('transferType')?.removeValidators(Validators.required);
       this.historyForm.get('filename')?.removeValidators(Validators.required);
     }
-    console.log(this.historyForm.get('transferType')?.value);
   }
+
+  initEplanTransferType(){
+    if(this.historyForm.get('eplanCopy')?.disabled){
+      this.historyForm.get('eplanCopy')?.enable();
+      this.historyForm.get('eplanCopy')?.setValidators(Validators.required);
+    } else {
+      this.historyForm.get('eplanCopy')?.removeValidators(Validators.required);
+      this.historyForm.get('eplanCopy')?.disable();
+    }
+  }
+
 
   transferTypeValidator(control: AbstractControl): ValidationErrors | null {
     const validValues = [1, 2];
@@ -82,14 +137,28 @@ export class AddHistoryComponent implements OnInit{
         fileTransfer: this.historyForm.value.fileTransfer as boolean,
         transferType: this.historyForm.value.transferType as number,
         eplan: this.historyForm.value.eplan as boolean,
+        eplanCopy: this.historyForm.value.eplanCopy as boolean,
+
+        updated: false,
+        updateDate: "",
+        updateItem: "",
+        updateUserAcronym: "",
+        updateFilename: "",
+        updateFileTransfer: false,
+        updateTransferType: 0,
+        updateEplan: false,
+        updateEplanCopy: false
       }
       if(!this.historyForm.value.fileTransfer){
         historyInput.transferType = 0;
         historyInput.eplan = false;
       }
+
       this.store.dispatch(loadSpinner({isLoading:true}));
       if(this.data.isEdit){
+        // console.log(historyInput)
         historyInput.id=this.historyForm.value.id as number
+        this.store.dispatch(updateStationHistory({historyInput:historyInput}))
         this.dialogResult = true;
       }else{
         // console.log(historyInput)

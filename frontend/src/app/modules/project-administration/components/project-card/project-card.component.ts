@@ -1,5 +1,5 @@
-import {Component, Injector, Input, Output} from '@angular/core';
-import {projectFavViewModel, projectViewModel} from "../../store/project-administration.model";
+import {Component, Input} from '@angular/core';
+import {projectFavViewModel} from "../../store/project-administration.model";
 import {userModel, userRole} from "../../../userAdministration/store/user-Administration.model";
 import {loadSpinner} from "../../../../core/store/app.action";
 import {updateLoggedUser} from "../../../../core/logged-user/logged-user.actions";
@@ -27,6 +27,7 @@ export class ProjectCardComponent {
   @Input() loggedUser!: loggedUser;
   @Input() favorite : boolean = false;
   @Input() archive : boolean = false;
+  @Input() dashboard: boolean = false;
   archivedProject!:projectFavViewModel;
 
   constructor(private store:Store<AppStateModel>,

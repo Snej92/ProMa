@@ -68,4 +68,9 @@ public class StationController {
     public List<StationFavView> getFavorites(){
         return stationService.getFavorites();
     }
+
+    @GetMapping("/assigned")
+    public List<StationFavView> getAssignedStations(){
+        return stationService.getAssignedStation();
+    }
 }

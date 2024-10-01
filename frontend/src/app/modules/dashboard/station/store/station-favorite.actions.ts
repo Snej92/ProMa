@@ -8,8 +8,10 @@ export const LOAD_STATION_VIEW_FAVORITE_FAIL='[dashboard page] load station view
 export const LOAD_STATION_VIEW_FAVORITE='[dashboard page] get station view favorite'
 
 export const UPDATE_STATION_FAVORITE='[dashboard page] update station'
+export const UPDATE_STATION_FAVORITE_SUCCESS = '[dashboard page] update station success'
 
 export const updateStationFavorite=createAction(UPDATE_STATION_FAVORITE, props<{stationId:number, remove:boolean}>())
+export const updateDashboardStationFavoriteSuccess=createAction(UPDATE_STATION_FAVORITE_SUCCESS, props<{stationId:number, remove:boolean}>())
 
 export const loadStationViewFavorite=createAction(LOAD_STATION_VIEW_FAVORITE);
 export const loadStationViewFavoriteSuccess=createAction(LOAD_STATION_VIEW_FAVORITE_SUCCESS, props<{stationViewList:stationFavViewModel[]}>());

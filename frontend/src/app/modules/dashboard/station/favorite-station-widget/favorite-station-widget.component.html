@@ -1,0 +1,12 @@
+<app-dashboard-widget [title]="'Gespeicherte Stationen'"
+                      [additionalTitle]="'aktives Projekt'">
+  <div class="station-cards-container">
+    <ng-container *ngIf="stationFavoriteView">
+      <app-station-card class="station-card hover-card"
+                        *ngFor="let stationFavView of stationFavoriteView.stationViewList;"
+                        [currentIndex]="stationFavView.station.id"
+                        [dashboard]="true"
+                        [stationFavView]="stationFavView"/>
+    </ng-container>
+  </div>
+</app-dashboard-widget>

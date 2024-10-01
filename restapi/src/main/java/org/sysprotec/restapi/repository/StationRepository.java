@@ -23,6 +23,7 @@ public interface StationRepository extends JpaRepository<Station, Long>, JpaSpec
 
     Optional<Station> findStationByNameIgnoreCase(String name);
     Optional<Station> findStationByNameIgnoreCaseAndProjectId(String name, Long id);
+    Optional<Station> getStationByIdAndProjectId(Long id, Long projectId);
 
     Optional<Station> findStationByNameAndDocumentationTaskSettingId(String name, Long TaskSettingId);
     Optional<Station> findStationByNameAndSpecificationTaskSettingId(String name, Long TaskSettingId);
@@ -35,5 +36,6 @@ public interface StationRepository extends JpaRepository<Station, Long>, JpaSpec
     List<Station> findByProjectIdOrderByNameAsc(Long projectId);
 
     Optional<List<StationView>> getProjectedByProjectIdOrderByNameAsc(Long projectId);
+    Optional<List<StationView>> getProjectedByIssuerNameAndProjectId(String issuerName, Long id);
     Optional<List<Station>> getByProjectIdOrderByNameAsc(Long projectId);
 }

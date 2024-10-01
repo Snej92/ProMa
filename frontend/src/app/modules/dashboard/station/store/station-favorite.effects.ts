@@ -4,10 +4,14 @@ import {catchError, of, switchMap} from "rxjs";
 import {StationFavoriteService} from "../service/station-favorite.service";
 import {
   loadStationViewFavorite,
-  loadStationViewFavoriteFail, loadStationViewFavoriteSuccess, updateStationFavorite,
+  loadStationViewFavoriteFail,
+  loadStationViewFavoriteSuccess,
+  updateDashboardStationFavoriteSuccess,
+  updateStationFavorite,
 } from "./station-favorite.actions";
 import {loadSpinner, showAlert} from "../../../../core/store/app.action";
 import {updateStationFavoriteSuccess} from "../../../station/store/stationView.actions";
+import {loadAssignedStationView} from "../../assigned-stations/store/assigned-station.actions";
 
 
 @Injectable()
@@ -39,13 +43,16 @@ export class StationFavoriteEffects {
         this.service.editStationFavorite(action.stationId, action.remove).pipe(
           switchMap(data=> of(
             updateStationFavoriteSuccess({stationId:action.stationId, remove:action.remove}),
+            updateDashboardStationFavoriteSuccess({stationId:action.stationId, remove:action.remove}),
+            loadStationViewFavorite(),
+            loadAssignedStationView(),
             loadSpinner({isLoading:false}),
-            showAlert({message: 'Projekt erfolgreich aktualisiert', actionResult:'pass'})
+            showAlert({message: 'Projekt als Favorit gespeichert', actionResult:'pass'})
           )),
           catchError((error)=>
             of(
               showAlert({
-                message: 'Projekt Aktualisierung fehlgeschlagen wegen '+error.message,
+                message: 'Projekt als Favorit speichern fehlgeschlagen '+error.message,
                 actionResult:'fail'
               }),
               loadSpinner({isLoading:false})))

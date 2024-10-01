@@ -243,6 +243,18 @@
   stroke: var(--frontend-progress-spinner) !important;
 }
 
+//cell customization
+.routing-cell{
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.routing-cell:hover{
+  cursor: pointer;
+  background-color: rgba(0,0,0,0.15);
+}
+
 
 //Hide Headers and Columns
 

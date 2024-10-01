@@ -3,10 +3,11 @@ import {
   addStationHistorySuccess,
   loadStationHistory,
   loadStationHistoryFail,
-  loadStationHistorySuccess
+  loadStationHistorySuccess, updateStationHistory, updateStationHistorySuccess
 } from "./history.actions";
 import {historyState} from "./history.state";
 import {addProjectViewSuccess} from "../../../project-administration/store/project-administration.actions";
+import {updateVersionSuccess} from "../../../settings/version/store/version.actions";
 
 const _historyReducer = createReducer(
   historyState,
@@ -38,7 +39,19 @@ const _historyReducer = createReducer(
     const history={...action.historyInput};
     return{
       ...state,
-      historyList:[...state.historyList,history]
+      historyList:[history, ...state.historyList]
+    };
+  }),
+
+  on(updateStationHistorySuccess, (state,action) => {
+    const historyOld={...action.historyOld};
+    const historyNew={...action.historyNew};
+    const updatedHistory=state.historyList.map(history=>{
+      return historyOld.id===history.id?historyNew:history;
+    });
+    return{
+      ...state,
+      historyList:updatedHistory
     };
   }),
 );

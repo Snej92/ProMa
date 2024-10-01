@@ -1,16 +1,44 @@
   <div class="table-container mat-elevation-z8">
     <table mat-table [dataSource]="history.historyList">
 
+      <ng-container matColumnDef="Aktion">
+        <th class="th-center" mat-header-cell *matHeaderCellDef> Aktion </th>
+        <td class="td-center"
+            [ngClass]="{
+            'transferType-1': (history?.transferType==1 && !history?.eplan && !history.updated)
+            || (history?.updateTransferType==1 && !history?.updateEplan && history.updated),
+            'transferType-2': (history?.transferType==2 && !history?.eplan && !history.updated)
+            || history?.updateTransferType==2 && !history?.updateEplan && history.updated,
+            'transferType-1-eplan': (history?.transferType==1 && history?.eplan && !history.eplanCopy && !history.updated)
+            || (history?.updateTransferType==1 && history?.updateEplan && !history.updateEplanCopy && history.updated),
+            'transferType-2-eplan': (history?.transferType==2 && history?.eplan && !history.eplanCopy && !history.updated)
+            || (history?.updateTransferType==2 && history?.updateEplan && !history.updateEplanCopy && history.updated),
+            }"
+            mat-cell *matCellDef="let history" >
+          <app-sys-button icon="edit" color="accent" tooltip="Bearbeiten" (click)="updateHistory(history.id)"></app-sys-button>
+<!--          <app-sys-button icon="delete" tooltip="löschen" ></app-sys-button>-->
+        </td>
+      </ng-container>
+
       <ng-container matColumnDef="Zeitstempel">
         <th mat-header-cell *matHeaderCellDef> Zeitstempel </th>
         <td [ngClass]="{
-            'transferType-1': history?.transferType==1 && !history?.eplan,
-            'transferType-2': history?.transferType==2 && !history?.eplan,
-            'transferType-1-eplan': history?.transferType==1 && history?.eplan,
-            'transferType-2-eplan': history?.transferType==2 && history?.eplan
+            'transferType-1': (history?.transferType==1 && !history?.eplan && !history.updated)
+            || (history?.updateTransferType==1 && !history?.updateEplan && history.updated),
+            'transferType-2': (history?.transferType==2 && !history?.eplan && !history.updated)
+            || history?.updateTransferType==2 && !history?.updateEplan && history.updated,
+            'transferType-1-eplan': (history?.transferType==1 && history?.eplan && !history.eplanCopy && !history.updated)
+            || (history?.updateTransferType==1 && history?.updateEplan && !history.updateEplanCopy && history.updated),
+            'transferType-2-eplan': (history?.transferType==2 && history?.eplan && !history.eplanCopy && !history.updated)
+            || (history?.updateTransferType==2 && history?.updateEplan && !history.updateEplanCopy && history.updated),
             }"
             mat-cell *matCellDef="let history">
+          <ng-container *ngIf="!history.updated">
             {{history.date}}
+          </ng-container>
+          <ng-container *ngIf="history.updated">
+            {{history.updateDate}}
+          </ng-container>
         </td>
       </ng-container>
 
@@ -20,39 +48,104 @@
           <mat-icon [matTooltip]="historyInfo" matTooltipClass="custom-tooltip" class="info-icon">info</mat-icon>
         </th>
         <td [ngClass]="{
-            'transferType-1': history?.transferType==1 && !history?.eplan,
-            'transferType-2': history?.transferType==2 && !history?.eplan,
-            'transferType-1-eplan': history?.transferType==1 && history?.eplan,
-            'transferType-2-eplan': history?.transferType==2 && history?.eplan
+            'transferType-1': (history?.transferType==1 && !history?.eplan && !history.updated)
+            || (history?.updateTransferType==1 && !history?.updateEplan && history.updated),
+            'transferType-2': (history?.transferType==2 && !history?.eplan && !history.updated)
+            || history?.updateTransferType==2 && !history?.updateEplan && history.updated,
+            'transferType-1-eplan': (history?.transferType==1 && history?.eplan && !history.eplanCopy && !history.updated)
+            || (history?.updateTransferType==1 && history?.updateEplan && !history.updateEplanCopy && history.updated),
+            'transferType-2-eplan': (history?.transferType==2 && history?.eplan && !history.eplanCopy && !history.updated)
+            || (history?.updateTransferType==2 && history?.updateEplan && !history.updateEplanCopy && history.updated),
             }"
           mat-cell *matCellDef="let history">
-          {{history.item}}
+          <ng-container *ngIf="!history.updated">
+            {{history.item}}
+          </ng-container>
+          <ng-container *ngIf="history.updated">
+            <div class="updated-item">
+              <div class="me-2">
+                <!--Datei erhalten-->
+                <ng-container *ngIf="history?.transferType==1 && !history?.eplan">
+                  <mat-icon [matTooltip]="'Original vom ' + history.date + ' von ' + history.userAcronym + ': ' + history.item + ', Datei: ' + history.filename +
+                  ', Datei erhalten'">
+                    feedback
+                  </mat-icon>
+                </ng-container>
+                <!--Datei übergeben-->
+                <ng-container *ngIf="history?.transferType==2 && !history?.eplan">
+                  <mat-icon [matTooltip]="'Original vom ' + history.date + ' von ' + history.userAcronym + ': ' + history.item + ', Datei: ' + history.filename +
+                  ', Datei übergeben'">
+                    feedback
+                  </mat-icon>
+                </ng-container>
+                <!--EPLAN erhalten-->
+                <ng-container *ngIf="history?.transferType==1 && history?.eplan">
+                  <mat-icon [matTooltip]="'Original vom ' + history.date + ' von ' + history.userAcronym + ': ' + history.item + ', Datei: ' + history.filename +
+                  ', EPLAN erhalten'">
+                    feedback
+                  </mat-icon>
+                </ng-container>
+                <!--EPLAN übergeben-->
+                <ng-container *ngIf="history?.transferType==2 && history?.eplan">
+                  <mat-icon [matTooltip]="'Original vom ' + history.date + ' von ' + history.userAcronym + ': ' + history.item + ', Datei: ' + history.filename +
+                  ', EPLAN übergeben'">
+                    feedback
+                  </mat-icon>
+                </ng-container>
+                <!--EPLAN übergeben-->
+                <ng-container *ngIf="history?.transferType==0">
+                  <mat-icon [matTooltip]="'Original vom ' + history.date + ' von ' + history.userAcronym + ': ' + history.item + ', Datei: ' + history.filename">
+                    feedback
+                  </mat-icon>
+                </ng-container>
+              </div>
+              {{history.updateItem}}
+            </div>
+          </ng-container>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="Benutzer">
         <th class="th-center" mat-header-cell *matHeaderCellDef> Benutzer </th>
         <td [ngClass]="{
-            'transferType-1': history?.transferType==1 && !history?.eplan,
-            'transferType-2': history?.transferType==2 && !history?.eplan,
-            'transferType-1-eplan': history?.transferType==1 && history?.eplan,
-            'transferType-2-eplan': history?.transferType==2 && history?.eplan
+            'transferType-1': (history?.transferType==1 && !history?.eplan && !history.updated)
+            || (history?.updateTransferType==1 && !history?.updateEplan && history.updated),
+            'transferType-2': (history?.transferType==2 && !history?.eplan && !history.updated)
+            || history?.updateTransferType==2 && !history?.updateEplan && history.updated,
+            'transferType-1-eplan': (history?.transferType==1 && history?.eplan && !history.eplanCopy && !history.updated)
+            || (history?.updateTransferType==1 && history?.updateEplan && !history.updateEplanCopy && history.updated),
+            'transferType-2-eplan': (history?.transferType==2 && history?.eplan && !history.eplanCopy && !history.updated)
+            || (history?.updateTransferType==2 && history?.updateEplan && !history.updateEplanCopy && history.updated),
             }"
           class="th-center" mat-cell *matCellDef="let history">
-          {{history.userAcronym}}
+          <ng-container *ngIf="!history.updated">
+            {{history.userAcronym}}
+          </ng-container>
+          <ng-container *ngIf="history.updated">
+            {{history.updateUserAcronym}}
+          </ng-container>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="Dateiname">
         <th mat-header-cell *matHeaderCellDef> Dateiname </th>
         <td [ngClass]="{
-            'transferType-1': history?.transferType==1 && !history?.eplan,
-            'transferType-2': history?.transferType==2 && !history?.eplan,
-            'transferType-1-eplan': history?.transferType==1 && history?.eplan,
-            'transferType-2-eplan': history?.transferType==2 && history?.eplan
+            'transferType-1': (history?.transferType==1 && !history?.eplan && !history.updated)
+            || (history?.updateTransferType==1 && !history?.updateEplan && history.updated),
+            'transferType-2': (history?.transferType==2 && !history?.eplan && !history.updated)
+            || history?.updateTransferType==2 && !history?.updateEplan && history.updated,
+            'transferType-1-eplan': (history?.transferType==1 && history?.eplan && !history.eplanCopy && !history.updated)
+            || (history?.updateTransferType==1 && history?.updateEplan && !history.updateEplanCopy && history.updated),
+            'transferType-2-eplan': (history?.transferType==2 && history?.eplan && !history.eplanCopy && !history.updated)
+            || (history?.updateTransferType==2 && history?.updateEplan && !history.updateEplanCopy && history.updated),
             }"
           mat-cell *matCellDef="let history">
-          {{history.filename}}
+          <ng-container *ngIf="!history.updated">
+            {{history.filename}}
+          </ng-container>
+          <ng-container *ngIf="history.updated">
+            {{history.updateFilename}}
+          </ng-container>
         </td>
       </ng-container>
 

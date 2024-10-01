@@ -18,7 +18,7 @@ export class HistoryComponent implements OnInit, OnDestroy{
 
   private subscriptions: Subscription[] = [];
   history !: history;
-  displayedColumns: string[] = ['Zeitstempel', 'Historie', 'Benutzer', 'Dateiname'];
+  displayedColumns: string[] = ['Aktion', 'Zeitstempel', 'Historie', 'Benutzer', 'Dateiname'];
   @Input() stationId!:number;
 
 
@@ -42,6 +42,10 @@ export class HistoryComponent implements OnInit, OnDestroy{
 
   addHistory(){
     this.openPopup(0,"Manueller Eintrag", false, this.stationId);
+  }
+
+  updateHistory(id:any){
+    this.openPopup(id,"Eintrag bearbeiten", true, this.stationId);
   }
 
   openPopup(id:any, title:any, isEdit=false, stationId:any){

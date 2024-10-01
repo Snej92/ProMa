@@ -5,7 +5,7 @@ import {ProjectFavoriteService} from "../service/project-favorite.service";
 import {
   loadProjectViewFavorite,
   loadProjectViewFavoriteFail,
-  loadProjectViewFavoriteSuccess, updateProjectFavorite
+  loadProjectViewFavoriteSuccess, updateDashboardProjectFavoriteSuccess, updateProjectFavorite
 } from "./project-favorite.actions";
 import {loadSpinner, showAlert} from "../../../../core/store/app.action";
 import {updateProjectFavoriteSuccess} from "../../../project-administration/store/project-administration.actions";
@@ -40,6 +40,7 @@ export class ProjectFavoriteEffects {
         this.service.editProjectFavorite(action.projectId, action.remove).pipe(
           switchMap(data=> of(
             updateProjectFavoriteSuccess({projectId:action.projectId, remove:action.remove}),
+            updateDashboardProjectFavoriteSuccess({projectId:action.projectId, remove:action.remove}),
             loadSpinner({isLoading:false}),
             showAlert({message: 'Projekt erfolgreich aktualisiert', actionResult:'pass'})
           )),

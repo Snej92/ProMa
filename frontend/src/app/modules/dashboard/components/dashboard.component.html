@@ -1,5 +1,13 @@
-<div class="d-flex justify-content-center">
-  <h3>
-    coming soon!
-  </h3>
+<div class="d-flex justify-content-center dashboard-container">
+  <div class="favorite-projects">
+    <app-favorite-project-widget [loggedUser]="loggedUser"></app-favorite-project-widget>
+  </div>
+
+  <div class="favorite-stations">
+    <app-favorite-station-widget></app-favorite-station-widget>
+  </div>
+
+  <div class="assigned-stations">
+    <app-assigned-station-widget></app-assigned-station-widget>
+  </div>
 </div>

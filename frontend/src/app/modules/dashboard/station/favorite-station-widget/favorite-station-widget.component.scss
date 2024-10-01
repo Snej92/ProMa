@@ -1,0 +1,11 @@
+.station-cards-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 40px;
+}
+
+.station-card{
+  margin-top: 20px;
+  border-radius: 12px;
+}

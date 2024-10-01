@@ -37,6 +37,20 @@
   text-align: center;
 }
 
+.td-center{
+  text-align: center;
+}
+
+.th-Aktion{
+  padding-left: 35px;
+}
+
+.mat-column-Aktion{
+  width: 80px;
+  min-width: 80px;
+  max-width: 80px;
+}
+
 .mat-column-Zeitstempel{
   width: 180px;
 }
@@ -61,4 +75,10 @@
 
 ::ng-deep .custom-tooltip {
   white-space: pre-line;
+}
+
+.updated-item {
+  display: flex;
+  position: relative;
+  top: 4px;
 }

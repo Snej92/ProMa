@@ -3,8 +3,9 @@ import {projectFavoriteViewState} from "./project-favorite.state";
 import {
   loadProjectViewFavorite,
   loadProjectViewFavoriteFail,
-  loadProjectViewFavoriteSuccess
+  loadProjectViewFavoriteSuccess, updateDashboardProjectFavoriteSuccess
 } from "./project-favorite.actions";
+import {projectFavViewModel} from "../../../project-administration/store/project-administration.model";
 
 
 const _projectFavoriteReducer = createReducer(
@@ -30,6 +31,30 @@ const _projectFavoriteReducer = createReducer(
       ...state,
       projectViewList:[],
       errorMessage:action.errorText.message
+    };
+  }),
+
+  on(updateDashboardProjectFavoriteSuccess, (state, action) => {
+    return{
+      ...state,
+      projectViewList: state.projectViewList.map(projectFavViewModel =>
+        projectFavViewModel.project.id === action.projectId
+          ? {
+            ...projectFavViewModel,
+            isFavorite: !action.remove
+          }
+          : projectFavViewModel
+      ),
+    };
+  }),
+
+  on(updateDashboardProjectFavoriteSuccess, (state, action) => {
+    const updateDashboardProjectFavorite=state.projectViewList.filter((data:projectFavViewModel)=>{
+      return data.project.id!==action.projectId
+    })
+    return{
+      ...state,
+      projectViewList:updateDashboardProjectFavorite
     };
   }),
 );

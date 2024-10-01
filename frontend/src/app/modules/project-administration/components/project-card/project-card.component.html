@@ -19,29 +19,31 @@
     </div>
 
     <ng-container *ngIf="loggedUser.user.roles.projectRole">
-      <div class="card-header-right" (click)="$event.stopPropagation()">
-        <button class="align-menu-button" mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="editProject(projectFavView?.project?.id)">
-            Bearbeiten
+      <ng-container *ngIf="!dashboard">
+        <div class="card-header-right" (click)="$event.stopPropagation()">
+          <button class="align-menu-button" mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
           </button>
-          <button mat-menu-item (click)="deleteProject(projectFavView?.project?.id, projectFavView?.project?.name)">
-            Löschen
-          </button>
-          <ng-container *ngIf="!archive">
-            <button mat-menu-item (click)="archiveProject(projectFavView?.project?.id)">
-              Archivieren
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="editProject(projectFavView?.project?.id)">
+              Bearbeiten
             </button>
-          </ng-container>
-          <ng-container *ngIf="archive">
-            <button mat-menu-item (click)="deArchiveProject(projectFavView?.project?.id)">
-              Dearchivieren
+            <button mat-menu-item (click)="deleteProject(projectFavView?.project?.id, projectFavView?.project?.name)">
+              Löschen
             </button>
-          </ng-container>
-        </mat-menu>
-      </div>
+            <ng-container *ngIf="!archive">
+              <button mat-menu-item (click)="archiveProject(projectFavView?.project?.id)">
+                Archivieren
+              </button>
+            </ng-container>
+            <ng-container *ngIf="archive">
+              <button mat-menu-item (click)="deArchiveProject(projectFavView?.project?.id)">
+                Dearchivieren
+              </button>
+            </ng-container>
+          </mat-menu>
+        </div>
+      </ng-container>
     </ng-container>
 
   </div>

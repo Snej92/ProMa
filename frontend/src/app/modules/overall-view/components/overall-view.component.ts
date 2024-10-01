@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {Subscription, take} from "rxjs";
 import {stationOverallView, stationOverallViewFilter} from "../store/stationOverallView.model";
 import {loadSpinner} from "../../../core/store/app.action";
@@ -9,6 +9,7 @@ import {loadStationOverallView} from "../store/stationOverallView.actions";
 import {getLoggedUserInfo} from "../../../core/logged-user/logged-user.selectors";
 import {loggedUser} from "../../../core/logged-user/logged-user.model";
 import {MatOption} from "@angular/material/select";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-overall-view',
@@ -16,6 +17,8 @@ import {MatOption} from "@angular/material/select";
   styleUrl: './overall-view.component.scss'
 })
 export class OverallViewComponent implements OnInit, OnDestroy{
+  @Output() selectedOverviewEmitted = new EventEmitter<number>();
+
   loggedUser!:loggedUser;
   private subscriptions: Subscription[] = [];
   stationOverallView!:stationOverallView;
@@ -73,7 +76,8 @@ export class OverallViewComponent implements OnInit, OnDestroy{
   };
 
 
-  constructor(private store:Store<AppStateModel>) {
+  constructor(private store:Store<AppStateModel>,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -856,6 +860,14 @@ export class OverallViewComponent implements OnInit, OnDestroy{
   }
   //endregion
 
+  navigateToStation(stationId: number, selectedOverview: number): void {
+    this.router.navigate(['/overview'], {
+      queryParams: {
+        id: stationId,
+        selectedOverview: selectedOverview
+      }
+    });
+  }
 
   ngOnDestroy(): void {
 

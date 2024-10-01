@@ -6,15 +6,12 @@ import {
   addStationHistory, addStationHistorySuccess,
   loadStationHistory,
   loadStationHistoryFail,
-  loadStationHistorySuccess
+  loadStationHistorySuccess, updateStationHistory, updateStationHistorySuccess
 } from "./history.actions";
 import {HistoryService} from "../service/history.service";
-import {
-  addProjectView,
-  addProjectViewSuccess
-} from "../../../project-administration/store/project-administration.actions";
-import {projectViewModel} from "../../../project-administration/store/project-administration.model";
 import {historyModel} from "./history.model";
+import {updateVersion, updateVersionSuccess} from "../../../settings/version/store/version.actions";
+import {versionModel} from "../../../settings/version/store/version.model";
 
 @Injectable()
 export class HistoryEffects {
@@ -49,6 +46,22 @@ export class HistoryEffects {
             showAlert({message: 'Historie Erfolgreich hinzugefügt', actionResult:'pass'})
           )),
           catchError((error)=> of(showAlert({message: 'Historie Hinzufügen fehlgeschlagen wegen '+error.message, actionResult:'fail'}),loadSpinner({isLoading:false})))
+        )
+      )
+    )
+  );
+
+  _updateHistory=createEffect(()=>
+    this.action$.pipe(
+      ofType(updateStationHistory),
+      switchMap(action =>
+        this.service.updateHistory(action.historyInput).pipe(
+          switchMap(data=> of(
+            updateStationHistorySuccess({historyNew:data as historyModel, historyOld:action.historyInput}),
+            loadSpinner({isLoading:false}),
+            showAlert({message: 'Historie erfolgreich aktualisiert', actionResult:'pass'})
+          )),
+          catchError((error)=> of(showAlert({message: 'Historie Aktualisierung fehlgeschlagen wegen '+error.message, actionResult:'fail'}),loadSpinner({isLoading:false})))
         )
       )
     )

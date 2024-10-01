@@ -5,28 +5,73 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16c64894-e2b1-46b9-9759-3e6da58dad35" name="Changes" comment="V0.17.1&#10;-more filter options (rows, &quot;Allgemein&quot;)&#10;-improved useability here and there">
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/assigned-station-widget/assigned-station-widget.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/assigned-station-widget/assigned-station-widget.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/assigned-station-widget/assigned-station-widget.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/assigned-station-widget/assigned-station-widget.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/service/assigned-station.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/service/assigned-station.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/store/assigned-station.actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/store/assigned-station.effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/store/assigned-station.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/store/assigned-station.reducers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/store/assigned-station.selectors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/store/assigned-station.state.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/favorite-project-widget/favorite-project-widget.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/favorite-project-widget/favorite-project-widget.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/favorite-project-widget/favorite-project-widget.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/favorite-project-widget/favorite-project-widget.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/favorite-station-widget/favorite-station-widget.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/favorite-station-widget/favorite-station-widget.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/favorite-station-widget/favorite-station-widget.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/favorite-station-widget/favorite-station-widget.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/dashboard-widget/dashboard-widget.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/dashboard-widget/dashboard-widget.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/dashboard-widget/dashboard-widget.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/dashboard-widget/dashboard-widget.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/angular.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/logged-user/logged-user.effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/logged-user/logged-user.effects.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/core/store/app.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/store/app.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/store/app.state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/store/app.state.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/components/dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/components/dashboard.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/components/dashboard.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/components/dashboard.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/components/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/components/dashboard.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/store/project-favorite.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/store/project-favorite.actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/store/project-favorite.effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/store/project-favorite.effects.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/store/project-favorite.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/store/project-favorite.reducers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/store/project-favorite.selectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/store/project-favorite.selectors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/store/station-favorite.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/store/station-favorite.actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/store/station-favorite.effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/store/station-favorite.effects.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/store/station-favorite.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/store/station-favorite.reducers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/store/station-favorite.selectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/store/station-favorite.selectors.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/components/overall-view.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/components/overall-view.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/components/overall-view.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/components/overall-view.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/components/overall-view.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/components/overall-view.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/filter/store/overall-view-filter.actions.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/filter/store/overall-view-filter.effects.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/filter/store/overall-view-filter.model.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/filter/store/overall-view-filter.reducers.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/filter/store/overall-view-filter.selectors.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/filter/store/overall-view-filter.state.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/service/station-overall-view.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/service/station-overall-view.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/store/stationOverallView.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/store/stationOverallView.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/store/stationOverallView.effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/store/stationOverallView.effects.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/store/stationOverallView.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/store/stationOverallView.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/components/overview.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/components/overview.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/add-history/add-history.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/add-history/add-history.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/add-history/add-history.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/add-history/add-history.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/service/history.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/service/history.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/store/history.effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/store/history.effects.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/store/history.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/store/history.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/store/history.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/store/history.reducers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/HistoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/HistoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/StationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/StationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/History.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/HistoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/HistoryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/StationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/StationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/HistoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/HistoryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/StationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/StationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/specification/StationSpecification.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/specification/StationSpecification.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,48 +118,49 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Maven.restapi [package].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.RestapiApplication.executor&quot;: &quot;Run&quot;,
-    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Coding/StuTo&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\Coding\\ProMa\\frontend\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Maven.restapi [package].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.RestapiApplication.executor": "Run",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Coding/ProMa/frontend/src/app/modules/dashboard/assigned-stations/store",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "D:\\Coding\\ProMa\\frontend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\dashboard\assigned-stations\store" />
       <recent name="D:\Coding\ProMa\frontend\src\app\modules\dashboard\station" />
       <recent name="D:\Coding\ProMa\frontend\src\app\modules\dashboard\project\store" />
       <recent name="D:\Coding\ProMa\frontend\src\app\modules\calender\store" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\dashboard\station\service" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\dashboard\project\service" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\dashboard\assigned-stations\service" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\dashboard\assigned-stations" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\page-template" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\dashboard\station" />
       <recent name="D:\Coding\ProMa\frontend\src\app\modules\dashboard\project" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\overview" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\core\websocket" />
     </key>
   </component>
   <component name="RunManager">
@@ -159,7 +205,9 @@
       <workItem from="1727241032880" duration="25878000" />
       <workItem from="1727324943136" duration="21796000" />
       <workItem from="1727413737276" duration="90000" />
-      <workItem from="1727414217509" duration="16716000" />
+      <workItem from="1727414217509" duration="17253000" />
+      <workItem from="1727672302057" duration="26977000" />
+      <workItem from="1727757861306" duration="15878000" />
     </task>
     <task id="LOCAL-00001" summary="V0.13&#10;Vorbereitung fürs Dashboard und sehr viele bugfixes und QoL changes">
       <option name="closed" value="true" />
@@ -273,7 +321,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727356086920</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="V0.17.1&#10;-more filter options (rows, &quot;Allgemein&quot;)&#10;-improved useability here and there">
+      <option name="closed" value="true" />
+      <created>1727431925294</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1727431925294</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

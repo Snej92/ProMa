@@ -22,6 +22,8 @@ export class OverviewComponent implements OnInit,OnDestroy{
   loggedUser!:loggedUser;
 
   stationId: number = 0;
+  stationIdDashboard: number = 0;
+  dashboard: boolean = false;
 
   selectedOverview!:number;
 
@@ -44,15 +46,27 @@ export class OverviewComponent implements OnInit,OnDestroy{
     this.route.queryParamMap.subscribe(params => {
       const idParamString = params.get('id');
       const selectedOverviewString = params.get('selectedOverview');
+      const dashboard = params.get('dashboard');
       console.log("selectedOverviewString: ", selectedOverviewString)
+      console.log("dashboard: ", dashboard)
+
+      if(dashboard !== null){
+        this.dashboard = params.get('dashboard') === 'true';
+      }
 
       if(idParamString === null){
         console.log('ID is null')
         this.selectedOverview = Number(localStorage.getItem('selectedOverview')) || 1; // Default to 1 if no value is found
       } else {
-        // @ts-ignore
-        this.stationId = +params.get('id');
-        console.log('ID is: ', this.stationId)
+        if(!this.dashboard){
+          // @ts-ignore
+          this.stationId = +params.get('id');
+          console.log('ID is: ', this.stationId)
+        } else{
+          // @ts-ignore
+          this.stationIdDashboard = +params.get('id');
+          console.log('ID is: ', this.stationId)
+        }
         if(selectedOverviewString === null){
           this.selectedOverview = Number(localStorage.getItem('selectedOverview')) || 1; // Default to 1 if no value is found
         } else {
@@ -77,6 +91,18 @@ export class OverviewComponent implements OnInit,OnDestroy{
       this.store.select(getStationViewInfo).pipe()
         .subscribe(data =>{
           this.stationFavView=data;
+          if(this.dashboard){
+            for(let i = 0; i < this.stationFavView.stationViewList.length; i++){
+              if(this.stationFavView.stationViewList.at(i)){
+                // @ts-ignore
+                if(this.stationIdDashboard == this.stationFavView.stationViewList.at(i).station.id){
+                  // @ts-ignore
+                  console.log(this.stationFavView.stationViewList.at(i).station.name)
+                  this.stationId = i;
+                }
+              }
+            }
+          }
         })
     )
   }

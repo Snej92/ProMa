@@ -13,6 +13,8 @@ import {
 import {
   ProjectAdministrationService
 } from "../../modules/project-administration/service/project-administration.service";
+import {loadStationViewFavorite} from "../../modules/dashboard/station/store/station-favorite.actions";
+import {loadAssignedStationView} from "../../modules/dashboard/assigned-stations/store/assigned-station.actions";
 
 @Injectable()
 export class LoggedUserEffects {
@@ -46,6 +48,8 @@ export class LoggedUserEffects {
           switchMap(data=> of(
             loadSpinner({isLoading:true}),
             updateLoggedUserSuccess({loggedUser:data}),
+            loadStationViewFavorite(),
+            loadAssignedStationView(),
             showAlert({message: 'Projekt ausgewählt', actionResult:'pass'})
           )),
           catchError((error)=> of(showAlert({message: 'Projekt auswählen fehlgeschlagen weil '+error.message, actionResult:'fail'}),loadSpinner({isLoading:false})))

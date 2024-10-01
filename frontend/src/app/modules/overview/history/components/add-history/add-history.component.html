@@ -32,7 +32,13 @@
       </div>
 
       <div>
-        <mat-checkbox formControlName="eplan">EPLAN</mat-checkbox>
+        <mat-checkbox (change)="initEplanTransferType()" formControlName="eplan">
+          EPLAN
+        </mat-checkbox>
+
+        <mat-checkbox formControlName="eplanCopy">
+          Kopie
+        </mat-checkbox>
       </div>
 
     </mat-card-content>

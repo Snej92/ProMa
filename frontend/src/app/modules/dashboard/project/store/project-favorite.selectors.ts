@@ -2,7 +2,7 @@ import {createFeatureSelector, createSelector} from "@ngrx/store";
 import {projectFavViewModel, projectView} from "../../../project-administration/store/project-administration.model";
 
 
-const getProjectFavoriteViewState=createFeatureSelector<projectView>('projectView')
+const getProjectFavoriteViewState=createFeatureSelector<projectView>('projectFavoriteView')
 
 export const getProjectFavoriteView=createSelector(getProjectFavoriteViewState,(state)=>{
   return state.projectViewList;

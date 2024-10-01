@@ -3,6 +3,7 @@ package org.sysprotec.restapi.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.sysprotec.restapi.model.History;
 import org.sysprotec.restapi.model.Station;
 import org.sysprotec.restapi.model.User;
@@ -39,6 +40,7 @@ public class HistoryService {
                         .fileTransfer(false)
                         .transferType(0)
                         .eplan(false)
+                        .eplanCopy(false)
                         .build();
                 if(!newHistory.getItem().isBlank()){
                     historyRepository.save(newHistory);
@@ -73,19 +75,68 @@ public class HistoryService {
                     .fileTransfer(history.getFileTransfer())
                     .transferType(history.getTransferType())
                     .eplan(history.getEplan())
+                    .eplanCopy(history.getEplanCopy())
+
+                    .updated(false)
+                    .updateDate("")
+                    .updateItem("")
+                    .updateUserAcronym("")
+                    .updateFilename("")
+                    .updateFileTransfer(false)
+                    .updateTransferType(0)
+                    .updateEplan(false)
+                    .updateEplanCopy(false)
                     .build();
             historyRepository.save(newHistory);
 
             if(newHistory.getEplan() && newHistory.getFileTransfer()){
-                if(newHistory.getTransferType() == 1){
+                if(newHistory.getTransferType() == 1 && !newHistory.getEplanCopy()){
                     optionalStation.get().setStatus(StatusEPLAN.EINGELAGERT);
-                } else if(newHistory.getTransferType() == 2){
+                } else if(newHistory.getTransferType() == 2 && !newHistory.getEplanCopy()){
                     optionalStation.get().setStatus(StatusEPLAN.AUSGELAGERT);
                 }
                 stationRepository.save(optionalStation.get());
             }
 
             return historyRepository.findTopByOrderByIdDesc();
+        }
+        return null;
+    }
+
+
+    @Transactional
+    public History updateHistory(History history) {
+        Optional<History> optionalHistory = historyRepository.findById(history.getId());
+        User user = userService.getLoggedUser();
+        if(optionalHistory.isPresent()){
+
+            History updateHistory = optionalHistory.get();
+
+            updateHistory.setUpdated(true);
+            updateHistory.setUpdateDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")));
+            updateHistory.setUpdateItem(history.getItem());
+            updateHistory.setUpdateUserAcronym(user.getAcronym());
+            updateHistory.setUpdateFilename(history.getFilename());
+            updateHistory.setUpdateFileTransfer(history.getFileTransfer());
+            updateHistory.setUpdateTransferType(history.getTransferType());
+            updateHistory.setUpdateEplan(history.getEplan());
+            updateHistory.setUpdateEplanCopy(history.getEplanCopy());
+
+
+            Optional<Station> optionalStation = stationRepository.findById(optionalHistory.get().getStation().getId());
+            if(optionalStation.isPresent()){
+                if(updateHistory.getUpdateEplan() && updateHistory.getUpdateFileTransfer()){
+                    if(updateHistory.getUpdateTransferType() == 1 && !updateHistory.getUpdateEplanCopy()){
+                        optionalStation.get().setStatus(StatusEPLAN.EINGELAGERT);
+                    } else if(updateHistory.getUpdateTransferType() == 2 && !updateHistory.getUpdateEplanCopy()){
+                        optionalStation.get().setStatus(StatusEPLAN.AUSGELAGERT);
+                    }
+                }
+            }
+            historyRepository.save(updateHistory);
+            if(historyRepository.findById(history.getId()).isPresent()){
+                return historyRepository.findById(history.getId()).get();
+            }
         }
         return null;
     }

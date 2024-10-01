@@ -5,6 +5,7 @@
         <div class="station-cards-container">
           <app-station-card class="station-card ms-5 mt-4 mb-1 hover-card"
                             *ngFor="let stationFavView of stationFavView.stationViewList; let i = index"
+                            [dashboard]="false"
                             [stationFavView]="stationFavView"
                             [currentIndex]="i"/>
 
