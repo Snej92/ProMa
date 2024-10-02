@@ -148,6 +148,10 @@ public class ProjectService {
                     .technicalDataSetting(technicalDataSettings)
                     .build();
 
+            if(saveProject.getColor() == null){
+                saveProject.setColor("#ffffff");
+            }
+
             projectRepository.save(saveProject);
 
             //Fetch saved Project so Lists are initialized

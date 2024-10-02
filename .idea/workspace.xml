@@ -4,49 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16c64894-e2b1-46b9-9759-3e6da58dad35" name="Changes" comment="V1.0.0&#10;-Dashboard implementiert&#10;-Historie kann bearbeitet werden (mit log des originalen eintrags)&#10;-EPLAN als Kopie übergeben/erhalten">
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/global-settings.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/global-settings.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/global-settings.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/global-settings.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/image-upload/service/image-upload.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/image-upload/service/image-upload.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/image-upload/store/image-upload.actions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/image-upload/store/image-upload.effects.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/image-upload/store/image-upload.model.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/image-upload/store/image-upload.reducers.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/image-upload/store/image-upload.selectors.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/image-upload/store/image-upload.state.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/WebConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/additional/FileUploadController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/additional/Upload.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/additional/FileUploadService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/Audi.png" afterDir="false" />
+    <list default="true" id="16c64894-e2b1-46b9-9759-3e6da58dad35" name="Changes" comment="V1.1.0&#10;-updated global.version">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/active-project/active-project.state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/active-project/active-project.state.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/store/app.state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/store/app.state.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/components/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/components/dashboard.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/store/control.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/store/control.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/store/control.effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/store/control.effects.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/store/project-administration.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/store/project-administration.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/components/control-settings.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/components/control-settings.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/authentication/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/authentication/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/ProjectConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/deserialization/ProjectViewImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/deserialization/ProjectViewImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/project/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/project/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/projections/ProjectView.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/projections/ProjectView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/ProjectRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/ProjectRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/ProjectService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +70,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Coding/StuTo",
+    "last_opened_file_path": "D:/Coding/ProMa - Dateien/Database/02102024",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -183,7 +145,7 @@
       <workItem from="1727414217509" duration="17253000" />
       <workItem from="1727672302057" duration="26977000" />
       <workItem from="1727757861306" duration="22027000" />
-      <workItem from="1727845202924" duration="24105000" />
+      <workItem from="1727845202924" duration="26272000" />
     </task>
     <task id="LOCAL-00001" summary="V0.13&#10;Vorbereitung fürs Dashboard und sehr viele bugfixes und QoL changes">
       <option name="closed" value="true" />
@@ -313,7 +275,23 @@
       <option name="project" value="LOCAL" />
       <updated>1727776428997</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="V1.1.0&#10;-global settings implemented&#10;-uploading pictures and selecting them for the project cards to display them">
+      <option name="closed" value="true" />
+      <created>1727871419312</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1727871419312</updated>
+    </task>
+    <task id="LOCAL-00018" summary="V1.1.0&#10;-updated global.version">
+      <option name="closed" value="true" />
+      <created>1727871566694</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1727871566694</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -345,6 +323,8 @@
     <MESSAGE value="V0.17.0&#10;-blubblub für homo" />
     <MESSAGE value="V0.17.1&#10;-more filter options (rows, &quot;Allgemein&quot;)&#10;-improved useability here and there" />
     <MESSAGE value="V1.0.0&#10;-Dashboard implementiert&#10;-Historie kann bearbeitet werden (mit log des originalen eintrags)&#10;-EPLAN als Kopie übergeben/erhalten" />
-    <option name="LAST_COMMIT_MESSAGE" value="V1.0.0&#10;-Dashboard implementiert&#10;-Historie kann bearbeitet werden (mit log des originalen eintrags)&#10;-EPLAN als Kopie übergeben/erhalten" />
+    <MESSAGE value="V1.1.0&#10;-global settings implemented&#10;-uploading pictures and selecting them for the project cards to display them" />
+    <MESSAGE value="V1.1.0&#10;-updated global.version" />
+    <option name="LAST_COMMIT_MESSAGE" value="V1.1.0&#10;-updated global.version" />
   </component>
 </project>

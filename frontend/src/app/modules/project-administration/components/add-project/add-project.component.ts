@@ -4,7 +4,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../../core/store/appState.model";
 import {Subscription, take} from "rxjs";
-import {projectFavViewModel, projectView, projectViewModel} from "../../store/project-administration.model";
+import {projectFavViewModel, projectViewModel} from "../../store/project-administration.model";
 import {addProjectView, updateProject} from "../../store/project-administration.actions";
 import {getProjectById} from "../../store/project-administration.selectors";
 import {loadSpinner} from "../../../../core/store/app.action";
@@ -36,7 +36,7 @@ export class AddProjectComponent implements OnInit, OnDestroy{
   projectForm=this.builder.group({
     id:this.builder.control(0),
     archived:this.builder.control(false),
-    color:this.builder.control(''),
+    color:this.builder.control('#ffffff'),
     acronym:this.builder.control('', Validators.required),
     name:this.builder.control('', Validators.required),
     description:this.builder.control(''),
@@ -107,11 +107,16 @@ export class AddProjectComponent implements OnInit, OnDestroy{
             archived: false
           }
         };
-        this.color = data.project.color;
+        if(data.project.color != null){
+          this.color = data.project.color;
+        } else {
+          this.color = "#ffffff";
+        }
+
         this.projectForm.setValue({
           id: this.editData.project.id,
           archived: this.editData.project.archived,
-          color: this.editData.project.color,
+          color: this.color,
           acronym: this.editData.project.acronym,
           name: this.editData.project.name,
           description: this.editData.project.description,
