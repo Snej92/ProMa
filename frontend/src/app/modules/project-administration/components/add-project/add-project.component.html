@@ -21,14 +21,8 @@
           <input maxlength="5" matInput formControlName="acronym">
         </mat-form-field>
 
-<!--        <mat-form-field class="mat-mdc-form-field-2">-->
-<!--          <mat-label>Farbe</mat-label>-->
-<!--          <input maxlength="7" matInput formControlName="color">-->
-<!--          <mat-hint>Hex Format: #ffffff</mat-hint>-->
-<!--        </mat-form-field>-->
 
 <!--        Color Picker-->
-
         <mat-form-field class="mat-mdc-form-field-2">
           <mat-label>Farbe</mat-label>
           <input class="color-picker-input"
@@ -55,20 +49,31 @@
 
       </div>
 
-      <ng-container *ngIf="!data.isEdit">
+      <div class="d-flex justify-content-between">
+        <ng-container *ngIf="!data.isEdit">
+          <mat-form-field class="mat-mdc-form-field-2">
+            <mat-label>Template</mat-label>
+            <mat-select formControlName="template">
+              <mat-option value="Neu">Neu</mat-option>
+              <ng-container *ngFor="let project of data.project.projectViewList">
+                <mat-option [value]="project.project.name">{{project.project.name}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
+
         <mat-form-field class="mat-mdc-form-field-2">
-          <mat-label>Template</mat-label>
-          <mat-select formControlName="template">
-            <mat-option value="Neu">Neu</mat-option>
-            <ng-container *ngFor="let project of data.project.projectViewList">
-              <mat-option [value]="project.project.name">{{project.project.name}}</mat-option>
+          <mat-label>Bild</mat-label>
+          <mat-select formControlName="image">
+            <mat-option value="">Nichts auswählen</mat-option>
+            <ng-container *ngFor="let upload of upload.uploadList">
+              <mat-option [value]="upload.fileName">{{upload.fileName}}</mat-option>
             </ng-container>
           </mat-select>
         </mat-form-field>
-      </ng-container>
+      </div>
 
     </mat-card-content>
-
 
     <mat-card-actions>
       <button type="submit" mat-raised-button color="accent"> {{data.button}} </button>

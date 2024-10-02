@@ -3,7 +3,6 @@ import {controlModel} from "./control.model";
 
 
 
-
 export const UPDATE_STATION_CONTROL='[control overview page] update control'
 export const UPDATE_STATION_CONTROL_SUCCESS='[control overview page] update control success'
 

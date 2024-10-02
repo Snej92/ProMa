@@ -275,6 +275,7 @@ public class ProjectService {
                 saveProject.setInProgressStations(projectFavView.getProject().getInProgressStations());
                 saveProject.setStoredStations(projectFavView.getProject().getStoredStations());
                 saveProject.setNotStoredStations(projectFavView.getProject().getNotStoredStations());
+                saveProject.setImage(projectFavView.getProject().getImage());
 
                 if(saveProject.getArchived()){
                     List<User> userList = userRepository.findUserByActiveProject(saveProject.getId());

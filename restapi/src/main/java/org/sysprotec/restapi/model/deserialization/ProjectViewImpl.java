@@ -21,4 +21,5 @@ public class ProjectViewImpl implements ProjectView {
     private Integer inProgressStations;
     private Integer storedStations;
     private Integer notStoredStations;
+    private String image;
 }

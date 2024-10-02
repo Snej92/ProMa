@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {projectFavViewModel} from "../../store/project-administration.model";
 import {userModel, userRole} from "../../../userAdministration/store/user-Administration.model";
 import {loadSpinner} from "../../../../core/store/app.action";
@@ -16,13 +16,14 @@ import {
 import {getProjectById} from "../../store/project-administration.selectors";
 import {take} from "rxjs";
 import {updateProjectFavorite} from "../../../dashboard/project/store/project-favorite.actions";
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-project-card',
   templateUrl: './project-card.component.html',
   styleUrl: './project-card.component.scss'
 })
-export class ProjectCardComponent {
+export class ProjectCardComponent implements OnInit{
   @Input() projectFavView: projectFavViewModel | undefined;
   @Input() loggedUser!: loggedUser;
   @Input() favorite : boolean = false;
@@ -30,9 +31,16 @@ export class ProjectCardComponent {
   @Input() dashboard: boolean = false;
   archivedProject!:projectFavViewModel;
 
+  projectImageUrl: string | null = null;
+  private API_URL= environment.API_URL;
+
   constructor(private store:Store<AppStateModel>,
               private dialog:MatDialog,
               private confirm:MatDialog) {
+  }
+
+  ngOnInit(): void {
+    this.initProjectImageUrl()
   }
 
   editProject(id:any){
@@ -147,6 +155,14 @@ export class ProjectCardComponent {
       this.store.dispatch(updateProjectFavorite({projectId:id, remove:true}))
     } else {
       this.store.dispatch(updateProjectFavorite({projectId:id, remove:false}))
+    }
+  }
+
+  initProjectImageUrl(){
+    if(this.projectFavView){
+      if(this.projectFavView.project.image){
+        this.projectImageUrl = this.API_URL + "/upload/image/" + this.projectFavView.project.image
+      }
     }
   }
 }

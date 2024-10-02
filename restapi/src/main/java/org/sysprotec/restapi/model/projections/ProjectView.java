@@ -15,4 +15,5 @@ public interface ProjectView {
     Integer getInProgressStations();
     Integer getStoredStations();
     Integer getNotStoredStations();
+    String getImage();
 }

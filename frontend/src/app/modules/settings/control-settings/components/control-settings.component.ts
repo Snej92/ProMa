@@ -31,6 +31,25 @@ export class ControlSettingsComponent implements OnInit, OnDestroy{
               private confirm:MatDialog) {
   }
 
+  ngOnInit(): void {
+    this.store.dispatch(loadSpinner({isLoading:true}));
+    this.store.dispatch(loadSettingControl())
+
+    this.subscriptions.push(
+      this.store.select(getSettingControlInfo).pipe()
+        .subscribe(data=>{
+          this.controlSettings=data;
+          this.editControlSettings = data.controlSettingList.reduce((acc, item) => {
+            acc[item.id] = {
+              controlSetting: { ...item },
+              isEdit: false,
+            };
+            return acc;
+          }, {} as { [key: number]: editControlSettingModel });
+        })
+    )
+  }
+
   addControlSetting(){
     this.openPopup(0,"Kontrolle Hinzufügen", false);
   }
@@ -103,25 +122,6 @@ export class ControlSettingsComponent implements OnInit, OnDestroy{
     } else{
       console.error('Invalid ID:', id);
     }
-  }
-
-  ngOnInit(): void {
-    this.store.dispatch(loadSpinner({isLoading:true}));
-    this.store.dispatch(loadSettingControl())
-
-    this.subscriptions.push(
-      this.store.select(getSettingControlInfo).pipe()
-        .subscribe(data=>{
-          this.controlSettings=data;
-          this.editControlSettings = data.controlSettingList.reduce((acc, item) => {
-            acc[item.id] = {
-              controlSetting: { ...item },
-              isEdit: false,
-            };
-            return acc;
-          }, {} as { [key: number]: editControlSettingModel });
-        })
-    )
   }
 
   ngOnDestroy(): void {

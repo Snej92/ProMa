@@ -8,7 +8,7 @@ import {
   loadStationControlSuccess, updateStationControl, updateStationControlSuccess
 } from "./control.actions";
 import {ControlService} from "../service/control.service";
-import {controlModel} from "../../control/store/control.model";
+import {controlModel} from "./control.model";
 
 @Injectable()
 export class ControlEffects {

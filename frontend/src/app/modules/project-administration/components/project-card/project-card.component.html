@@ -50,8 +50,12 @@
 
   <div>
     <div class="card-media">
-
+      <img *ngIf="projectImageUrl; else noImage" [src]="projectImageUrl" [width]="346" [height]="100" class="project-image">
     </div>
+
+    <ng-template #noImage>
+      <span class="no-image">Kein Bild ausgewählt</span>
+    </ng-template>
 
     <div class="card-info1 d-flex justify-content-center">
       <h5>Anzahl Stationen: {{projectFavView?.project?.amountStations}}</h5>

@@ -15,6 +15,7 @@ export const activeProjectViewModel:projectViewModel={
   inProgressStations:0,
   storedStations:0,
   notStoredStations:0,
+  image: ""
 }
 
 export const activeFavProjectViewModel:projectFavViewModel={

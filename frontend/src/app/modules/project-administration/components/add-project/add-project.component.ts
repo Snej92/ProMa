@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
@@ -8,15 +8,21 @@ import {projectFavViewModel, projectView, projectViewModel} from "../../store/pr
 import {addProjectView, updateProject} from "../../store/project-administration.actions";
 import {getProjectById} from "../../store/project-administration.selectors";
 import {loadSpinner} from "../../../../core/store/app.action";
+import {loadUploadList} from "../../../global-settings/image-upload/store/image-upload.actions";
+import {getUploadInfo} from "../../../global-settings/image-upload/store/image-upload.selectors";
+import {upload} from "../../../global-settings/image-upload/store/image-upload.model";
 
 @Component({
   selector: 'app-add-project',
   templateUrl: './add-project.component.html',
   styleUrl: './add-project.component.scss'
 })
-export class AddProjectComponent implements OnInit{
+export class AddProjectComponent implements OnInit, OnDestroy{
   editData!:projectFavViewModel;
+  upload!:upload;
   template!:string;
+  private subscriptions: Subscription[] = [];
+
 
   showPicker:boolean = false;
   color: string = '#ffffff'; // Default color
@@ -39,7 +45,8 @@ export class AddProjectComponent implements OnInit{
     storedStations:this.builder.control(0),
     notStoredStations:this.builder.control(0),
     template:this.builder.control('', Validators.required),
-    isFavorite:this.builder.control(false)
+    isFavorite:this.builder.control(false),
+    image:this.builder.control(""),
   })
 
   saveProject(){
@@ -55,6 +62,7 @@ export class AddProjectComponent implements OnInit{
         inProgressStations:this.projectForm.value.inProgressStations as number,
         storedStations:this.projectForm.value.storedStations as number,
         notStoredStations:this.projectForm.value.notStoredStations as number,
+        image:this.projectForm.value.image as string,
       }
       const projectInput:projectFavViewModel={
         project:project,
@@ -80,6 +88,14 @@ export class AddProjectComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.store.dispatch(loadUploadList());
+    this.subscriptions.push(
+      this.store.select(getUploadInfo).pipe()
+        .subscribe(data=> {
+          this.upload = data;
+        })
+    );
+
     if (this.data.isEdit) {
       this.store.select(getProjectById(this.data.id)).pipe(
         take(1)
@@ -104,7 +120,8 @@ export class AddProjectComponent implements OnInit{
           storedStations: this.editData.project.storedStations,
           notStoredStations: this.editData.project.notStoredStations,
           template: '',
-          isFavorite: this.editData.isFavorite
+          isFavorite: this.editData.isFavorite,
+          image: this.editData.project.image
         })
       })
     }
@@ -117,5 +134,9 @@ export class AddProjectComponent implements OnInit{
   onColorChange(hexColor: string) {
     this.color = hexColor;
     this.projectForm.get('color')?.setValue(hexColor);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

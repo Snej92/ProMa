@@ -175,6 +175,10 @@ import { FavoriteStationWidgetComponent } from './modules/dashboard/station/favo
 import { AssignedStationWidgetComponent } from './modules/dashboard/assigned-stations/assigned-station-widget/assigned-station-widget.component';
 import { DashboardWidgetComponent } from './page-template/dashboard-widget/dashboard-widget.component';
 import {AssignedStationEffects} from "./modules/dashboard/assigned-stations/store/assigned-station.effects";
+import {DragDropModule} from "@angular/cdk/drag-drop";
+import { GlobalSettingsComponent } from './modules/global-settings/global-settings.component';
+import {ImageUploadService} from "./modules/global-settings/image-upload/service/image-upload.service";
+import {UploadEffects} from "./modules/global-settings/image-upload/store/image-upload.effects";
 
 const config: SocketIoConfig = { url: 'http://localhost:7081/ws-endpoint', options: {} };
 
@@ -258,11 +262,13 @@ registerLocaleData(localeDe);
     FavoriteProjectWidgetComponent,
     FavoriteStationWidgetComponent,
     AssignedStationWidgetComponent,
-    DashboardWidgetComponent
+    DashboardWidgetComponent,
+    GlobalSettingsComponent
   ],
     imports: [
         AppRoutingModule,
         BrowserModule,
+        DragDropModule,
         KeycloakAngularModule,
         HttpClientModule,
         SocketIoModule.forRoot(config),
@@ -294,7 +300,8 @@ registerLocaleData(localeDe);
             CalenderEffects,
             ProjectFavoriteEffects,
             StationFavoriteEffects,
-            AssignedStationEffects]),
+            AssignedStationEffects,
+            UploadEffects]),
 
 
         MatToolbar,

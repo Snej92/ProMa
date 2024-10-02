@@ -36,7 +36,8 @@ public class SecurityConfig {
                                 "/v3/api-docs/**",
                                 "/proxy/**",
                                 "/ws-endpoint/**",
-                                "/socket.io/**").permitAll()
+                                "/socket.io/**",
+                                "/api/upload/image/**").permitAll()
                         .anyRequest().authenticated());
         http
                 .oauth2ResourceServer(configurer

@@ -1,0 +1,53 @@
+<div class="global-settings-container">
+  <mat-card class="upload-image-container">
+    <mat-card-header class="card-title">
+      Bilder
+    </mat-card-header>
+    <mat-card-content>
+      <h2>Neues Bild hochladen</h2>
+
+      <div class="d-flex justify-content-between">
+        <div class="d-flex">
+          <!--      Select File button-->
+          <button mat-raised-button color="primary" (click)="fileInput.click()">Datei auswählen</button>
+          <div class="select-file">
+            <ng-container *ngIf="selectedFile">{{selectedFile.name}}</ng-container>
+            <ng-container *ngIf="!selectedFile"> Keine Datei ausgewählt </ng-container>
+          </div>
+        </div>
+        <div>
+          <!--      Upload Button-->
+          <button mat-raised-button color="primary" (click)="uploadImage()">Hochladen</button>
+        </div>
+
+        <input #fileInput class="select-file-button" type="file" (change)="onFileSelected($event)" hidden>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="uploaded-image-container mt-4">
+    <mat-card-header class="card-title">
+      Bereits hochgeladen
+    </mat-card-header>
+    <mat-card-content>
+      <ng-container *ngIf="upload.uploadList.length >= 0">
+        <div class="all-images-container">
+          <ng-container *ngFor="let uploadList of upload.uploadList">
+            <div class="image-container">
+              <img [src]="API_URL + '/upload/image/' + uploadList.fileName"
+                   [width]="200"
+                   [height]="200"
+                   (click)="deleteImage(uploadList.fileName)"
+                   class="image">
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="upload.uploadList.length == 0">
+        <div class="all-images-container">
+          Noch Kein Bild hochgeladen
+        </div>
+      </ng-container>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -15,6 +15,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     List<ProjectView> findProjectsProjectedByArchivedOrderById(Boolean archived);
     List<ProjectView> findAllProjectedByOrderByName();
 
+
     Project findTopByOrderByIdDesc();
     Project findProjectByStationsId(Long id);
     Project findProjectByNameIgnoreCase(String name);
@@ -28,6 +29,8 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     Optional<Project> findProjectBySpecificationSettingId(Long id);
     Optional<Project> findProjectByProjectionSettingId(Long id);
     Optional<Project> findProjectByTechnicalDataSettingId(Long id);
+
+    Optional<List<Project>> findProjectByImage(String image);
 
     ProjectView findProjectedByNameIgnoreCase(String name);
     ProjectView getProjectedById(Long id);

@@ -33,6 +33,7 @@ import {assignmentReducer} from "../../modules/calender/store/calender.reducers"
 import {projectFavoriteViewReducer} from "../../modules/dashboard/project/store/project-favorite.reducers";
 import {stationFavoriteViewReducer} from "../../modules/dashboard/station/store/station-favorite.reducers";
 import {assignedStationViewReducer} from "../../modules/dashboard/assigned-stations/store/assigned-station.reducers";
+import {uploadReducer} from "../../modules/global-settings/image-upload/store/image-upload.reducers";
 
 
 export const AppState={
@@ -63,4 +64,5 @@ export const AppState={
   projectFavoriteView:projectFavoriteViewReducer,
   stationFavoriteView:stationFavoriteViewReducer,
   assignedStationView:assignedStationViewReducer,
+  upload:uploadReducer,
 }

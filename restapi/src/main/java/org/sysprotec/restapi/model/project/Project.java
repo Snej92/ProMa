@@ -35,6 +35,7 @@ public class Project {
     private Integer inProgressStations;
     private Integer storedStations;
     private Integer notStoredStations;
+    private String image;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private List<Version> versions;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")

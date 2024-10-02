@@ -4,74 +4,49 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16c64894-e2b1-46b9-9759-3e6da58dad35" name="Changes" comment="V0.17.1&#10;-more filter options (rows, &quot;Allgemein&quot;)&#10;-improved useability here and there">
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/assigned-station-widget/assigned-station-widget.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/assigned-station-widget/assigned-station-widget.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/assigned-station-widget/assigned-station-widget.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/assigned-station-widget/assigned-station-widget.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/service/assigned-station.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/service/assigned-station.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/store/assigned-station.actions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/store/assigned-station.effects.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/store/assigned-station.model.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/store/assigned-station.reducers.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/store/assigned-station.selectors.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/assigned-stations/store/assigned-station.state.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/favorite-project-widget/favorite-project-widget.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/favorite-project-widget/favorite-project-widget.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/favorite-project-widget/favorite-project-widget.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/favorite-project-widget/favorite-project-widget.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/favorite-station-widget/favorite-station-widget.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/favorite-station-widget/favorite-station-widget.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/favorite-station-widget/favorite-station-widget.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/favorite-station-widget/favorite-station-widget.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/dashboard-widget/dashboard-widget.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/dashboard-widget/dashboard-widget.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/dashboard-widget/dashboard-widget.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/page-template/dashboard-widget/dashboard-widget.component.ts" afterDir="false" />
+    <list default="true" id="16c64894-e2b1-46b9-9759-3e6da58dad35" name="Changes" comment="V1.0.0&#10;-Dashboard implementiert&#10;-Historie kann bearbeitet werden (mit log des originalen eintrags)&#10;-EPLAN als Kopie übergeben/erhalten">
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/global-settings.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/global-settings.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/global-settings.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/global-settings.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/image-upload/service/image-upload.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/image-upload/service/image-upload.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/image-upload/store/image-upload.actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/image-upload/store/image-upload.effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/image-upload/store/image-upload.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/image-upload/store/image-upload.reducers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/image-upload/store/image-upload.selectors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/modules/global-settings/image-upload/store/image-upload.state.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/WebConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/additional/FileUploadController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/additional/Upload.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/additional/FileUploadService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/Audi.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/logged-user/logged-user.effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/logged-user/logged-user.effects.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/store/app.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/store/app.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/active-project/active-project.state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/active-project/active-project.state.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/core/store/app.state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/store/app.state.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/components/dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/components/dashboard.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/components/dashboard.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/components/dashboard.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/components/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/components/dashboard.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/store/project-favorite.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/store/project-favorite.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/store/project-favorite.effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/store/project-favorite.effects.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/store/project-favorite.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/store/project-favorite.reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/store/project-favorite.selectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/project/store/project-favorite.selectors.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/store/station-favorite.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/store/station-favorite.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/store/station-favorite.effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/store/station-favorite.effects.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/store/station-favorite.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/store/station-favorite.reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/store/station-favorite.selectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/dashboard/station/store/station-favorite.selectors.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/components/overall-view.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/components/overall-view.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/components/overall-view.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/components/overall-view.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/components/overall-view.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overall-view/components/overall-view.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/components/overview.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/components/overview.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/add-history/add-history.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/add-history/add-history.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/add-history/add-history.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/add-history/add-history.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/components/history.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/service/history.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/service/history.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/store/history.effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/store/history.effects.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/store/history.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/store/history.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/store/history.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/history/store/history.reducers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/store/control.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/store/control.actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/store/control.effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/control/store/control.effects.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/add-project/add-project.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/components/project-card/project-card.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station-card/station-card.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/station/components/station.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/HistoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/HistoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/StationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/StationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/History.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/HistoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/HistoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/StationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/StationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/HistoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/HistoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/StationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/StationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/store/project-administration.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/project-administration/store/project-administration.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/components/control-settings.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/settings/control-settings/components/control-settings.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/authentication/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/authentication/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/config/ProjectConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/deserialization/ProjectViewImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/deserialization/ProjectViewImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/project/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/project/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/projections/ProjectView.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/model/projections/ProjectView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/ProjectRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/repository/ProjectRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/ProjectService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +108,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Coding/ProMa/frontend/src/app/modules/dashboard/assigned-stations/store",
+    "last_opened_file_path": "D:/Coding/StuTo",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -156,11 +131,11 @@
       <recent name="D:\Coding\ProMa\frontend\src\app\modules\calender\store" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\global-settings\image-upload\service" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\global-settings\image-upload" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules" />
+      <recent name="D:\Coding\ProMa\frontend\src\app\modules\dashboard\components" />
       <recent name="D:\Coding\ProMa\frontend\src\app\modules\dashboard\assigned-stations\service" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\dashboard\assigned-stations" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\page-template" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\dashboard\station" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\dashboard\project" />
     </key>
   </component>
   <component name="RunManager">
@@ -207,7 +182,8 @@
       <workItem from="1727413737276" duration="90000" />
       <workItem from="1727414217509" duration="17253000" />
       <workItem from="1727672302057" duration="26977000" />
-      <workItem from="1727757861306" duration="15878000" />
+      <workItem from="1727757861306" duration="22027000" />
+      <workItem from="1727845202924" duration="24105000" />
     </task>
     <task id="LOCAL-00001" summary="V0.13&#10;Vorbereitung fürs Dashboard und sehr viele bugfixes und QoL changes">
       <option name="closed" value="true" />
@@ -329,7 +305,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727431925294</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="V1.0.0&#10;-Dashboard implementiert&#10;-Historie kann bearbeitet werden (mit log des originalen eintrags)&#10;-EPLAN als Kopie übergeben/erhalten">
+      <option name="closed" value="true" />
+      <created>1727776428997</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1727776428997</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -360,6 +344,7 @@
     <MESSAGE value="V0.17.0&#10;-small bug fixes&#10;-included filter options (columns) for overall view" />
     <MESSAGE value="V0.17.0&#10;-blubblub für homo" />
     <MESSAGE value="V0.17.1&#10;-more filter options (rows, &quot;Allgemein&quot;)&#10;-improved useability here and there" />
-    <option name="LAST_COMMIT_MESSAGE" value="V0.17.1&#10;-more filter options (rows, &quot;Allgemein&quot;)&#10;-improved useability here and there" />
+    <MESSAGE value="V1.0.0&#10;-Dashboard implementiert&#10;-Historie kann bearbeitet werden (mit log des originalen eintrags)&#10;-EPLAN als Kopie übergeben/erhalten" />
+    <option name="LAST_COMMIT_MESSAGE" value="V1.0.0&#10;-Dashboard implementiert&#10;-Historie kann bearbeitet werden (mit log des originalen eintrags)&#10;-EPLAN als Kopie übergeben/erhalten" />
   </component>
 </project>

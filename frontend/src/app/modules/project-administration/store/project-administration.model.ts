@@ -9,6 +9,7 @@ export interface projectViewModel{
   inProgressStations:number,
   storedStations:number,
   notStoredStations:number,
+  image:string,
 }
 
 export interface projectFavViewModel{
