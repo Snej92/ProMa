@@ -88,7 +88,7 @@ export class AddProjectComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    this.store.dispatch(loadUploadList());
+    this.store.dispatch(loadUploadList({typ:1}));
     this.subscriptions.push(
       this.store.select(getUploadInfo).pipe()
         .subscribe(data=> {

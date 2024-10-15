@@ -1,11 +1,11 @@
 import {Injectable} from "@angular/core";
-import {Actions, createEffect, ofType} from "@ngrx/effects";
+import {act, Actions, createEffect, ofType} from "@ngrx/effects";
 import {catchError, of, switchMap} from "rxjs";
 import {loadSpinner, showAlert} from "../../../../core/store/app.action";
 import {ImageUploadService} from "../service/image-upload.service";
 import {
   deleteImage, deleteImageSuccess,
-  LOAD_UPLOAD_LIST,
+  LOAD_UPLOAD_LIST, loadUploadList,
   loadUploadListFail,
   loadUploadListSuccess,
   uploadImage,
@@ -17,6 +17,9 @@ import {
 } from "../../../settings/control-settings/store/controlSetting.actions";
 import {controlSettingModel} from "../../../settings/control-settings/store/controlSetting.model";
 import {uploadModel} from "./image-upload.model";
+import {loadStationViewFavorite} from "../../../dashboard/station/store/station-favorite.actions";
+import {updateStation} from "../../../station/store/stationView.actions";
+import {stationFavViewModel} from "../../../station/store/stationView.model";
 
 @Injectable()
 export class UploadEffects {
@@ -27,9 +30,9 @@ export class UploadEffects {
 
   _getUploads=createEffect(()=>
     this.action$.pipe(
-      ofType(LOAD_UPLOAD_LIST),
+      ofType(loadUploadList),
       switchMap(action=>
-        this.service.getUploadList().pipe(
+        this.service.getUploadList(action.typ).pipe(
           switchMap(data=> of(
             loadUploadListSuccess({uploadList:data}),
             loadSpinner({isLoading:false})
@@ -44,7 +47,7 @@ export class UploadEffects {
     this.action$.pipe(
       ofType(uploadImage),
       switchMap(action=>
-        this.service.uploadImage(action.image).pipe(
+        this.service.uploadImage(action.image, action.typ).pipe(
           switchMap(data=> of(
             uploadImageSuccess({upload:data as uploadModel}),
             loadSpinner({isLoading:false}),
@@ -56,13 +59,15 @@ export class UploadEffects {
     )
   );
 
+
   _deleteImage=createEffect(()=>
     this.action$.pipe(
       ofType(deleteImage),
       switchMap(action=>
-        this.service.deleteImage(action.imageName).pipe(
+        this.service.deleteImage(action.imageName, action.typ).pipe(
           switchMap(data=> of(
             deleteImageSuccess({imageName:action.imageName}),
+            loadStationViewFavorite(),
             loadSpinner({isLoading:false}),
             showAlert({message: 'Bild erfolgreich gelöscht', actionResult:'pass'})
           )),

@@ -46,6 +46,8 @@
       <ng-container *ngIf="loggedUser.user.roles.adminRole">
         <button mat-menu-item routerLink="/userAdministration"><span>Benutzerverwaltung</span></button>
         <button mat-menu-item routerLink="/calender"><span>Projektkalender</span></button>
+      </ng-container>
+      <ng-container *ngIf="loggedUser.user.roles.projectRole">
         <button mat-menu-item routerLink="/globalSettings"><span>Einstellungen</span></button>
       </ng-container>
       <button mat-menu-item (click)="onLogout()"><span>Ausloggen</span></button>

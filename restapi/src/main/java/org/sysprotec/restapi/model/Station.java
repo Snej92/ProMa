@@ -35,6 +35,7 @@ public class Station {
     private StatusEPLAN status;
     private Integer totalProgress;
     private String version;
+    private String image;
     //Progress
     //LOP
     private Integer lopTotal;

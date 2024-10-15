@@ -179,6 +179,7 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
 import { GlobalSettingsComponent } from './modules/global-settings/global-settings.component';
 import {ImageUploadService} from "./modules/global-settings/image-upload/service/image-upload.service";
 import {UploadEffects} from "./modules/global-settings/image-upload/store/image-upload.effects";
+import { StationOverviewImageComponent } from './modules/overview/station/components/station-overview-image/station-overview-image.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:7081/ws-endpoint', options: {} };
 
@@ -263,7 +264,8 @@ registerLocaleData(localeDe);
     FavoriteStationWidgetComponent,
     AssignedStationWidgetComponent,
     DashboardWidgetComponent,
-    GlobalSettingsComponent
+    GlobalSettingsComponent,
+    StationOverviewImageComponent
   ],
     imports: [
         AppRoutingModule,

@@ -1,0 +1,22 @@
+<mat-card class="image-card">
+  <mat-card-header class="header-font">
+    <h3 class="header-font">Übersichtsbild</h3>
+  </mat-card-header>
+  <mat-card-content>
+
+    <div>
+      <img *ngIf="stationImageUrl; else noImage" [src]="stationImageUrl" (click)="deleteImage(stationViewInput.stationViewOverview.station.image)">
+    </div>
+
+    <ng-template #noImage>
+      <button mat-raised-button color="accent" (click)="fileInput.click()">
+        <mat-icon>upload</mat-icon>
+        Bild hochladen
+      </button>
+      {{stationViewInput.stationViewOverview.station.image}}
+      <input #fileInput type="file" (change)="onFileSelected($event)" hidden>
+    </ng-template>
+
+
+  </mat-card-content>
+</mat-card>

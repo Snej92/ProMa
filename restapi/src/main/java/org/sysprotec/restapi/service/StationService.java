@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.sysprotec.restapi.model.*;
 import org.sysprotec.restapi.model.overview.HeaderData;
 import org.sysprotec.restapi.model.overview.Lop;
@@ -364,6 +365,7 @@ public class StationService {
                 saveStation.setStatus(stationFavView.getStation().getStatus());
                 saveStation.setTotalProgress(stationFavView.getStation().getTotalProgress());
                 saveStation.setVersion(stationFavView.getStation().getVersion());
+                saveStation.setImage(stationFavView.getStation().getImage());
                 saveStation.setLopTotal(stationFavView.getStation().getLopTotal());
                 saveStation.setLopDone(stationFavView.getStation().getLopDone());
                 saveStation.setLopToDo(stationFavView.getStation().getLopToDo());
@@ -897,4 +899,5 @@ public class StationService {
             }
         }
     }
+
 }

@@ -11,15 +11,15 @@ export class ImageUploadService {
   private API_URL= environment.API_URL;
   constructor(private http:HttpClient) { }
 
-  uploadImage(formData : FormData):Observable<uploadModel>{
-    return this.http.post<uploadModel>(this.API_URL + '/upload/image', formData);
+  uploadImage(formData : FormData, typ:number):Observable<uploadModel>{
+    return this.http.post<uploadModel>(this.API_URL + '/upload/image/'+typ, formData);
   }
 
-  getUploadList():Observable<uploadModel[]>{
-    return this.http.get<uploadModel[]>(this.API_URL + '/upload/image');
+  getUploadList(typ:number):Observable<uploadModel[]>{
+    return this.http.get<uploadModel[]>(this.API_URL + '/upload/image/'+ typ);
   }
 
-  deleteImage(filename : string):Observable<string>{
-    return this.http.delete<string>(this.API_URL + '/upload/image/' + filename);
+  deleteImage(filename:string, typ:number):Observable<string>{
+    return this.http.delete<string>(this.API_URL + '/upload/image/' + filename + '/'+ typ);
   }
 }

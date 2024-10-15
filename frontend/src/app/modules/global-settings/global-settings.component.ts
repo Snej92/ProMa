@@ -30,7 +30,7 @@ export class GlobalSettingsComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.store.dispatch(loadSpinner({isLoading:true}));
-    this.store.dispatch(loadUploadList());
+    this.store.dispatch(loadUploadList({typ:1}));
     this.subscriptions.push(
       this.store.select(getUploadInfo).pipe()
         .subscribe(data=> {
@@ -52,7 +52,7 @@ export class GlobalSettingsComponent implements OnInit, OnDestroy{
       formData.append('file', this.selectedFile);
 
       this.store.dispatch(loadSpinner({isLoading:true}));
-      this.store.dispatch(uploadImage({image:formData}));
+      this.store.dispatch(uploadImage({image:formData, typ:1}));
     }
   }
 
@@ -72,7 +72,7 @@ export class GlobalSettingsComponent implements OnInit, OnDestroy{
     confirmRef.afterClosed().subscribe((confirmed:boolean)=> {
       if(confirmed){
         this.store.dispatch(loadSpinner({isLoading:true}));
-        this.store.dispatch(deleteImage({imageName:fileName}))
+        this.store.dispatch(deleteImage({imageName:fileName, typ:1}))
       }
     })
   }

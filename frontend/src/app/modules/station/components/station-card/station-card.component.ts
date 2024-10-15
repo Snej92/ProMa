@@ -64,7 +64,7 @@ export class StationCardComponent {
       queryParams: {
         id: stationId,
         selectedOverview: selectedOverview,
-        dashboard : dashboard
+        dashboard: dashboard
       }
     });
   }

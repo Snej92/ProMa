@@ -6,8 +6,9 @@ export interface stationViewModel{
   issuerAcronym:string,
   issuerName:string,
   status:string,
-  version:string,
   totalProgress:number,
+  version:string,
+  image:string,
   //LOP
   lopTotal:number,
   lopDone:number,

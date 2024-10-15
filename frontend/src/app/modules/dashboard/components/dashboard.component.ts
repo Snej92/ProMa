@@ -4,7 +4,6 @@ import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../core/store/appState.model";
 import {loggedUser} from "../../../core/logged-user/logged-user.model";
 import {getLoggedUserInfo} from "../../../core/logged-user/logged-user.selectors";
-import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 
 
 @Component({
@@ -21,12 +20,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
 
   private subscriptions: Subscription[] = [];
 
-  //Widget-Array
-  dashboardWidgets = [
-    { name: 'favorite-projects', component: 'app-favorite-project-widget' },
-    { name: 'favorite-stations', component: 'app-favorite-station-widget' },
-    { name: 'assigned-stations', component: 'app-assigned-station-widget' }
-  ];
 
   ngOnInit(): void {
     this.subscriptions.push(

@@ -23,7 +23,7 @@ const routes: Routes = [
   {path: 'userAdministration', component: UserAdministrationComponent, canActivate: [AuthGuard], data:{roles:['admin']}},
   {path: 'projectAdministration/:archive', component: ProjectAdministrationComponent, canActivate: [AuthGuard]},
   {path: 'calender', component: CalenderComponent, canActivate: [AuthGuard], data:{roles:['admin']}},
-  {path: 'globalSettings', component: GlobalSettingsComponent, canActivate: [AuthGuard], data:{roles:['admin']}},
+  {path: 'globalSettings', component: GlobalSettingsComponent, canActivate: [AuthGuard], data:{roles:['project']}},
   {path: '**', component: DashboardComponent, canActivate: [AuthGuard]},
 ];
 

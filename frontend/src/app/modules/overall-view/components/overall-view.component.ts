@@ -860,11 +860,12 @@ export class OverallViewComponent implements OnInit, OnDestroy{
   }
   //endregion
 
-  navigateToStation(stationId: number, selectedOverview: number): void {
+  navigateToStation(stationId: number, selectedOverview: number, dashboard : boolean): void {
     this.router.navigate(['/overview'], {
       queryParams: {
         id: stationId,
-        selectedOverview: selectedOverview
+        selectedOverview: selectedOverview,
+        dashboard: dashboard
       }
     });
   }

@@ -13,8 +13,9 @@ public interface StationView {
     String getIssuerAcronym();
     String getIssuerName();
     StatusEPLAN getStatus();
-    String getVersion();
     Integer getTotalProgress();
+    String getVersion();
+    String getImage();
     //Progress
     //LOP
     Integer getLopTotal();

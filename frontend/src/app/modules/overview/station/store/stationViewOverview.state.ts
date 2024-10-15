@@ -8,8 +8,9 @@ export const stationViewModelState:stationViewModel={
   issuerAcronym:'',
   issuerName:'',
   status:'',
-  version:'',
   totalProgress:0,
+  version:'',
+  image:'',
   //LOP
   lopTotal:0,
   lopDone:0,

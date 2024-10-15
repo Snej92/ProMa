@@ -161,7 +161,7 @@ export class ProjectCardComponent implements OnInit{
   initProjectImageUrl(){
     if(this.projectFavView){
       if(this.projectFavView.project.image){
-        this.projectImageUrl = this.API_URL + "/upload/image/" + this.projectFavView.project.image
+        this.projectImageUrl = this.API_URL + "/upload/image/" + this.projectFavView.project.image + "/1"
       }
     }
   }

@@ -18,24 +18,29 @@ public class FileUploadController {
 
     private final FileUploadService fileUploadService;
 
-    @PostMapping("/image")
-    public ResponseEntity<Upload> uploadImage(
-            @RequestParam("file") MultipartFile file) {
-        return fileUploadService.uploadImage(file);
+    @PostMapping("/image/{typ}")
+    public ResponseEntity<Upload> uploadProjectImage(
+            @RequestParam("file") MultipartFile file,
+            @PathVariable Integer typ) {
+        return fileUploadService.uploadProjectImage(file, typ);
     }
 
-    @GetMapping("/image")
-    public ResponseEntity<List<Upload>> getUploadedImages() {
-        return fileUploadService.getUploadedImages();
+    @GetMapping("/image/{typ}")
+    public ResponseEntity<List<Upload>> getUploadedImages(@PathVariable Integer typ) {
+        return fileUploadService.getUploadedImages(typ);
     }
 
-    @GetMapping(("image/{filename}"))
-    public ResponseEntity<Resource> getImage(@PathVariable String filename) {
-        return fileUploadService.getImage(filename);
+    @GetMapping(("image/{filename}/{typ}"))
+    public ResponseEntity<Resource> getImage(
+            @PathVariable String filename,
+            @PathVariable Integer typ) {
+        return fileUploadService.getImage(filename, typ);
     }
 
-    @DeleteMapping("/image/{filename}")
-    public ResponseEntity<String> deleteImage(@PathVariable String filename) {
-        return fileUploadService.deleteImage(filename);
+    @DeleteMapping("/image/{filename}/{typ}")
+    public ResponseEntity<String> deleteImage(
+            @PathVariable String filename,
+            @PathVariable Integer typ) {
+        return fileUploadService.deleteImage(filename, typ);
     }
 }

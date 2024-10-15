@@ -29,10 +29,17 @@ import java.util.Optional;
 @Slf4j
 public class FileUploadService {
 
-    private final String UPLOAD_DIR = "uploads/";
+    private String UPLOAD_DIR = "uploads/";
     private final ProjectRepository projectRepository;
 
-    public ResponseEntity<Upload> uploadImage(MultipartFile file){
+    //types:
+    //1: Project
+    //2: Station
+
+    public ResponseEntity<Upload> uploadProjectImage(MultipartFile file, Integer typ){
+
+        checkingUploadTyp(typ);
+
         log.info("Uploading image to " + UPLOAD_DIR + file.getOriginalFilename());
         try {
             // Create the directory if it doesn't exist
@@ -60,7 +67,10 @@ public class FileUploadService {
         }
     }
 
-    public ResponseEntity<List<Upload>> getUploadedImages(){
+    public ResponseEntity<List<Upload>> getUploadedImages(Integer typ){
+
+        checkingUploadTyp(typ);
+
         File folder = new File(UPLOAD_DIR);
         File[] listOfFiles = folder.listFiles();
 
@@ -81,7 +91,10 @@ public class FileUploadService {
         return new ResponseEntity<>(uploads, HttpStatus.OK);
     }
 
-    public ResponseEntity<Resource> getImage(String filename){
+    public ResponseEntity<Resource> getImage(String filename, Integer typ){
+
+        checkingUploadTyp(typ);
+
         try {
             File file = new File(UPLOAD_DIR + filename);
             if (file.exists()) {
@@ -105,7 +118,10 @@ public class FileUploadService {
         }
     }
 
-    public ResponseEntity<String> deleteImage(String filename){
+    public ResponseEntity<String> deleteImage(String filename, Integer typ){
+
+        checkingUploadTyp(typ);
+
         try {
             Path filePath = Paths.get(UPLOAD_DIR).resolve(filename).normalize();
             File file = filePath.toFile();
@@ -128,6 +144,19 @@ public class FileUploadService {
             }
         } catch (Exception e) {
             return new ResponseEntity<>("Fehler beim Löschen aufgetreten",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public void checkingUploadTyp(Integer typ){
+        switch(typ){
+            case 1: UPLOAD_DIR = "uploads/project/";
+                break;
+
+            case 2: UPLOAD_DIR = "uploads/station/";
+                break;
+
+            default: log.error("Provided Upload typ is not configured!");
+                break;
         }
     }
 }
