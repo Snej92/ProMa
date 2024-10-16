@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import org.sysprotec.restapi.model.Station;
 import org.sysprotec.restapi.model.settings.TaskSetting;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Entity
@@ -43,7 +43,7 @@ public class Task {
         if(this.done){
             if(this.dateDone != null){
                 if(this.dateDone.isEmpty()){
-                    this.dateDone = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+                    this.dateDone = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
                 }
             }
         } else {
@@ -56,7 +56,7 @@ public class Task {
         if(this.commited){
             if(this.dateCommited != null){
                 if(this.dateCommited.isEmpty()){
-                    this.dateCommited = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+                    this.dateCommited = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
                 }
             }
         } else {

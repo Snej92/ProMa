@@ -11,7 +11,7 @@ import org.sysprotec.restapi.model.Station;
 import org.sysprotec.restapi.model.User;
 import org.sysprotec.restapi.model.types.StatusLOP;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Entity
@@ -42,7 +42,7 @@ public class Lop {
     public void setStatus(StatusLOP status, User loggedUser) {
         this.status = status;
         if(status == StatusLOP.ERLEDIGT) {
-            this.endDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+            this.endDate = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
             this.userAcronym = loggedUser.getAcronym();
         } else if(endDate != null){
             if(endDate.isEmpty()){

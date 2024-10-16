@@ -26,7 +26,7 @@ import org.sysprotec.restapi.repository.settings.TaskSettingRepository;
 import org.sysprotec.restapi.repository.settings.TechnicalDataSettingRepository;
 import org.sysprotec.restapi.repository.settings.VersionRepository;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -251,7 +251,7 @@ public class ProjectService {
                     .version("1.0")
                     .toDo(versionTodo)
                     .done(true)
-                    .date(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")))
+                    .date(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")))
                     .project(projectRepository.findTopByOrderByIdDesc())
                     .build();
             versionRepository.save(startVersion);

@@ -10,9 +10,8 @@ import org.sysprotec.restapi.model.User;
 import org.sysprotec.restapi.model.types.StatusEPLAN;
 import org.sysprotec.restapi.repository.HistoryRepository;
 import org.sysprotec.restapi.repository.StationRepository;
-import org.sysprotec.restapi.repository.UserRepository;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +31,7 @@ public class HistoryService {
             if (stationRepository.findById(StationId).isPresent()){
                 Station station = stationRepository.findById(StationId).get();
                 History newHistory = History.builder()
-                        .date(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")))
+                        .date(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")))
                         .item(item)
                         .userAcronym(loggedUser.getAcronym())
                         .filename("")
@@ -67,7 +66,7 @@ public class HistoryService {
         User user = userService.getLoggedUser();
         if (optionalStation.isPresent()) {
             History newHistory = History.builder()
-                    .date(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")))
+                    .date(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")))
                     .item(history.getItem())
                     .userAcronym(user.getAcronym())
                     .filename(history.getFilename())
@@ -113,7 +112,7 @@ public class HistoryService {
             History updateHistory = optionalHistory.get();
 
             updateHistory.setUpdated(true);
-            updateHistory.setUpdateDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")));
+            updateHistory.setUpdateDate(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")));
             updateHistory.setUpdateItem(history.getItem());
             updateHistory.setUpdateUserAcronym(user.getAcronym());
             updateHistory.setUpdateFilename(history.getFilename());
