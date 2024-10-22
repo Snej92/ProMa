@@ -68,6 +68,7 @@ export class DocumentationSettingsComponent implements OnInit, OnDestroy{
   openPopup(id:any, title:any, isEdit=false){
     this.dialog.open(AddDocumentationComponent,{
       width:'40%',
+      disableClose: true,
       data:{
         id:id,
         title:title,

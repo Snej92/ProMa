@@ -116,6 +116,7 @@ export class VersionComponent implements OnInit, OnDestroy {
   OpenPopup(id:any,version:any,isEdit=false, button:any){
     this.dialog.open(AddVersionComponent,{
       width: '25%',
+      disableClose: true,
       data:{
         id:id,
         version:version,

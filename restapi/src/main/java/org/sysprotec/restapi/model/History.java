@@ -23,6 +23,7 @@ public class History {
     private String date;
     private String item;
     private String userAcronym;
+    @Column(length = 1000)
     private String filename;
     private Boolean fileTransfer;
 

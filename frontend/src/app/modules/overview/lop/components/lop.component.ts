@@ -83,6 +83,7 @@ export class LopComponent implements OnInit, OnDestroy{
   openPopup(id:any, title:any, isEdit=false, stationId:any, button:any){
     this.dialog.open(AddLopComponent,{
       width:'40%',
+      disableClose: true,
       data:{
         id:id,
         title:title,

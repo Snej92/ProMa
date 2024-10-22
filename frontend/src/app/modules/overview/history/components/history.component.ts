@@ -51,6 +51,7 @@ export class HistoryComponent implements OnInit, OnDestroy{
   openPopup(id:any, title:any, isEdit=false, stationId:any){
     this.dialog.open(AddHistoryComponent,{
       width:'40%',
+      disableClose: true,
       data:{
         id:id,
         title:title,

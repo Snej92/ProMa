@@ -72,6 +72,7 @@ export class UserAdministrationComponent implements OnInit, OnDestroy{
   openPopup(id:any, title:any, isEdit=false, button:any){
     this.dialog.open(AddUserComponent,{
       width:'30%',
+      disableClose: true,
       data:{
         id:id,
         title: title,

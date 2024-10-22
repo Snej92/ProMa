@@ -64,6 +64,7 @@ export class TechnicalDataSettingsComponent implements OnInit, OnDestroy{
   openPopup(id:any, title:any, isEdit=false){
     this.dialog.open(AddTechnicalDataComponent,{
       width:'40%',
+      disableClose: true,
       data:{
         id:id,
         title:title,

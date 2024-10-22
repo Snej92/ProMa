@@ -67,6 +67,7 @@ export class HeaderDataSettingsComponent implements OnInit, OnDestroy{
   openPopup(id:any, title:any, isEdit=false){
     this.dialog.open(AddHeaderDataComponent,{
       width:'40%',
+      disableClose: true,
       data:{
         id:id,
         title:title,
