@@ -6,6 +6,7 @@ import {loadSpinner} from "../../../../core/store/app.action";
 import {editHeaderDataModel, headerData} from "../store/headerData.model";
 import {loadStationHeaderData, updateStationHeaderData} from "../store/headerData.actions";
 import {getHeaderDataInfo} from "../store/headerData.selectors";
+import {MatTooltip} from "@angular/material/tooltip";
 
 
 @Component({
@@ -18,6 +19,7 @@ export class HeaderDataComponent implements OnInit, OnDestroy{
   headerData !: headerData;
   editHeaderData: { [key: number]: editHeaderDataModel } = {};
   displayedColumns: string[] = ['Kopfdaten', 'Daten'];
+  tooltipMessage = "Klicken zum kopieren"
   @Input() stationId!:number;
   @ViewChild('inputField', {static: false}) inputField!: ElementRef;
 
@@ -62,6 +64,29 @@ export class HeaderDataComponent implements OnInit, OnDestroy{
     console.log(this.editHeaderData[id].headerData);
     this.store.dispatch(loadSpinner({isLoading:true}))
     this.store.dispatch(updateStationHeaderData({headerDataStationInput:this.editHeaderData[id].headerData}))
+  }
+
+  copyText(value: string, tooltip: MatTooltip): void {
+    navigator.clipboard.writeText(value).then(() => {
+      this.tooltipMessage = 'Text in Zwischenablage kopiert!';
+      tooltip.show();
+
+      // Hide the tooltip after 2 seconds
+      setTimeout(() => {
+        tooltip.hide();
+        this.resetTooltip();
+      }, 2000);
+    }).catch(err => {
+      this.tooltipMessage = 'Fehler beim kopieren in Zwischenablage!';
+      tooltip.show();
+      console.error('Failed to copy: ', err);
+    });
+  }
+
+  resetTooltip(): void {
+    setTimeout(() => {
+      this.tooltipMessage = 'Klicken zum kopieren';
+      }, 300)
   }
 
   ngOnDestroy(): void {

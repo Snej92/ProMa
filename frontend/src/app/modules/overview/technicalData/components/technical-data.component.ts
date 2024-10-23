@@ -6,6 +6,7 @@ import {loadSpinner, showAlert} from "../../../../core/store/app.action";
 import {editTechnicalDataModel, technicalData} from "../store/technicalData.model";
 import {loadStationTechnicalData, updateStationTechnicalData} from "../store/technicalData.actions";
 import {getTechnicalDataById, getTechnicalDataInfo} from "../store/technicalData.selectors";
+import {MatTooltip} from "@angular/material/tooltip";
 
 
 
@@ -19,6 +20,7 @@ export class TechnicalDataComponent implements OnInit, OnDestroy{
   technicalData !: technicalData;
   editTechnicalData: { [key: number]: editTechnicalDataModel } = {};
   displayedColumns: string[] = ['TechnischeDaten', 'Wert'];
+  tooltipMessage = 'Klicken zum kopieren';
   @Input() stationId!:number;
   @ViewChild('inputField', {static: false}) inputField!: ElementRef;
 
@@ -76,6 +78,29 @@ export class TechnicalDataComponent implements OnInit, OnDestroy{
     } else{
       return -1
     }
+  }
+
+  copyText(value: string, tooltip: MatTooltip): void {
+    navigator.clipboard.writeText(value).then(() => {
+      this.tooltipMessage = 'Text in Zwischenablage kopiert!';
+      tooltip.show();
+
+      // Hide the tooltip after 2 seconds
+      setTimeout(() => {
+        tooltip.hide();
+        this.resetTooltip();
+      }, 2000);
+    }).catch(err => {
+      this.tooltipMessage = 'Fehler beim kopieren in Zwischenablage!';
+      tooltip.show();
+      console.error('Failed to copy: ', err);
+    });
+  }
+
+  resetTooltip(): void {
+    setTimeout(() => {
+      this.tooltipMessage = 'Klicken zum kopieren';
+    }, 300)
   }
 
   ngOnDestroy(): void {

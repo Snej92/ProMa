@@ -7,6 +7,7 @@ import {historyModel} from "../../store/history.model";
 import {loadSpinner} from "../../../../../core/store/app.action";
 import {addStationHistory, updateStationHistory} from "../../store/history.actions";
 import {getHistoryById} from "../../store/history.selectors";
+import {ThemeService} from "../../../../../page-template/theme-toggle/service/theme.service";
 
 
 @Component({
@@ -16,6 +17,7 @@ import {getHistoryById} from "../../store/history.selectors";
 })
 export class AddHistoryComponent implements OnInit{
   date!: string;
+  isDarkMode !: boolean;
 
   historyForm!: FormGroup;
   dialogResult:boolean = false;
@@ -24,7 +26,10 @@ export class AddHistoryComponent implements OnInit{
   constructor(private dialogRef:MatDialogRef<AddHistoryComponent>,
               private builder:FormBuilder,
               private store:Store<AppStateModel>,
-              @Inject(MAT_DIALOG_DATA) public data:any) {
+              @Inject(MAT_DIALOG_DATA) public data:any,
+              private themeService:ThemeService) {
+
+    this.isDarkMode = this.themeService.isDarkMode()
 
     this.historyForm=this.builder.group({
       id:this.builder.control(0),

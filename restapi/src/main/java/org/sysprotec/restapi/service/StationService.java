@@ -218,6 +218,7 @@ public class StationService {
                                     .projectionDone(stationFavView.getStation().getProjectionDone())
                                     .projectionToDo(stationFavView.getStation().getProjectionToDo())
                                     .projectionProgress(stationFavView.getStation().getProjectionProgress())
+                                    .note(stationFavView.getStation().getNote())
                                     .project(savedProject)
                                     .build();
 
@@ -382,6 +383,7 @@ public class StationService {
                 saveStation.setControlDone(stationFavView.getStation().getControlDone());
                 saveStation.setControlToDo(stationFavView.getStation().getControlToDo());
                 saveStation.setControlProgress(stationFavView.getStation().getControlProgress());
+                saveStation.setNote(stationFavView.getStation().getNote());
 
                 //Issuer Name
                 Optional<User> optionalUser = userRepository.findUserByAcronym(stationFavView.getStation().getIssuerAcronym());

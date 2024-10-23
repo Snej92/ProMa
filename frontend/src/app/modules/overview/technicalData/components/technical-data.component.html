@@ -11,8 +11,19 @@
         <th class="th-center" mat-header-cell *matHeaderCellDef> Wert </th>
         <td class="th-center" mat-cell *matCellDef="let technicalData">
           <ng-container *ngIf="!editTechnicalData[technicalData.id]?.isEdit">
-            <div class="editable-field" (click)="setEdit(technicalData.id)">
-              {{technicalData.value +' '+ technicalData.technicalDataSetting.unit || 'Klicken, um Daten hinzuzufügen'}}
+            <div class="technicalData-data">
+              <div class="editable-field" (click)="setEdit(technicalData.id)">
+                {{technicalData.value +' '+ technicalData.technicalDataSetting.unit || 'Klicken, um Daten hinzuzufügen'}}
+              </div>
+              <div (click)="copyText(technicalData.value, tooltip)"
+                   matTooltip="{{tooltipMessage}}"
+                   #tooltip="matTooltip"
+                   matTooltipPosition="right"
+                   (mouseleave)="resetTooltip()">
+                <mat-icon class="copyIcon">
+                  content_paste
+                </mat-icon>
+              </div>
             </div>
           </ng-container>
           <ng-container *ngIf="editTechnicalData[technicalData.id].isEdit">

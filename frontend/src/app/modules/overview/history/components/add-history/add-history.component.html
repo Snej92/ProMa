@@ -22,24 +22,50 @@
       </div>
 
 
-      <div>
-        <mat-checkbox (change)="initTransferType()" formControlName="fileTransfer">Datei Übergabe</mat-checkbox>
+<!--      Light Mode-->
+      <ng-container *ngIf="!isDarkMode">
+        <div>
+          <mat-checkbox (change)="initTransferType()" formControlName="fileTransfer">Datei Übergabe</mat-checkbox>
 
-        <mat-radio-group formControlName="transferType">
-          <mat-radio-button class="ms-2" value="1">erhalten</mat-radio-button>
-          <mat-radio-button class="ms-2" value="2">übergeben</mat-radio-button>
-        </mat-radio-group>
-      </div>
+          <mat-radio-group formControlName="transferType">
+            <mat-radio-button class="ms-2" value="1">erhalten</mat-radio-button>
+            <mat-radio-button class="ms-2" value="2">übergeben</mat-radio-button>
+          </mat-radio-group>
+        </div>
 
-      <div>
-        <mat-checkbox (change)="initEplanTransferType()" formControlName="eplan">
-          EPLAN
-        </mat-checkbox>
+        <div>
+          <mat-checkbox (change)="initEplanTransferType()" formControlName="eplan">
+            EPLAN
+          </mat-checkbox>
 
-        <mat-checkbox formControlName="eplanCopy">
-          Kopie
-        </mat-checkbox>
-      </div>
+          <mat-checkbox formControlName="eplanCopy">
+            Kopie
+          </mat-checkbox>
+        </div>
+      </ng-container>
+
+<!--      Dark Mode-->
+      <ng-container *ngIf="isDarkMode">
+        <div>
+          <mat-checkbox color="primary" (change)="initTransferType()" formControlName="fileTransfer">Datei Übergabe</mat-checkbox>
+
+          <mat-radio-group formControlName="transferType">
+            <mat-radio-button color="primary" class="ms-2" value="1">erhalten</mat-radio-button>
+            <mat-radio-button color="primary" class="ms-2" value="2">übergeben</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div>
+          <mat-checkbox color="primary" (change)="initEplanTransferType()" formControlName="eplan">
+            EPLAN
+          </mat-checkbox>
+
+          <mat-checkbox color="primary" formControlName="eplanCopy">
+            Kopie
+          </mat-checkbox>
+        </div>
+      </ng-container>
+
 
     </mat-card-content>
 

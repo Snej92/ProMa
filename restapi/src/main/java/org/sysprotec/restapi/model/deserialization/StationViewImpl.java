@@ -50,4 +50,6 @@ public class StationViewImpl implements StationView {
     private Integer projectionDone;
     private Integer projectionToDo;
     private Integer projectionProgress;
+    //Additions
+    private String note;
 }

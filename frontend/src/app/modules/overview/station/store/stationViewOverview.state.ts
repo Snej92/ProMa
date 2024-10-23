@@ -36,6 +36,7 @@ export const stationViewModelState:stationViewModel={
   projectionDone:0,
   projectionToDo:0,
   projectionProgress:0,
+  note:""
 }
 
 export const stationFavViewModelState:stationFavViewModel={

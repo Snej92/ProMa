@@ -1,0 +1,45 @@
+<mat-card class="note-card">
+  <div class="d-flex  ms-2 mt-2 me-2">
+    <div class="card-header-left">
+      <ng-container *ngIf="isEdit" class="button">
+        <app-sys-button icon="check"
+                        color="accent"
+                        tooltip="Speichern"
+                        (click)="toggleEditMode($event)">
+        </app-sys-button>
+      </ng-container>
+      <ng-container *ngIf="!isEdit">
+        <app-sys-button icon="edit"
+                        color="accent"
+                        tooltip="Bearbeiten"
+                        (click)="toggleEditMode($event)">
+        </app-sys-button>
+      </ng-container>
+    </div>
+    <div class="card-header-text">
+      <h3 class="header-font">Notizen</h3>
+    </div>
+  </div>
+  <mat-card-content>
+
+    <div class="mt-2">
+      <ngx-editor-menu
+        class="ngx-editor-menu"
+        [editor]="editor"
+        [toolbar]="toolbar"
+        [disabled]="!isEdit"
+      ></ngx-editor-menu>
+      <div class="mt-2">
+
+      </div>
+      <ngx-editor
+        [editor]="editor"
+        [(ngModel)]="stationNote"
+        [disabled]="!isEdit"
+        [placeholder]="'Mach eine Notiz...'"
+      ></ngx-editor>
+    </div>
+
+  </mat-card-content>
+</mat-card>
+

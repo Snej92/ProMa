@@ -21,6 +21,7 @@ public class History {
     @SequenceGenerator(name = "HISTORY_ID_GEN", sequenceName = "HISTORY_ID_SEQ", initialValue = 1, allocationSize = 1)
     private Long id;
     private String date;
+    @Column(length = 1000)
     private String item;
     private String userAcronym;
     @Column(length = 1000)
@@ -37,8 +38,10 @@ public class History {
     //updated History Entry
     private Boolean updated;
     private String updateDate;
+    @Column(length = 1000)
     private String updateItem;
     private String updateUserAcronym;
+    @Column(length = 1000)
     private String updateFilename;
     private Boolean updateFileTransfer;
     private Integer updateTransferType;

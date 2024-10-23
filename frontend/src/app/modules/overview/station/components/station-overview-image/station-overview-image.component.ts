@@ -7,8 +7,7 @@ import {deleteImage, uploadImage} from "../../../../global-settings/image-upload
 import {stationViewOverview} from "../../store/stationViewOverview.model";
 import {environment} from "../../../../../../environments/environment";
 import {SysConfirmationComponent} from "../../../../../core/sys-confirmation/sys-confirmation.component";
-import {stationFavViewModel, stationViewModel} from "../../../../station/store/stationView.model";
-import {filter, take} from "rxjs";
+import {stationFavViewModel} from "../../../../station/store/stationView.model";
 import {updateStation} from "../../../../station/store/stationView.actions";
 
 @Component({

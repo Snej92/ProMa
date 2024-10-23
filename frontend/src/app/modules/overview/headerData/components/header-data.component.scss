@@ -49,3 +49,23 @@
 .edit-mat-form-field-data{
   width: 100%
 }
+
+.headerData-data {
+  position: relative;
+  top: 4px;
+  display: flex;
+  justify-content: center;
+}
+
+.copyIcon {
+  margin-left: 5px;
+  position: relative;
+  top: -3px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.copyIcon:hover{
+  color: var(--frontend-primary);
+  transform: scale(1.15);
+}

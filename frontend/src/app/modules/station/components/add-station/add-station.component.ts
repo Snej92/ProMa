@@ -65,6 +65,7 @@ export class AddStationComponent implements OnInit, OnDestroy{
     projectionDone:this.builder.control(0),
     projectionToDo:this.builder.control(0),
     projectionProgress:this.builder.control(0),
+    note:this.builder.control(""),
     isFavorite:this.builder.control(false)
   }) as FormGroup;
 
@@ -133,7 +134,8 @@ export class AddStationComponent implements OnInit, OnDestroy{
           projectionDone:this.editData.station.projectionDone,
           projectionToDo:this.editData.station.projectionToDo,
           projectionProgress:this.editData.station.projectionProgress,
-          isFavorite:this.editData.isFavorite
+          isFavorite:this.editData.isFavorite,
+          note:this.editData.station.note
         })
       })
       this.onInitSub.unsubscribe();
@@ -171,6 +173,7 @@ export class AddStationComponent implements OnInit, OnDestroy{
       projectionDone:this.stationForm.value.projectionDone as number,
       projectionToDo:this.stationForm.value.projectionToDo as number,
       projectionProgress:this.stationForm.value.projectionProgress as number,
+      note:this.stationForm.value.note as string
     }
 
     const stationInput : stationFavViewModel = {

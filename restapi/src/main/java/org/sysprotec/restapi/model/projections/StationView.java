@@ -42,4 +42,6 @@ public interface StationView {
     Integer getProjectionDone();
     Integer getProjectionToDo();
     Integer getProjectionProgress();
+    //Addition
+    String getNote();
 }

@@ -34,6 +34,8 @@ export interface stationViewModel{
   projectionDone:number,
   projectionToDo:number,
   projectionProgress:number,
+  //Additions
+  note:string,
 }
 
 export interface stationViewRequest{

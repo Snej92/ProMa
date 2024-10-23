@@ -62,6 +62,9 @@ public class Station {
     private Integer projectionDone;
     private Integer projectionToDo;
     private Integer projectionProgress;
+    //Addition
+    @Column(length = 1000)
+    private String note;
     //Tables
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "station")
     private List<History> history;
