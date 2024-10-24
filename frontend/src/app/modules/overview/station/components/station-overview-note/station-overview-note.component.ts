@@ -1,10 +1,11 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {stationViewOverview} from "../../store/stationViewOverview.model";
-import {loadSpinner} from "../../../../../core/store/app.action";
+import {loadSpinner, showAlert} from "../../../../../core/store/app.action";
 import {Store} from "@ngrx/store";
 import {AppStateModel} from "../../../../../core/store/appState.model";
 import {updateStation} from "../../../../station/store/stationView.actions";
 import {Editor, Toolbar} from "ngx-editor";
+import {updateStationViewNote} from "../../store/stationViewOverview.actions";
 
 
 
@@ -41,6 +42,7 @@ export class StationOverviewNoteComponent implements OnChanges, OnInit, OnDestro
   ];
 
   ngOnInit(): void {
+    this.isEdit = false;
     this.editor = new Editor();
   }
 
@@ -52,57 +54,79 @@ export class StationOverviewNoteComponent implements OnChanges, OnInit, OnDestro
 
   toggleEditMode(event: Event)
   {
-    this.isEdit = !this.isEdit;
-    if(this.isEdit)
+    if(!this.isEdit)
     {
       this.editNote = this.stationViewInput.stationViewOverview.station.note;
+      this.isEdit = true;
     }
     else
     {
-      this.stationViewEdit = {
-        stationViewOverview: {
-          station: {
-            id: this.stationViewInput.stationViewOverview.station.id,
-            name: this.stationViewInput.stationViewOverview.station.name,
-            description: this.stationViewInput.stationViewOverview.station.description,
-            issuerAcronym: this.stationViewInput.stationViewOverview.station.issuerAcronym,
-            issuerName: this.stationViewInput.stationViewOverview.station.issuerName,
-            status: this.stationViewInput.stationViewOverview.station.status,
-            totalProgress: this.stationViewInput.stationViewOverview.station.totalProgress,
-            version: this.stationViewInput.stationViewOverview.station.version,
-            image: this.stationViewInput.stationViewOverview.station.image,
-            lopTotal: this.stationViewInput.stationViewOverview.station.lopTotal,
-            lopDone: this.stationViewInput.stationViewOverview.station.lopDone,
-            lopToDo: this.stationViewInput.stationViewOverview.station.lopToDo,
-            lopProgress: this.stationViewInput.stationViewOverview.station.lopProgress,
-            documentationTotal: this.stationViewInput.stationViewOverview.station.documentationTotal,
-            documentationDone: this.stationViewInput.stationViewOverview.station.documentationDone,
-            documentationToDo: this.stationViewInput.stationViewOverview.station.documentationToDo,
-            documentationProgress: this.stationViewInput.stationViewOverview.station.documentationProgress,
-            specificationTotal: this.stationViewInput.stationViewOverview.station.specificationTotal,
-            specificationDone: this.stationViewInput.stationViewOverview.station.specificationDone,
-            specificationToDo: this.stationViewInput.stationViewOverview.station.specificationToDo,
-            specificationProgress: this.stationViewInput.stationViewOverview.station.specificationProgress,
-            controlTotal: this.stationViewInput.stationViewOverview.station.controlTotal,
-            controlDone: this.stationViewInput.stationViewOverview.station.controlDone,
-            controlToDo: this.stationViewInput.stationViewOverview.station.controlToDo,
-            controlProgress: this.stationViewInput.stationViewOverview.station.controlProgress,
-            projectionTotal: this.stationViewInput.stationViewOverview.station.projectionTotal,
-            projectionDone: this.stationViewInput.stationViewOverview.station.projectionDone,
-            projectionToDo: this.stationViewInput.stationViewOverview.station.projectionToDo,
-            projectionProgress: this.stationViewInput.stationViewOverview.station.projectionProgress,
-            note: this.stationNote
-          } ,
-          isFavorite: this.stationViewInput.stationViewOverview.isFavorite
-        },
-        errorMessage: this.stationViewInput.errorMessage
-      };
-
-      this.stationViewEdit.stationViewOverview.station.note = this.stationNote;
-      console.log(this.stationViewEdit);
-      this.store.dispatch(loadSpinner({isLoading:true}));
-      this.store.dispatch(updateStation({stationViewInput:this.stationViewEdit.stationViewOverview}))
+      this.updateStationNote()
+      this.isEdit = false;
     }
+  }
+
+  updateStationNote() {
+    this.stationViewEdit = {
+      stationViewOverview: {
+        station: {
+          id: this.stationViewInput.stationViewOverview.station.id,
+          name: this.stationViewInput.stationViewOverview.station.name,
+          description: this.stationViewInput.stationViewOverview.station.description,
+          issuerAcronym: this.stationViewInput.stationViewOverview.station.issuerAcronym,
+          issuerName: this.stationViewInput.stationViewOverview.station.issuerName,
+          status: this.stationViewInput.stationViewOverview.station.status,
+          totalProgress: this.stationViewInput.stationViewOverview.station.totalProgress,
+          version: this.stationViewInput.stationViewOverview.station.version,
+          image: this.stationViewInput.stationViewOverview.station.image,
+          lopTotal: this.stationViewInput.stationViewOverview.station.lopTotal,
+          lopDone: this.stationViewInput.stationViewOverview.station.lopDone,
+          lopToDo: this.stationViewInput.stationViewOverview.station.lopToDo,
+          lopProgress: this.stationViewInput.stationViewOverview.station.lopProgress,
+          documentationTotal: this.stationViewInput.stationViewOverview.station.documentationTotal,
+          documentationDone: this.stationViewInput.stationViewOverview.station.documentationDone,
+          documentationToDo: this.stationViewInput.stationViewOverview.station.documentationToDo,
+          documentationProgress: this.stationViewInput.stationViewOverview.station.documentationProgress,
+          specificationTotal: this.stationViewInput.stationViewOverview.station.specificationTotal,
+          specificationDone: this.stationViewInput.stationViewOverview.station.specificationDone,
+          specificationToDo: this.stationViewInput.stationViewOverview.station.specificationToDo,
+          specificationProgress: this.stationViewInput.stationViewOverview.station.specificationProgress,
+          controlTotal: this.stationViewInput.stationViewOverview.station.controlTotal,
+          controlDone: this.stationViewInput.stationViewOverview.station.controlDone,
+          controlToDo: this.stationViewInput.stationViewOverview.station.controlToDo,
+          controlProgress: this.stationViewInput.stationViewOverview.station.controlProgress,
+          projectionTotal: this.stationViewInput.stationViewOverview.station.projectionTotal,
+          projectionDone: this.stationViewInput.stationViewOverview.station.projectionDone,
+          projectionToDo: this.stationViewInput.stationViewOverview.station.projectionToDo,
+          projectionProgress: this.stationViewInput.stationViewOverview.station.projectionProgress,
+          note: this.stationNote
+        } ,
+        isFavorite: this.stationViewInput.stationViewOverview.isFavorite
+      },
+      errorMessage: this.stationViewInput.errorMessage
+    };
+
+    this.stationViewEdit.stationViewOverview.station.note = this.stationNote;
+    console.log(this.stationViewEdit);
+    if(this.isHTMLString(this.stationNote))
+    {
+      this.store.dispatch(loadSpinner({isLoading:true}));
+      this.store.dispatch(updateStationViewNote({stationViewInput:this.stationViewEdit.stationViewOverview}))
+    }
+    else
+    {
+      console.error("not HTML String")
+      console.error(this.stationNote)
+      console.error(this.stationViewEdit.stationViewOverview.station)
+      this.store.dispatch(showAlert({message: 'Da ist ein upsi passiert', actionResult:'fail'}))
+    }
+  }
+
+  isHTMLString(stationNote: string): boolean {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(stationNote, 'text/html');
+    // Check if the parsed content has any valid HTML elements
+    return Array.from(doc.body.childNodes).some(node => node.nodeType === 1); // Node.ELEMENT_NODE
   }
 
   ngOnDestroy(): void {

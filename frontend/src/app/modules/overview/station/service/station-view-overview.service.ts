@@ -14,4 +14,8 @@ export class StationViewOverviewService {
   getStation(id:number):Observable<stationFavViewModel>{
     return this.http.get<stationFavViewModel>(this.API_URL + "/station/"+id)
   }
+
+  updateStationNote(stationViewInput:stationFavViewModel){
+    return this.http.put(this.API_URL + "/station/note", stationViewInput);
+  }
 }

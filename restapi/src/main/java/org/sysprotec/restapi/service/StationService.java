@@ -408,6 +408,34 @@ public class StationService {
         return null;
     }
 
+    public StationFavView updateStationNote(StationFavView stationFavView) {
+        Optional<Station> optionalStation = stationRepository.findById(stationFavView.getStation().getId());
+        if (optionalStation.isPresent()) {
+            Optional<Station> station = stationRepository.findStationByNameIgnoreCaseAndProjectId(stationFavView.getStation().getName(), optionalStation.get().getProject().getId());
+            if(station.isEmpty() || stationFavView.getStation().getName().equals(optionalStation.get().getName())){
+                Station saveStation = optionalStation.get();
+                saveStation.setNote(stationFavView.getStation().getNote());
+
+                //Issuer Name
+                Optional<User> optionalUser = userRepository.findUserByAcronym(stationFavView.getStation().getIssuerAcronym());
+                optionalUser.ifPresent(value -> saveStation.setIssuerName(value.getFirstname() + " " + value.getLastname()));
+
+                stationRepository.save(saveStation);
+
+                return StationFavView.builder()
+                        .station(stationRepository.getProjectedById(stationFavView.getStation().getId()))
+                        .isFavorite(stationFavView.getIsFavorite())
+                        .build();
+
+            } else {
+                log.error("Station {} already exists in Database", stationFavView.getStation().getName());
+            }
+        } else {
+            log.error("Station with ID{} does not exist", stationFavView.getStation().getId());
+        }
+        return null;
+    }
+
     public StationFavView getStation(Long stationId) {
         User loggedUser = userService.getLoggedUser();
         if(loggedUser != null) {

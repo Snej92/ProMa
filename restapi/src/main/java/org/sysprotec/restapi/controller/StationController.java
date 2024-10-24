@@ -48,6 +48,11 @@ public class StationController {
         return stationService.updateStation(stationFavView);
     }
 
+    @PutMapping("/note")
+    public StationFavView updateStationNote(@RequestBody StationFavView stationFavView){
+        return stationService.updateStationNote(stationFavView);
+    }
+
     @DeleteMapping("{stationId}")
     public void deleteStation(@PathVariable Long stationId){
         stationService.deleteStation(stationId);

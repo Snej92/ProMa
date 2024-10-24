@@ -4,10 +4,11 @@ import {catchError, of, switchMap} from "rxjs";
 import {
   loadStationViewOverview,
   loadStationViewOverviewFail,
-  loadStationViewOverviewSuccess
+  loadStationViewOverviewSuccess, updateStationViewNote, updateStationViewNoteSuccess
 } from "./stationViewOverview.actions";
 import {StationViewOverviewService} from "../service/station-view-overview.service";
-import {loadSpinner} from "../../../../core/store/app.action";
+import {loadSpinner, showAlert} from "../../../../core/store/app.action";
+
 
 @Injectable()
 export class StationViewOverviewEffects {
@@ -25,6 +26,22 @@ export class StationViewOverviewEffects {
             loadSpinner({isLoading:false})
           )),
           catchError((error)=> of(loadStationViewOverviewFail({errorText:error}), loadSpinner({isLoading:false})))
+        )
+      )
+    )
+  );
+
+  _updateStation=createEffect(()=>
+    this.action$.pipe(
+      ofType(updateStationViewNote),
+      switchMap(action =>
+        this.service.updateStationNote(action.stationViewInput).pipe(
+          switchMap(data=> of(
+            updateStationViewNoteSuccess({stationViewInput:action.stationViewInput}),
+            loadSpinner({isLoading:false}),
+            showAlert({message: 'Notiz erfolgreich aktualisiert', actionResult:'pass'}),
+          )),
+          catchError((error)=> of(showAlert({message: 'Notiz Aktualisierung fehlgeschlagen wegen '+error.message, actionResult:'fail'}),loadSpinner({isLoading:false})))
         )
       )
     )

@@ -3,8 +3,9 @@ import {stationFavViewModelState, stationViewModelState, stationViewOverviewStat
 import {
   loadStationViewOverview,
   loadStationViewOverviewFail,
-  loadStationViewOverviewSuccess
+  loadStationViewOverviewSuccess, updateStationViewNoteSuccess
 } from "./stationViewOverview.actions";
+import {updateSettingControlSuccess} from "../../../settings/control-settings/store/controlSetting.actions";
 
 
 
@@ -31,6 +32,14 @@ const _stationViewOverviewReducer = createReducer(
       ...state,
       stationViewOverview:stationFavViewModelState,
       errorMessage:action.errorText.message
+    };
+  }),
+
+  on(updateStationViewNoteSuccess, (state,action) => {
+    return{
+      ...state,
+      stationViewOverview:action.stationViewInput,
+      errorMessage:''
     };
   }),
 )

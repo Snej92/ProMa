@@ -64,7 +64,6 @@ export class StationOverviewComponent implements OnInit, OnDestroy{
     this.selectedOverviewEmitted.emit(id);
   }
 
-
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
