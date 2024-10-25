@@ -17,9 +17,8 @@ import {loadActiveProjectView} from "../../core/active-project/active-project.ac
 import {getActiveProjectViewInfo} from "../../core/active-project/active-project.selector";
 import {Subscription} from "rxjs";
 import {environment} from "../../../environments/environment";
-import {activeFavProjectViewModel} from "../../core/active-project/active-project.state";
 import {loggedUserModel} from "../../core/logged-user/logged-user.state";
-import {global} from "../../core/store/app.model";
+import {getWeekday, getWeekNumber, global} from "../../core/store/app.model";
 
 @Component({
   selector: 'app-sys-sidenav',
@@ -30,6 +29,9 @@ export class SysSidenavComponent implements OnInit, OnDestroy{
 
   private subscriptions: Subscription[] = [];
   activeProjectView!:activeProjectView | null | undefined;
+  todayDate:string="";
+  weekNumber:number = 0;
+  today!:Date;
 
   loggedUser:loggedUser={
     user:loggedUserModel,
@@ -51,6 +53,12 @@ export class SysSidenavComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     console.log('Nav Init')
     console.log('production: ' + environment.production)
+
+    this.today = new Date();
+
+    //Get Date
+    this.todayDate = this.getParsedDate();
+
     this.store.dispatch(loadSpinner({isLoading:true}))
     this.store.dispatch(loadActiveProjectView());
     this.subscriptions.push(
@@ -69,9 +77,16 @@ export class SysSidenavComponent implements OnInit, OnDestroy{
     );
   }
 
+  getParsedDate():string{
+    const date = new Date();
+    return `${date.getDate().toString().padStart(2, '0')}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getFullYear()}`;
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-    protected readonly global = global;
+  protected readonly global = global;
+  protected readonly getWeekday = getWeekday;
+  protected readonly getWeekNumber = getWeekNumber;
 }

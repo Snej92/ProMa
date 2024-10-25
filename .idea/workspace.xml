@@ -4,391 +4,97 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16c64894-e2b1-46b9-9759-3e6da58dad35" name="Changes" comment="V1.3.0&#10;-added copy to clipboard for headerdata and technical data and notes for station overview">
+    <list default="true" id="af47dcf6-b06e-447a-9fe9-b4adf54fac01" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/core/store/app.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/store/app.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-note/station-overview-note.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview-note/station-overview-note.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/components/station-overview.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/service/station-view-overview.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/service/station-view-overview.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/store/stationViewOverview.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/store/stationViewOverview.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/store/stationViewOverview.effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/store/stationViewOverview.effects.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/store/stationViewOverview.reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/modules/overview/station/store/stationViewOverview.reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/StationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/controller/StationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/StationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/java/org/sysprotec/restapi/service/StationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page-template/sys-sidenav/sys-sidenav.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/restapi/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="TypeScript File" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;Snej92&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Snej92/ProMa&quot;,
-    &quot;accountId&quot;: &quot;9f77aa54-3db8-4415-b771-0ddec89dadf3&quot;
-  }
-}</component>
-  <component name="KubernetesApiPersistence">{}</component>
-  <component name="KubernetesApiProvider">{
-  &quot;isMigrated&quot;: true
-}</component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 0
-}</component>
-  <component name="ProjectId" id="2lBOKxGA9S2IAHfS6XlijddRG8T" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2nuvPwvdv71ZL0VB93ViKdjNrqT" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Maven.restapi [package].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.RestapiApplication.executor&quot;: &quot;Run&quot;,
-    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Coding/ProMa&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\Coding\\ProMa\\frontend\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
-    ]
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.RestapiApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "D:\\02_Coding\\ProMa\\frontend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\dashboard\assigned-stations\store" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\dashboard\station" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\dashboard\project\store" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\calender\store" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\overview\station\components" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\global-settings\image-upload\service" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\global-settings\image-upload" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules" />
-      <recent name="D:\Coding\ProMa\frontend\src\app\modules\dashboard\components" />
-    </key>
-  </component>
+}]]></component>
   <component name="RunManager">
-    <configuration name="RestapiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <configuration name="RestapiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="restapi" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.sysprotec.restapi.RestapiApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.sysprotec.restapi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.RestapiApplication" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.19072.14" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.19072.14" />
+        <option value="jdk-21.0.1-openjdk-21.0.1-f644763e9732-f98dd351" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="16c64894-e2b1-46b9-9759-3e6da58dad35" name="Changes" comment="" />
-      <created>1724649944045</created>
+      <changelist id="af47dcf6-b06e-447a-9fe9-b4adf54fac01" name="Changes" comment="" />
+      <created>1729835756343</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1724649944045</updated>
-      <workItem from="1724649945373" duration="21474000" />
-      <workItem from="1724733882232" duration="22430000" />
-      <workItem from="1724821035634" duration="20945000" />
-      <workItem from="1724908294692" duration="16956000" />
-      <workItem from="1725342950696" duration="23832000" />
-      <workItem from="1725426351967" duration="25712000" />
-      <workItem from="1725512590550" duration="10590000" />
-      <workItem from="1725942696680" duration="1901000" />
-      <workItem from="1726028652407" duration="1849000" />
-      <workItem from="1726119709582" duration="16885000" />
-      <workItem from="1726466223540" duration="15381000" />
-      <workItem from="1726548631982" duration="16977000" />
-      <workItem from="1726635104085" duration="25572000" />
-      <workItem from="1727154512393" duration="23592000" />
-      <workItem from="1727241032880" duration="25878000" />
-      <workItem from="1727324943136" duration="21796000" />
-      <workItem from="1727413737276" duration="90000" />
-      <workItem from="1727414217509" duration="17253000" />
-      <workItem from="1727672302057" duration="26977000" />
-      <workItem from="1727757861306" duration="22027000" />
-      <workItem from="1727845202924" duration="27193000" />
-      <workItem from="1728277728755" duration="18062000" />
-      <workItem from="1728362714875" duration="3993000" />
-      <workItem from="1728373775688" duration="522000" />
-      <workItem from="1728374435070" duration="638000" />
-      <workItem from="1728450896759" duration="1301000" />
-      <workItem from="1728883697953" duration="2984000" />
-      <workItem from="1728968775033" duration="5015000" />
-      <workItem from="1729054901788" duration="5911000" />
-      <workItem from="1729486984180" duration="6173000" />
-      <workItem from="1729573645879" duration="17724000" />
-      <workItem from="1729658764125" duration="15001000" />
-      <workItem from="1729745067469" duration="4329000" />
+      <updated>1729835756343</updated>
+      <workItem from="1729835757769" duration="3517000" />
     </task>
-    <task id="LOCAL-00001" summary="V0.13&#10;Vorbereitung fürs Dashboard und sehr viele bugfixes und QoL changes">
-      <option name="closed" value="true" />
-      <created>1724928012217</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1724928012217</updated>
-    </task>
-    <task id="LOCAL-00002" summary="V0.13&#10;Vorbereitung fürs Dashboard und sehr viele bugfixes und QoL changes">
-      <option name="closed" value="true" />
-      <created>1724928362978</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1724928362978</updated>
-    </task>
-    <task id="LOCAL-00003" summary="V0.13&#10;Vorbereitung fürs Dashboard und sehr viele bugfixes und QoL changes">
-      <option name="closed" value="true" />
-      <created>1724931640253</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1724931640253</updated>
-    </task>
-    <task id="LOCAL-00004" summary="V0.13.1&#10;Regex mat-error text bei headerdata settings und add version angepasst für genauere beschreibung">
-      <option name="closed" value="true" />
-      <created>1725347031069</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1725347031069</updated>
-    </task>
-    <task id="LOCAL-00005" summary="V0.14.0&#10;-small bug fixes&#10;-implemented ProjectCalander">
-      <option name="closed" value="true" />
-      <created>1725454005252</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1725454005252</updated>
-    </task>
-    <task id="LOCAL-00006" summary="V0.14.1&#10;-updates to projectCalender">
-      <option name="closed" value="true" />
-      <created>1725525009285</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1725525009285</updated>
-    </task>
-    <task id="LOCAL-00007" summary="V0.14.2&#10;-updates to projectCalender">
-      <option name="closed" value="true" />
-      <created>1726142798059</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1726142798059</updated>
-    </task>
-    <task id="LOCAL-00008" summary="V0.14.3&#10;-fixed projectCalender x-scrolling">
-      <option name="closed" value="true" />
-      <created>1726493496165</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1726493496165</updated>
-    </task>
-    <task id="LOCAL-00009" summary="V0.15.0&#10;-improved selecting project so the whole mat-card is working without menu and favorite button&#10;-implemented ability to route to overview when clicking a station">
-      <option name="closed" value="true" />
-      <created>1726571988649</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1726571988649</updated>
-    </task>
-    <task id="LOCAL-00010" summary="V0.16.0&#10;-routing from station -&gt; stationOverview, depending if you press the card, LOP or Version&#10;-versionStation now sorted by stationName&#10;-uploaded to server">
-      <option name="closed" value="true" />
-      <created>1726650470881</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1726650470881</updated>
-    </task>
-    <task id="LOCAL-00011" summary="V0.16.1&#10;-small bug fixes&#10;-preparation for versionStation update history entry">
-      <option name="closed" value="true" />
-      <created>1726666729403</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1726666729403</updated>
-    </task>
-    <task id="LOCAL-00012" summary="V0.16.1&#10;-small bug fixes&#10;-preparation for versionStation update history entry">
-      <option name="closed" value="true" />
-      <created>1726666798063</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1726666798063</updated>
-    </task>
-    <task id="LOCAL-00013" summary="V0.17.0&#10;-small bug fixes&#10;-included filter options (columns) for overall view">
-      <option name="closed" value="true" />
-      <created>1727330429901</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1727330429901</updated>
-    </task>
-    <task id="LOCAL-00014" summary="V0.17.0&#10;-blubblub für homo">
-      <option name="closed" value="true" />
-      <created>1727356086920</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1727356086920</updated>
-    </task>
-    <task id="LOCAL-00015" summary="V0.17.1&#10;-more filter options (rows, &quot;Allgemein&quot;)&#10;-improved useability here and there">
-      <option name="closed" value="true" />
-      <created>1727431925294</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1727431925294</updated>
-    </task>
-    <task id="LOCAL-00016" summary="V1.0.0&#10;-Dashboard implementiert&#10;-Historie kann bearbeitet werden (mit log des originalen eintrags)&#10;-EPLAN als Kopie übergeben/erhalten">
-      <option name="closed" value="true" />
-      <created>1727776428997</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1727776428997</updated>
-    </task>
-    <task id="LOCAL-00017" summary="V1.1.0&#10;-global settings implemented&#10;-uploading pictures and selecting them for the project cards to display them">
-      <option name="closed" value="true" />
-      <created>1727871419312</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1727871419312</updated>
-    </task>
-    <task id="LOCAL-00018" summary="V1.1.0&#10;-updated global.version">
-      <option name="closed" value="true" />
-      <created>1727871566694</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1727871566694</updated>
-    </task>
-    <task id="LOCAL-00019" summary="V1.1.1&#10;-fixed color picker">
-      <option name="closed" value="true" />
-      <created>1727874106209</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1727874106209</updated>
-    </task>
-    <task id="LOCAL-00020" summary="V1.2.1&#10;-fixed station overall view navigation to station">
-      <option name="closed" value="true" />
-      <created>1728983507106</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1728983507106</updated>
-    </task>
-    <task id="LOCAL-00021" summary="V1.2.2&#10;-fixed time for history entry and time in general">
-      <option name="closed" value="true" />
-      <created>1729082481684</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1729082481684</updated>
-    </task>
-    <task id="LOCAL-00022" summary="V1.2.3&#10;-history filename entry maxlenght = 1000">
-      <option name="closed" value="true" />
-      <created>1729582351434</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1729582351434</updated>
-    </task>
-    <task id="LOCAL-00023" summary="V1.3.0&#10;-added copy to clipboard for headerdata and technical data and notes for station overview">
-      <option name="closed" value="true" />
-      <created>1729674951730</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1729674951730</updated>
-    </task>
-    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="V0.13&#10;Vorbereitung fürs Dashboard und sehr viele bugfixes und QoL changes" />
-    <MESSAGE value="V0.13.1&#10;Regex mat-error text bei headerdata settings und add version angepasst für genauere beschreibung" />
-    <MESSAGE value="V0.14.0&#10;-small bug fixes&#10;-implemented ProjectCalander" />
-    <MESSAGE value="V0.14.1&#10;-updates to projectCalender" />
-    <MESSAGE value="V0.14.2&#10;-updates to projectCalender" />
-    <MESSAGE value="V0.14.3&#10;-fixed projectCalender x-scrolling" />
-    <MESSAGE value="V0.15.0&#10;-improved selecting project so the whole mat-card is working without menu and favorite button&#10;-implemented ability to route to overview when clicking a station" />
-    <MESSAGE value="V0.16.0&#10;-routing from station -&gt; stationOverview, depending if you press the card, LOP or Version&#10;-versionStation now sorted by stationName&#10;-uploaded to server" />
-    <MESSAGE value="V0.16.1&#10;-small bug fixes&#10;-preparation for versionStation update history entry" />
-    <MESSAGE value="V0.17.0&#10;-small bug fixes&#10;-included filter options (columns) for overall view" />
-    <MESSAGE value="V0.17.0&#10;-blubblub für homo" />
-    <MESSAGE value="V0.17.1&#10;-more filter options (rows, &quot;Allgemein&quot;)&#10;-improved useability here and there" />
-    <MESSAGE value="V1.0.0&#10;-Dashboard implementiert&#10;-Historie kann bearbeitet werden (mit log des originalen eintrags)&#10;-EPLAN als Kopie übergeben/erhalten" />
-    <MESSAGE value="V1.1.0&#10;-global settings implemented&#10;-uploading pictures and selecting them for the project cards to display them" />
-    <MESSAGE value="V1.1.0&#10;-updated global.version" />
-    <MESSAGE value="V1.1.1&#10;-fixed color picker" />
-    <MESSAGE value="V1.2.1&#10;-fixed station overall view navigation to station" />
-    <MESSAGE value="V1.2.2&#10;-fixed time for history entry and time in general" />
-    <MESSAGE value="V1.2.3&#10;-history filename entry maxlenght = 1000" />
-    <MESSAGE value="V1.3.0&#10;-added copy to clipboard for headerdata and technical data and notes for station overview" />
-    <option name="LAST_COMMIT_MESSAGE" value="V1.3.0&#10;-added copy to clipboard for headerdata and technical data and notes for station overview" />
   </component>
 </project>

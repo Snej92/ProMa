@@ -10,3 +10,17 @@ export const global = {
   ),
   version : "Version 1.3."
 }
+
+export function getWeekNumber(day: number, month: number, year: number) {
+  const date = new Date(year, month - 1, day);
+  // ISO week starts on Monday
+  const thursday = new Date(date.getTime());
+  thursday.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
+  const firstJanuary = new Date(thursday.getFullYear(), 0, 1);
+  return Math.floor(((thursday.getTime() - firstJanuary.getTime()) / (86400000)) / 7) + 1;
+}
+
+export function getWeekday(day: number, month: number, year: number, weekday: string): string {
+  const date = new Date(year, month-1, day);
+  return date.toLocaleDateString('de-DE', { weekday: "long" });
+}

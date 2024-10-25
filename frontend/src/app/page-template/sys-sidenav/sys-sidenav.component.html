@@ -13,6 +13,19 @@
     </span>
     </ng-container>
   </div>
+  <div class="date-container">
+    <div class="date-day-container">
+      <div class="date-item-container">
+        {{getWeekday(this.today.getDate(), this.today.getMonth() + 1, this.today.getFullYear(), "long")}}
+      </div>
+      <div class="date-item-container">
+        {{this.todayDate}}
+      </div>
+    </div>
+    <div class="date-item-container ms-2" style="font-size: 1.5rem">
+      KW{{getWeekNumber(this.today.getDate(), this.today.getMonth() + 1, this.today.getFullYear())}}
+    </div>
+  </div>
   <!--  right side-->
   <span class="flex-container justify-content-between">
     <span class="alignment-user">
